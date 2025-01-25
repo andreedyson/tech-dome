@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  ADMIN
+  CUSTOMER
+}
+
+model User {
+  id       String   @id @default(cuid())
+  name     String
+  email    String
+  password String
+  role     UserRole @default(CUSTOMER)
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Order     Order[]
+  Session   Session[]
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model Brand {
+  id   Int    @id @default(autoincrement())
+  name String
+  logo String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
+}
+
+model Location {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Product   Product[]
+}
+
+enum ProductStatus {
+  READY
+  PRE_ORDER
+}
+
+model Product {
+  id          String        @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  images      String[]
+  brandId     Int
+  categoryId  Int
+  locationId  Int
+  status      ProductStatus @default(READY)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  brand    Brand          @relation(fields: [brandId], references: [id])
+  category Category       @relation(fields: [categoryId], references: [id])
+  location Location       @relation(fields: [locationId], references: [id])
+  orders   OrderProduct[]
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+}
+
+model Order {
+  id     Int         @id @default(autoincrement())
+  code   String      @unique
+  userId String
+  total  Float
+  status OrderStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User           @relation(fields: [userId], references: [id])
+  detail OrderDetails?
+  orders OrderProduct[]
+}
+
+model OrderDetails {
+  id         String  @id @default(cuid())
+  orderId    Int     @unique
+  name       String
+  phone      String
+  address    String
+  city       String
+  postalCode String
+  notes      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id])
+}
+
+model OrderProduct {
+  id        String @id @default(cuid())
+  productId String
+  orderId   Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id])
+}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
@@ -13,22 +13,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DealDome",
-  description: "Shop with DealDome",
+  title: {
+    template: "DealDome | %s",
+    default: "DealDome",
+  },
 };
 
-export default function ARootLayout({
+export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <main
+      className={`${geistSans.className} ${geistMono.variable} antialiased`}
+    >
+      <div>
         {children}
-      </body>
-    </html>
+        <Toaster />
+      </div>
+    </main>
   );
 }
