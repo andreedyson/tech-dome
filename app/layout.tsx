@@ -3,8 +3,11 @@ import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
-  title: "DealDome",
-  description: "Shop with DealDome",
+  title: {
+    template: "%s | DealDome",
+    default: "DealDome",
+  },
+  description: "Shop with Deal Dome",
 };
 
 export default function ARootLayout({
