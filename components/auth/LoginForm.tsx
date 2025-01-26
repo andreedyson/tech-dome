@@ -7,15 +7,39 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { Checkbox } from "../ui/checkbox";
 import { useState } from "react";
+import { SignIn } from "@/lib/actions";
+import { ActionResult } from "@/types/auth";
+import { useFormState, useFormStatus } from "react-dom";
+
+const initialState: ActionResult = {
+  error: "",
+};
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
+  const [state, formAction] = useFormState(SignIn, initialState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  function SubmitButton() {
+    const { pending } = useFormStatus();
+
+    console.log(pending);
+
+    return (
+      <Button type="submit" className="w-full" disabled={pending}>
+        {pending ? "Logging In..." : "Login"}
+      </Button>
+    );
+  }
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      action={formAction}
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+    >
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-balance text-sm text-muted-foreground">
@@ -25,7 +49,13 @@ export function LoginForm({
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input
+            id="email"
+            type="email"
+            name="email"
+            placeholder="m@example.com"
+            required
+          />
         </div>
         <div className="grid gap-2">
           <div className="flex items-center">
@@ -34,6 +64,7 @@ export function LoginForm({
           <Input
             id="password"
             type={showPassword ? "text" : "password"}
+            name="password"
             placeholder={showPassword ? "Your Password" : "********"}
             required
           />
@@ -45,9 +76,8 @@ export function LoginForm({
             <Label htmlFor="showPassword">Show Password</Label>
           </div>
         </div>
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
+        {/* {state.error} */}
+        <SubmitButton />
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">
             Or continue with
