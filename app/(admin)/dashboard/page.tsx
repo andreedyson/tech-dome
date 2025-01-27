@@ -6,7 +6,12 @@ export const metadata: Metadata = {
 };
 
 function DashboardPage() {
-  return <div>DashboardPage</div>;
+  return (
+    <>
+      {/* Dashboard Page Content */}
+      <div>Dashboard</div>
+    </>
+  );
 }
 
 export default DashboardPage;
