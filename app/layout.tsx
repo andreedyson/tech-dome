@@ -3,10 +3,7 @@ import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
-  title: {
-    template: "%s | DealDome",
-    default: "DealDome",
-  },
+  title: "DealDome",
   description: "Shop with Deal Dome",
 };
 
