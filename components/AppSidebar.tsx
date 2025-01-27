@@ -1,9 +1,12 @@
+"use client";
+
 import {
   ChartBarStacked,
   Home,
   Boxes,
   MapPin,
-  LayoutTemplate,
+  Building,
+  ShoppingCart,
 } from "lucide-react";
 
 import {
@@ -18,6 +21,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -34,7 +38,7 @@ const items = [
   {
     title: "Brands",
     url: "/dashboard/brands",
-    icon: LayoutTemplate,
+    icon: Building,
   },
   {
     title: "Categories",
@@ -46,9 +50,17 @@ const items = [
     url: "/dashboard/locations",
     icon: MapPin,
   },
+  {
+    title: "Orders",
+    url: "/dashboard/Orders",
+    icon: ShoppingCart,
+  },
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
+  const pathnameSplit = pathname.split("/").slice(0, 3).join("/");
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -75,10 +87,13 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link
+                      href={item.url}
+                      className={`hover:text-main-violet-500 duration-200 ${pathnameSplit === item.url ? "text-main-violet-700 font-semibold" : ""}`}
+                    >
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
