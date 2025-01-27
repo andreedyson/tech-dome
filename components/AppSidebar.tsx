@@ -7,6 +7,7 @@ import {
   MapPin,
   Building,
   ShoppingCart,
+  LogOut,
 } from "lucide-react";
 
 import {
@@ -22,6 +23,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogoutButtonSidebar from "./auth/LogoutButtonSidebar";
 
 // Menu items.
 const items = [
@@ -62,7 +64,7 @@ export function AppSidebar() {
   const pathnameSplit = pathname.split("/").slice(0, 3).join("/");
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon" className="border-r-4">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -79,7 +81,7 @@ export function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="shadow-xl">
+      <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -89,7 +91,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <Link
                       href={item.url}
-                      className={`hover:text-main-violet-500 duration-200 ${pathnameSplit === item.url ? "text-main-violet-700 font-semibold" : ""}`}
+                      className={`duration-200 hover:text-main-violet-500 ${pathnameSplit === item.url ? "font-semibold text-main-violet-700" : ""}`}
                     >
                       <item.icon />
                       <span>{item.title}</span>
@@ -101,6 +103,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <LogoutButtonSidebar />
     </Sidebar>
   );
 }

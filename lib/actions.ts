@@ -1,11 +1,11 @@
 "use server";
 
-import { LoginActionResult } from "@/types/auth";
+import { LoginActionResult, LogoutActionResult } from "@/types/auth";
 import { loginSchema } from "@/types/validations";
 import { redirect } from "next/navigation";
 import { prisma } from "./prisma";
 import bcrypt from "bcrypt";
-import { lucia } from "./auth";
+import { getUser, lucia } from "./auth";
 import { cookies } from "next/headers";
 
 export async function SignIn(
@@ -66,4 +66,29 @@ export async function SignIn(
   );
 
   return redirect("/dashboard");
+}
+
+export async function SignOut(
+  _: unknown,
+  formData: FormData,
+): Promise<LogoutActionResult> {
+  const { session } = await getUser();
+
+  if (!session) {
+    return {
+      error: "Unauthorized",
+    };
+  }
+
+  await lucia.invalidateSession(session.id);
+
+  const sessionCookie = lucia.createBlankSessionCookie();
+
+  cookies().set(
+    sessionCookie.name,
+    sessionCookie.value,
+    sessionCookie.attributes,
+  );
+
+  return redirect("/sign-in");
 }

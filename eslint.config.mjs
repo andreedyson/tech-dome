@@ -10,11 +10,17 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = {
+  extends: [
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended",
+  ],
   rules: {
     "react/react-in-jsx-scope": "error",
     "next/no-img-element": "warn",
-    "typescript/no-unused-vars": "error",
-    ...compat.extends("next/core-web-vitals", "next/typescript"),
+    "@typescript-eslint/no-unused-vars": "error",
+    "import/no-unused-modules": "warn",
   },
   parserOptions: {
     ecmaVersion: 2020,

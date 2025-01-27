@@ -5,3 +5,7 @@ export type LoginActionResult = {
   };
   message?: string;
 };
+
+export type LogoutActionResult = {
+  error: string;
+};
