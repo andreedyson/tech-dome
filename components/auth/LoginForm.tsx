@@ -1,19 +1,20 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { Checkbox } from "../ui/checkbox";
-import { useEffect, useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import { SignIn } from "@/lib/actions";
+import { cn } from "@/lib/utils";
 import { LoginActionResult } from "@/types/auth";
-import { useFormState, useFormStatus } from "react-dom";
 import { loginSchema } from "@/types/validations";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -35,6 +36,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
+  const { toast } = useToast();
   const [state, formAction] = useFormState(SignIn, initialState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -46,6 +48,14 @@ export function LoginForm({
   });
 
   useEffect(() => {
+    if (state.message !== undefined) {
+      toast({
+        title: "🔑Authentication Error",
+        description: state.message,
+        variant: "destructive",
+      });
+    }
+
     if (Array.isArray(state?.errors)) {
       // Check if state.errors is an array before iterating
       state.errors.forEach((error) => {
