@@ -33,6 +33,11 @@ const items = [
     icon: Home,
   },
   {
+    title: "Categories",
+    url: "/dashboard/categories",
+    icon: ChartBarStacked,
+  },
+  {
     title: "Products",
     url: "/dashboard/products",
     icon: Boxes,
@@ -41,11 +46,6 @@ const items = [
     title: "Brands",
     url: "/dashboard/brands",
     icon: Building,
-  },
-  {
-    title: "Categories",
-    url: "/dashboard/categories",
-    icon: ChartBarStacked,
   },
   {
     title: "Locations",

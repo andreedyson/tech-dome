@@ -43,9 +43,7 @@ function AdminHeader() {
                       </BreadcrumbLink>
                     </BreadcrumbItem>
                   )}
-                  {index < pathnames.length - 1 && (
-                    <BreadcrumbSeparator className="hidden md:block" />
-                  )}
+                  {index < pathnames.length - 1 && <BreadcrumbSeparator />}
                 </React.Fragment>
               );
             })}
