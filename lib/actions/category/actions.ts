@@ -4,20 +4,34 @@ import { prisma } from "@/lib/prisma";
 import { ActionResult } from "@/types/auth";
 import { categorySchema } from "@/types/validations";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function createCategory(
   _: unknown,
   formData: FormData,
 ): Promise<ActionResult> {
   try {
+    const name = formData.get("name");
+
     const validatedFields = categorySchema.safeParse({
-      name: formData.get("name"),
+      name: name,
     });
 
     if (!validatedFields.success) {
       return {
         error: validatedFields.error.errors[0].message,
+      };
+    }
+
+    const categoryExist = await prisma.category.findFirst({
+      where: {
+        name: validatedFields.data.name,
+      },
+    });
+
+    if (categoryExist) {
+      return {
+        error: "Category name already exist",
+        message: undefined,
       };
     }
 

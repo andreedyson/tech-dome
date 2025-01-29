@@ -14,7 +14,7 @@ export function SubmitButton({
 }: SubmitButtonType) {
   return (
     <Button disabled={isSubmitting} {...props}>
-      <span className={cn({ "opacity-0": isSubmitting })}>{children}</span>
+      <span>{children}</span>
 
       {isSubmitting && (
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">

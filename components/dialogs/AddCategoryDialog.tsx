@@ -2,7 +2,6 @@
 
 import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -29,20 +28,30 @@ import { Input } from "@/components/ui/input";
 import { SubmitButton } from "../SubmitButton";
 import { ChartBarStacked } from "lucide-react";
 import { categorySchema } from "@/types/validations";
-import { BASE_URL } from "@/constants";
-import { useFormState } from "react-dom";
 import { createCategory } from "@/lib/actions/category/actions";
 import { ActionResult } from "@/types/auth";
+import { useFormState, useFormStatus } from "react-dom";
 
 const initialState: ActionResult = {
   error: "",
 };
 
+function Submit() {
+  const { pending } = useFormStatus();
+
+  return (
+    <SubmitButton
+      isSubmitting={pending}
+      className="w-[150px] bg-main-violet-700 hover:bg-main-violet-500 md:w-full"
+    >
+      {pending ? "Creating..." : "Create"}
+    </SubmitButton>
+  );
+}
+
 function AddCategoryDialog() {
   const [state, formAction] = useFormState(createCategory, initialState);
-  const [submitting, setSubmitting] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
-  const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof categorySchema>>({
@@ -59,6 +68,9 @@ function AddCategoryDialog() {
         description: state.message,
         variant: "success",
       });
+
+      form.reset();
+      setOpen(false);
     }
 
     if (state.error) {
@@ -68,51 +80,7 @@ function AddCategoryDialog() {
         variant: "destructive",
       });
     }
-  }, [state.error, form]);
-
-  async function onSubmit(values: z.infer<typeof categorySchema>) {
-    setSubmitting(true);
-
-    try {
-      const res = await fetch(`${BASE_URL}/api/team`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // userId: userId,
-          name: values.name,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setSubmitting(false);
-        toast({
-          title: "Uh oh! Terjadi kesalahan",
-          description: data.message,
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Success 🎉",
-          description: data.message,
-          variant: "success",
-        });
-        form.reset();
-        setOpen(false);
-        setSubmitting(false);
-        router.refresh();
-      }
-    } catch (error) {
-      setSubmitting(false);
-      toast({
-        title: "Gagal menambahkan kategori",
-        variant: "destructive",
-      });
-    }
-  }
+  }, [state]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -151,12 +119,7 @@ function AddCategoryDialog() {
             />
 
             <DialogFooter>
-              <SubmitButton
-                isSubmitting={submitting}
-                className="w-[150px] bg-main-violet-700 hover:bg-main-violet-500 dark:text-foreground md:w-full"
-              >
-                {submitting ? "Creating..." : "Create"}
-              </SubmitButton>
+              <Submit />
             </DialogFooter>
           </form>
         </Form>
