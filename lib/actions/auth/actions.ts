@@ -1,12 +1,12 @@
 "use server";
 
-import { LoginActionResult, LogoutActionResult } from "@/types/auth";
+import { LoginActionResult, ActionResult } from "@/types/auth";
 import { loginSchema } from "@/types/validations";
 import { redirect } from "next/navigation";
-import { prisma } from "./prisma";
 import bcrypt from "bcrypt";
-import { getUser, lucia } from "./auth";
 import { cookies } from "next/headers";
+import { getUser, lucia } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 
 export async function SignIn(
   _: unknown,
@@ -71,7 +71,7 @@ export async function SignIn(
 export async function SignOut(
   _: unknown,
   formData: FormData,
-): Promise<LogoutActionResult> {
+): Promise<ActionResult> {
   const { session } = await getUser();
 
   if (!session) {

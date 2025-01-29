@@ -9,10 +9,10 @@ import {
 } from "../ui/sidebar";
 import { LogOut } from "lucide-react";
 import { useFormState } from "react-dom";
-import { SignOut } from "@/lib/actions";
-import { LogoutActionResult } from "@/types/auth";
+import { ActionResult } from "@/types/auth";
+import { SignOut } from "@/lib/actions/auth/actions";
 
-const initialState: LogoutActionResult = {
+const initialState: ActionResult = {
   error: "",
 };
 

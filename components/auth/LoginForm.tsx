@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { SignIn } from "@/lib/actions";
 import { cn } from "@/lib/utils";
 import { LoginActionResult } from "@/types/auth";
 import { loginSchema } from "@/types/validations";
@@ -23,6 +22,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { SignIn } from "@/lib/actions/auth/actions";
 
 const initialState: LoginActionResult = {
   errors: {
