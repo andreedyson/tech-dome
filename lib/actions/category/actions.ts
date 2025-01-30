@@ -6,11 +6,31 @@ import { categorySchema } from "@/types/validations";
 import { revalidatePath } from "next/cache";
 
 export async function createCategory(
-  _: unknown,
+  userId: string,
   formData: FormData,
 ): Promise<ActionResult> {
   try {
     const name = formData.get("name");
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!user) {
+      return {
+        error: "User not found",
+        message: undefined,
+      };
+    }
 
     const validatedFields = categorySchema.safeParse({
       name: name,

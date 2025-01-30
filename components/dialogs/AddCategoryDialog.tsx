@@ -49,8 +49,13 @@ function Submit() {
   );
 }
 
-function AddCategoryDialog() {
-  const [state, formAction] = useFormState(createCategory, initialState);
+function AddCategoryDialog({ userId }: { userId: string }) {
+  const [state, formAction] = useFormState(
+    async (_: ActionResult, formData: FormData) => {
+      return await createCategory(userId, formData);
+    },
+    initialState,
+  );
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
 
