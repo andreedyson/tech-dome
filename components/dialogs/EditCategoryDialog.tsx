@@ -48,7 +48,7 @@ function Submit() {
   return (
     <SubmitButton
       isSubmitting={pending}
-      className="w-[150px] bg-yellow-500 hover:bg-yellow-400 md:w-full"
+      className="w-full bg-yellow-500 hover:bg-yellow-400"
     >
       {pending ? "Editing..." : "Edit"}
     </SubmitButton>
@@ -106,11 +106,11 @@ function EditCategoryDialog({ categoryData }: EditCategoryProps) {
         <DialogHeader className="space-y-2">
           <DialogTitle>Edit Category</DialogTitle>
           <DialogDescription>
-            Modify the category details want to change.
+            Modify the category details you want to change.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form action={formAction} className="space-y-6">
+          <form action={formAction} className="space-y-4">
             <FormField
               control={form.control}
               name="name"

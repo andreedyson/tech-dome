@@ -13,25 +13,26 @@ async function CategoriesPage() {
 
   return (
     <section className="space-y-4">
-      {/* Categories Page Header */}
-      <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-        <div className="w-full space-y-2">
-          <h2 className="flex items-center gap-2 text-2xl font-bold leading-none md:text-3xl">
-            <ChartBarStacked className="size-6 md:size-8" />
-            Categories
-          </h2>
-          <p className="text-sm leading-none text-muted-foreground md:text-base">
-            Organize and manage your product categories efficiently.
-          </p>
+      <div className="space-y-3 rounded-lg bg-muted p-4">
+        {/* Categories Page Header */}
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+          <div className="w-full space-y-2">
+            <h2 className="flex items-center gap-2 text-2xl font-bold leading-none md:text-3xl">
+              <ChartBarStacked className="size-6 md:size-8" />
+              Categories
+            </h2>
+            <p className="text-sm leading-none text-muted-foreground md:text-base">
+              Organize and manage your product categories efficiently.
+            </p>
+          </div>
+          <div className="flex w-full justify-end">
+            <AddCategoryDialog userId={session?.userId as string} />
+          </div>
         </div>
-        <div className="flex w-full justify-end">
-          <AddCategoryDialog userId={session?.userId as string} />
+        {/* Data Table */}
+        <div>
+          <DataTable columns={columns} data={categoriesData} />
         </div>
-      </div>
-
-      {/* Data Table */}
-      <div>
-        <DataTable columns={columns} data={categoriesData} />
       </div>
     </section>
   );
