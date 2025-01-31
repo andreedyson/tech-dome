@@ -128,6 +128,8 @@ export async function editCategory(
       },
     });
 
+    revalidatePath("/dashboard/categories");
+
     return {
       error: undefined,
       message: "Category successfully edited",

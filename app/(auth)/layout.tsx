@@ -18,6 +18,7 @@ export default async function AuthLayout({
   if (session && user.role === "ADMIN") {
     return redirect("/dashboard");
   }
+
   return (
     <main className={`${GeistSans.className} antialiased`}>
       <div>

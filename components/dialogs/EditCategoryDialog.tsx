@@ -28,7 +28,7 @@ import { Input } from "@/components/ui/input";
 import { SubmitButton } from "../SubmitButton";
 import { Pencil } from "lucide-react";
 import { categorySchema } from "@/types/validations";
-import { createCategory, editCategory } from "@/lib/actions/category/actions";
+import { editCategory } from "@/lib/actions/category/actions";
 import { ActionResult } from "@/types/auth";
 import { useFormState, useFormStatus } from "react-dom";
 import { Category } from "@prisma/client";
@@ -81,9 +81,8 @@ function EditCategoryDialog({ categoryData }: EditCategoryProps) {
         variant: "success",
       });
 
-      router.refresh();
-      form.reset();
       setOpen(false);
+      router.refresh();
     }
 
     if (state.error) {
