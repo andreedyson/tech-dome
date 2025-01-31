@@ -141,3 +141,39 @@ export async function editCategory(
     };
   }
 }
+
+export async function deleteCategory(
+  categoryId: number,
+  formData: FormData,
+): Promise<ActionResult> {
+  try {
+    const category = await prisma.category.findUnique({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    if (!category) {
+      return {
+        error: "Category not found",
+        message: undefined,
+      };
+    }
+
+    await prisma.category.delete({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    return {
+      error: undefined,
+      message: "Category successfully deleted",
+    };
+  } catch (error) {
+    return {
+      error: "Something went wrong",
+      message: undefined,
+    };
+  }
+}

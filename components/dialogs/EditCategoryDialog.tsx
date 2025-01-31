@@ -56,12 +56,10 @@ function Submit() {
 }
 
 function EditCategoryDialog({ categoryData }: EditCategoryProps) {
-  const [state, formAction] = useFormState(
-    async (_: ActionResult, formData: FormData) => {
-      return await editCategory(categoryData, formData);
-    },
-    initialState,
-  );
+  const editCategoryWithId = async (_: ActionResult, formData: FormData) => {
+    return await editCategory(categoryData, formData);
+  };
+  const [state, formAction] = useFormState(editCategoryWithId, initialState);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
   const router = useRouter();

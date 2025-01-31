@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import EditCategoryDialog from "../dialogs/EditCategoryDialog";
 import { Category } from "@prisma/client";
+import DeleteCategoryDialog from "../dialogs/DeleteCategoryDialog";
 
 export const columns: ColumnDef<Category>[] = [
   {
@@ -21,8 +22,9 @@ export const columns: ColumnDef<Category>[] = [
       const category = row.original;
 
       return (
-        <div>
+        <div className="flex items-center gap-1">
           <EditCategoryDialog categoryData={category} />
+          <DeleteCategoryDialog categoryData={category} />
         </div>
       );
     },
