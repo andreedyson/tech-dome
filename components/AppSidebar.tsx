@@ -38,9 +38,9 @@ const items = [
     icon: ChartBarStacked,
   },
   {
-    title: "Products",
-    url: "/dashboard/products",
-    icon: Boxes,
+    title: "Locations",
+    url: "/dashboard/locations",
+    icon: MapPin,
   },
   {
     title: "Brands",
@@ -48,9 +48,9 @@ const items = [
     icon: Building,
   },
   {
-    title: "Locations",
-    url: "/dashboard/locations",
-    icon: MapPin,
+    title: "Products",
+    url: "/dashboard/products",
+    icon: Boxes,
   },
   {
     title: "Orders",

@@ -1,9 +1,9 @@
-import { columns as CategoryColumns } from "@/components/categories/columns";
-import AddCategoryDialog from "@/components/categories/AddCategoryDialog";
+import AddlocationDialog from "@/components/categories/AddCategoryDialog";
+import { columns as ColumnLocation } from "@/components/locations/columns";
 import { DataTable } from "@/components/ui/data-table";
 import { validateProtected } from "@/lib/check-session";
-import { getAllCategories } from "@/lib/data/category";
-import { ChartBarStacked } from "lucide-react";
+import { getAllLocations } from "@/lib/data/locations";
+import { MapPin } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
 
@@ -11,35 +11,36 @@ export const metadata: Metadata = {
   title: "Categories",
 };
 
-async function CategoriesPage() {
-  const categoriesData = await getAllCategories();
+async function LocationsPage() {
+  const locationsData = await getAllLocations();
   const { session } = await validateProtected();
 
   return (
     <section className="space-y-4">
       <div className="space-y-3 rounded-lg bg-muted p-4">
-        {/* Categories Page Header */}
+        {/* Locatioons Page Header */}
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full space-y-2">
             <h2 className="flex items-center gap-2 text-2xl font-bold leading-none md:text-3xl">
-              <ChartBarStacked className="size-6 md:size-8" />
-              Categories
+              <MapPin className="size-6 md:size-8" />
+              Locations
             </h2>
-            <p className="text-sm leading-none text-muted-foreground md:text-base">
-              Organize and manage your product categories efficiently.
+            <p className="max-w-[500px] text-sm leading-none text-muted-foreground md:text-base">
+              Manage, visualize and gain insights and control over your site's
+              geographical data
             </p>
           </div>
           <div className="flex w-full justify-end">
-            <AddCategoryDialog userId={session.userId as string} />
+            <AddlocationDialog userId={session.userId as string} />
           </div>
         </div>
         {/* Data Table */}
         <div>
-          <DataTable columns={CategoryColumns} data={categoriesData} />
+          <DataTable columns={ColumnLocation} data={locationsData} />
         </div>
       </div>
     </section>
   );
 }
 
-export default CategoriesPage;
+export default LocationsPage;

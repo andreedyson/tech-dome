@@ -1,11 +1,11 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import EditCategoryDialog from "./EditCategoryDialog";
-import { Category } from "@prisma/client";
-import DeleteCategoryDialog from "./DeleteCategoryDialog";
+import { Location } from "@prisma/client";
+import EditlocationDialog from "./EditLocationDialog";
+import DeletelocationDialog from "./DeleteLocationDialog";
 
-export const columns: ColumnDef<Category>[] = [
+export const columns: ColumnDef<Location>[] = [
   {
     accessorKey: "id",
     header: "ID",
@@ -19,12 +19,12 @@ export const columns: ColumnDef<Category>[] = [
     header: "Actions",
     id: "actions",
     cell: ({ row }) => {
-      const category = row.original;
+      const location = row.original;
 
       return (
         <div className="flex items-center gap-1">
-          <EditCategoryDialog categoryData={category} />
-          <DeleteCategoryDialog categoryData={category} />
+          <EditlocationDialog locationData={location} />
+          <DeletelocationDialog locationData={location} />
         </div>
       );
     },
