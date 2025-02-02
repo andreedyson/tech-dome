@@ -25,9 +25,9 @@ async function LocationsPage() {
               <MapPin className="size-6 md:size-8" />
               Locations
             </h2>
-            <p className="max-w-[500px] text-sm leading-none text-muted-foreground md:text-base">
-              Manage, visualize and gain insights and control over your site's
-              geographical data
+            <p className="text-sm leading-none text-muted-foreground md:text-base">
+              Manage, gain insights and control over your site's geographical
+              data
             </p>
           </div>
           <div className="flex w-full justify-end">

@@ -119,7 +119,7 @@ function EditlocationDialog({ locationData }: EditlocationProps) {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="ex: Computer"
+                      placeholder="ex: Indonesia"
                       autoComplete="off"
                       className="bg-input"
                       {...field}
