@@ -1,5 +1,5 @@
-import { columns as CategoryColumns } from "@/components/categories/columns";
 import AddCategoryDialog from "@/components/categories/AddCategoryDialog";
+import { columns as CategoryColumns } from "@/components/categories/columns";
 import { DataTable } from "@/components/ui/data-table";
 import { validateProtected } from "@/lib/check-session";
 import { getAllCategories } from "@/lib/data/category";

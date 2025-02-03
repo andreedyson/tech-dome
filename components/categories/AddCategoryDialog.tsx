@@ -26,9 +26,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "../SubmitButton";
-import { MapPin } from "lucide-react";
-import { locationSchema } from "@/types/validations";
-import { createlocation } from "@/lib/actions/location/actions";
+import { ChartBarStacked } from "lucide-react";
+import { categorySchema } from "@/types/validations";
+import { createCategory } from "@/lib/actions/category/actions";
 import { ActionResult } from "@/types/auth";
 import { useFormState, useFormStatus } from "react-dom";
 
@@ -49,18 +49,18 @@ function Submit() {
   );
 }
 
-function AddLocationDialog({ userId }: { userId: string }) {
+function AddCategoryDialog({ userId }: { userId: string }) {
   const [state, formAction] = useFormState(
     async (_: ActionResult, formData: FormData) => {
-      return await createlocation(userId, formData);
+      return await createCategory(userId, formData);
     },
     initialState,
   );
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof locationSchema>>({
-    resolver: zodResolver(locationSchema),
+  const form = useForm<z.infer<typeof categorySchema>>({
+    resolver: zodResolver(categorySchema),
     defaultValues: {
       name: "",
     },
@@ -91,15 +91,15 @@ function AddLocationDialog({ userId }: { userId: string }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="flex items-center gap-2 bg-main-violet-600 text-sm text-white duration-200 hover:bg-main-violet-400">
-          <MapPin size={16} />
-          Add Location
+          <ChartBarStacked size={16} />
+          Add Category
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[350px] rounded-lg sm:max-w-[380px]">
         <DialogHeader className="space-y-2">
-          <DialogTitle>Create Location</DialogTitle>
+          <DialogTitle>Create Category</DialogTitle>
           <DialogDescription>
-            Please enter the details of the new location you want to create.
+            Please enter the details of the new category you want to create.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -112,7 +112,7 @@ function AddLocationDialog({ userId }: { userId: string }) {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="ex: Computer"
+                      placeholder="ex: Indonesia"
                       autoComplete="off"
                       className="bg-input"
                       {...field}
@@ -133,4 +133,4 @@ function AddLocationDialog({ userId }: { userId: string }) {
   );
 }
 
-export default AddLocationDialog;
+export default AddCategoryDialog;

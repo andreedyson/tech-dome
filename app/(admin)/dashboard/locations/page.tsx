@@ -1,4 +1,4 @@
-import AddlocationDialog from "@/components/categories/AddCategoryDialog";
+import AddLocationDialog from "@/components/locations/AddLocationDialog";
 import { columns as ColumnLocation } from "@/components/locations/columns";
 import { DataTable } from "@/components/ui/data-table";
 import { validateProtected } from "@/lib/check-session";
@@ -31,7 +31,7 @@ async function LocationsPage() {
             </p>
           </div>
           <div className="flex w-full justify-end">
-            <AddlocationDialog userId={session.userId as string} />
+            <AddLocationDialog userId={session.userId as string} />
           </div>
         </div>
         {/* Data Table */}

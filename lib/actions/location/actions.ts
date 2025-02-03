@@ -6,7 +6,7 @@ import { locationSchema } from "@/types/validations";
 import { Location } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-export async function createlocation(
+export async function createLocation(
   userId: string,
   formData: FormData,
 ): Promise<ActionResult> {
