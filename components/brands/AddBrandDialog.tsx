@@ -125,6 +125,7 @@ function AddBrandDialog({ userId }: { userId: string }) {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
+                      id="name"
                       placeholder="ex: Logitech"
                       autoComplete="off"
                       className="bg-input"
@@ -138,17 +139,18 @@ function AddBrandDialog({ userId }: { userId: string }) {
 
             <FormField
               control={form.control}
-              name="name"
+              name="logo"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Logo</FormLabel>
                   <FormControl>
                     <Input
+                      id="logo"
+                      name="logo"
                       onChange={handleFileChange}
                       type="file"
                       autoComplete="off"
-                      className="bg-input"
-                      accept=".png, .jpg, .jpeg"
+                      className="w-full bg-input"
                     />
                   </FormControl>
                   <FormMessage />

@@ -1,4 +1,7 @@
+"use server";
+
 import { prisma } from "@/lib/prisma";
+import { uploadFile } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
 import { brandSchema } from "@/types/validations";
 import { revalidatePath } from "next/cache";
@@ -10,6 +13,8 @@ export async function createBrand(
   try {
     const name = formData.get("name");
     const logo = formData.get("logo");
+
+    console.log(name);
 
     const user = await prisma.user.findUnique({
       where: {
@@ -56,10 +61,12 @@ export async function createBrand(
       };
     }
 
+    const fileName = await uploadFile(validatedFields.data.logo, "brands");
+
     await prisma.brand.create({
       data: {
         name: validatedFields.data.name,
-        logo: validatedFields.data.logo,
+        logo: fileName,
       },
     });
 
@@ -71,7 +78,7 @@ export async function createBrand(
     };
   } catch (error) {
     return {
-      error: "Something went wrong",
+      error: "Something went wrong creating Brand",
       message: undefined,
     };
   }
