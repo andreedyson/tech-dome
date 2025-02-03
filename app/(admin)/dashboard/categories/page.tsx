@@ -30,7 +30,7 @@ async function CategoriesPage() {
             </p>
           </div>
           <div className="flex w-full justify-end">
-            <AddCategoryDialog userId={session.userId as string} />
+            <AddCategoryDialog />
           </div>
         </div>
         {/* Data Table */}

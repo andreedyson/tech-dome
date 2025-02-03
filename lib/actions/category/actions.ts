@@ -1,5 +1,6 @@
 "use server";
 
+import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
 import { ActionResult } from "@/types/auth";
 import { categorySchema } from "@/types/validations";
@@ -7,31 +8,19 @@ import { Category } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function createCategory(
-  userId: string,
+  _: unknown,
   formData: FormData,
 ): Promise<ActionResult> {
   try {
-    const name = formData.get("name");
-    const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
-
+    const user = await validateProtected();
     if (!user) {
       return {
-        error: "User not found",
+        error: "You must be signed in to perform this action",
         message: undefined,
       };
     }
+
+    const name = formData.get("name");
 
     const validatedFields = categorySchema.safeParse({
       name: name,
@@ -80,6 +69,14 @@ export async function editCategory(
   categoryData: Category,
   formData: FormData,
 ): Promise<ActionResult> {
+  const user = await validateProtected();
+  if (!user) {
+    return {
+      error: "You must be signed in to perform this action",
+      message: undefined,
+    };
+  }
+
   try {
     const category = await prisma.category.findUnique({
       where: {
@@ -147,6 +144,14 @@ export async function deleteCategory(
   formData: FormData,
 ): Promise<ActionResult> {
   try {
+    const user = await validateProtected();
+    if (!user) {
+      return {
+        error: "You must be signed in to perform this action",
+        message: undefined,
+      };
+    }
+
     const category = await prisma.category.findUnique({
       where: {
         id: categoryId,

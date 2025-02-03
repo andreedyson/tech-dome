@@ -50,14 +50,9 @@ function Submit() {
   );
 }
 
-function AddBrandDialog({ userId }: { userId: string }) {
+function AddBrandDialog() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [state, formAction] = useFormState(
-    async (_: ActionResult, formData: FormData) => {
-      return await createBrand(userId, formData);
-    },
-    initialState,
-  );
+  const [state, formAction] = useFormState(createBrand, initialState);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
 

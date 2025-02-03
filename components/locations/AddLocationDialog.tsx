@@ -49,13 +49,8 @@ function Submit() {
   );
 }
 
-function AddLocationDialog({ userId }: { userId: string }) {
-  const [state, formAction] = useFormState(
-    async (_: ActionResult, formData: FormData) => {
-      return await createLocation(userId, formData);
-    },
-    initialState,
-  );
+function AddLocationDialog() {
+  const [state, formAction] = useFormState(createLocation, initialState);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
 

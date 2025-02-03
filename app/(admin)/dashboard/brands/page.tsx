@@ -31,7 +31,7 @@ async function BrandsPage() {
             </p>
           </div>
           <div className="flex w-full justify-end">
-            <AddBrandDialog userId={session.userId as string} />
+            <AddBrandDialog />
           </div>
         </div>
         {/* Data Table */}

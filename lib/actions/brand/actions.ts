@@ -1,5 +1,6 @@
 "use server";
 
+import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
 import { uploadFile } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
@@ -7,35 +8,20 @@ import { brandSchema } from "@/types/validations";
 import { revalidatePath } from "next/cache";
 
 export async function createBrand(
-  userId: string,
+  _: unknown,
   formData: FormData,
 ): Promise<ActionResult> {
   try {
-    const name = formData.get("name");
-    const logo = formData.get("logo");
-
-    console.log(name);
-
-    const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
-
+    const user = await validateProtected();
     if (!user) {
       return {
-        error: "User not found",
+        error: "You must be signed in to perform this action",
         message: undefined,
       };
     }
+
+    const name = formData.get("name");
+    const logo = formData.get("logo");
 
     const validatedFields = brandSchema.safeParse({
       name: name,

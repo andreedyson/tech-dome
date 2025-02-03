@@ -1,5 +1,6 @@
 "use server";
 
+import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
 import { ActionResult } from "@/types/auth";
 import { locationSchema } from "@/types/validations";
@@ -7,31 +8,19 @@ import { Location } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function createLocation(
-  userId: string,
+  _: unknown,
   formData: FormData,
 ): Promise<ActionResult> {
   try {
-    const name = formData.get("name");
-    const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
-
+    const user = await validateProtected();
     if (!user) {
       return {
-        error: "User not found",
+        error: "You must be signed in to perform this action",
         message: undefined,
       };
     }
+
+    const name = formData.get("name");
 
     const validatedFields = locationSchema.safeParse({
       name: name,
@@ -81,6 +70,14 @@ export async function editlocation(
   formData: FormData,
 ): Promise<ActionResult> {
   try {
+    const user = await validateProtected();
+    if (!user) {
+      return {
+        error: "You must be signed in to perform this action",
+        message: undefined,
+      };
+    }
+
     const location = await prisma.location.findUnique({
       where: {
         id: locationData.id,
@@ -147,6 +144,14 @@ export async function deletelocation(
   formData: FormData,
 ): Promise<ActionResult> {
   try {
+    const user = await validateProtected();
+    if (!user) {
+      return {
+        error: "You must be signed in to perform this action",
+        message: undefined,
+      };
+    }
+
     const location = await prisma.location.findUnique({
       where: {
         id: locationId,

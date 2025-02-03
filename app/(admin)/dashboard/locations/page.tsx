@@ -31,7 +31,7 @@ async function LocationsPage() {
             </p>
           </div>
           <div className="flex w-full justify-end">
-            <AddLocationDialog userId={session.userId as string} />
+            <AddLocationDialog />
           </div>
         </div>
         {/* Data Table */}
