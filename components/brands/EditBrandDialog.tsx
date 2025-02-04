@@ -26,15 +26,21 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SubmitButton } from "../SubmitButton";
-import { Building } from "lucide-react";
+import { Building, Pencil } from "lucide-react";
 import { brandSchema } from "@/types/validations";
-import { createBrand } from "@/lib/actions/brand/actions";
+import { createBrand, editBrand } from "@/lib/actions/brand/actions";
 import { ActionResult } from "@/types/auth";
 import { useFormState, useFormStatus } from "react-dom";
 import Image from "next/image";
+import { Brand } from "@prisma/client";
+import { getImageUrl } from "@/lib/supabase";
 
 const initialState: ActionResult = {
   error: "",
+};
+
+type EditBrandProps = {
+  brandData: Brand;
 };
 
 function Submit() {
@@ -45,21 +51,26 @@ function Submit() {
       isSubmitting={pending}
       className="w-[150px] bg-main-violet-700 hover:bg-main-violet-500 md:w-full"
     >
-      {pending ? "Creating..." : "Create"}
+      {pending ? "Editing..." : "Edit"}
     </SubmitButton>
   );
 }
 
-function AddBrandDialog() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [state, formAction] = useFormState(createBrand, initialState);
+function EditBrandDialog({ brandData }: EditBrandProps) {
+  const [selectedImage, setSelectedImage] = useState<string | null>(
+    getImageUrl(brandData.logo),
+  );
+  const editBrandWithId = async (_: ActionResult, formData: FormData) => {
+    return await editBrand(brandData, formData);
+  };
+  const [state, formAction] = useFormState(editBrandWithId, initialState);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof brandSchema>>({
     resolver: zodResolver(brandSchema),
     defaultValues: {
-      name: "",
+      name: brandData.name,
       logo: "",
     },
   });
@@ -98,16 +109,18 @@ function AddBrandDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="flex items-center gap-2 bg-main-violet-600 text-sm text-white duration-200 hover:bg-main-violet-400">
-          <Building size={16} />
-          Add Brand
+        <Button
+          variant={"ghost"}
+          className="flex items-center gap-2 bg-yellow-500 text-sm text-white duration-200 hover:bg-yellow-400"
+        >
+          <Pencil size={16} />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[350px] rounded-lg sm:max-w-[380px]">
         <DialogHeader className="space-y-2">
-          <DialogTitle>Create Brand</DialogTitle>
+          <DialogTitle>Edit Brand</DialogTitle>
           <DialogDescription>
-            Please enter the details of the new brand you want to add.
+            Modify the details of the brand you want to edit.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -146,7 +159,6 @@ function AddBrandDialog() {
                       type="file"
                       autoComplete="off"
                       className="w-full bg-input"
-                      required
                     />
                   </FormControl>
                   <FormMessage />
@@ -185,4 +197,4 @@ function AddBrandDialog() {
   );
 }
 
-export default AddBrandDialog;
+export default EditBrandDialog;

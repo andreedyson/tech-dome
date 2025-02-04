@@ -38,7 +38,7 @@ const initialState: ActionResult = {
   error: "",
 };
 
-type EditlocationProps = {
+type EditLocationProps = {
   locationData: Location;
 };
 
@@ -55,7 +55,7 @@ function Submit() {
   );
 }
 
-function EditlocationDialog({ locationData }: EditlocationProps) {
+function EditlocationDialog({ locationData }: EditLocationProps) {
   const editLocationWithId = async (_: ActionResult, formData: FormData) => {
     return await editlocation(locationData, formData);
   };
