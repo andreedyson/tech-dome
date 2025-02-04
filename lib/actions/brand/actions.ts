@@ -2,7 +2,7 @@
 
 import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
-import { uploadFile } from "@/lib/supabase";
+import { updateFile, uploadFile } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
 import { brandSchema } from "@/types/validations";
 import { Brand } from "@prisma/client";
@@ -132,10 +132,11 @@ export async function editBrand(
       }
     }
 
-    let fileName = brand.logo;
+    let prevFile = new File([], brand.logo);
+    let newFilename = brand.logo;
 
     if (fileUpload.size > 0) {
-      fileName = await uploadFile(fileUpload, "brands");
+      newFilename = await updateFile(prevFile, fileUpload, "brands");
     }
 
     // Update the brand with the new name and logo if provided
@@ -145,7 +146,7 @@ export async function editBrand(
       },
       data: {
         name: validatedFields.data.name,
-        logo: fileName,
+        logo: newFilename,
       },
     });
 
