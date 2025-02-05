@@ -2,7 +2,7 @@
 
 import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
-import { updateFile, uploadFile } from "@/lib/supabase";
+import { deleteFile, updateFile, uploadFile } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
 import { brandSchema } from "@/types/validations";
 import { Brand } from "@prisma/client";
@@ -155,6 +155,52 @@ export async function editBrand(
     return {
       error: undefined,
       message: "Brand successfully edited",
+    };
+  } catch (error) {
+    return {
+      error: "Something went wrong",
+      message: undefined,
+    };
+  }
+}
+
+export async function deleteBrand(
+  brandId: number,
+  formData: FormData,
+): Promise<ActionResult> {
+  try {
+    const user = await validateProtected();
+    if (!user) {
+      return {
+        error: "You must be signed in to perform this action",
+        message: undefined,
+      };
+    }
+
+    const brand = await prisma.brand.findUnique({
+      where: {
+        id: brandId,
+      },
+    });
+
+    if (!brand) {
+      return {
+        error: "Brand not found",
+        message: undefined,
+      };
+    }
+
+    await deleteFile(brand.logo, "brands");
+
+    await prisma.brand.delete({
+      where: {
+        id: brandId,
+      },
+    });
+
+    return {
+      error: undefined,
+      message: "Brand successfully deleted",
     };
   } catch (error) {
     return {

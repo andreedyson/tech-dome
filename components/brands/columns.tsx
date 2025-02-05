@@ -5,6 +5,7 @@ import { Brand } from "@prisma/client";
 import Image from "next/image";
 import { getImageUrl } from "@/lib/supabase";
 import EditBrandDialog from "./EditBrandDialog";
+import DeleteBrandDialog from "./DeleteBrandDialog";
 
 export const columns: ColumnDef<Brand>[] = [
   {
@@ -15,13 +16,12 @@ export const columns: ColumnDef<Brand>[] = [
 
       return (
         <div className="inline-flex items-center gap-4">
-          <div className="size-20 object-contain">
+          <div className="size-20 rounded-lg object-contain">
             <Image
               src={getImageUrl(brand.logo)}
               alt={brand.name}
               width={80}
               height={80}
-              className="rounded-lg"
             />
           </div>
           <p>{brand.name}</p>
@@ -38,6 +38,7 @@ export const columns: ColumnDef<Brand>[] = [
       return (
         <div className="flex items-center gap-1">
           <EditBrandDialog brandData={brand} />
+          <DeleteBrandDialog brandData={brand} />
         </div>
       );
     },

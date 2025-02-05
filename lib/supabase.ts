@@ -38,18 +38,26 @@ export const updateFile = async (
 ) => {
   const fileType = newFile.type.split("/")[1];
   const newFilename = `${path}-${Date.now()}.${fileType}`;
-  const prevFilePath = `public/${path}/${prevFile.name}`;
-  const filePath = `public/${path}/${newFilename}`;
+  const newFilePath = `public/${path}/${newFilename}`;
 
   // Delete the old file if it exists
   if (prevFile.name) {
-    await supabaseClient.remove([prevFilePath]);
+    await deleteFile(prevFile.name);
   }
 
-  await supabaseClient.upload(filePath, newFile, {
+  await supabaseClient.upload(newFilePath, newFile, {
     cacheControl: "3600",
     upsert: true,
   });
 
   return newFilename;
+};
+
+export const deleteFile = async (
+  fileName: string,
+  path: "brands" | "products" = "brands",
+) => {
+  const filePath = `public/${path}/${fileName}`;
+
+  await supabaseClient.remove([filePath]);
 };
