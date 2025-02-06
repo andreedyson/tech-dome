@@ -2,11 +2,9 @@
 import AddBrandDialog from "@/components/brands/AddBrandDialog";
 import { columns as BrandColumns } from "@/components/brands/columns";
 import { DataTable } from "@/components/ui/data-table";
-import { validateProtected } from "@/lib/check-session";
 import { getAllBrands } from "@/lib/data/brand";
 import { Building } from "lucide-react";
 import { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Brands",
@@ -14,7 +12,6 @@ export const metadata: Metadata = {
 
 async function BrandsPage() {
   const brandsData = await getAllBrands();
-  const { session } = await validateProtected();
 
   return (
     <section className="space-y-4">

@@ -34,6 +34,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import Image from "next/image";
 import { Brand } from "@prisma/client";
 import { getImageUrl } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
 
 const initialState: ActionResult = {
   error: "",
@@ -66,6 +67,7 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
   const [state, formAction] = useFormState(editBrandWithId, initialState);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof brandSchema>>({
     resolver: zodResolver(brandSchema),
@@ -86,14 +88,20 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
   };
 
   useEffect(() => {
+    form.reset({
+      name: brandData.name,
+    });
+
     if (state.message) {
+      router.push("/dashboard/brands");
+      router.refresh();
+
       toast({
         title: "Success ✔️",
         description: state.message,
         variant: "success",
       });
 
-      form.reset();
       setOpen(false);
     }
 
@@ -104,7 +112,7 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
         variant: "destructive",
       });
     }
-  }, [state]);
+  }, [state, brandData.name]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

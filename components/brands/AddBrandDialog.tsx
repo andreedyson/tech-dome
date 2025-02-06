@@ -84,6 +84,7 @@ function AddBrandDialog() {
 
       form.reset();
       setOpen(false);
+      setSelectedImage(null);
     }
 
     if (state.error) {

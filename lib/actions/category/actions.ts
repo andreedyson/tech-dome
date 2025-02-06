@@ -171,6 +171,8 @@ export async function deleteCategory(
       },
     });
 
+    revalidatePath("/dashboard/categories");
+
     return {
       error: undefined,
       message: "Category successfully deleted",

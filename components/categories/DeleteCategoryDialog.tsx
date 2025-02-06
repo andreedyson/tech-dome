@@ -61,6 +61,7 @@ function DeleteCategoryDialog({ categoryData }: DeleteCategoryProps) {
       });
 
       setOpen(false);
+      router.push("/dashboard/categories");
       router.refresh();
     }
 

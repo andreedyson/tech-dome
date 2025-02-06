@@ -61,6 +61,7 @@ function DeletelocationDialog({ locationData }: DeletelocationProps) {
       });
 
       setOpen(false);
+      router.push("/dashboard/locations");
       router.refresh();
     }
 

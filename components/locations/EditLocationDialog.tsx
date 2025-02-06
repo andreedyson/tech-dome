@@ -72,7 +72,14 @@ function EditlocationDialog({ locationData }: EditLocationProps) {
   });
 
   useEffect(() => {
+    form.reset({
+      name: locationData.name,
+    });
+
     if (state.message) {
+      router.push("/dashboard/locations");
+      router.refresh();
+
       toast({
         title: "Success ✔️",
         description: state.message,
@@ -80,7 +87,6 @@ function EditlocationDialog({ locationData }: EditLocationProps) {
       });
 
       setOpen(false);
-      router.refresh();
     }
 
     if (state.error) {
@@ -90,7 +96,7 @@ function EditlocationDialog({ locationData }: EditLocationProps) {
         variant: "destructive",
       });
     }
-  }, [state]);
+  }, [state, locationData.name]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

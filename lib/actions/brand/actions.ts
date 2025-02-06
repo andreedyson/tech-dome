@@ -198,6 +198,8 @@ export async function deleteBrand(
       },
     });
 
+    revalidatePath("/dashboard/brands");
+
     return {
       error: undefined,
       message: "Brand successfully deleted",

@@ -61,6 +61,7 @@ function DeleteBrandDialog({ brandData }: DeleteBrandProps) {
       });
 
       setOpen(false);
+      router.push("/dashboard/brands");
       router.refresh();
     }
 

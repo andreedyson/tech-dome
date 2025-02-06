@@ -72,7 +72,14 @@ function EditCategoryDialog({ categoryData }: EditCategoryProps) {
   });
 
   useEffect(() => {
+    form.reset({
+      name: categoryData.name,
+    });
+
     if (state.message) {
+      router.push("/dashboard/categories");
+      router.refresh();
+
       toast({
         title: "Success ✔️",
         description: state.message,
@@ -80,7 +87,6 @@ function EditCategoryDialog({ categoryData }: EditCategoryProps) {
       });
 
       setOpen(false);
-      router.refresh();
     }
 
     if (state.error) {
@@ -90,7 +96,7 @@ function EditCategoryDialog({ categoryData }: EditCategoryProps) {
         variant: "destructive",
       });
     }
-  }, [state]);
+  }, [state, categoryData.name]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

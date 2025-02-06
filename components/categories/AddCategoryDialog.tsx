@@ -107,7 +107,7 @@ function AddCategoryDialog() {
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="ex: Indonesia"
+                      placeholder="ex: Computer"
                       autoComplete="off"
                       className="bg-input"
                       {...field}
