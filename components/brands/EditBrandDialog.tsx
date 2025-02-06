@@ -166,6 +166,7 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
                       type="file"
                       autoComplete="off"
                       className="w-full bg-input"
+                      accept=".jpg, .png, .jpeg"
                     />
                   </FormControl>
                   <FormMessage />

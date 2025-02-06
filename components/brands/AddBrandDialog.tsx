@@ -147,6 +147,7 @@ function AddBrandDialog() {
                       type="file"
                       autoComplete="off"
                       className="w-full bg-input"
+                      accept=".jpg, .png, .jpeg"
                       required
                     />
                   </FormControl>
