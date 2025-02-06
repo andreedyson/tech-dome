@@ -58,9 +58,7 @@ function Submit() {
 }
 
 function EditBrandDialog({ brandData }: EditBrandProps) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(
-    getImageUrl(brandData.logo),
-  );
+  const [selectedImage, setSelectedImage] = useState<string | null>();
   const editBrandWithId = async (_: ActionResult, formData: FormData) => {
     return await editBrand(brandData, formData);
   };
@@ -88,6 +86,7 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
   };
 
   useEffect(() => {
+    setSelectedImage(getImageUrl(brandData.logo));
     form.reset({
       name: brandData.name,
     });
