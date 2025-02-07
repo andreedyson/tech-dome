@@ -7,6 +7,7 @@ export async function getAllProducts(): Promise<ProductColumn[]> {
       include: {
         category: true,
         brand: true,
+        location: true,
         orders: true,
       },
     });
@@ -19,6 +20,7 @@ export async function getAllProducts(): Promise<ProductColumn[]> {
       imageUrl: product.images[0],
       categoryName: product.category.name,
       brandName: product.brand.name,
+      locationName: product.location.name,
       total_sales: product.orders.length,
       status: product.status,
       createdAt: product.createdAt,

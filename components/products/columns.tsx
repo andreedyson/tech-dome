@@ -15,6 +15,7 @@ export type ProductColumn = {
   imageUrl: string;
   categoryName: string;
   brandName: string;
+  locationName: string;
   total_sales: number;
   status: ProductStatus;
   createdAt: Date;
@@ -53,7 +54,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
   },
   {
     accessorKey: "price",
-    header: () => <div className="text-right">Price</div>,
+    header: "Price",
     cell: ({ row }) => {
       const product = row.original;
 

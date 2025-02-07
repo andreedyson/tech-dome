@@ -41,3 +41,23 @@ export const brandSchema = z.object({
       message: "File type is not allowed",
     }),
 });
+
+export const productSchema = z.object({
+  name: z
+    .string({ required_error: "brand Name is required" })
+    .trim()
+    .min(2, { message: "Brand name must be minimum of 2 characters" })
+    .max(32, { message: "Brand name must be less than 32 characters" }),
+  image: z
+    .any()
+    .refine((file: File) => file.name, { message: "Image is required" })
+    .refine((file: File) => ALLOWED_FILE_TYPE.includes(file.type), {
+      message: "File type is not allowed",
+    }),
+  description: z.string().optional(),
+  price: z.coerce.number(),
+  status: z.enum(["PRE_ORDER", "READY"]),
+  categoryId: z.string(),
+  brandId: z.string(),
+  locationId: z.string(),
+});

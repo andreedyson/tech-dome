@@ -3,6 +3,7 @@ import { columns as ProductColumns } from "@/components/products/columns";
 import { DataTable } from "@/components/ui/data-table";
 import { Boxes } from "lucide-react";
 import { getAllProducts } from "@/lib/data/product";
+import AddProductDialog from "@/components/products/AddProductDialog";
 
 async function ProductsPage() {
   const productsData = await getAllProducts();
@@ -21,7 +22,7 @@ async function ProductsPage() {
             </p>
           </div>
           <div className="flex w-full justify-end">
-            {/* <AddCategoryDialog /> */}
+            <AddProductDialog />
           </div>
         </div>
         {/* Data Table */}
