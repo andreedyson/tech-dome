@@ -62,7 +62,7 @@ function ProductImageUpload() {
           width={200}
           height={200}
           alt="Product Image"
-          className="aspect-square size-16 rounded-md object-cover"
+          className="aspect-square size-20 rounded-md object-cover"
         />
         <Image
           ref={secondImageRef}
@@ -70,7 +70,7 @@ function ProductImageUpload() {
           width={200}
           height={200}
           alt="Product Image"
-          className="aspect-square size-16 rounded-md object-cover"
+          className="aspect-square size-20 rounded-md object-cover"
         />
         <Button
           onClick={handleOpenFolder}
@@ -78,7 +78,7 @@ function ProductImageUpload() {
           className="size-20 cursor-pointer bg-input"
           asChild
         >
-          <Upload className="size-16" color="#955cf6" />
+          <Upload color="#955cf6" />
         </Button>
       </div>
 

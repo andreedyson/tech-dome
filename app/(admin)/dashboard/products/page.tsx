@@ -1,9 +1,9 @@
-import React from "react";
 import { columns as ProductColumns } from "@/components/products/columns";
+import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
-import { Boxes } from "lucide-react";
 import { getAllProducts } from "@/lib/data/product";
-import AddProductDialog from "@/components/products/AddProductDialog";
+import { Boxes } from "lucide-react";
+import Link from "next/link";
 
 async function ProductsPage() {
   const productsData = await getAllProducts();
@@ -22,7 +22,12 @@ async function ProductsPage() {
             </p>
           </div>
           <div className="flex w-full justify-end">
-            <AddProductDialog />
+            <Link href={"/dashboard/products/create"}>
+              <Button className="flex items-center gap-2 bg-main-violet-600 text-sm text-white duration-200 hover:bg-main-violet-400">
+                <Boxes size={16} />
+                Add Product
+              </Button>
+            </Link>
           </div>
         </div>
         {/* Data Table */}

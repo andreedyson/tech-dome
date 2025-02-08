@@ -1,3 +1,5 @@
+"use server";
+
 import { Location } from "@prisma/client";
 import { prisma } from "../prisma";
 

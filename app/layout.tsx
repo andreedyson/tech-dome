@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { Toaster } from "@/components/ui/toaster";
+import ReactQueryProvider from "@/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "DealDome",
@@ -16,7 +17,7 @@ export default function ARootLayout({
   return (
     <html lang="en">
       <body className={`${GeistSans.className} antialiased`}>
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
         <Toaster />
       </body>
     </html>
