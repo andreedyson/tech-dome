@@ -41,6 +41,7 @@ import { ActionResult } from "@/types/auth";
 import { useFormState, useFormStatus } from "react-dom";
 import Image from "next/image";
 import { Textarea } from "../ui/textarea";
+import ProductImageUpload from "./ProductImageUpload";
 
 const initialState: ActionResult = {
   error: "",
@@ -60,7 +61,6 @@ function Submit() {
 }
 
 function AddProductDialog() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [state, formAction] = useFormState(createBrand, initialState);
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
@@ -73,16 +73,6 @@ function AddProductDialog() {
     },
   });
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setSelectedImage(previewUrl);
-    } else {
-      setSelectedImage(null);
-    }
-  };
-
   useEffect(() => {
     if (state.message) {
       toast({
@@ -93,7 +83,6 @@ function AddProductDialog() {
 
       form.reset();
       setOpen(false);
-      setSelectedImage(null);
     }
 
     if (state.error) {
@@ -124,49 +113,7 @@ function AddProductDialog() {
           <form action={formAction} className="space-y-6">
             <div className="grid gap-5 md:grid-cols-5">
               <div className="space-y-2 md:col-span-2">
-                <FormField
-                  control={form.control}
-                  name="image"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Image</FormLabel>
-                      <FormControl>
-                        <Input
-                          id="image"
-                          name="image"
-                          onChange={handleFileChange}
-                          type="file"
-                          autoComplete="off"
-                          className="w-full bg-input"
-                          accept=".jpg, .png, .jpeg"
-                          required
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Image Preview */}
-                {selectedImage ? (
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <Image
-                      src={selectedImage}
-                      width={200}
-                      height={200}
-                      alt="Product Image"
-                      className="max-h-[200px] object-contain"
-                    />
-                    <p
-                      onClick={() => setSelectedImage(null)}
-                      className="w-fit cursor-pointer border bg-muted px-2 py-1 text-end text-sm"
-                    >
-                      Clear
-                    </p>
-                  </div>
-                ) : (
-                  <p className="text-center text-sm">No image selected.</p>
-                )}
+                <ProductImageUpload />
               </div>
 
               <div className="col-span-3 space-y-3">
