@@ -8,10 +8,13 @@ const supabaseKey = SUPABASE_KEY as string;
 const supabase = createClient(supabaseUrl, supabaseKey);
 const supabaseClient = supabase.storage.from("deal-dome-image");
 
-export const getImageUrl = (name: string) => {
+export const getImageUrl = (
+  name: string,
+  type: "brands" | "products" = "brands",
+) => {
   const { data } = supabase.storage
     .from("deal-dome-image")
-    .getPublicUrl(`/public/brands/${name}`);
+    .getPublicUrl(`/public/${type}/${name}`);
 
   return data.publicUrl;
 };

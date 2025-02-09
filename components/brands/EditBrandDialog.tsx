@@ -86,7 +86,7 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
   };
 
   useEffect(() => {
-    setSelectedImage(getImageUrl(brandData.logo));
+    setSelectedImage(getImageUrl(brandData.logo, "brands"));
     form.reset({
       name: brandData.name,
     });

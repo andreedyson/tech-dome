@@ -32,7 +32,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
         <div className="inline-flex items-center gap-5">
           <div className="size-20 rounded-lg object-contain">
             <Image
-              src={getImageUrl(product.imageUrl)}
+              src={getImageUrl(product.imageUrl, "products")}
               alt={product.name}
               width={80}
               height={80}
