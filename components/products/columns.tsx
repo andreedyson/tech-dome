@@ -58,9 +58,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
     cell: ({ row }) => {
       const product = row.original;
 
-      return (
-        <div className="text-right">{currencyFormatterIDR(product.price)}</div>
-      );
+      return <div>{currencyFormatterIDR(product.price)}</div>;
     },
   },
   {

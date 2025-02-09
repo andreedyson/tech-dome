@@ -30,7 +30,7 @@ export const locationSchema = z.object({
 
 export const brandSchema = z.object({
   name: z
-    .string({ required_error: "brand Name is required" })
+    .string({ required_error: "Brand Name is required" })
     .trim()
     .min(2, { message: "Brand name must be minimum of 2 characters" })
     .max(32, { message: "Brand name must be less than 32 characters" }),
@@ -44,20 +44,32 @@ export const brandSchema = z.object({
 
 export const productSchema = z.object({
   name: z
-    .string({ required_error: "brand Name is required" })
+    .string({ required_error: "Product Name is required" })
     .trim()
-    .min(2, { message: "Brand name must be minimum of 2 characters" })
-    .max(32, { message: "Brand name must be less than 32 characters" }),
+    .min(4, { message: "Product name must be minimum of 4 characters" }),
   image: z
     .any()
-    .refine((file: File) => file.name, { message: "Image is required" })
-    .refine((file: File) => ALLOWED_FILE_TYPE.includes(file.type), {
-      message: "File type is not allowed",
-    }),
-  description: z.string().optional(),
-  price: z.coerce.number(),
+    .refine((files: File[]) => files.length === 3, {
+      message: "Please upload 3 product images",
+    })
+    .refine(
+      (files: File[]) => {
+        let validate = false;
+
+        Array.from(files).find((file) => {
+          validate = ALLOWED_FILE_TYPE.includes(file.type);
+        });
+
+        return validate;
+      },
+      { message: "Uploaded files should be the type of images" },
+    ),
+  description: z
+    .string({ required_error: "Description is required" })
+    .min(10, { message: "Description should be at least 10 characters " }),
+  price: z.coerce.number({ required_error: "Price is required" }),
   status: z.enum(["PRE_ORDER", "READY"]),
-  categoryId: z.string(),
-  brandId: z.string(),
-  locationId: z.string(),
+  categoryId: z.string({ required_error: "Category is required" }),
+  brandId: z.string({ required_error: "Brand is required" }),
+  locationId: z.string({ required_error: "Location is required" }),
 });
