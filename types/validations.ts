@@ -47,7 +47,7 @@ export const productSchema = z.object({
     .string({ required_error: "Product Name is required" })
     .trim()
     .min(4, { message: "Product name must be minimum of 4 characters" }),
-  image: z
+  images: z
     .any()
     .refine((files: File[]) => files.length === 3, {
       message: "Please upload 3 product images",
@@ -73,3 +73,5 @@ export const productSchema = z.object({
   brandId: z.string({ required_error: "Brand is required" }),
   locationId: z.string({ required_error: "Location is required" }),
 });
+
+export const editProductSchema = productSchema.omit({ images: true });

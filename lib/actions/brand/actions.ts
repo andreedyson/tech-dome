@@ -2,7 +2,7 @@
 
 import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
-import { deleteFile, updateFile, uploadFile } from "@/lib/supabase";
+import { deleteFiles, updateFile, uploadFile } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
 import { brandSchema } from "@/types/validations";
 import { Brand } from "@prisma/client";
@@ -190,7 +190,7 @@ export async function deleteBrand(
       };
     }
 
-    await deleteFile(brand.logo, "brands");
+    await deleteFiles([brand.logo], "brands");
 
     await prisma.brand.delete({
       where: {

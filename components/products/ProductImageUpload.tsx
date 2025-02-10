@@ -1,54 +1,42 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import { Input } from "../ui/input";
-import Image from "next/image";
-import { Button } from "../ui/button";
 import { Upload } from "lucide-react";
+import Image from "next/image";
+import { ChangeEvent, useRef, useEffect, useState } from "react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
-function ProductImageUpload() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+interface ProductImageUploadProps {
+  defaultImages?: string[];
+}
+
+function ProductImageUpload({ defaultImages = [] }: ProductImageUploadProps) {
   const inputImageRef = useRef<HTMLInputElement>(null);
-  const thumbnailImageRef = useRef<HTMLImageElement>(null);
-  const firstImageRef = useRef<HTMLImageElement>(null);
-  const secondImageRef = useRef<HTMLImageElement>(null);
+  const [images, setImages] = useState<string[]>(defaultImages);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setSelectedImage(previewUrl);
-    } else {
-      setSelectedImage(null);
+  // Ensure images are only set initially, avoiding resets when uploading new images
+  useEffect(() => {
+    if (images.length === 0 && defaultImages.length > 0) {
+      setImages(defaultImages);
     }
-  };
+  }, [defaultImages]);
 
   const handleOpenFolder = () => {
-    if (inputImageRef.current) {
-      inputImageRef.current.click();
-    }
+    inputImageRef.current?.click();
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (
-      !thumbnailImageRef.current ||
-      !firstImageRef.current ||
-      !secondImageRef.current
-    ) {
-      return;
-    }
-
-    if (e.target.files && e.target.files.length >= 3) {
-      thumbnailImageRef.current.src = URL.createObjectURL(e.target.files[0]);
-      firstImageRef.current.src = URL.createObjectURL(e.target.files[1]);
-      secondImageRef.current.src = URL.createObjectURL(e.target.files[2]);
+    if (e.target.files) {
+      const newImages = Array.from(e.target.files).map((file) =>
+        URL.createObjectURL(file),
+      );
+      setImages(newImages.slice(0, 3));
     }
   };
 
   return (
     <div className="space-y-4">
-      {/* Image Preview */}
+      {/* Thumbnail Image */}
       <Image
-        ref={thumbnailImageRef}
-        src={"/assets/image-placeholder.svg"}
+        src={images[0] || "/assets/image-placeholder.svg"}
         width={200}
         height={200}
         alt="Product Image"
@@ -56,25 +44,22 @@ function ProductImageUpload() {
       />
 
       <div className="flex items-center justify-between gap-2">
-        <Image
-          ref={firstImageRef}
-          src={"/assets/image-placeholder.svg"}
-          width={200}
-          height={200}
-          alt="Product Image"
-          className="aspect-square size-12 rounded-md object-cover md:size-20"
-        />
-        <Image
-          ref={secondImageRef}
-          src={"/assets/image-placeholder.svg"}
-          width={200}
-          height={200}
-          alt="Product Image"
-          className="aspect-square size-12 rounded-md object-cover md:size-20"
-        />
+        {/* Additional Images */}
+        {[1, 2].map((index) => (
+          <Image
+            key={index}
+            src={images[index] || "/assets/image-placeholder.svg"}
+            width={200}
+            height={200}
+            alt="Product Image"
+            className="aspect-square size-12 rounded-md object-cover md:size-20"
+          />
+        ))}
+
+        {/* Upload Button */}
         <Button
           onClick={handleOpenFolder}
-          variant={"outline"}
+          variant="outline"
           className="size-12 cursor-pointer bg-input md:size-20"
           asChild
         >
@@ -85,8 +70,8 @@ function ProductImageUpload() {
       <Input
         ref={inputImageRef}
         type="file"
-        id="image"
-        name="image"
+        id="images"
+        name="images"
         onChange={handleImageChange}
         autoComplete="off"
         className="hidden"

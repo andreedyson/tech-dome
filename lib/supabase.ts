@@ -45,7 +45,7 @@ export const updateFile = async (
 
   // Delete the old file if it exists
   if (prevFile.name) {
-    await deleteFile(prevFile.name);
+    await deleteFiles([prevFile.name]);
   }
 
   await supabaseClient.upload(newFilePath, newFile, {
@@ -56,11 +56,11 @@ export const updateFile = async (
   return newFilename;
 };
 
-export const deleteFile = async (
-  fileName: string,
+export const deleteFiles = async (
+  fileNames: string[],
   path: "brands" | "products" = "brands",
 ) => {
-  const filePath = `public/${path}/${fileName}`;
+  const filePaths = fileNames.map((fileName) => `public/${path}/${fileName}`);
 
-  await supabaseClient.remove([filePath]);
+  await supabaseClient.remove(filePaths);
 };

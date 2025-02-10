@@ -26,9 +26,10 @@ import { Input } from "@/components/ui/input";
 import { useBrands } from "@/hooks/use-brand";
 import { useCategories } from "@/hooks/use-category";
 import { useLocations } from "@/hooks/use-location";
-import { createProduct } from "@/lib/actions/product/actions";
+import { createProduct, editProduct } from "@/lib/actions/product/actions";
 import { ActionResult } from "@/types/auth";
 import { productSchema } from "@/types/validations";
+import { Product } from "@prisma/client";
 import Link from "next/link";
 import { useFormState, useFormStatus } from "react-dom";
 import { SubmitButton } from "../SubmitButton";
@@ -36,6 +37,7 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import ProductImageUpload from "./ProductImageUpload";
+import { getImageUrl } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 
 const initialState: ActionResult = {
@@ -50,29 +52,42 @@ function Submit() {
       isSubmitting={pending}
       className="w-[150px] bg-main-violet-700 hover:bg-main-violet-500"
     >
-      {pending ? "Creating..." : "Create"}
+      {pending ? "Editing..." : "Edit"}
     </SubmitButton>
   );
 }
 
-function AddProductForm() {
-  const [state, formAction] = useFormState(createProduct, initialState);
+type EditProductProps = {
+  productData: Product;
+};
+
+function EditProductForm({ productData }: EditProductProps) {
+  const editProductWithId = async (_: ActionResult, formData: FormData) => {
+    return await editProduct(productData, formData);
+  };
+  const [state, formAction] = useFormState(editProductWithId, initialState);
   const { toast } = useToast();
   const router = useRouter();
   const { data: categories } = useCategories();
   const { data: brands } = useBrands();
   const { data: locations } = useLocations();
 
+  const imageUrls = productData.images.map((img) => {
+    const filenames = getImageUrl(img, "products");
+
+    return filenames;
+  });
+
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      categoryId: "",
-      brandId: "",
-      locationId: "",
-      price: 0,
-      status: "PRE_ORDER",
+      name: productData.name,
+      description: productData.description,
+      categoryId: productData.categoryId.toString(),
+      brandId: productData.categoryId.toString(),
+      locationId: productData.brandId.toString(),
+      price: productData.price,
+      status: productData.status,
       images: "",
     },
   });
@@ -104,7 +119,7 @@ function AddProductForm() {
         <form action={formAction} className="space-y-6">
           <div className="grid gap-5 md:grid-cols-7">
             <div className="space-y-2 md:col-span-2">
-              <ProductImageUpload />
+              <ProductImageUpload defaultImages={imageUrls} />
             </div>
 
             <div className="space-y-3 md:col-span-5">
@@ -171,7 +186,10 @@ function AddProductForm() {
               <div className="grid gap-4 md:grid-cols-3">
                 <div className="space-y-2">
                   <Label htmlFor="categoryId">Category</Label>
-                  <Select name="categoryId">
+                  <Select
+                    name="categoryId"
+                    defaultValue={productData.categoryId.toString()}
+                  >
                     <SelectTrigger
                       id="categoryId"
                       className="bg-input"
@@ -194,7 +212,10 @@ function AddProductForm() {
 
                 <div className="space-y-2">
                   <Label htmlFor="brandId">Brand</Label>
-                  <Select name="brandId">
+                  <Select
+                    name="brandId"
+                    defaultValue={productData.brandId.toString()}
+                  >
                     <SelectTrigger
                       id="brandId"
                       className="bg-input"
@@ -214,7 +235,10 @@ function AddProductForm() {
 
                 <div className="space-y-2">
                   <Label htmlFor="locationId">Location</Label>
-                  <Select name="locationId">
+                  <Select
+                    name="locationId"
+                    defaultValue={productData.locationId.toString()}
+                  >
                     <SelectTrigger
                       id="locationId"
                       className="bg-input"
@@ -238,7 +262,7 @@ function AddProductForm() {
 
               <div className="space-y-2">
                 <Label htmlFor="status">Status</Label>
-                <Select name="status">
+                <Select name="status" defaultValue={productData.status}>
                   <SelectTrigger
                     id="status"
                     className="bg-input"
@@ -273,4 +297,4 @@ function AddProductForm() {
   );
 }
 
-export default AddProductForm;
+export default EditProductForm;
