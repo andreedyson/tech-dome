@@ -25,8 +25,7 @@ function AdminHeader() {
         <Breadcrumb>
           <BreadcrumbList>
             {pathnames.slice(0, 3).map((segment, index) => {
-              const isLastSegment =
-                index === 2 || index === pathnames.length - 1;
+              const isLastSegment = index === pathnames.length - 1;
               const href = `/${pathnames.slice(0, index + 1).join("/")}`;
 
               return (
@@ -44,18 +43,18 @@ function AdminHeader() {
                       </BreadcrumbLink>
                     </BreadcrumbItem>
                   )}
-                  {index < 2 && <BreadcrumbSeparator />}
+                  {!isLastSegment && <BreadcrumbSeparator />}
                 </React.Fragment>
               );
             })}
-            {/* {pathnames.length > 3 && (
+            {pathnames.length > 3 && (
               <>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>...</BreadcrumbPage>
                 </BreadcrumbItem>
               </>
-            )} */}
+            )}
           </BreadcrumbList>
         </Breadcrumb>
       </div>
