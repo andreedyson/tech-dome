@@ -6,6 +6,9 @@ import Image from "next/image";
 import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR, formatDate } from "@/lib/utils";
 import ProductStatusBadge from "../ProductStatusBadge";
+import { Button } from "../ui/button";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
 
 export type ProductColumn = {
   id: string;
@@ -24,7 +27,7 @@ export type ProductColumn = {
 export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Product",
     cell: ({ row }) => {
       const product = row.original;
 
@@ -77,11 +80,17 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const brand = row.original;
+      const product = row.original;
       return (
         <div className="flex items-center gap-1 text-right">
-          {/* <EditBrandDialog brandData={brand} />
-          <DeleteBrandDialog brandData={brand} /> */}
+          <Link href={`/dashboard/products/edit/${product.id}`}>
+            <Button
+              variant={"ghost"}
+              className="flex items-center gap-2 bg-yellow-500 text-sm text-white duration-200 hover:bg-yellow-400"
+            >
+              <Pencil size={16} />
+            </Button>
+          </Link>
         </div>
       );
     },

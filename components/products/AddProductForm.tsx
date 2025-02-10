@@ -26,17 +26,16 @@ import { Input } from "@/components/ui/input";
 import { useBrands } from "@/hooks/use-brand";
 import { useCategories } from "@/hooks/use-category";
 import { useLocations } from "@/hooks/use-location";
-import { createBrand } from "@/lib/actions/brand/actions";
+import { createProduct } from "@/lib/actions/product/actions";
 import { ActionResult } from "@/types/auth";
 import { productSchema } from "@/types/validations";
+import Link from "next/link";
 import { useFormState, useFormStatus } from "react-dom";
 import { SubmitButton } from "../SubmitButton";
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import ProductImageUpload from "./ProductImageUpload";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { createProduct } from "@/lib/actions/product/actions";
-import { Label } from "../ui/label";
 
 const initialState: ActionResult = {
   error: "",

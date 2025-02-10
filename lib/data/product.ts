@@ -1,5 +1,6 @@
 import { ProductColumn } from "@/components/products/columns";
 import { prisma } from "../prisma";
+import { Product } from "@prisma/client";
 
 export async function getAllProducts(): Promise<ProductColumn[]> {
   try {
@@ -29,5 +30,23 @@ export async function getAllProducts(): Promise<ProductColumn[]> {
     return mappedProducts;
   } catch (error) {
     return [];
+  }
+}
+
+export async function getProductById(productId: string): Promise<Product> {
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
+    return product;
+  } catch (error) {
+    throw new Error("Something went wrong getting product data");
   }
 }
