@@ -139,9 +139,8 @@ export async function editlocation(
   }
 }
 
-export async function deletelocation(
+export async function deleteLocation(
   locationId: number,
-  formData: FormData,
 ): Promise<ActionResult> {
   try {
     const user = await validateProtected();

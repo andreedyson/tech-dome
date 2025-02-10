@@ -1,9 +1,8 @@
 "use client";
 
 import { useToast } from "@/hooks/use-toast";
-import { deleteCategory } from "@/lib/actions/category/actions";
 import { ActionResult } from "@/types/auth";
-import { Category } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -19,6 +18,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { deleteProduct } from "@/lib/actions/product/actions";
 import { Trash } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -26,8 +26,8 @@ const initialState: ActionResult = {
   error: "",
 };
 
-type DeleteCategoryProps = {
-  categoryData: Category;
+type DeleteBrandProps = {
+  productId: string;
 };
 
 function Submit() {
@@ -43,9 +43,9 @@ function Submit() {
   );
 }
 
-function DeleteCategoryDialog({ categoryData }: DeleteCategoryProps) {
+function DeleteProductDialog({ productId }: DeleteBrandProps) {
   const [state, formAction] = useFormState(
-    async () => await deleteCategory(categoryData.id),
+    async () => await deleteProduct(productId),
     initialState,
   );
   const [open, setOpen] = useState<boolean>(false);
@@ -61,7 +61,7 @@ function DeleteCategoryDialog({ categoryData }: DeleteCategoryProps) {
       });
 
       setOpen(false);
-      router.push("/dashboard/categories");
+      router.push("/dashboard/brands");
       router.refresh();
     }
 
@@ -89,7 +89,7 @@ function DeleteCategoryDialog({ categoryData }: DeleteCategoryProps) {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will delete the category data and remove its data from the
+              This will delete the product data and all its data from the
               servers.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -103,4 +103,4 @@ function DeleteCategoryDialog({ categoryData }: DeleteCategoryProps) {
   );
 }
 
-export default DeleteCategoryDialog;
+export default DeleteProductDialog;

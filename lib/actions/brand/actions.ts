@@ -164,10 +164,7 @@ export async function editBrand(
   }
 }
 
-export async function deleteBrand(
-  brandId: number,
-  formData: FormData,
-): Promise<ActionResult> {
+export async function deleteBrand(brandId: number): Promise<ActionResult> {
   try {
     const user = await validateProtected();
     if (!user) {

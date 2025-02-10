@@ -2,7 +2,7 @@
 
 import { useToast } from "@/hooks/use-toast";
 import { ActionResult } from "@/types/auth";
-import { Category } from "@prisma/client";
+import { Brand } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -27,7 +27,7 @@ const initialState: ActionResult = {
 };
 
 type DeleteBrandProps = {
-  brandData: Category;
+  brandData: Brand;
 };
 
 function Submit() {
@@ -44,10 +44,10 @@ function Submit() {
 }
 
 function DeleteBrandDialog({ brandData }: DeleteBrandProps) {
-  const editCategoryWithId = async (_: ActionResult, formData: FormData) => {
-    return await deleteBrand(brandData.id, formData);
-  };
-  const [state, formAction] = useFormState(editCategoryWithId, initialState);
+  const [state, formAction] = useFormState(
+    async () => await deleteBrand(brandData.id),
+    initialState,
+  );
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
   const router = useRouter();

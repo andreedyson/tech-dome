@@ -141,7 +141,6 @@ export async function editCategory(
 
 export async function deleteCategory(
   categoryId: number,
-  formData: FormData,
 ): Promise<ActionResult> {
   try {
     const user = await validateProtected();

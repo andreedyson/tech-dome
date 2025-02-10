@@ -9,6 +9,7 @@ import ProductStatusBadge from "../ProductStatusBadge";
 import { Button } from "../ui/button";
 import { Pencil } from "lucide-react";
 import Link from "next/link";
+import DeleteProductDialog from "./DeleteProductDialog";
 
 export type ProductColumn = {
   id: string;
@@ -91,6 +92,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
               <Pencil size={16} />
             </Button>
           </Link>
+          <DeleteProductDialog productId={product.id} />
         </div>
       );
     },

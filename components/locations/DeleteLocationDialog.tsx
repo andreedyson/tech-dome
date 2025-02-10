@@ -1,12 +1,12 @@
 "use client";
 
+import { useToast } from "@/hooks/use-toast";
+import { deleteLocation } from "@/lib/actions/location/actions";
 import { ActionResult } from "@/types/auth";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { SubmitButton } from "../SubmitButton";
-import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
-import { deletelocation } from "@/lib/actions/location/actions";
 
 import {
   AlertDialog,
@@ -18,9 +18,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "../ui/button";
-import { Trash } from "lucide-react";
 import { Location } from "@prisma/client";
+import { Trash } from "lucide-react";
+import { Button } from "../ui/button";
 
 const initialState: ActionResult = {
   error: "",
@@ -44,10 +44,10 @@ function Submit() {
 }
 
 function DeletelocationDialog({ locationData }: DeletelocationProps) {
-  const editLocationWithId = async (_: ActionResult, formData: FormData) => {
-    return await deletelocation(locationData.id, formData);
-  };
-  const [state, formAction] = useFormState(editLocationWithId, initialState);
+  const [state, formAction] = useFormState(
+    async () => await deleteLocation(locationData.id),
+    initialState,
+  );
   const [open, setOpen] = useState<boolean>(false);
   const { toast } = useToast();
   const router = useRouter();

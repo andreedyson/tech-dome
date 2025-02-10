@@ -150,6 +150,7 @@ export async function editProduct(
         };
       }
 
+      // If the newly upload files is 3, delete old files and upload new one
       for (const images of uploadedImages) {
         await deleteFiles(product.images, "products");
         const filename = await uploadFile(images, "products");
@@ -180,6 +181,51 @@ export async function editProduct(
     return {
       error: undefined,
       message: "Product edited successfully",
+    };
+  } catch (error) {
+    return {
+      error: "Something went wrong",
+      message: undefined,
+    };
+  }
+}
+
+export async function deleteProduct(productId: string): Promise<ActionResult> {
+  try {
+    const user = await validateProtected();
+    if (!user) {
+      return {
+        error: "You must be signed in to perform this action",
+        message: undefined,
+      };
+    }
+
+    const product = await prisma.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+
+    if (!product) {
+      return {
+        error: "Product not found",
+        message: undefined,
+      };
+    }
+
+    await deleteFiles(product.images, "products");
+
+    await prisma.product.delete({
+      where: {
+        id: productId,
+      },
+    });
+
+    revalidatePath("/dashboard/products");
+
+    return {
+      error: undefined,
+      message: "Product successfully deleted",
     };
   } catch (error) {
     return {
