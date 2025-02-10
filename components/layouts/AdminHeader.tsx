@@ -48,14 +48,14 @@ function AdminHeader() {
                 </React.Fragment>
               );
             })}
-            {pathnames.length > 3 && (
-              <React.Fragment>
+            {/* {pathnames.length > 3 && (
+              <>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>...</BreadcrumbPage>
                 </BreadcrumbItem>
-              </React.Fragment>
-            )}
+              </>
+            )} */}
           </BreadcrumbList>
         </Breadcrumb>
       </div>

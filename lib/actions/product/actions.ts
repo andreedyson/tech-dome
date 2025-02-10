@@ -136,7 +136,7 @@ export async function editProduct(
     }
 
     const uploadedImages = formData.getAll("images") as File[];
-    const filenames = product.images;
+    let filenames = [];
 
     if (uploadedImages.length === 3) {
       const parseImage = productSchema.pick({ images: true }).safeParse({
@@ -154,6 +154,8 @@ export async function editProduct(
         const filename = await uploadFile(images, "products");
         filenames.push(filename);
       }
+    } else {
+      filenames = product.images;
     }
 
     await prisma.product.update({
