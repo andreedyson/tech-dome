@@ -49,7 +49,7 @@ export const productSchema = z.object({
     .min(4, { message: "Product name must be minimum of 4 characters" }),
   images: z
     .any()
-    .refine((files: File[]) => files.length === 3, {
+    .refine((files: File[]) => files.length <= 3, {
       message: "Please upload 3 product images",
     })
     .refine(

@@ -2,7 +2,7 @@
 
 import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
-import { uploadFile } from "@/lib/supabase";
+import { deleteFiles, uploadFile } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
 import { editProductSchema, productSchema } from "@/types/validations";
 import { Product, ProductStatus } from "@prisma/client";
@@ -29,7 +29,7 @@ export async function createProduct(
       locationId: formData.get("locationId"),
       brandId: formData.get("brandId"),
       status: formData.get("status"),
-      images: formData.getAll("image"),
+      images: formData.getAll("images"),
     };
 
     const validatedFields = productSchema.safeParse(formDatas);
@@ -151,6 +151,7 @@ export async function editProduct(
       }
 
       for (const images of uploadedImages) {
+        await deleteFiles(product.images, "products");
         const filename = await uploadFile(images, "products");
         filenames.push(filename);
       }

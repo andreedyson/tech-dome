@@ -24,7 +24,7 @@ function ProductImageUpload({ defaultImages = [] }: ProductImageUploadProps) {
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
+    if (e.target.files && e.target.files.length >= 3) {
       const newImages = Array.from(e.target.files).map((file) =>
         URL.createObjectURL(file),
       );
