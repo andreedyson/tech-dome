@@ -10,7 +10,7 @@ import {
 import { LogOut } from "lucide-react";
 import { useFormState } from "react-dom";
 import { ActionResult } from "@/types/auth";
-import { SignOut } from "@/lib/actions/auth/actions";
+import { SignOut } from "@/lib/actions/auth/admin/actions";
 
 const initialState: ActionResult = {
   error: "",

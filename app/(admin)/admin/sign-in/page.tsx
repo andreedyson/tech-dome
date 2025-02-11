@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/auth/LoginForm";
+import { AdminLoginForm } from "@/components/auth/AdminLoginForm";
 import Image from "next/image";
 import React from "react";
 
@@ -16,7 +16,7 @@ function SignInPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <LoginForm />
+            <AdminLoginForm />
           </div>
         </div>
       </div>

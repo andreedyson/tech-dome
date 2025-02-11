@@ -17,7 +17,6 @@ export async function SignIn(
     password: formData.get("password"),
   });
 
-  // Return early if the form data is invalid
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,

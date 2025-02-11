@@ -22,7 +22,8 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { SignIn } from "@/lib/actions/auth/actions";
+import { SignIn } from "@/lib/actions/auth/admin/actions";
+import { Users } from "lucide-react";
 
 const initialState: LoginActionResult = {
   errors: {
@@ -32,7 +33,7 @@ const initialState: LoginActionResult = {
   message: undefined,
 };
 
-export function LoginForm({
+export function AdminLoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
@@ -157,6 +158,15 @@ export function LoginForm({
           </Link>
         </div>
       </form>
+      <div className="mt-8 flex justify-end">
+        <Link
+          href={"/sign-in"}
+          className="flex items-center gap-2 text-sm font-semibold text-main-violet-500 duration-200 hover:text-main-violet-700 hover:underline"
+        >
+          <Users size={16} strokeWidth={3} />
+          Customer Sign In
+        </Link>
+      </div>
     </Form>
   );
 }
