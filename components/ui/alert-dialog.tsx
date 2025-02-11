@@ -5,6 +5,7 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { CircleAlert } from "lucide-react";
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
@@ -50,10 +51,7 @@ const AlertDialogHeader = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
-    className={cn(
-      "flex flex-col space-y-2 text-center sm:text-left",
-      className,
-    )}
+    className={cn("flex flex-col space-y-2 text-center", className)}
     {...props}
   />
 );
@@ -65,7 +63,7 @@ const AlertDialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "mt-2 flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "mt-2 flex w-full flex-col-reverse sm:flex-row sm:justify-center sm:space-x-2",
       className,
     )}
     {...props}
@@ -77,11 +75,19 @@ const AlertDialogTitle = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <AlertDialogPrimitive.Title
-    ref={ref}
-    className={cn("text-lg font-semibold", className)}
-    {...props}
-  />
+  <div className="flex flex-col items-center gap-2">
+    <CircleAlert
+      className="shrink-0 text-red-500"
+      size={32}
+      strokeWidth={2}
+      aria-hidden="true"
+    />
+    <AlertDialogPrimitive.Title
+      ref={ref}
+      className={cn("text-lg font-semibold", className)}
+      {...props}
+    />
+  </div>
 ));
 AlertDialogTitle.displayName = AlertDialogPrimitive.Title.displayName;
 
