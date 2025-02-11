@@ -1,12 +1,19 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
+import { SignUp } from "@/lib/actions/auth/customer/actions";
+import { RegisterActionResult } from "@/types/auth";
+import { registerSchema } from "@/types/validations";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -15,16 +22,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { useFormState, useFormStatus } from "react-dom";
-import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { z } from "zod";
-import { registerSchema } from "@/types/validations";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Checkbox } from "../ui/checkbox";
-import { SignIn } from "@/lib/actions/auth/customer/actions";
-import { RegisterActionResult } from "@/types/auth";
 
 const initialState: RegisterActionResult = {
   errors: {
@@ -35,12 +32,9 @@ const initialState: RegisterActionResult = {
   message: undefined,
 };
 
-export function RegisterForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+export function RegisterForm({ className }: React.ComponentProps<"div">) {
   const { toast } = useToast();
-  const [state, formAction] = useFormState(SignIn, initialState);
+  const [state, formAction] = useFormState(SignUp, initialState);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -73,7 +67,7 @@ export function RegisterForm({
 
     return (
       <Button type="submit" className="w-full" disabled={pending}>
-        {pending ? "Logging In..." : "Login"}
+        {pending ? "Creating..." : "Create"}
       </Button>
     );
   }
