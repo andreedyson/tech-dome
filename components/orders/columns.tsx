@@ -2,13 +2,10 @@
 
 import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR, formatDate } from "@/lib/utils";
-import { OrderStatus, Product } from "@prisma/client";
+import { OrderStatus } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { Pencil } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import OrderStatusBadge from "../OrderStausBadge";
-import { Button } from "../ui/button";
 
 export type OrderColumn = {
   id: number;
@@ -77,24 +74,6 @@ export const columns: ColumnDef<OrderColumn>[] = [
       const order = row.original;
 
       return <OrderStatusBadge status={order.status} />;
-    },
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => {
-      const product = row.original;
-      return (
-        <div className="flex items-center gap-1 text-right">
-          <Link href={`/dashboard/products/edit/${product.id}`}>
-            <Button
-              variant={"ghost"}
-              className="flex items-center gap-2 bg-yellow-500 text-sm text-white duration-200 hover:bg-yellow-400"
-            >
-              <Pencil size={16} />
-            </Button>
-          </Link>
-        </div>
-      );
     },
   },
 ];

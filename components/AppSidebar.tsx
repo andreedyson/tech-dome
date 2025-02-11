@@ -8,6 +8,7 @@ import {
   Building,
   ShoppingCart,
   LogOut,
+  Users,
 } from "lucide-react";
 
 import {
@@ -56,6 +57,11 @@ const items = [
     title: "Orders",
     url: "/dashboard/orders",
     icon: ShoppingCart,
+  },
+  {
+    title: "Customers",
+    url: "/dashboard/customers",
+    icon: Users,
   },
 ];
 
