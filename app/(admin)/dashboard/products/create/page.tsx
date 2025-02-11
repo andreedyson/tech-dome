@@ -1,7 +1,12 @@
 import AddProductForm from "@/components/products/AddProductForm";
 import { Boxes, ChevronLeft } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Add Products",
+};
 
 async function CreateProductPage() {
   return (

@@ -33,7 +33,9 @@ export async function getAllProducts(): Promise<ProductColumn[]> {
   }
 }
 
-export async function getProductById(productId: string): Promise<Product> {
+export async function getProductById(
+  productId: string,
+): Promise<Product | null> {
   try {
     const product = await prisma.product.findUnique({
       where: {
@@ -47,6 +49,6 @@ export async function getProductById(productId: string): Promise<Product> {
 
     return product;
   } catch (error) {
-    throw new Error("Something went wrong getting product data");
+    return null;
   }
 }

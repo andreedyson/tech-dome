@@ -1,11 +1,21 @@
 import EditProductForm from "@/components/products/EditProductForm";
 import { getProductById } from "@/lib/data/product";
 import { Boxes, ChevronLeft } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Edit Products",
+};
 
 async function EditProductPage({ params: { id } }: { params: { id: string } }) {
   const product = await getProductById(id);
+
+  if (!product) {
+    return redirect("/dashboard/products");
+  }
   return (
     <div className="w-full space-y-4">
       <Link
