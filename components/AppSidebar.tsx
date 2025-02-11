@@ -54,7 +54,7 @@ const items = [
   },
   {
     title: "Orders",
-    url: "/dashboard/Orders",
+    url: "/dashboard/orders",
     icon: ShoppingCart,
   },
 ];
