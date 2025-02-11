@@ -83,7 +83,7 @@ export function AdminLoginForm({
         {...props}
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-2xl font-bold">Admin Login</h1>
+          <h1 className="text-base font-bold md:text-2xl">Admin Login</h1>
           <p className="text-balance text-sm text-muted-foreground">
             Enter your email and password below to securely access the admin
             dashboard.
@@ -154,8 +154,8 @@ export function AdminLoginForm({
         </div>
         <div className="text-center text-sm">
           Don&apos;t have an account?{" "}
-          <Link href="/auth/register" className="underline underline-offset-4">
-            Sign up
+          <Link href="/register" className="underline underline-offset-4">
+            Register
           </Link>
         </div>
       </form>

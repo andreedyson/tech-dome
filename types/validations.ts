@@ -12,6 +12,13 @@ export const loginSchema = z.object({
     .max(32, { message: "Password must be less than 32 characters" }),
 });
 
+export const registerSchema = loginSchema.extend({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(2, { message: "Name must be minimum of 2 characters" })
+    .max(80, { message: "Name must be less than 80 characters" }),
+});
+
 export const categorySchema = z.object({
   name: z
     .string({ required_error: "Name is required" })

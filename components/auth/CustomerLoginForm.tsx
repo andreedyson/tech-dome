@@ -95,7 +95,9 @@ export function CustomerLoginForm({
                   </a>
                 </div>
                 <div className="space-y-2">
-                  <h1 className="text-2xl font-bold">Welcome Back! 👋</h1>
+                  <h1 className="text-base font-bold md:text-2xl">
+                    Welcome Back! 👋
+                  </h1>
                   <p className="max-w-[300px] text-sm text-muted-foreground">
                     Enter your email and password below to login to your
                     account.
@@ -179,7 +181,7 @@ export function CustomerLoginForm({
                     href="/register"
                     className="underline underline-offset-4"
                   >
-                    Sign up
+                    Register
                   </Link>
                 </div>
               </div>
