@@ -23,7 +23,7 @@ export default async function AdminLayout({
   const { session } = await getUser();
 
   if (!session) {
-    return redirect("/sign-in");
+    redirect("/sign-in");
   }
   return (
     <SidebarProvider>

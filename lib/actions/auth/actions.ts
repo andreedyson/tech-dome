@@ -90,5 +90,5 @@ export async function SignOut(
     sessionCookie.attributes,
   );
 
-  return redirect("/sign-in");
+  redirect("/sign-in");
 }
