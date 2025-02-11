@@ -96,7 +96,7 @@ export function CustomerLoginForm({
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-2xl font-bold">Welcome Back! 👋</h1>
-                  <p className="max-w-[250px] text-sm text-muted-foreground">
+                  <p className="max-w-[300px] text-sm text-muted-foreground">
                     Enter your email and password below to login to your
                     account.
                   </p>
