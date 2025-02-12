@@ -16,17 +16,18 @@ export default function LandingLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
+    <main lang="en">
+      <div
         className={`${GeistSans.className} max-w-[1920px] antialiased md:mx-[80px] lg:mx-[144px] 2xl:mx-auto`}
       >
-        <div>
-          <LandingHeader />
-          <MobileHeader />
-          <ReactQueryProvider>{children}</ReactQueryProvider>
-        </div>
+        <LandingHeader />
+        <MobileHeader />
+        <ReactQueryProvider>
+          <div className="m-4">{children}</div>
+        </ReactQueryProvider>
+
         <Toaster />
-      </body>
-    </html>
+      </div>
+    </main>
   );
 }

@@ -6,6 +6,7 @@ import { AlignJustify, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 function MobileHeader() {
   const [openNav, setOpenNav] = useState<boolean>(false);
@@ -29,26 +30,31 @@ function MobileHeader() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-20 md:mt-6">
-      <nav className="relative mb-4 flex w-full items-center justify-between border bg-gradient-to-r from-slate-900 to-gray-800 p-4 md:hidden md:rounded-md">
+    <header className="sticky top-0 z-20 md:mt-6">
+      <nav className="relative flex w-full items-center justify-between border-b p-4 shadow-md md:hidden md:rounded-md">
         <div className="flex items-center gap-4">
           <div
             onClick={() => setOpenNav((prev) => !prev)}
             className="cursor-pointer"
           >
-            {openNav ? (
-              <X size={28} />
-            ) : (
-              <AlignJustify size={28} color="white" />
-            )}
+            {openNav ? <X size={28} /> : <AlignJustify size={28} />}
           </div>
-          <div className="text-lg font-bold italic text-main-violet-500">
+          <div className="text-xl font-bold text-main-violet-500">
             Deal Dome
           </div>
         </div>
 
+        <Button className="rounded-full px-5">
+          <Link
+            href={"/sign-in"}
+            className="duration-200 hover:text-slate-800 hover:underline md:text-base"
+          >
+            Sign In
+          </Link>
+        </Button>
+
         <div
-          className={`absolute top-[60px] flex h-[92vh] w-full flex-col bg-background p-4 shadow-[0px_0px_10px_2px_#00000024] duration-200 dark:bg-background ${openNav ? "left-0" : "-left-[1000px]"}`}
+          className={`absolute top-[60px] flex h-[92vh] w-full flex-col border bg-background p-4 duration-200 dark:bg-background ${openNav ? "left-0" : "-left-[1000px]"}`}
         >
           <div className="flex flex-col gap-4">
             {LANDING_PAGE_LINKS.map((link) => (
@@ -68,7 +74,7 @@ function MobileHeader() {
           </div>
         </div>
       </nav>
-    </div>
+    </header>
   );
 }
 

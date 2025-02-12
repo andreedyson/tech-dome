@@ -19,7 +19,7 @@ export default function AootLayout({
       <body
         className={`${GeistSans.className} mx-auto max-w-[1920px] antialiased`}
       >
-        <div className="mx-[144px] my-4">
+        <div>
           <ReactQueryProvider>{children}</ReactQueryProvider>
         </div>
         <Toaster />
