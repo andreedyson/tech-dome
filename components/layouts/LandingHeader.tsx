@@ -9,12 +9,9 @@ import { Button } from "../ui/button";
 function LandingHeader() {
   const pathname = usePathname();
   return (
-    <header className="my-4 hidden items-center justify-between rounded-2xl bg-gradient-to-r from-slate-900 to-gray-800 p-6 md:flex">
+    <header className="my-4 hidden items-center justify-between rounded-2xl border p-6 shadow-md md:flex">
       {/* Deal Dome Logo */}
-      <Link
-        href="#"
-        className="flex items-center gap-2 font-semibold italic text-white"
-      >
+      <Link href="#" className="flex items-center gap-2 font-semibold italic">
         <div className="flex size-8 items-center justify-center rounded-md bg-primary font-bold text-primary-foreground">
           DD
         </div>
@@ -22,12 +19,12 @@ function LandingHeader() {
       </Link>
 
       {/* Landing Page Links */}
-      <div className="flex items-center gap-6 text-sm text-white md:text-base">
+      <div className="flex items-center gap-6 text-sm md:text-base">
         {LANDING_PAGE_LINKS.map((link) => (
           <Link
             key={link.title}
             href={link.url}
-            className={`${pathname === link.url ? "text-main-violet-400" : ""} duration-200 hover:underline`}
+            className={`${pathname === link.url ? "text-main-violet-600" : ""} font-medium duration-200 hover:underline`}
           >
             {link.title}
           </Link>
@@ -35,10 +32,10 @@ function LandingHeader() {
       </div>
 
       {/* Authentication Buttons */}
-      <div className="flex items-center gap-4 font-medium text-white md:text-base">
+      <div className="flex items-center gap-4 font-medium md:text-base">
         <Link
           href={"/sign-in"}
-          className="text-white duration-200 hover:text-slate-300 hover:underline md:text-base"
+          className="duration-200 hover:text-slate-800 hover:underline md:text-base"
         >
           Sign In
         </Link>
