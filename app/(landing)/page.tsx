@@ -1,3 +1,9 @@
+import Hero from "@/components/pages/Hero";
+
 export default function Home() {
-  return <div>DealDome</div>;
+  return (
+    <div>
+      <Hero />
+    </div>
+  );
 }

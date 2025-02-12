@@ -23,7 +23,7 @@ export default function LandingLayout({
         <LandingHeader />
         <MobileHeader />
         <ReactQueryProvider>
-          <div className="m-4">{children}</div>
+          <div className="m-4 md:my-4">{children}</div>
         </ReactQueryProvider>
 
         <Toaster />
