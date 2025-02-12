@@ -1,9 +1,7 @@
-import Image from "next/image";
-import React from "react";
-import { Crown, ShoppingCart } from "lucide-react";
-import { Button } from "../ui/button";
 import { LANDING_TESTIMONIALS } from "@/constants";
-import test from "node:test";
+import { Crown, ShoppingCart } from "lucide-react";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 function Hero() {
   return (

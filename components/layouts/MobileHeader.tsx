@@ -31,7 +31,7 @@ function MobileHeader() {
 
   return (
     <header className="sticky top-0 z-20 md:mt-6">
-      <nav className="relative flex w-full items-center justify-between border-b p-4 shadow-md md:hidden md:rounded-md">
+      <nav className="relative flex w-full items-center justify-between border-b bg-background p-4 shadow-md md:hidden md:rounded-md">
         <div className="flex items-center gap-4">
           <div
             onClick={() => setOpenNav((prev) => !prev)}
