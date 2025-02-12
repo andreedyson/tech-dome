@@ -84,15 +84,15 @@ export function CustomerLoginForm({
             <form action={formAction} className="p-6 md:p-8">
               <div className="flex flex-col gap-4">
                 <div className="flex justify-center gap-2 md:justify-start">
-                  <a
-                    href="#"
+                  <Link
+                    href="/sign-in"
                     className="flex items-center gap-2 font-semibold italic"
                   >
                     <div className="flex size-8 items-center justify-center rounded-md bg-primary font-bold text-primary-foreground">
                       DD
                     </div>
                     Deal Dome
-                  </a>
+                  </Link>
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-base font-bold md:text-2xl">

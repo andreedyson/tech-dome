@@ -74,7 +74,7 @@ export async function SignIn(
     };
   }
 
-  return redirect("/dashboard");
+  return redirect("/");
 }
 
 export async function SignUp(
