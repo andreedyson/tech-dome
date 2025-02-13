@@ -30,7 +30,7 @@ export async function getPopularBrands(): Promise<Brand[]> {
       },
     });
 
-    return brands;
+    return brands.slice(0, 4);
   } catch (error) {
     return [];
   }

@@ -66,7 +66,7 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
     // TODO: Add filter to product with order more than or equals to 5
     const topProducts = products.filter((product) => product);
 
-    return topProducts;
+    return topProducts.slice(0, 4);
   } catch (error) {
     return [];
   }
@@ -91,7 +91,7 @@ export async function getNewReleaseProducts(): Promise<TopProductProps[]> {
       },
     });
 
-    return newReleases;
+    return newReleases.slice(0, 8);
   } catch (error) {
     return [];
   }

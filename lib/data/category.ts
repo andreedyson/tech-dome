@@ -38,7 +38,7 @@ export async function getTotalProductsByCategory(): Promise<
       totalProducts: category.Product.length,
     }));
 
-    return data;
+    return data.slice(0, 8);
   } catch (error) {
     return [];
   }
