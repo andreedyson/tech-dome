@@ -38,16 +38,21 @@ function MobileHeader({ session, user }: MobileHeaderProps) {
   return (
     <header className="sticky top-0 z-20 md:mt-6">
       <nav className="relative flex w-full items-center justify-between border-b bg-background p-4 shadow-md md:hidden md:rounded-md">
-        <div className="flex items-center gap-4">
-          <div
-            onClick={() => setOpenNav((prev) => !prev)}
-            className="cursor-pointer"
-          >
-            {openNav ? <X size={28} /> : <AlignJustify size={28} />}
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div
+              onClick={() => setOpenNav((prev) => !prev)}
+              className="cursor-pointer"
+            >
+              {openNav ? <X size={28} /> : <AlignJustify size={28} />}
+            </div>
+            <div className="text-xl font-bold text-main-violet-500">
+              Deal Dome
+            </div>
           </div>
-          <div className="text-xl font-bold text-main-violet-500">
-            Deal Dome
-          </div>
+          {session && user?.role && (
+            <p className="text-sm font-semibold underline">{user.name}</p>
+          )}
         </div>
 
         {!session && (
