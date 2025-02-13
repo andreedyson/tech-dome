@@ -5,13 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
-import { Session } from "lucia";
+import { Session, User } from "lucia";
 
 type LandingHeaderProps = {
   session: Session | null;
+  user: User | null;
 };
 
-function LandingHeader({ session }: LandingHeaderProps) {
+function LandingHeader({ session, user }: LandingHeaderProps) {
   const pathname = usePathname();
   return (
     <header className="my-4 hidden items-center justify-between rounded-2xl border p-6 shadow-md md:flex">
@@ -37,7 +38,9 @@ function LandingHeader({ session }: LandingHeaderProps) {
       </div>
 
       {/* Authentication Buttons */}
-      {!session && (
+      {session && user?.role === "CUSTOMER" ? (
+        <p className="font-semibold underline">{user.name}</p>
+      ) : (
         <div className="flex items-center gap-4 font-medium md:text-base">
           <Link
             href={"/sign-in"}

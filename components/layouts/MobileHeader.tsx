@@ -7,13 +7,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { Session } from "lucia";
+import { Session, User } from "lucia";
 
 type MobileHeaderProps = {
   session: Session | null;
+  user: User | null;
 };
 
-function MobileHeader({ session }: MobileHeaderProps) {
+function MobileHeader({ session, user }: MobileHeaderProps) {
   const [openNav, setOpenNav] = useState<boolean>(false);
   const pathname = usePathname();
   const pagename = "/" + pathname.split("/")[1];

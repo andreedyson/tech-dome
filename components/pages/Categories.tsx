@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { getTotalProductsByCategory } from "@/lib/data/category";
+import Link from "next/link";
 
 async function Categories() {
   const categoriesProducts = await getTotalProductsByCategory();
@@ -17,15 +18,16 @@ async function Categories() {
       {/* Categories Products Section */}
       <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
         {categoriesProducts.map((category) => (
-          <div
+          <Link
+            href={"/"}
             key={category.name}
-            className="rounded-xl border-2 p-4 shadow-md"
+            className="rounded-xl border-2 p-4 shadow-md duration-200 hover:border-yellow-500"
           >
             <p className="text-lg font-bold">{category.name}</p>
             <p className="text-muted-foreground">
               {category.totalProducts} Products
             </p>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

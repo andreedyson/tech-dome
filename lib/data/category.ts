@@ -23,19 +23,18 @@ export async function getTotalProductsByCategory(): Promise<
 > {
   try {
     const categories = await prisma.category.findMany({
-      select: {
-        name: true,
-        Product: {
+      include: {
+        _count: {
           select: {
-            id: true,
+            Product: true,
           },
         },
       },
     });
 
-    const data = categories.map((category) => ({
-      name: category.name,
-      totalProducts: category.Product.length,
+    const data = categories.map(({ _count, ...category }) => ({
+      ...category,
+      totalProducts: _count.Product,
     }));
 
     return data.slice(0, 8);

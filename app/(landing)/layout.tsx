@@ -18,15 +18,15 @@ export default async function LandingLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { session } = await getUser();
+  const { session, user } = await getUser();
 
   return (
     <main lang="en">
       <div
         className={`${GeistSans.className} max-w-[1920px] antialiased md:mx-[80px] lg:mx-[144px] 2xl:mx-auto`}
       >
-        <LandingHeader session={session} />
-        <MobileHeader session={session} />
+        <LandingHeader session={session} user={user} />
+        <MobileHeader session={session} user={user} />
         <ReactQueryProvider>
           <div className="m-4 md:my-4">{children}</div>
         </ReactQueryProvider>
