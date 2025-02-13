@@ -4,24 +4,29 @@ import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "@/ReactQueryProvider";
 import LandingHeader from "@/components/layouts/LandingHeader";
 import MobileHeader from "@/components/layouts/MobileHeader";
+import { getUser } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { validateProtected } from "@/lib/check-session";
 
 export const metadata: Metadata = {
   title: "DealDome",
   description: "Shop with Deal Dome",
 };
 
-export default function LandingLayout({
+export default async function LandingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { session } = await getUser();
+
   return (
     <main lang="en">
       <div
         className={`${GeistSans.className} max-w-[1920px] antialiased md:mx-[80px] lg:mx-[144px] 2xl:mx-auto`}
       >
-        <LandingHeader />
-        <MobileHeader />
+        <LandingHeader session={session} />
+        <MobileHeader session={session} />
         <ReactQueryProvider>
           <div className="m-4 md:my-4">{children}</div>
         </ReactQueryProvider>

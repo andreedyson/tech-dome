@@ -8,7 +8,7 @@ async function Categories() {
     <section className="w-full space-y-4">
       {/* Categories Section Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-bold">Categories</h2>
+        <h2 className="text-2xl font-bold md:text-3xl">Categories</h2>
         <Button variant={"ghost"} className="border-2 font-semibold">
           Explore All
         </Button>

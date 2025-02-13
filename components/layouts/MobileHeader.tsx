@@ -7,8 +7,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import { Session } from "lucia";
 
-function MobileHeader() {
+type MobileHeaderProps = {
+  session: Session | null;
+};
+
+function MobileHeader({ session }: MobileHeaderProps) {
   const [openNav, setOpenNav] = useState<boolean>(false);
   const pathname = usePathname();
   const pagename = "/" + pathname.split("/")[1];
@@ -44,14 +49,16 @@ function MobileHeader() {
           </div>
         </div>
 
-        <Button className="rounded-full px-5">
-          <Link
-            href={"/sign-in"}
-            className="duration-200 hover:text-slate-800 hover:underline md:text-base"
-          >
-            Sign In
-          </Link>
-        </Button>
+        {!session && (
+          <Button className="rounded-full px-5">
+            <Link
+              href={"/sign-in"}
+              className="duration-200 hover:text-slate-800 hover:underline md:text-base"
+            >
+              Sign In
+            </Link>
+          </Button>
+        )}
 
         <div
           className={`absolute top-[60px] flex h-[92vh] w-full flex-col border bg-background p-4 duration-200 dark:bg-background ${openNav ? "left-0" : "-left-[1000px]"}`}
