@@ -11,7 +11,7 @@ async function Products() {
     <section className="w-full space-y-4">
       {/* Products Section Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold md:text-3xl">Products</h2>
+        <h2 className="text-2xl font-bold md:text-3xl">Top Products</h2>
         <Button variant={"ghost"} className="border-2 font-semibold">
           Explore All
         </Button>
@@ -31,11 +31,13 @@ async function Products() {
             />
             {/* Product Details */}
             <div className="p-4">
-              <h4 className="text-xl font-bold">{product.name}</h4>
+              <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
+                {product.name}
+              </h4>
               <p className="text-sm font-medium text-muted-foreground">
                 {product.category.name}
               </p>
-              <p className="mt-3 text-lg font-bold text-main-violet-700">
+              <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
                 {currencyFormatterIDR(product.price)}
               </p>
             </div>
