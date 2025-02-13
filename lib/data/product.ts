@@ -1,6 +1,7 @@
 import { ProductColumn } from "@/components/products/columns";
 import { prisma } from "../prisma";
 import { Product } from "@prisma/client";
+import { TopProductProps } from "@/types/product";
 
 export async function getAllProducts(): Promise<ProductColumn[]> {
   try {
@@ -50,5 +51,23 @@ export async function getProductById(
     return product;
   } catch (error) {
     return null;
+  }
+}
+
+export async function getTopProducts(): Promise<TopProductProps[]> {
+  try {
+    const products = await prisma.product.findMany({
+      include: {
+        orders: true,
+        category: true,
+      },
+    });
+
+    // TODO: Add filter to product with order more than or equals to 5
+    const topProducts = products.filter((product) => product);
+
+    return topProducts;
+  } catch (error) {
+    return [];
   }
 }
