@@ -25,3 +25,30 @@ export const formatDate = (date: Date) => {
 
   return formattedDate;
 };
+
+export const formatDaysAgo = (date: Date) => {
+  let daysAgo;
+  const today = new Date();
+
+  today.setHours(0, 0, 0, 0);
+  date.setHours(0, 0, 0, 0);
+
+  // Calculate the difference in time (in milliseconds)
+  const timeDifference = today.getTime() - date.getTime();
+
+  // Convert milliseconds to days
+  const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+  switch (daysDifference) {
+    case 0:
+      daysAgo = "Today";
+      break;
+    case 1:
+      daysAgo = "Yesterday";
+      break;
+    default:
+      daysAgo = daysDifference + " Days Ago";
+  }
+
+  return daysAgo;
+};

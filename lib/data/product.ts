@@ -71,3 +71,28 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
     return [];
   }
 }
+
+export async function getNewReleaseProducts(): Promise<TopProductProps[]> {
+  try {
+    const currentDate = new Date();
+
+    // Calculate the date two weeks ago
+    const pastTwoWeeks = new Date(currentDate);
+    pastTwoWeeks.setDate(currentDate.getDate() - 14);
+
+    const newReleases = await prisma.product.findMany({
+      where: {
+        createdAt: {
+          gte: pastTwoWeeks, // Filter products created after two weeks ago
+        },
+      },
+      include: {
+        category: true,
+      },
+    });
+
+    return newReleases;
+  } catch (error) {
+    return [];
+  }
+}

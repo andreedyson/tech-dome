@@ -1,6 +1,7 @@
 import Brands from "@/components/pages/Brands";
 import Categories from "@/components/pages/Categories";
 import Hero from "@/components/pages/Hero";
+import NewReleases from "@/components/pages/NewReleases";
 import Products from "@/components/pages/Products";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Categories />
       <Products />
       <Brands />
+      <NewReleases />
     </div>
   );
 }
