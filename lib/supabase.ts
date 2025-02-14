@@ -16,6 +16,10 @@ export const getImageUrl = (
     .from("deal-dome-image")
     .getPublicUrl(`/public/${type}/${name}`);
 
+  if (!name) {
+    return "/assets/image-placeholder.svg";
+  }
+
   return data.publicUrl;
 };
 

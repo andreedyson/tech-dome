@@ -1,3 +1,4 @@
+import ProductCard from "@/components/card/ProductCard";
 import FilterBrands from "@/components/catalogs/FilterBrands";
 import FilterCategories from "@/components/catalogs/FilterCategories";
 import FilterLocations from "@/components/catalogs/FilterLocations";
@@ -48,6 +49,10 @@ function CatalogsPage() {
 
         <div className="rounded-xl border-2 bg-background p-4 shadow md:col-span-3">
           <h3 className="text-xl font-bold md:text-2xl">Products</h3>
+          <Separator className="my-2" />
+          <div className="grid grid-cols-3">
+            <ProductCard />
+          </div>
         </div>
       </div>
     </section>
