@@ -51,7 +51,9 @@ function MobileHeader({ session, user }: MobileHeaderProps) {
             </div>
           </div>
           {session && user?.role && (
-            <p className="text-sm font-semibold underline">{user.name}</p>
+            <p className="text-sm font-semibold underline">
+              Hi, {user.name.split(" ")[0]}
+            </p>
           )}
         </div>
 

@@ -39,7 +39,7 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
 
       {/* Authentication Buttons */}
       {session && user?.role === "CUSTOMER" ? (
-        <p className="font-semibold underline">{user.name}</p>
+        <p className="font-semibold underline">Hi, {user.name.split(" ")[0]}</p>
       ) : (
         <div className="flex items-center gap-4 font-medium md:text-base">
           <Link
