@@ -1,7 +1,9 @@
 import React from "react";
 import { Input } from "../ui/input";
+import { getAllBrands } from "@/lib/data/brand";
 
-function FilterBrands() {
+async function FilterBrands() {
+  const brands = await getAllBrands();
   return (
     <div className="space-y-3">
       {/* Filter Brands Header */}
@@ -9,10 +11,12 @@ function FilterBrands() {
 
       {/* Filter Brands Checkboxes */}
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Input type="checkbox" className="size-4" />
-          <p className="font-medium">Logitech</p>
-        </div>
+        {brands.map((brand) => (
+          <div key={brand.name + brand.id} className="flex items-center gap-2">
+            <Input value={brand.id} type="checkbox" className="size-4" />
+            <p className="font-medium">{brand.name}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

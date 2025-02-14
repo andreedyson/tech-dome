@@ -1,7 +1,9 @@
 import React from "react";
 import { Input } from "../ui/input";
+import { getAllLocations } from "@/lib/data/locations";
 
-function FilterLocations() {
+async function FilterLocations() {
+  const locations = await getAllLocations();
   return (
     <div className="space-y-3">
       {/* Filter Locations Header */}
@@ -9,10 +11,15 @@ function FilterLocations() {
 
       {/* Filter Locations Checkboxes */}
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Input type="checkbox" className="size-4" />
-          <p className="font-medium">Indonesia</p>
-        </div>
+        {locations.map((location) => (
+          <div
+            key={location.name + location.id}
+            className="flex items-center gap-2"
+          >
+            <Input value={location.id} type="checkbox" className="size-4" />
+            <p className="font-medium">{location.name}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
