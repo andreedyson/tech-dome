@@ -9,26 +9,42 @@ function FilterPrice() {
   const { setFilter } = useFilterCatalog();
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(0);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
+    if (maxPrice !== 0 && minPrice > maxPrice) {
+      setError("Minimum price should be less than the Maximum Price");
+    } else {
+      setError("");
+    }
+
     const debounceInput = setTimeout(() => {
       setFilter({
         minPrice: minPrice,
-      });
-    }, 1000);
-
-    return () => clearTimeout(debounceInput);
-  }, [minPrice]);
-
-  useEffect(() => {
-    const debounceInput = setTimeout(() => {
-      setFilter({
         maxPrice: maxPrice,
       });
     }, 1000);
 
     return () => clearTimeout(debounceInput);
-  }, [maxPrice]);
+  }, [minPrice, maxPrice]);
+
+  const handleMinPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number.parseInt(e.target.value);
+    if (!isNaN(value)) {
+      setMinPrice(value);
+    } else {
+      setMinPrice(0);
+    }
+  };
+
+  const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number.parseInt(e.target.value);
+    if (!isNaN(value)) {
+      setMaxPrice(value);
+    } else {
+      setMaxPrice(0);
+    }
+  };
 
   return (
     <div className="space-y-3">
@@ -37,6 +53,9 @@ function FilterPrice() {
 
       {/* Filter Price Inputs */}
       <div className="space-y-2">
+        <div className="animate-pulse text-balance text-sm text-red-500">
+          {error}
+        </div>
         <div className="relative">
           <DollarSign size={14} className="absolute left-2 top-2.5" />
           <Input
@@ -45,7 +64,7 @@ function FilterPrice() {
             name="minimum"
             placeholder="Minimum Price"
             className="pl-8 placeholder:font-semibold"
-            onChange={(e) => setMinPrice(Number.parseInt(e.target.value))}
+            onChange={handleMinPriceChange}
           />
         </div>
         <div className="relative">
@@ -56,7 +75,7 @@ function FilterPrice() {
             name="maximum"
             placeholder="Maximum Price"
             className="pl-8 placeholder:font-semibold"
-            onChange={(e) => setMaxPrice(Number.parseInt(e.target.value))}
+            onChange={handleMaxPriceChange}
           />
         </div>
       </div>
