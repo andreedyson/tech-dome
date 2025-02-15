@@ -1,7 +1,7 @@
 "use client";
 
 import { BASE_URL } from "@/constants";
-import { Filter } from "@/hooks/useFilterCatalog";
+import { Filter, useFilterCatalog } from "@/hooks/useFilterCatalog";
 import { ProductCardProps } from "@/types/product";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "../card/ProductCard";
@@ -22,17 +22,17 @@ const fetchProducts = async (body?: Filter): Promise<ProductCardProps[]> => {
 };
 
 function ProductList() {
+  const { filter } = useFilterCatalog();
   const { data: products, isLoading } = useQuery({
-    queryKey: ["product-list"],
-    queryFn: () => fetchProducts(),
+    queryKey: ["product-list", filter],
+    queryFn: () => fetchProducts(filter),
   });
 
   if (isLoading)
     return <div className="mt-6 w-full text-center">Loading...</div>;
-
   return (
-    <div className="grid grid-cols-3">
-      {products ? (
+    <div className="grid w-full grid-cols-3">
+      {products && products.length > 0 ? (
         products?.map((product) => (
           <ProductCard
             key={product.id + product.name}
@@ -47,7 +47,9 @@ function ProductList() {
           />
         ))
       ) : (
-        <div>No products found</div>
+        <div className="col-span-3 mt-6 w-full text-center">
+          No products found
+        </div>
       )}
     </div>
   );
