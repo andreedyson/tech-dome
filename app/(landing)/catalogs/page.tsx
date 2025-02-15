@@ -4,11 +4,8 @@ import FilterCategories from "@/components/catalogs/FilterCategories";
 import FilterLocations from "@/components/catalogs/FilterLocations";
 import FilterPrice from "@/components/catalogs/FilterPrice";
 import FilterStatus from "@/components/catalogs/FilterStatus";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import SearchProduct from "@/components/catalogs/SearchProduct";
 import { Separator } from "@/components/ui/separator";
-import { Search } from "lucide-react";
-import React from "react";
 
 function CatalogsPage() {
   return (
@@ -16,19 +13,7 @@ function CatalogsPage() {
       {/* Product Catalog Header */}
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <h2 className="text-2xl font-bold md:text-3xl">Our Product Catalog</h2>
-        <div className="relative flex items-center">
-          <Input
-            type="text"
-            id="search"
-            name="search"
-            placeholder="Search product"
-            className="bg-input md:w-[400px]"
-            autoComplete="off"
-          />
-          <Label htmlFor="search" className="absolute right-4">
-            <Search />
-          </Label>
-        </div>
+        <SearchProduct />
       </div>
 
       {/* Product List Catalog */}
