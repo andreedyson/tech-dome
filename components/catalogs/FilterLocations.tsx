@@ -1,6 +1,7 @@
 import React from "react";
 import { Input } from "../ui/input";
 import { getAllLocations } from "@/lib/data/locations";
+import FilterCheckboxItem from "./FilterCheckboxItem";
 
 async function FilterLocations() {
   const locations = await getAllLocations();
@@ -12,13 +13,12 @@ async function FilterLocations() {
       {/* Filter Locations Checkboxes */}
       <div className="space-y-2">
         {locations.map((location) => (
-          <div
-            key={location.name + location.id}
-            className="flex items-center gap-2"
-          >
-            <Input value={location.id} type="checkbox" className="size-4" />
-            <p className="font-medium">{location.name}</p>
-          </div>
+          <FilterCheckboxItem
+            key={location.id + location.name}
+            id={location.id.toString()}
+            value={location.name}
+            type="location"
+          />
         ))}
       </div>
     </div>

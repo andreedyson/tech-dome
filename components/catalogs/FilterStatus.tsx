@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "../ui/input";
+import FilterCheckboxItem from "./FilterCheckboxItem";
 
 function FilterStatus() {
   return (
@@ -9,14 +10,8 @@ function FilterStatus() {
 
       {/* Filter Status Checkboxes */}
       <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Input type="checkbox" className="size-4" />
-          <p className="font-semibold text-orange-500">Pre-Order</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Input type="checkbox" className="size-4" />
-          <p className="font-semibold text-green-500">Ready</p>
-        </div>
+        <FilterCheckboxItem id={"READY"} value="PRE-ORDER" type="status" />
+        <FilterCheckboxItem id={"PRE_ORDER"} value="READY" type="status" />
       </div>
     </div>
   );
