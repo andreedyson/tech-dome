@@ -4,6 +4,7 @@ import { useFilterCatalog } from "@/hooks/useFilterCatalog";
 import React, { ChangeEvent } from "react";
 import { Input } from "../ui/input";
 import { ProductStatus } from "@prisma/client";
+import { Label } from "../ui/label";
 
 type FilterCheckboxItemProps = {
   id: string;
@@ -103,7 +104,9 @@ function FilterCheckboxItem({ id, value, type }: FilterCheckboxItemProps) {
         type="checkbox"
         className="size-4"
       />
-      <p className="font-medium">{value}</p>
+      <Label htmlFor={id + value}>
+        <p className="font-medium">{value}</p>
+      </Label>
     </div>
   );
 }
