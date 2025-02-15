@@ -4,6 +4,7 @@ import FilterCategories from "@/components/catalogs/FilterCategories";
 import FilterLocations from "@/components/catalogs/FilterLocations";
 import FilterPrice from "@/components/catalogs/FilterPrice";
 import FilterStatus from "@/components/catalogs/FilterStatus";
+import ProductList from "@/components/catalogs/ProductList";
 import SearchProduct from "@/components/catalogs/SearchProduct";
 import { Separator } from "@/components/ui/separator";
 import { getAllProducts } from "@/lib/data/product";
@@ -37,21 +38,7 @@ async function CatalogsPage() {
         <div className="rounded-xl border-2 bg-background p-4 shadow md:col-span-3">
           <h3 className="text-xl font-bold md:text-2xl">Products</h3>
           <Separator className="my-2" />
-          <div className="grid grid-cols-3">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={{
-                  id: product.id,
-                  name: product.name,
-                  description: product.description,
-                  categoryName: product.categoryName,
-                  imageUrl: product.imageUrl,
-                  price: product.price,
-                }}
-              />
-            ))}
-          </div>
+          <ProductList />
         </div>
       </div>
     </section>
