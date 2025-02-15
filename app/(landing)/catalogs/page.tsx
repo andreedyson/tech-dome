@@ -6,8 +6,10 @@ import FilterPrice from "@/components/catalogs/FilterPrice";
 import FilterStatus from "@/components/catalogs/FilterStatus";
 import SearchProduct from "@/components/catalogs/SearchProduct";
 import { Separator } from "@/components/ui/separator";
+import { getAllProducts } from "@/lib/data/product";
 
-function CatalogsPage() {
+async function CatalogsPage() {
+  const products = await getAllProducts();
   return (
     <section className="mt-8 w-full space-y-8">
       {/* Product Catalog Header */}
@@ -36,7 +38,19 @@ function CatalogsPage() {
           <h3 className="text-xl font-bold md:text-2xl">Products</h3>
           <Separator className="my-2" />
           <div className="grid grid-cols-3">
-            <ProductCard />
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={{
+                  id: product.id,
+                  name: product.name,
+                  description: product.description,
+                  categoryName: product.categoryName,
+                  imageUrl: product.imageUrl,
+                  price: product.price,
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
