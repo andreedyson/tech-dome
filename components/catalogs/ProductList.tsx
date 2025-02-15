@@ -31,7 +31,7 @@ function ProductList() {
   if (isLoading)
     return <div className="mt-6 w-full text-center">Loading...</div>;
   return (
-    <div className="grid w-full grid-cols-3">
+    <div className="grid w-full grid-cols-2 md:grid-cols-3">
       {products && products.length > 0 ? (
         products?.map((product) => (
           <ProductCard
