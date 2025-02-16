@@ -30,7 +30,7 @@ async function ProductDetailsPage({
       />
 
       {/* Product */}
-      <div className="flex gap-12">
+      <div className="flex flex-col gap-12 xl:flex-row">
         {/* Product Images */}
         <ProductDetailsImages product={product} />
         {/* Product Details */}
@@ -39,13 +39,13 @@ async function ProductDetailsPage({
             <div>
               <h1 className="text-4xl font-bold md:text-5xl">{product.name}</h1>
               <div>
-                <p className="mt-2 font-semibold text-muted-foreground">
+                <p className="mt-1 text-sm font-semibold text-muted-foreground md:mt-2 md:text-base">
                   {product.categoryName} • {product.brandName}
                 </p>
               </div>
             </div>
             <div>
-              <p className="flex items-center gap-1">
+              <p className="flex items-center gap-1 text-sm md:text-base">
                 <MapPin size={16} />
                 {product.locationName}
               </p>
@@ -64,7 +64,7 @@ async function ProductDetailsPage({
 
           <div>
             <h3 className="text-lg font-semibold">About Products</h3>
-            <p className="text-justify">{product.description}</p>
+            <p className="line-clamp-[6] text-justify">{product.description}</p>
           </div>
 
           <Separator className="my-4 h-[2px]" />

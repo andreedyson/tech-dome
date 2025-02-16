@@ -15,13 +15,13 @@ function ProductDetailsImages({ product }: ProductDetailsImagesProps) {
     setSelectedImage(product.images[index]);
   };
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col gap-6 max-xl:items-center md:flex-row">
       {/* Product Images */}
-      <div className="flex h-full w-full flex-col justify-between gap-2">
+      <div className="flex h-full flex-row justify-between gap-12 max-xl:order-1 md:flex-col lg:gap-6 xl:w-full">
         {product.images.map((img, index) => (
           <div
             key={index}
-            className={`aspect-square size-[120px] cursor-pointer rounded-xl ${
+            className={`aspect-square size-full cursor-pointer rounded-xl lg:size-[120px] ${
               selectedImage === img
                 ? "ring-4 ring-blue-500"
                 : "ring-2 ring-slate-300"
@@ -39,7 +39,7 @@ function ProductDetailsImages({ product }: ProductDetailsImagesProps) {
         ))}
       </div>
       {/* Image Preview */}
-      <div className="aspect-square size-[420px]">
+      <div className="aspect-square size-full xl:size-[420px]">
         <Image
           src={getImageUrl(selectedImage as string, "products")}
           width={800}
