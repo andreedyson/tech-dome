@@ -1,11 +1,11 @@
 import ProductDetailsBreadcrumb from "@/components/catalogs/ProductDetailsBreadcrumb";
+import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { getProductById } from "@/lib/data/product";
-import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR } from "@/lib/utils";
-import { MapPin, Star } from "lucide-react";
-import Image from "next/image";
+import { MapPin, ShoppingCart, Star } from "lucide-react";
 import { redirect } from "next/navigation";
-import React from "react";
 
 async function ProductDetailsPage({
   params: { id },
@@ -32,15 +32,7 @@ async function ProductDetailsPage({
       {/* Product */}
       <div className="flex gap-12">
         {/* Product Images */}
-        <div className="aspect-square size-[400px]">
-          <Image
-            src={getImageUrl(product.images[0] as string, "products")}
-            width={800}
-            height={800}
-            alt={product.name}
-            className="size-full"
-          />
-        </div>
+        <ProductDetailsImages product={product} />
         {/* Product Details */}
         <div className="w-full">
           <div className="flex items-center justify-between">
@@ -68,15 +60,23 @@ async function ProductDetailsPage({
             <span className="font-semibold">({product.total_sales})</span>
           </div>
 
-          <div className="mt-6">
+          <Separator className="my-4 h-[2px]" />
+
+          <div>
             <h3 className="text-lg font-semibold">About Products</h3>
             <p className="text-justify">{product.description}</p>
           </div>
 
-          <div className="mt-8">
+          <Separator className="my-4 h-[2px]" />
+
+          <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold md:text-3xl">
               {currencyFormatterIDR(product.price)}
             </h2>
+            <Button>
+              <ShoppingCart strokeWidth={3} />
+              Add to Cart
+            </Button>
           </div>
         </div>
       </div>
