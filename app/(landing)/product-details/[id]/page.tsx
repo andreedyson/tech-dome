@@ -2,7 +2,8 @@ import ProductDetailsBreadcrumb from "@/components/catalogs/ProductDetailsBreadc
 import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { getProductById } from "@/lib/data/product";
+import { getProductById, getTopProducts } from "@/lib/data/product";
+import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR } from "@/lib/utils";
 import { MapPin, ShoppingCart, Star } from "lucide-react";
 import Image from "next/image";
@@ -16,6 +17,10 @@ async function ProductDetailsPage({
   };
 }) {
   const product = await getProductById(id);
+  const topProducts = await getTopProducts();
+  const filteredProducts = topProducts.filter(
+    (topProduct) => topProduct.name !== product?.name,
+  );
 
   if (!product) {
     redirect("/catalogs");
@@ -119,6 +124,40 @@ async function ProductDetailsPage({
               </article>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Products You Might Like Section */}
+      <div className="w-full space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-bold md:text-3xl">
+            Products You Might Like
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="rounded-xl border-2 shadow-md">
+              <Image
+                src={getImageUrl(product.images[0], "products")}
+                width={150}
+                height={150}
+                alt={product.name}
+                className="w-full object-contain"
+              />
+              <div className="p-4">
+                <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
+                  {product.name}
+                </h4>
+                <p className="text-sm font-medium text-muted-foreground">
+                  {product.category.name}
+                </p>
+                <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
+                  {currencyFormatterIDR(product.price)}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
