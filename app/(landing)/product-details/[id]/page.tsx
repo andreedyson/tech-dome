@@ -1,5 +1,6 @@
 import ProductDetailsBreadcrumb from "@/components/catalogs/ProductDetailsBreadcrumb";
 import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
+import ShowMoreText from "@/components/ShowMoreText";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getProductById, getTopProducts } from "@/lib/data/product";
@@ -69,7 +70,11 @@ async function ProductDetailsPage({
 
           <div className="space-y-2">
             <h3 className="text-lg font-semibold">About Products</h3>
-            <p className="line-clamp-[6] text-justify">{product.description}</p>
+            <ShowMoreText
+              className="text-justify"
+              text={product.description}
+              maxLength={300}
+            />
           </div>
 
           <Separator className="my-4 h-[2px]" />
