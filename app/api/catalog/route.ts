@@ -2,7 +2,7 @@ import { Filter } from "@/hooks/useFilterCatalog";
 import { getUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getImageUrl } from "@/lib/supabase";
-import { ProductCardProps } from "@/types/product";
+import { ProductDetailProps } from "@/types/product";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -95,22 +95,36 @@ export async function POST(req: NextRequest) {
         images: true,
         name: true,
         description: true,
+        price: true,
+        createdAt: true,
         category: {
           select: {
             name: true,
           },
         },
-        price: true,
+        brand: {
+          select: {
+            name: true,
+          },
+        },
+        location: {
+          select: {
+            name: true,
+          },
+        },
       },
     });
 
-    const response: ProductCardProps[] = products.map((product) => ({
+    const response: ProductDetailProps[] = products.map((product) => ({
       id: product.id,
       name: product.name,
       description: product.description,
-      imageUrl: getImageUrl(product.images[0], "products"),
+      images: product.images,
       categoryName: product.category.name,
+      brandName: product.brand.name,
+      locationName: product.location.name,
       price: product.price,
+      createdAt: product.createdAt,
     }));
 
     return NextResponse.json(response);

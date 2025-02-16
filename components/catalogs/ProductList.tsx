@@ -2,11 +2,11 @@
 
 import { BASE_URL } from "@/constants";
 import { Filter, useFilterCatalog } from "@/hooks/useFilterCatalog";
-import { ProductCardProps } from "@/types/product";
+import { ProductDetailProps } from "@/types/product";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "../card/ProductCard";
 
-const fetchProducts = async (body?: Filter): Promise<ProductCardProps[]> => {
+const fetchProducts = async (body?: Filter): Promise<ProductDetailProps[]> => {
   try {
     const res = await fetch(`${BASE_URL}/api/catalog`, {
       method: "POST",
@@ -34,17 +34,7 @@ function ProductList() {
     <div className="grid w-full grid-cols-2 md:grid-cols-3">
       {products && products.length > 0 ? (
         products?.map((product) => (
-          <ProductCard
-            key={product.id + product.name}
-            product={{
-              id: product.id,
-              name: product.name,
-              description: product.description,
-              categoryName: product.categoryName,
-              imageUrl: product.imageUrl,
-              price: product.price,
-            }}
-          />
+          <ProductCard key={product.id + product.name} product={product} />
         ))
       ) : (
         <div className="col-span-3 mt-6 w-full text-center">

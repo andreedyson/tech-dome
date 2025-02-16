@@ -1,10 +1,11 @@
+import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR } from "@/lib/utils";
-import { ProductCardProps } from "@/types/product";
+import { ProductDetailProps } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
 
 type ProductProps = {
-  product: ProductCardProps;
+  product: ProductDetailProps;
 };
 
 function ProductCard({ product }: ProductProps) {
@@ -16,7 +17,7 @@ function ProductCard({ product }: ProductProps) {
       <article className="rounded-xl border-2 shadow-md">
         {/* Product Image */}
         <Image
-          src={product.imageUrl}
+          src={getImageUrl(product.images[0], "products")}
           width={150}
           height={150}
           alt={product.name}

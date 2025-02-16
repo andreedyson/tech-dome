@@ -1,4 +1,3 @@
-import ProductCard from "@/components/card/ProductCard";
 import FilterBrands from "@/components/catalogs/FilterBrands";
 import FilterCategories from "@/components/catalogs/FilterCategories";
 import FilterLocations from "@/components/catalogs/FilterLocations";
@@ -7,10 +6,8 @@ import FilterStatus from "@/components/catalogs/FilterStatus";
 import ProductList from "@/components/catalogs/ProductList";
 import SearchProduct from "@/components/catalogs/SearchProduct";
 import { Separator } from "@/components/ui/separator";
-import { getAllProducts } from "@/lib/data/product";
 
 async function CatalogsPage() {
-  const products = await getAllProducts();
   return (
     <section className="mt-8 w-full space-y-8">
       {/* Product Catalog Header */}

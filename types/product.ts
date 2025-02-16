@@ -4,11 +4,15 @@ export type TopProductProps = Product & {
   category: Category;
 };
 
-export type ProductCardProps = {
+export type ProductDetailProps = {
   id: string;
   name: string;
   description: string;
-  imageUrl: string;
-  categoryName: string;
+  images: string[];
   price: number;
+  categoryName: string;
+  brandName: string;
+  locationName: string;
+  total_sales: number;
+  createdAt: Date;
 };
