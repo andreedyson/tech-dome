@@ -1,3 +1,4 @@
+import AddToCartButton from "@/components/AddToCartButton";
 import ProductDetailsBreadcrumb from "@/components/catalogs/ProductDetailsBreadcrumb";
 import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import ShowMoreText from "@/components/ShowMoreText";
@@ -83,10 +84,7 @@ async function ProductDetailsPage({
             <h2 className="text-2xl font-bold md:text-3xl">
               {currencyFormatterIDR(product.price)}
             </h2>
-            <Button>
-              <ShoppingCart strokeWidth={3} />
-              Add to Cart
-            </Button>
+            <AddToCartButton product={product} />
           </div>
         </div>
       </div>
