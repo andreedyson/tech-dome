@@ -21,21 +21,23 @@ function CartProducts() {
             alt={product.name}
             width={100}
             height={100}
-            className="rounded-xl"
+            className="size-[150px] rounded-xl object-cover md:size-[100px]"
           />
           {/* Cart Product Details */}
-          <div className="grid w-full grid-cols-4">
-            <div>
+          <div className="grid w-full grid-cols-2 lg:grid-cols-4">
+            <div className="max-md:col-span-2">
               <h4 className="text-xl font-bold">{product.name}</h4>
               <p className="text-muted-foreground">{product.categoryName}</p>
             </div>
-            <div>
-              <p className="font-semibold text-muted-foreground">Price</p>
-              <p className="font-bold text-main-violet-500">
+            <div className="max-md:col-span-2">
+              <p className="hidden font-semibold text-muted-foreground md:block">
+                Price
+              </p>
+              <p className="font-bold text-main-violet-500 max-md:mt-3">
                 {currencyFormatterIDR(product.price)}
               </p>
             </div>
-            <div>
+            <div className="max-md:col-span-2 max-md:mt-6 max-sm:mt-3">
               <p className="font-semibold text-muted-foreground">Quantity</p>
               <div className="flex items-center gap-3">
                 <Minus
@@ -53,7 +55,7 @@ function CartProducts() {
                 />
               </div>
             </div>
-            <div>
+            <div className="max-md:col-span-2 max-md:mt-6 max-sm:mt-3">
               <p className="font-semibold text-muted-foreground">Total</p>
               <p className="font-bold text-main-violet-500">
                 {currencyFormatterIDR(product.price * product.quantity)}
