@@ -6,7 +6,8 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 
 function CartProducts() {
-  const { products } = useCart();
+  const { products, increaseQuantity, decreaseQuantity, removeProduct } =
+    useCart();
 
   return (
     <div>
@@ -37,11 +38,19 @@ function CartProducts() {
             <div>
               <p className="font-semibold text-muted-foreground">Quantity</p>
               <div className="flex items-center gap-3">
-                <Minus className="size-5 rounded-full bg-black" color="white" />
+                <Minus
+                  onClick={() => decreaseQuantity(product.id)}
+                  className="size-5 cursor-pointer rounded-full bg-black"
+                  color="white"
+                />
                 <span className="text-lg font-bold text-main-violet-500">
                   {product.quantity}
                 </span>
-                <Plus className="size-5 rounded-full bg-black" color="white" />
+                <Plus
+                  onClick={() => increaseQuantity(product.id)}
+                  className="size-5 cursor-pointer rounded-full bg-black"
+                  color="white"
+                />
               </div>
             </div>
             <div>
@@ -51,7 +60,10 @@ function CartProducts() {
               </p>
             </div>
           </div>
-          <div className="flex size-10 items-center justify-center">
+          <div
+            onClick={() => removeProduct(product.id)}
+            className="flex size-10 cursor-pointer items-center justify-center"
+          >
             <Trash2 color="red" />
           </div>
         </article>
