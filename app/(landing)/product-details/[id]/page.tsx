@@ -4,6 +4,7 @@ import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import ShowMoreText from "@/components/ShowMoreText";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { getUser } from "@/lib/auth";
 import { getProductById, getTopProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR } from "@/lib/utils";
@@ -18,6 +19,7 @@ async function ProductDetailsPage({
     id: string;
   };
 }) {
+  const { session } = await getUser();
   const product = await getProductById(id);
   const topProducts = await getTopProducts();
   const filteredProducts = topProducts.filter(
@@ -84,7 +86,10 @@ async function ProductDetailsPage({
             <h2 className="text-2xl font-bold md:text-3xl">
               {currencyFormatterIDR(product.price)}
             </h2>
-            <AddToCartButton product={product} />
+            <AddToCartButton
+              product={product}
+              isLoggedIn={session ? true : false}
+            />
           </div>
         </div>
       </div>

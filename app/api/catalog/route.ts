@@ -8,17 +8,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    // Check User Session
-    const { session } = await getUser();
-    if (!session) {
-      return NextResponse.json(
-        {
-          message: "You must be signed in to perform this action",
-        },
-        { status: 401 },
-      );
-    }
-
     const res = (await req.json()) as Filter;
 
     const ORQuery: Prisma.ProductWhereInput[] = [];
@@ -112,6 +101,11 @@ export async function POST(req: NextRequest) {
             name: true,
           },
         },
+        orders: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
 
@@ -125,6 +119,7 @@ export async function POST(req: NextRequest) {
       locationName: product.location.name,
       price: product.price,
       createdAt: product.createdAt,
+      total_sales: product.orders.length,
     }));
 
     return NextResponse.json(response);
