@@ -16,3 +16,14 @@ export type ProductDetailProps = {
   total_sales: number;
   createdAt: Date;
 };
+
+export type CartProps = {
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: number;
+  categoryName: string;
+  brandName: string;
+  locationName: string;
+  quantity: number;
+};

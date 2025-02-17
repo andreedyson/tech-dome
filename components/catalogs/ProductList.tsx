@@ -1,7 +1,7 @@
 "use client";
 
 import { BASE_URL } from "@/constants";
-import { Filter, useFilterCatalog } from "@/hooks/useFilterCatalog";
+import { Filter, useFilterCatalog } from "@/hooks/use-filter-catalog";
 import { ProductDetailProps } from "@/types/product";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "../card/ProductCard";

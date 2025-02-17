@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { DollarSign } from "lucide-react";
-import { useFilterCatalog } from "@/hooks/useFilterCatalog";
+import { useFilterCatalog } from "@/hooks/use-filter-catalog";
 
 function FilterPrice() {
   const { setFilter } = useFilterCatalog();

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Search } from "lucide-react";
-import { useFilterCatalog } from "@/hooks/useFilterCatalog";
+import { useFilterCatalog } from "@/hooks/use-filter-catalog";
 
 function SearchProduct() {
   const { setFilter } = useFilterCatalog();

@@ -1,4 +1,4 @@
-import { Filter } from "@/hooks/useFilterCatalog";
+import { Filter } from "@/hooks/use-filter-catalog";
 import { getUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getImageUrl } from "@/lib/supabase";
