@@ -16,13 +16,18 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import {
+  ChevronRight,
   Globe,
   MapPin,
   MapPinHouse,
+  MonitorDot,
   Notebook,
   UserCircle2Icon,
 } from "lucide-react";
 import { Textarea } from "../ui/textarea";
+import { Separator } from "../ui/separator";
+import { currencyFormatterIDR } from "@/lib/utils";
+import { Button } from "../ui/button";
 
 function CheckoutForm() {
   const { products } = useCart();
@@ -37,7 +42,7 @@ function CheckoutForm() {
     },
   });
 
-  const grandTotals = useMemo(() => {
+  const grandTotal = useMemo(() => {
     return products.reduce(
       (prev, curr) => prev + curr.price * curr.quantity,
       0,
@@ -45,9 +50,9 @@ function CheckoutForm() {
   }, [products]);
 
   return (
-    <div className="grid w-full gap-6 md:grid-cols-4">
+    <div className="grid w-full gap-6 lg:grid-cols-6">
       {/* Shipping Details */}
-      <div className="space-y-4 md:col-span-3">
+      <div className="space-y-4 lg:col-span-4">
         <h3 className="text-lg font-bold md:text-xl">Shipping Details</h3>
         <div className="grid rounded-lg border-2 bg-background p-4">
           <Form {...form}>
@@ -99,7 +104,7 @@ function CheckoutForm() {
                     </FormItem>
                   )}
                 />
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <FormField
                     control={form.control}
                     name="city"
@@ -176,11 +181,64 @@ function CheckoutForm() {
           </Form>
         </div>
       </div>
-      {/* Payment Detail */}
-      <div className="space-y-4 md:col-span-1">
-        <h3 className="text-lg font-bold md:text-xl">Payment</h3>
+
+      {/* Summary Detail */}
+      <div className="space-y-4 lg:col-span-2">
+        <h3 className="text-lg font-bold md:text-xl">Summary</h3>
         <div className="grid rounded-lg border-2 bg-background p-4">
-          Payment Details
+          <div>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center rounded-full bg-main-violet-500 p-2.5">
+                <MonitorDot color="white" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold">Top Quality Products</p>
+                <p className="text-sm leading-tight">
+                  High-performance tech products with the best deals
+                </p>
+              </div>
+            </div>
+
+            <Separator className="my-4 border-2" />
+
+            {/* Payment Details */}
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-sm">
+                <p>Sub-Total</p>
+                <p className="font-semibold">
+                  {currencyFormatterIDR(grandTotal)}
+                </p>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <p>Insurance</p>
+                <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <p>Shipping</p>
+                <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <p>Original Warranty</p>
+                <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <p>VAT</p>
+                <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-lg font-bold md:text-xl">Grand Total</p>
+              <p className="text-xl font-bold text-main-violet-500 md:text-2xl">
+                {currencyFormatterIDR(grandTotal)}
+              </p>
+            </div>
+
+            <Button className="mt-5 w-full rounded-full">
+              Checkout Now
+              <ChevronRight size={20} strokeWidth={3} />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
