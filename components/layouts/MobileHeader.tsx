@@ -2,7 +2,7 @@
 
 import { LANDING_PAGE_LINKS } from "@/constants";
 import { cn } from "@/lib/utils";
-import { AlignJustify, X } from "lucide-react";
+import { AlignJustify, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -51,9 +51,18 @@ function MobileHeader({ session, user }: MobileHeaderProps) {
             </div>
           </div>
           {session && user?.role && (
-            <p className="text-sm font-semibold underline">
-              Hi, {user.name.split(" ")[0]}
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="text-sm font-semibold underline">
+                Hi, {user.name.split(" ")[0]}
+              </p>
+              <Link href={"/cart"} className="rounded-full bg-input p-2.5">
+                <ShoppingCart
+                  size={20}
+                  strokeWidth={2.5}
+                  className="text-main-violet-600"
+                />
+              </Link>
+            </div>
           )}
         </div>
 

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
 import { Session, User } from "lucia";
+import { ShoppingCart } from "lucide-react";
 
 type LandingHeaderProps = {
   session: Session | null;
@@ -39,7 +40,18 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
 
       {/* Authentication Buttons */}
       {session && user?.role === "CUSTOMER" ? (
-        <p className="font-semibold underline">Hi, {user.name.split(" ")[0]}</p>
+        <div className="flex items-center gap-3">
+          <p className="font-semibold underline">
+            Hi, {user.name.split(" ")[0]}
+          </p>
+          <Link href={"/cart"} className="rounded-full bg-input p-2.5">
+            <ShoppingCart
+              size={20}
+              strokeWidth={2.5}
+              className="text-main-violet-600"
+            />
+          </Link>
+        </div>
       ) : (
         <div className="flex items-center gap-4 font-medium md:text-base">
           <Link
