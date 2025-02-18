@@ -82,3 +82,15 @@ export const productSchema = z.object({
 });
 
 export const editProductSchema = productSchema.omit({ images: true });
+
+export const orderDetailsSchmea = z.object({
+  name: z
+    .string({ required_error: " Name is required" })
+    .trim()
+    .min(3, { message: "Your Name must be minimum of 3 characters" }),
+  phone: z.string({ required_error: "Phone is required" }),
+  address: z.string({ required_error: "Address is required" }),
+  city: z.string({ required_error: "City is required" }),
+  postalCode: z.number({ required_error: "Postal Code is required" }),
+  notes: z.string(),
+});
