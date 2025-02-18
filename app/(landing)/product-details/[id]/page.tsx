@@ -2,15 +2,31 @@ import AddToCartButton from "@/components/AddToCartButton";
 import ProductDetailsBreadcrumb from "@/components/catalogs/ProductDetailsBreadcrumb";
 import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import ShowMoreText from "@/components/ShowMoreText";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getUser } from "@/lib/auth";
 import { getProductById, getTopProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR } from "@/lib/utils";
-import { MapPin, ShoppingCart, Star } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
+import { Metadata } from "next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+
+export async function generateMetadata({
+  params: { id },
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  // Read Route Params
+
+  // Fetch Product Data
+  const product = await getProductById(id);
+
+  return {
+    title: `${product?.name} - ${product?.categoryName}`,
+    description: product?.description,
+  };
+}
 
 async function ProductDetailsPage({
   params: { id },
