@@ -75,15 +75,15 @@ export async function editBrand(
   brandData: Brand,
   formData: FormData,
 ): Promise<ActionResult> {
-  const user = await validateProtected();
-  if (!user) {
-    return {
-      error: "You must be signed in to perform this action",
-      message: undefined,
-    };
-  }
-
   try {
+    const user = await validateProtected();
+    if (!user) {
+      return {
+        error: "You must be signed in to perform this action",
+        message: undefined,
+      };
+    }
+
     const name = formData.get("name");
     const logo = formData.get("logo");
 

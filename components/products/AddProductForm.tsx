@@ -30,13 +30,13 @@ import { createProduct } from "@/lib/actions/product/actions";
 import { ActionResult } from "@/types/auth";
 import { productSchema } from "@/types/validations";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
 import { SubmitButton } from "../SubmitButton";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import ProductImageUpload from "./ProductImageUpload";
-import { useRouter } from "next/navigation";
 
 const initialState: ActionResult = {
   error: "",
