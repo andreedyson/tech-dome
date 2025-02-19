@@ -22,6 +22,7 @@ import {
   MapPinHouse,
   MonitorDot,
   Notebook,
+  PhoneCall,
   UserCircle2Icon,
 } from "lucide-react";
 import { Textarea } from "../ui/textarea";
@@ -83,6 +84,29 @@ function CheckoutForm() {
                 />
                 <FormField
                   control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="phone">Phone</FormLabel>
+                      <FormControl>
+                        <div className="flex items-center justify-center rounded-md border border-input bg-muted">
+                          <PhoneCall className="mx-2" />
+
+                          <Input
+                            id="phone"
+                            placeholder="Enter Your Phone Number"
+                            autoComplete="off"
+                            className="rounded-l-none border-2 bg-input"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
                   name="address"
                   render={({ field }) => (
                     <FormItem>
@@ -93,7 +117,7 @@ function CheckoutForm() {
 
                           <Input
                             id="address"
-                            placeholder="Enter Your House Address Details"
+                            placeholder="Enter Your House Address"
                             autoComplete="off"
                             className="rounded-l-none border-2 bg-input"
                             {...field}

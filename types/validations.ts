@@ -88,9 +88,17 @@ export const orderDetailsSchmea = z.object({
     .string({ required_error: " Name is required" })
     .trim()
     .min(3, { message: "Your Name must be minimum of 3 characters" }),
-  phone: z.string({ required_error: "Phone is required" }),
-  address: z.string({ required_error: "Address is required" }),
-  city: z.string({ required_error: "City is required" }),
-  postalCode: z.number({ required_error: "Postal Code is required" }),
-  notes: z.string(),
+  phone: z.string({ required_error: "Phone Number is required" }),
+  address: z
+    .string({ required_error: "Address is required" })
+    .trim()
+    .trim()
+    .min(5, { message: "Address must be minimum of 5 characters" }),
+  city: z
+    .string({ required_error: "City is required" })
+    .min(5, { message: "City must be minimum of 5 characters" }),
+  postalCode: z
+    .number({ required_error: "Postal Code is required" })
+    .min(5, { message: "Postal Code must be minimum of 3 characters" }),
+  notes: z.string().optional(),
 });
