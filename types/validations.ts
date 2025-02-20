@@ -98,7 +98,7 @@ export const orderDetailsSchmea = z.object({
     .string({ required_error: "City is required" })
     .min(5, { message: "City must be minimum of 5 characters" }),
   postalCode: z
-    .number({ required_error: "Postal Code is required" })
-    .min(5, { message: "Postal Code must be minimum of 3 characters" }),
+    .string({ required_error: "Postal Code is required" })
+    .min(5, { message: "Postal Code must be minimum of 5 characters" }),
   notes: z.string().optional(),
 });

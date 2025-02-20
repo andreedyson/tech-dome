@@ -71,6 +71,7 @@ function CheckoutForm() {
       address: "",
       city: "",
       phone: "",
+      postalCode: "",
       notes: "",
     },
   });
@@ -191,6 +192,7 @@ function CheckoutForm() {
                             <MapPin className="mx-2" />
                             <Input
                               id="postalCode"
+                              type="string"
                               placeholder="Your Area Postal Code"
                               autoComplete="off"
                               className="rounded-l-none border-2 bg-input"

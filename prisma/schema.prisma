@@ -129,6 +129,8 @@ model OrderProduct {
   id        String @id @default(cuid())
   productId String
   orderId   Int
+  subTotal  Float
+  quantity  Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
