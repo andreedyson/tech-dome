@@ -2,8 +2,9 @@
 
 import { useCart } from "@/hooks/use-cart";
 import { currencyFormatterIDR } from "@/lib/utils";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { ChevronLeft, Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 function CartProducts() {
   const { products, increaseQuantity, decreaseQuantity, removeProduct } =
@@ -73,7 +74,16 @@ function CartProducts() {
         ))
       ) : (
         // TODO: Add empty cart state
-        <div>No products in cart yet</div>
+        <div>
+          <Link
+            href={"/catalogs"}
+            className="flex items-center font-semibold underline"
+          >
+            <ChevronLeft />
+            Checkout some products
+          </Link>
+          <p>No products in cart yet</p>
+        </div>
       )}
     </div>
   );
