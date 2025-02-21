@@ -89,9 +89,7 @@ model Product {
 
 enum OrderStatus {
   PENDING
-  PROCESSING
-  SHIPPED
-  DELIVERED
+  SUCCESS
 }
 
 model Order {
