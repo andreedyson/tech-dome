@@ -1,7 +1,10 @@
 "use client";
 
 import { useCart } from "@/hooks/use-cart";
+import { useToast } from "@/hooks/use-toast";
+import { createOrderDetails } from "@/lib/actions/cart/actions";
 import { currencyFormatterIDR } from "@/lib/utils";
+import { ActionResult } from "@/types/auth";
 import { orderDetailsSchmea } from "@/types/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -14,10 +17,11 @@ import {
   PhoneCall,
   UserCircle2Icon,
 } from "lucide-react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../ui/button";
+import { SubmitButton } from "../SubmitButton";
 import {
   Form,
   FormControl,
@@ -29,12 +33,6 @@ import {
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
-import { ActionResult } from "@/types/auth";
-import { useFormStatus } from "react-dom";
-import { SubmitButton } from "../SubmitButton";
-import { createOrderDetails } from "@/lib/actions/cart/actions";
-import { useFormState } from "react-dom";
-import { stat } from "fs";
 
 const initialState: ActionResult = {
   error: "",
@@ -63,6 +61,7 @@ function CheckoutForm() {
     return await createOrderDetails(_, formData, products, grandTotal);
   };
   const [state, formAction] = useFormState(createrOrderParams, initialState);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof orderDetailsSchmea>>({
     resolver: zodResolver(orderDetailsSchmea),
@@ -82,6 +81,24 @@ function CheckoutForm() {
       0,
     );
   }, [products]);
+
+  useEffect(() => {
+    if (state.message) {
+      toast({
+        title: "Success ✔️",
+        description: state.message,
+        variant: "success",
+      });
+    }
+
+    if (state.error) {
+      toast({
+        title: "There's a problem 😵",
+        description: state.error,
+        variant: "destructive",
+      });
+    }
+  }, [state]);
 
   return (
     <Form {...form}>
