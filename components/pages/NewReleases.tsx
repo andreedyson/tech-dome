@@ -1,9 +1,8 @@
-import React from "react";
-import { Button } from "../ui/button";
 import { getNewReleaseProducts } from "@/lib/data/product";
-import Image from "next/image";
 import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR, formatDaysAgo } from "@/lib/utils";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 async function NewReleases() {
   const newReleases = await getNewReleaseProducts();
@@ -17,36 +16,59 @@ async function NewReleases() {
         </Button>
       </div>
 
-      {/* Top Products Section */}
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-        {newReleases.map((product) => (
-          <div key={product.id} className="rounded-xl border-2 shadow-md">
-            {/* Product Image */}
-            <Image
-              src={getImageUrl(product.images[0], "products")}
-              width={150}
-              height={150}
-              alt={product.name}
-              className="w-full object-contain"
-            />
-            {/* Product Details */}
-            <div className="p-4">
-              <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
-                {product.name}
-              </h4>
-              <p className="text-sm font-medium text-muted-foreground">
-                {product.category.name}
-              </p>
-              <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-                {currencyFormatterIDR(product.price)}
-              </p>
+      {/* New Releases Section */}
+      <div className="w-full">
+        {newReleases.length ? (
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {newReleases.map((product) => (
+              <div key={product.id} className="rounded-xl border-2 shadow-md">
+                {/* Product Image */}
+                <Image
+                  src={getImageUrl(product.images[0], "products")}
+                  width={150}
+                  height={150}
+                  alt={product.name}
+                  className="w-full object-contain"
+                />
+                {/* Product Details */}
+                <div className="p-4">
+                  <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
+                    {product.name}
+                  </h4>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {product.category.name}
+                  </p>
+                  <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
+                    {currencyFormatterIDR(product.price)}
+                  </p>
 
-              <p className="mt-4 text-sm font-semibold text-muted-foreground">
-                Added {formatDaysAgo(product.createdAt)}
+                  <p className="mt-4 text-sm font-semibold text-muted-foreground">
+                    Added {formatDaysAgo(product.createdAt)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-full w-full flex-col items-center gap-2 text-center">
+            <Image
+              src={"/assets/products-empty.svg"}
+              width={500}
+              height={300}
+              alt="Products Not Found"
+              className="aspect-video size-[180px] lg:size-[280px]"
+              priority
+            />
+            <div className="space-y-0.5">
+              <h4 className="text-sm font-semibold md:text-base">
+                No New Releases Products Found
+              </h4>
+              <p className="desc-2 max-w-md text-xs md:text-sm">
+                Showing the top selling Products on DealDome.
               </p>
             </div>
           </div>
-        ))}
+        )}
       </div>
     </section>
   );

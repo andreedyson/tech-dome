@@ -1,9 +1,8 @@
-import React from "react";
-import { Button } from "../ui/button";
 import { getTopProducts } from "@/lib/data/product";
-import Image from "next/image";
 import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR } from "@/lib/utils";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 async function Products() {
   const topProducts = await getTopProducts();
@@ -18,31 +17,54 @@ async function Products() {
       </div>
 
       {/* Top Products Section */}
-      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-        {topProducts.map((product) => (
-          <div key={product.id} className="rounded-xl border-2 shadow-md">
-            {/* Product Image */}
+      <div className="w-full">
+        {topProducts.length ? (
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {topProducts.map((product) => (
+              <div key={product.id} className="rounded-xl border-2 shadow-md">
+                {/* Product Image */}
+                <Image
+                  src={getImageUrl(product.images[0], "products")}
+                  width={150}
+                  height={150}
+                  alt={product.name}
+                  className="w-full object-contain"
+                />
+                {/* Product Details */}
+                <div className="p-4">
+                  <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
+                    {product.name}
+                  </h4>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {product.category.name}
+                  </p>
+                  <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
+                    {currencyFormatterIDR(product.price)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-full w-full flex-col items-center gap-2 text-center">
             <Image
-              src={getImageUrl(product.images[0], "products")}
-              width={150}
-              height={150}
-              alt={product.name}
-              className="w-full object-contain"
+              src={"/assets/products-empty.svg"}
+              width={500}
+              height={300}
+              alt="Products Not Found"
+              className="aspect-video size-[180px] lg:size-[280px]"
+              priority
             />
-            {/* Product Details */}
-            <div className="p-4">
-              <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
-                {product.name}
+            <div className="space-y-0.5">
+              <h4 className="text-sm font-semibold md:text-base">
+                No Top Products Found
               </h4>
-              <p className="text-sm font-medium text-muted-foreground">
-                {product.category.name}
-              </p>
-              <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-                {currencyFormatterIDR(product.price)}
+              <p className="desc-2 max-w-md text-xs md:text-sm">
+                Showing the top selling Products on DealDome.
               </p>
             </div>
           </div>
-        ))}
+        )}
       </div>
     </section>
   );
