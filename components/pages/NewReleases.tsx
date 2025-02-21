@@ -3,6 +3,7 @@ import { getImageUrl } from "@/lib/supabase";
 import { currencyFormatterIDR, formatDaysAgo } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 async function NewReleases() {
   const newReleases = await getNewReleaseProducts();
@@ -21,14 +22,18 @@ async function NewReleases() {
         {newReleases.length ? (
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {newReleases.map((product) => (
-              <div key={product.id} className="rounded-xl border-2 shadow-md">
+              <Link
+                key={product.id}
+                href={`/product-details/${product.id}`}
+                className="rounded-xl border-2 shadow-md duration-200 hover:ring-2 hover:ring-main-violet-500"
+              >
                 {/* Product Image */}
                 <Image
                   src={getImageUrl(product.images[0], "products")}
                   width={150}
                   height={150}
                   alt={product.name}
-                  className="w-full object-contain"
+                  className="w-full rounded-t-xl object-contain"
                 />
                 {/* Product Details */}
                 <div className="p-4">
@@ -46,7 +51,7 @@ async function NewReleases() {
                     Added {formatDaysAgo(product.createdAt)}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         ) : (
