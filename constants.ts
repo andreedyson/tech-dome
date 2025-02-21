@@ -4,8 +4,8 @@ export const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 export const LANDING_PAGE_LINKS = [
   { url: "/", title: "Home" },
   { url: "/catalogs", title: "Catalogs" },
-  { url: "/testimonials", title: "Testimonials" },
-  { url: "/rewards", title: "Rewards" },
+  { url: "/brands", title: "Brands" },
+  { url: "/contacts", title: "Contacts" },
 ];
 export const LANDING_TESTIMONIALS = [
   {
