@@ -1,7 +1,5 @@
 import { Filter } from "@/hooks/use-filter-catalog";
-import { getUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { getImageUrl } from "@/lib/supabase";
 import { ProductDetailProps } from "@/types/product";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";

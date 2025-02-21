@@ -1,7 +1,6 @@
 import { ProductColumn } from "@/components/products/columns";
-import { prisma } from "../prisma";
-import { Product } from "@prisma/client";
 import { ProductDetailProps, TopProductProps } from "@/types/product";
+import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
 
 export async function getAllProducts(): Promise<ProductColumn[]> {
