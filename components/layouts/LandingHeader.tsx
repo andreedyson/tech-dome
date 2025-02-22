@@ -17,7 +17,7 @@ type LandingHeaderProps = {
 function LandingHeader({ session, user }: LandingHeaderProps) {
   const pathname = usePathname();
   return (
-    <header className="sticky top-4 my-4 hidden items-center justify-between rounded-2xl border bg-background p-6 shadow-md md:flex">
+    <header className="sticky top-4 z-[999] my-4 hidden items-center justify-between rounded-2xl border bg-background p-6 shadow-md md:flex">
       {/* Deal Dome Logo */}
       <Link href="/" className="flex items-center gap-2 font-semibold italic">
         <div className="flex size-8 items-center justify-center rounded-md bg-primary font-bold text-primary-foreground">

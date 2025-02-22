@@ -89,9 +89,9 @@ function CartProducts() {
               </h4>
               <Link
                 href={"/catalogs"}
-                className="flex max-w-md items-center text-xs underline md:text-sm"
+                className="flex max-w-md items-center text-xs hover:underline md:text-sm"
               >
-                <ChevronLeft />
+                <ChevronLeft size={16} />
                 Checkout some products
               </Link>
             </div>
