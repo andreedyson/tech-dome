@@ -76,7 +76,7 @@ function CartProducts() {
         <div>
           <div className="flex h-full w-full flex-col items-center gap-2 text-center">
             <Image
-              src={"/assets/empty-products.svg"}
+              src={"/assets/empty-cart.svg"}
               width={500}
               height={300}
               alt="Products Not Found"
