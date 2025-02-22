@@ -57,7 +57,7 @@ async function NewReleases() {
         ) : (
           <div className="flex h-full w-full flex-col items-center gap-2 text-center">
             <Image
-              src={"/assets/products-empty.svg"}
+              src={"/assets/empty-products.svg"}
               width={500}
               height={300}
               alt="Products Not Found"
@@ -68,7 +68,7 @@ async function NewReleases() {
               <h4 className="text-sm font-semibold md:text-base">
                 No New Releases Products Found
               </h4>
-              <p className="desc-2 max-w-md text-xs md:text-sm">
+              <p className="max-w-md text-xs md:text-sm">
                 Showing the top selling Products on DealDome.
               </p>
             </div>

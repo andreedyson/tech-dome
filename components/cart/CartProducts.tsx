@@ -11,7 +11,7 @@ function CartProducts() {
     useCart();
 
   return (
-    <div>
+    <div className="w-full">
       {products.length > 0 ? (
         products.map((product) => (
           <article
@@ -73,16 +73,29 @@ function CartProducts() {
           </article>
         ))
       ) : (
-        // TODO: Add empty cart state
         <div>
-          <Link
-            href={"/catalogs"}
-            className="flex items-center font-semibold underline"
-          >
-            <ChevronLeft />
-            Checkout some products
-          </Link>
-          <p>No products in cart yet</p>
+          <div className="flex h-full w-full flex-col items-center gap-2 text-center">
+            <Image
+              src={"/assets/empty-products.svg"}
+              width={500}
+              height={300}
+              alt="Products Not Found"
+              className="aspect-video size-[180px] lg:size-[280px]"
+              priority
+            />
+            <div className="space-y-0.5">
+              <h4 className="text-sm font-semibold md:text-base">
+                No Products in Cart Yet
+              </h4>
+              <Link
+                href={"/catalogs"}
+                className="flex max-w-md items-center text-xs underline md:text-sm"
+              >
+                <ChevronLeft />
+                Checkout some products
+              </Link>
+            </div>
+          </div>
         </div>
       )}
     </div>

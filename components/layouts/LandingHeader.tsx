@@ -23,7 +23,7 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
         <div className="flex size-8 items-center justify-center rounded-md bg-primary font-bold text-primary-foreground">
           DD
         </div>
-        <span className="hidden lg:block">Deal Dome</span>
+        <span>Deal Dome</span>
       </Link>
 
       {/* Landing Page Links */}
