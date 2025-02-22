@@ -1,6 +1,6 @@
 import { getTopProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
-import { currencyFormatterIDR } from "@/lib/utils";
+import { convertRupiah } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -44,7 +44,7 @@ async function Products() {
                     {product.category.name}
                   </p>
                   <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-                    {currencyFormatterIDR(product.price)}
+                    {convertRupiah(product.price)}
                   </p>
                 </div>
               </Link>

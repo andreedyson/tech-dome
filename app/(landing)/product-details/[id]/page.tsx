@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { getUser } from "@/lib/auth";
 import { getProductById, getTopProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
-import { currencyFormatterIDR } from "@/lib/utils";
+import { convertRupiah } from "@/lib/utils";
 import { MapPin, Star } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -100,7 +100,7 @@ async function ProductDetailsPage({
 
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold md:text-3xl">
-              {currencyFormatterIDR(product.price)}
+              {convertRupiah(product.price)}
             </h2>
             <AddToCartButton
               product={product}
@@ -177,7 +177,7 @@ async function ProductDetailsPage({
                   {product.category.name}
                 </p>
                 <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-                  {currencyFormatterIDR(product.price)}
+                  {convertRupiah(product.price)}
                 </p>
               </div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/hooks/use-cart";
-import { currencyFormatterIDR } from "@/lib/utils";
+import { convertRupiah } from "@/lib/utils";
 import { ChevronLeft, Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +36,7 @@ function CartProducts() {
                   Price
                 </p>
                 <p className="font-bold text-main-violet-500 max-md:mt-3">
-                  {currencyFormatterIDR(product.price)}
+                  {convertRupiah(product.price)}
                 </p>
               </div>
               <div className="max-md:col-span-2 max-md:mt-6 max-sm:mt-3">
@@ -60,7 +60,7 @@ function CartProducts() {
               <div className="max-md:col-span-2 max-md:mt-6 max-sm:mt-3">
                 <p className="font-semibold text-muted-foreground">Total</p>
                 <p className="font-bold text-main-violet-500">
-                  {currencyFormatterIDR(product.price * product.quantity)}
+                  {convertRupiah(product.price * product.quantity)}
                 </p>
               </div>
             </div>

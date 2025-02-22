@@ -1,5 +1,5 @@
 import { getImageUrl } from "@/lib/supabase";
-import { currencyFormatterIDR } from "@/lib/utils";
+import { convertRupiah } from "@/lib/utils";
 import { ProductDetailProps } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +35,7 @@ function ProductCard({ product }: ProductProps) {
             {product.description}
           </p>
           <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-            {currencyFormatterIDR(product.price)}
+            {convertRupiah(product.price)}
           </p>
         </div>
       </article>

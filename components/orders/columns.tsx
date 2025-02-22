@@ -1,7 +1,7 @@
 "use client";
 
 import { getImageUrl } from "@/lib/supabase";
-import { currencyFormatterIDR, formatDate } from "@/lib/utils";
+import { convertRupiah, formatDate } from "@/lib/utils";
 import { OrderStatus } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
@@ -64,7 +64,7 @@ export const columns: ColumnDef<OrderColumn>[] = [
     cell: ({ row }) => {
       const order = row.original;
 
-      return <div>{currencyFormatterIDR(order.total)}</div>;
+      return <div>{convertRupiah(order.total)}</div>;
     },
   },
   {

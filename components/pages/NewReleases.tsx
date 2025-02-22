@@ -1,6 +1,6 @@
 import { getNewReleaseProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
-import { currencyFormatterIDR, formatDaysAgo } from "@/lib/utils";
+import { convertRupiah, formatDaysAgo } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -44,7 +44,7 @@ async function NewReleases() {
                     {product.category.name}
                   </p>
                   <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-                    {currencyFormatterIDR(product.price)}
+                    {convertRupiah(product.price)}
                   </p>
 
                   <p className="mt-4 text-sm font-semibold text-muted-foreground">

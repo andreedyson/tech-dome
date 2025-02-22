@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const currencyFormatterIDR = (amount: number) => {
+export const convertRupiah = (amount: number) => {
   const formatter = Intl.NumberFormat("id-ID", {
     currency: "IDR",
     style: "currency",

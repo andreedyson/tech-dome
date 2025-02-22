@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ProductStatus } from "@prisma/client";
 import Image from "next/image";
 import { getImageUrl } from "@/lib/supabase";
-import { currencyFormatterIDR, formatDate } from "@/lib/utils";
+import { convertRupiah, formatDate } from "@/lib/utils";
 import ProductStatusBadge from "../ProductStatusBadge";
 import { Button } from "../ui/button";
 import { Pencil } from "lucide-react";
@@ -62,7 +62,7 @@ export const columns: ColumnDef<ProductColumn>[] = [
     cell: ({ row }) => {
       const product = row.original;
 
-      return <div>{currencyFormatterIDR(product.price)}</div>;
+      return <div>{convertRupiah(product.price)}</div>;
     },
   },
   {

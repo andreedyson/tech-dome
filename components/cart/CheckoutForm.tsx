@@ -3,7 +3,7 @@
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/hooks/use-toast";
 import { createOrderDetails } from "@/lib/actions/cart/actions";
-import { currencyFormatterIDR } from "@/lib/utils";
+import { convertRupiah } from "@/lib/utils";
 import { ActionResult } from "@/types/auth";
 import { orderDetailsSchmea } from "@/types/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -271,31 +271,29 @@ function CheckoutForm() {
                 <div className="space-y-1">
                   <div className="flex items-center justify-between text-sm">
                     <p>Sub-Total</p>
-                    <p className="font-semibold">
-                      {currencyFormatterIDR(grandTotal)}
-                    </p>
+                    <p className="font-semibold">{convertRupiah(grandTotal)}</p>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <p>Insurance</p>
-                    <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+                    <p className="font-semibold">{convertRupiah(0)}</p>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <p>Shipping</p>
-                    <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+                    <p className="font-semibold">{convertRupiah(0)}</p>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <p>Original Warranty</p>
-                    <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+                    <p className="font-semibold">{convertRupiah(0)}</p>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <p>VAT</p>
-                    <p className="font-semibold">{currencyFormatterIDR(0)}</p>
+                    <p className="font-semibold">{convertRupiah(0)}</p>
                   </div>
                 </div>
                 <div className="mt-4">
                   <p className="text-lg font-bold md:text-xl">Grand Total</p>
                   <p className="text-xl font-bold text-main-violet-500 md:text-2xl">
-                    {currencyFormatterIDR(grandTotal)}
+                    {convertRupiah(grandTotal)}
                   </p>
                 </div>
                 <Submit />
