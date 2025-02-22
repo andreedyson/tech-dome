@@ -1,9 +1,13 @@
-import { getBrandsWithTotalProducts } from "@/lib/data/brand";
+import {
+  getBrandsWithProducts,
+  getBrandsWithTotalProducts,
+} from "@/lib/data/brand";
 import { Building } from "lucide-react";
 import Image from "next/image";
 
 async function BrandsPage() {
   const brands = await getBrandsWithTotalProducts();
+  const brandWithProducts = await getBrandsWithProducts();
 
   return (
     <section className="w-full space-y-12">
@@ -123,6 +127,23 @@ async function BrandsPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Products by Brand Section */}
+      <div>
+        {brandWithProducts.length > 0 ? (
+          <div>
+            {brandWithProducts.map((brand) => (
+              <div key={brand.id + brand.name}>
+                <h3 className="text-xl font-bold leading-none md:text-2xl">
+                  {brand.name}
+                </h3>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </section>
   );
