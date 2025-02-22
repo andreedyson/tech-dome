@@ -83,8 +83,9 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
       },
     });
 
-    // TODO: Add filter to product with order more than or equals to 5
-    const topProducts = products.filter((product) => product);
+    const topProducts = products.filter(
+      (product) => product.orders.length >= 5,
+    );
 
     return topProducts.slice(0, 4);
   } catch (error) {

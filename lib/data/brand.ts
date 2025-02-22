@@ -19,18 +19,25 @@ export async function getAllBrands(): Promise<Brand[]> {
 
 export async function getPopularBrands(): Promise<Brand[]> {
   try {
-    // TODO: Filter Brands with the total orders of 10 or more
     const brands = await prisma.brand.findMany({
       include: {
         Product: {
-          include: {
+          select: {
             orders: true,
           },
         },
       },
     });
 
-    return brands.slice(0, 4);
+    const filteredBrands = brands.filter((brand) => {
+      const totalOrders = brand.Product.reduce((acc, product) => {
+        return acc + product.orders.length;
+      }, 0);
+
+      return totalOrders >= 5;
+    });
+
+    return filteredBrands.slice(0, 4);
   } catch (error) {
     return [];
   }
