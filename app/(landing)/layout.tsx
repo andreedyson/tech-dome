@@ -28,7 +28,7 @@ export default async function LandingLayout({
         <LandingHeader session={session} user={user} />
         <MobileHeader session={session} user={user} />
         <ReactQueryProvider>
-          <div className="mb-4">{children}</div>
+          <div className="my-4 max-md:mx-4">{children}</div>
           <Toaster />
         </ReactQueryProvider>
       </div>

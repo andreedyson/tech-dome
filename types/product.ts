@@ -1,4 +1,4 @@
-import { Category, Product } from "@prisma/client";
+import { Brand, Category, Product } from "@prisma/client";
 
 export type TopProductProps = Product & {
   category: Category;
