@@ -1,7 +1,8 @@
-import { Brand, Category, Product } from "@prisma/client";
+import { Brand, Category, Location, Product } from "@prisma/client";
 
 export type TopProductProps = Product & {
   category: Category;
+  location: Location;
 };
 
 export type ProductDetailProps = {

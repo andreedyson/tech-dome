@@ -84,6 +84,7 @@ export async function getBrandsWithProducts(): Promise<
         Product: {
           include: {
             category: true,
+            location: true,
           },
         },
       },

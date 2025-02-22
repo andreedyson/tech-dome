@@ -80,6 +80,7 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
       include: {
         orders: true,
         category: true,
+        location: true,
       },
     });
 
@@ -109,6 +110,7 @@ export async function getNewReleaseProducts(): Promise<TopProductProps[]> {
       },
       include: {
         category: true,
+        location: true,
       },
     });
 

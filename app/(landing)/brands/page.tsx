@@ -1,9 +1,13 @@
+import { Badge } from "@/components/ui/badge";
 import {
   getBrandsWithProducts,
   getBrandsWithTotalProducts,
 } from "@/lib/data/brand";
+import { getImageUrl } from "@/lib/supabase";
+import { convertRupiah } from "@/lib/utils";
 import { Building } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 async function BrandsPage() {
   const brands = await getBrandsWithTotalProducts();
@@ -132,12 +136,47 @@ async function BrandsPage() {
       {/* Products by Brand Section */}
       <div>
         {brandWithProducts.length > 0 ? (
-          <div>
+          <div className="space-y-6">
             {brandWithProducts.map((brand) => (
-              <div key={brand.id + brand.name}>
+              <div key={brand.id + brand.name} className="space-y-3">
                 <h3 className="text-xl font-bold leading-none md:text-2xl">
                   {brand.name}
                 </h3>
+
+                <div className="flex w-full md:overflow-x-auto">
+                  {brand.products.map((product) => (
+                    <Link
+                      key={product.id + product.name}
+                      href={`/product-details/${product.id}`}
+                      className="flex rounded-lg border-2 duration-200 hover:border-main-violet-800 max-md:w-full md:flex-shrink-0"
+                    >
+                      <div className="relative">
+                        <Image
+                          src={getImageUrl(product.images[0], "products")}
+                          width={180}
+                          height={180}
+                          alt={product.name}
+                          className="size-full rounded-l-lg object-cover md:size-[180px]"
+                        />
+                        <Badge className="absolute left-2 top-2 rounded-full text-xs">
+                          {product.category.name}
+                        </Badge>
+                      </div>
+                      <div className="p-4 leading-5">
+                        <p className="font-bold">{product.name}</p>
+                        <p className="text-sm font-semibold text-main-violet-500">
+                          {convertRupiah(product.price)}
+                        </p>
+                        <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] md:w-[240px]">
+                          {product.description}
+                        </p>
+                        <p className="mt-4 text-sm text-muted-foreground">
+                          Delivered from {product.location.name}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
