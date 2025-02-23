@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { getTotalProductsByCategory } from "@/lib/data/category";
 import { University } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 async function CategoriesPage() {
   const categoriesProducts = await getTotalProductsByCategory();
@@ -73,10 +74,12 @@ async function CategoriesPage() {
               tech you need to succeed. Shop now and ace your classes!
             </p>
           </div>
-          <Button className="mt-3 flex w-fit md:mt-5">
-            <University />
-            Shop the Student Deals
-          </Button>
+          <Link href={"/catalogs"}>
+            <Button className="mt-3 flex w-fit md:mt-5">
+              <University />
+              Shop the Student Deals
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

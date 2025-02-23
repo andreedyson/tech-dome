@@ -139,9 +139,20 @@ async function BrandsPage() {
           <div className="space-y-6">
             {brandWithProducts.map((brand) => (
               <div key={brand.id + brand.name} className="space-y-3">
-                <h3 className="text-xl font-bold leading-none md:text-2xl">
-                  {brand.name}
-                </h3>
+                <div className="flex items-center gap-2">
+                  <div className="aspect-video h-8 w-16 object-contain">
+                    <Image
+                      src={brand.logo}
+                      width={80}
+                      height={40}
+                      alt={brand.name}
+                      className="size-full object-contain"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold leading-none md:text-2xl">
+                    {brand.name}
+                  </h3>
+                </div>
 
                 <div className="flex w-full md:overflow-x-auto">
                   {brand.products.length > 0 ? (
