@@ -144,44 +144,82 @@ async function BrandsPage() {
                 </h3>
 
                 <div className="flex w-full md:overflow-x-auto">
-                  {brand.products.map((product) => (
-                    <Link
-                      key={product.id + product.name}
-                      href={`/product-details/${product.id}`}
-                      className="flex rounded-lg border-2 duration-200 hover:border-main-violet-800 max-md:w-full md:flex-shrink-0"
-                    >
-                      <div className="relative">
-                        <Image
-                          src={getImageUrl(product.images[0], "products")}
-                          width={180}
-                          height={180}
-                          alt={product.name}
-                          className="size-full rounded-l-lg object-cover md:size-[180px]"
-                        />
-                        <Badge className="absolute left-2 top-2 rounded-full text-xs">
-                          {product.category.name}
-                        </Badge>
+                  {brand.products.length > 0 ? (
+                    brand.products.map((product) => (
+                      <Link
+                        key={product.id + product.name}
+                        href={`/product-details/${product.id}`}
+                        className="flex rounded-lg border-2 duration-200 hover:border-main-violet-800 max-md:w-full md:flex-shrink-0"
+                      >
+                        <div className="relative">
+                          <Image
+                            src={getImageUrl(product.images[0], "products")}
+                            width={180}
+                            height={180}
+                            alt={product.name}
+                            className="size-full rounded-l-lg object-cover md:size-[180px]"
+                          />
+                          <Badge className="absolute left-2 top-2 rounded-full text-xs">
+                            {product.category.name}
+                          </Badge>
+                        </div>
+                        <div className="p-4 leading-5">
+                          <p className="font-bold">{product.name}</p>
+                          <p className="text-sm font-semibold text-main-violet-500">
+                            {convertRupiah(product.price)}
+                          </p>
+                          <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] md:w-[240px]">
+                            {product.description}
+                          </p>
+                          <p className="mt-4 text-sm text-muted-foreground">
+                            Delivered from {product.location.name}
+                          </p>
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <div className="flex h-full w-full flex-col items-center gap-2 text-center">
+                      <Image
+                        src={"/assets/empty-vault.svg"}
+                        width={500}
+                        height={300}
+                        alt="Products Not Found"
+                        className="aspect-video w-[180px] lg:w-[280px]"
+                        priority
+                      />
+                      <div className="space-y-0.5">
+                        <h4 className="text-sm font-semibold md:text-base">
+                          No Products from {brand.name} yet.
+                        </h4>
+                        <p className="max-w-md text-xs md:text-sm">
+                          Showing list of product from {brand.name}.
+                        </p>
                       </div>
-                      <div className="p-4 leading-5">
-                        <p className="font-bold">{product.name}</p>
-                        <p className="text-sm font-semibold text-main-violet-500">
-                          {convertRupiah(product.price)}
-                        </p>
-                        <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] md:w-[240px]">
-                          {product.description}
-                        </p>
-                        <p className="mt-4 text-sm text-muted-foreground">
-                          Delivered from {product.location.name}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div></div>
+          <div className="flex h-full w-full flex-col items-center gap-2 text-center">
+            <Image
+              src={"/assets/empty-file.svg"}
+              width={500}
+              height={300}
+              alt="Products Not Found"
+              className="aspect-video size-[180px] lg:size-[280px]"
+              priority
+            />
+            <div className="space-y-0.5">
+              <h4 className="text-sm font-semibold md:text-base">
+                No Brands data yet.
+              </h4>
+              <p className="max-w-md text-xs md:text-sm">
+                Showing list of product from each Brands.
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </section>
