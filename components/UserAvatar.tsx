@@ -1,15 +1,24 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+"use client";
+
+import { Avatar } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { SignOut } from "@/lib/actions/auth/admin/actions";
+import { LogOutIcon } from "lucide-react";
+import Link from "next/link";
 
 type UserAvatarProps = {
   fullname: string;
 };
-
 function UserAvatar({ fullname }: UserAvatarProps) {
   const memberIntial =
     fullname.split(" ").length > 1
@@ -17,18 +26,45 @@ function UserAvatar({ fullname }: UserAvatarProps) {
       : fullname.charAt(0);
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          className="relative size-8 rounded-full md:size-10"
+        >
           <Avatar className="flex items-center justify-center bg-main-violet-300 font-semibold">
             {memberIntial}
           </Avatar>
-        </TooltipTrigger>
-        <TooltipContent className="text-center">
-          <p className="font-semibold">{fullname}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="z-[100] w-56" align="end" forceMount>
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1 text-right">
+            <p className="text-sm font-semibold leading-none">{fullname}</p>
+            <p className="text-sm font-medium leading-none text-muted-foreground">
+              Customer
+            </p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <Link href={"/profile"} className="w-full">
+              Profile
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => SignOut()}
+            className="cursor-pointer font-semibold text-red-500"
+          >
+            Log out
+            <DropdownMenuShortcut className="text-red-500">
+              <LogOutIcon size={20} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 

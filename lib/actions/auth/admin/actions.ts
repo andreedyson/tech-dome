@@ -68,8 +68,8 @@ export async function SignIn(
 }
 
 export async function SignOut(
-  _: unknown,
-  formData: FormData,
+  _?: unknown,
+  formData?: FormData,
 ): Promise<ActionResult> {
   const { session } = await getUser();
 
@@ -89,5 +89,5 @@ export async function SignOut(
     sessionCookie.attributes,
   );
 
-  redirect("/sign-in");
+  redirect("/");
 }
