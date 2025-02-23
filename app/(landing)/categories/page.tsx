@@ -1,11 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { getTotalProductsByCategory } from "@/lib/data/category";
+import {
+  getCategoryWithProducts,
+  getTotalProductsByCategory,
+} from "@/lib/data/category";
 import { University } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 async function CategoriesPage() {
   const categoriesProducts = await getTotalProductsByCategory();
+  const categoryWithProducts = await getCategoryWithProducts();
+
   return (
     <div>
       <h1 className="max-w-[350px] text-2xl font-extrabold leading-none md:text-3xl lg:max-w-[500px] lg:text-4xl">

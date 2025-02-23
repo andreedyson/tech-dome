@@ -2,7 +2,10 @@
 
 import { Category } from "@prisma/client";
 import { prisma } from "../prisma";
-import { TotalProductByCategoryProps } from "@/types/category";
+import {
+  CategoryWithProductsProps,
+  TotalProductByCategoryProps,
+} from "@/types/category";
 
 export async function getAllCategories(): Promise<Category[]> {
   try {
@@ -38,6 +41,33 @@ export async function getTotalProductsByCategory(): Promise<
     }));
 
     return data.slice(0, 8);
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getCategoryWithProducts(): Promise<
+  CategoryWithProductsProps[]
+> {
+  try {
+    const categories = await prisma.category.findMany({
+      include: {
+        Product: {
+          include: {
+            category: true,
+            location: true,
+          },
+        },
+      },
+    });
+
+    const categoryWithProducts = categories.map((category) => ({
+      id: category.id,
+      name: category.name,
+      products: category.Product,
+    }));
+
+    return categoryWithProducts;
   } catch (error) {
     return [];
   }
