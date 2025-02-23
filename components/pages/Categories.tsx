@@ -1,8 +1,6 @@
-import React from "react";
-import { Button } from "../ui/button";
 import { getTotalProductsByCategory } from "@/lib/data/category";
-import Link from "next/link";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 async function Categories() {
   const categoriesProducts = await getTotalProductsByCategory();
@@ -21,8 +19,7 @@ async function Categories() {
         {categoriesProducts.length ? (
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {categoriesProducts.map((category) => (
-              <Link
-                href={"/"}
+              <div
                 key={category.name}
                 className="rounded-xl border-2 p-4 shadow-md duration-200 hover:border-yellow-500"
               >
@@ -30,7 +27,7 @@ async function Categories() {
                 <p className="text-muted-foreground">
                   {category.totalProducts} Products
                 </p>
-              </Link>
+              </div>
             ))}
           </div>
         ) : (

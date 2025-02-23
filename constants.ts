@@ -5,7 +5,7 @@ export const LANDING_PAGE_LINKS = [
   { url: "/", title: "Home" },
   { url: "/catalogs", title: "Catalogs" },
   { url: "/brands", title: "Brands" },
-  { url: "/contacts", title: "Contacts" },
+  { url: "/categories", title: "Categories" },
 ];
 export const LANDING_TESTIMONIALS = [
   {

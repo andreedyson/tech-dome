@@ -2,6 +2,7 @@ import { getPopularBrands } from "@/lib/data/brand";
 import { getImageUrl } from "@/lib/supabase";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 async function Brands() {
   const popularBrands = await getPopularBrands();
@@ -10,9 +11,11 @@ async function Brands() {
       {/* Brands Section Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold md:text-3xl">Brands</h2>
-        <Button variant={"ghost"} className="border-2 font-semibold">
-          Explore All
-        </Button>
+        <Link href={"/brands"}>
+          <Button variant={"ghost"} className="border-2 font-semibold">
+            Explore All
+          </Button>
+        </Link>
       </div>
 
       {/* Popular Brands Section */}

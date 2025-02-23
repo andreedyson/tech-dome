@@ -21,7 +21,7 @@ async function BrandsPage() {
           src={"/assets/macbook-laptop.jpg"}
           width={1000}
           height={500}
-          alt="ROG"
+          alt="Macbook"
           className="h-full w-full rounded-xl object-cover object-top"
         />
         <div className="absolute inset-0 rounded-xl bg-black opacity-50" />
@@ -43,8 +43,8 @@ async function BrandsPage() {
             <p className="mt-2 w-full max-w-[350px] text-center text-sm text-slate-300 lg:max-w-[400px] lg:text-base">
               Explore a curated selection of the most trusted tech brands,
               bringing you cutting-edge innovation, quality, and performance.
-              Find the perfect brand for your next upgrade! Let me know if you’d
-              like any tweaks! 🚀
+              Find the perfect brand for your next upgrade! Let me know if
+              you&apos;d like any tweaks! 🚀
             </p>
           </div>
         </div>
