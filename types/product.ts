@@ -11,9 +11,9 @@ export type ProductDetailProps = {
   description: string;
   images: string[];
   price: number;
-  categoryName?: string;
-  brandName?: string;
-  locationName?: string;
+  category?: Category;
+  brand?: Brand;
+  location?: Location;
   total_sales?: number;
   createdAt: Date;
 };

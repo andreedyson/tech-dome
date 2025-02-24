@@ -2,6 +2,7 @@ import { ProductColumn } from "@/components/products/columns";
 import { ProductDetailProps, TopProductProps } from "@/types/product";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
+import { Product } from "@prisma/client";
 
 export async function getAllProducts(): Promise<ProductColumn[]> {
   try {
@@ -60,9 +61,9 @@ export async function getProductById(
       description: product.description,
       price: product.price,
       images: product.images,
-      categoryName: product.category.name,
-      brandName: product.brand.name,
-      locationName: product.location.name,
+      category: product.category,
+      brand: product.brand,
+      location: product.location,
       total_sales: product.orders.length,
       status: product.status,
       createdAt: product.createdAt,
@@ -115,6 +116,23 @@ export async function getNewReleaseProducts(): Promise<TopProductProps[]> {
     });
 
     return newReleases.slice(0, 8);
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getSimilarProducts(
+  categoryId: number,
+): Promise<ProductDetailProps[]> {
+  try {
+    const similarProducts = await prisma.product.findMany({
+      where: {
+        categoryId: categoryId,
+      },
+      include: { category: true },
+    });
+
+    return similarProducts;
   } catch (error) {
     return [];
   }

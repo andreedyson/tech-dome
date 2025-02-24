@@ -4,7 +4,7 @@ import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import ShowMoreText from "@/components/ShowMoreText";
 import { Separator } from "@/components/ui/separator";
 import { getUser } from "@/lib/auth";
-import { getProductById, getTopProducts } from "@/lib/data/product";
+import { getProductById, getSimilarProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
 import { MapPin, Star } from "lucide-react";
@@ -23,7 +23,7 @@ export async function generateMetadata({
   const product = await getProductById(id);
 
   return {
-    title: `${product?.name} - ${product?.categoryName}`,
+    title: `${product?.name} - ${product?.category?.name}`,
     description: product?.description,
   };
 }
@@ -37,9 +37,11 @@ async function ProductDetailsPage({
 }) {
   const { session } = await getUser();
   const product = await getProductById(id);
-  const topProducts = await getTopProducts();
-  const filteredProducts = topProducts.filter(
-    (topProduct) => topProduct.name !== product?.name,
+  const similarProducts = await getSimilarProducts(
+    product?.category?.id as number,
+  );
+  const filteredSimilarProducts = similarProducts.filter(
+    (similar) => similar.name !== product?.name,
   );
 
   if (!product) {
@@ -65,14 +67,14 @@ async function ProductDetailsPage({
               <h1 className="text-4xl font-bold md:text-5xl">{product.name}</h1>
               <div>
                 <p className="mt-1 text-sm font-semibold text-muted-foreground md:mt-2 md:text-base">
-                  {product.categoryName} • {product.brandName}
+                  {product.category?.name} • {product.brand?.name}
                 </p>
               </div>
             </div>
             <div>
               <p className="flex items-center gap-1 text-sm md:text-base">
                 <MapPin size={16} />
-                {product.locationName}
+                {product.location?.name}
               </p>
             </div>
           </div>
@@ -151,37 +153,57 @@ async function ProductDetailsPage({
         </div>
       </div>
 
-      {/* Products You Might Like Section */}
+      {/* Similar Products Section */}
       <div className="w-full space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold md:text-3xl">
-            Products You Might Like
-          </h2>
+          <h2 className="text-2xl font-bold md:text-3xl">Similar Products</h2>
         </div>
 
         <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
-          {filteredProducts.map((product) => (
-            <div key={product.id} className="rounded-xl border-2 shadow-md">
+          {filteredSimilarProducts.length > 0 ? (
+            filteredSimilarProducts.map((product) => (
+              <div key={product.id} className="rounded-xl border-2 shadow-md">
+                <Image
+                  src={getImageUrl(product.images[0], "products")}
+                  width={150}
+                  height={150}
+                  alt={product.name}
+                  className="w-full object-contain"
+                />
+                <div className="p-4">
+                  <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
+                    {product.name}
+                  </h4>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {product.category?.name}
+                  </p>
+                  <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
+                    {convertRupiah(product.price)}
+                  </p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-full flex flex-col items-center gap-2 text-center">
               <Image
-                src={getImageUrl(product.images[0], "products")}
-                width={150}
-                height={150}
-                alt={product.name}
-                className="w-full object-contain"
+                src={"/assets/empty-products.svg"}
+                width={500}
+                height={300}
+                alt="Products Not Found"
+                className="aspect-video size-[180px] lg:size-[280px]"
+                priority
               />
-              <div className="p-4">
-                <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
-                  {product.name}
+              <div className="space-y-0.5">
+                <h4 className="text-sm font-semibold md:text-base">
+                  No Similar Products found.
                 </h4>
-                <p className="text-sm font-medium text-muted-foreground">
-                  {product.category.name}
-                </p>
-                <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-                  {convertRupiah(product.price)}
+                <p className="max-w-[350px] text-xs md:text-sm">
+                  Showing list of similar products with the category of{" "}
+                  {product.category?.name}.
                 </p>
               </div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
