@@ -1,15 +1,10 @@
 import HorizontalProductCard from "@/components/card/HorizontalProductCard";
 import BrandsBanner from "@/components/pages/BrandsBanner";
-import { Badge } from "@/components/ui/badge";
 import {
   getBrandsWithProducts,
   getBrandsWithTotalProducts,
 } from "@/lib/data/brand";
-import { getImageUrl } from "@/lib/supabase";
-import { convertRupiah } from "@/lib/utils";
-import { Building } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 async function BrandsPage() {
   const brands = await getBrandsWithTotalProducts();
