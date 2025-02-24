@@ -1,3 +1,5 @@
+import HorizontalProductCard from "@/components/card/HorizontalProductCard";
+import BrandsBanner from "@/components/pages/BrandsBanner";
 import { Badge } from "@/components/ui/badge";
 import {
   getBrandsWithProducts,
@@ -15,40 +17,7 @@ async function BrandsPage() {
 
   return (
     <section className="w-full space-y-12">
-      {/* Brands Hero Section */}
-      <div className="relative h-[350px] w-full md:h-[400px]">
-        <Image
-          src={"/assets/macbook-laptop.jpg"}
-          width={1000}
-          height={500}
-          alt="Macbook"
-          className="h-full w-full rounded-xl object-cover object-top"
-        />
-        <div className="absolute inset-0 rounded-xl bg-black opacity-50" />
-
-        {/* Brand Hero Text */}
-        <div className="absolute top-0 flex w-full flex-col items-center justify-center px-12 py-20 max-lg:order-last">
-          <div className="flex w-fit items-center gap-2 rounded-full border-2 bg-white px-3 py-2 text-sm font-semibold text-black shadow-md">
-            <Building size={20} />
-            Top Quality Tech Brands
-          </div>
-          <div className="mt-3 flex w-full flex-col items-center justify-center">
-            <h1 className="max-w-[350px] text-center text-2xl font-extrabold leading-none text-white md:text-3xl lg:max-w-[500px] lg:text-4xl">
-              Discover Top Tech Brands <br />
-              <span className="text-main-violet-400">
-                {" "}
-                for Innovation & Quality
-              </span>
-            </h1>
-            <p className="mt-2 w-full max-w-[350px] text-center text-sm text-slate-300 lg:max-w-[400px] lg:text-base">
-              Explore a curated selection of the most trusted tech brands,
-              bringing you cutting-edge innovation, quality, and performance.
-              Find the perfect brand for your next upgrade! Let me know if
-              you&apos;d like any tweaks! 🚀
-            </p>
-          </div>
-        </div>
-      </div>
+      <BrandsBanner />
 
       {/* Brands Bento Grid */}
       <div className="space-y-4">
@@ -157,36 +126,7 @@ async function BrandsPage() {
                 <div className="flex w-full md:overflow-x-auto">
                   {brand.products.length > 0 ? (
                     brand.products.map((product) => (
-                      <Link
-                        key={product.id + product.name}
-                        href={`/product-details/${product.id}`}
-                        className="flex rounded-lg border-2 duration-200 hover:border-main-violet-800 max-md:w-full md:flex-shrink-0"
-                      >
-                        <div className="relative">
-                          <Image
-                            src={getImageUrl(product.images[0], "products")}
-                            width={180}
-                            height={180}
-                            alt={product.name}
-                            className="size-full rounded-l-lg object-cover md:size-[180px]"
-                          />
-                          <Badge className="absolute left-2 top-2 rounded-full text-xs">
-                            {product.category.name}
-                          </Badge>
-                        </div>
-                        <div className="p-4 leading-5">
-                          <p className="font-bold">{product.name}</p>
-                          <p className="text-sm font-semibold text-main-violet-500">
-                            {convertRupiah(product.price)}
-                          </p>
-                          <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] md:w-[240px]">
-                            {product.description}
-                          </p>
-                          <p className="mt-4 text-sm text-muted-foreground">
-                            Delivered from {product.location.name}
-                          </p>
-                        </div>
-                      </Link>
+                      <HorizontalProductCard product={product} />
                     ))
                   ) : (
                     <div className="flex h-full w-full flex-col items-center gap-2 text-center">
