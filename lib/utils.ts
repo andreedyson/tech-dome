@@ -67,3 +67,13 @@ export const generateRandomString = (length: number = 16) => {
 
   return result;
 };
+
+export const calculateShippingFee = (total: number) => {
+  if (total < 100000) {
+    return 15000; // Flat fee for orders below 100,000
+  } else if (total < 500000) {
+    return 10000; // Reduced fee for orders between 100,000 and 500,000
+  } else {
+    return 0; // Free shipping for orders above 500,000
+  }
+};

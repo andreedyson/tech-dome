@@ -83,7 +83,7 @@ export const productSchema = z.object({
 
 export const editProductSchema = productSchema.omit({ images: true });
 
-export const orderDetailsSchmea = z.object({
+export const orderDetailsSchema = z.object({
   name: z
     .string({ required_error: " Name is required" })
     .trim()

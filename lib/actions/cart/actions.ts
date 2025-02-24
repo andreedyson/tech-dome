@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { generateRandomString } from "@/lib/utils";
 import xenditClient from "@/lib/xendit";
 import { CartProps } from "@/types/product";
-import { orderDetailsSchmea } from "@/types/validations";
+import { orderDetailsSchema } from "@/types/validations";
 import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
 import {
@@ -39,7 +39,7 @@ export async function createOrderDetails(
       notes: formData.get("notes"),
     };
 
-    const validatedFields = orderDetailsSchmea.safeParse(formDataObject);
+    const validatedFields = orderDetailsSchema.safeParse(formDataObject);
 
     if (!validatedFields.success) {
       return {

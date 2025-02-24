@@ -3,9 +3,9 @@
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/hooks/use-toast";
 import { createOrderDetails } from "@/lib/actions/cart/actions";
-import { convertRupiah } from "@/lib/utils";
+import { calculateShippingFee, convertRupiah } from "@/lib/utils";
 import { ActionResult } from "@/types/auth";
-import { orderDetailsSchmea } from "@/types/validations";
+import { orderDetailsSchema } from "@/types/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ChevronRight,
@@ -57,14 +57,35 @@ function Submit() {
 function CheckoutForm() {
   const { products } = useCart();
 
-  const createrOrderParams = async (_: unknown, formData: FormData) => {
+  const totalPrice = useMemo(() => {
+    return products.reduce(
+      (prev, curr) => prev + curr.price * curr.quantity,
+      0,
+    );
+  }, [products]);
+
+  const TAX_RATE = 0.1; // 10% Tax
+  const WARRANTY_RATE = 0.05; // 5% Warranty
+  const SHIPPING_COST =
+    products.length > 0 ? calculateShippingFee(totalPrice) : 0;
+
+  const warranty = useMemo(() => totalPrice * WARRANTY_RATE, [totalPrice]);
+  const tax = useMemo(
+    () => (totalPrice + SHIPPING_COST + warranty) * TAX_RATE,
+    [totalPrice],
+  );
+  const grandTotal = useMemo(() => {
+    return totalPrice + tax + SHIPPING_COST + warranty;
+  }, [totalPrice, tax]);
+
+  const createOrderParams = async (_: unknown, formData: FormData) => {
     return await createOrderDetails(_, formData, products, grandTotal);
   };
-  const [state, formAction] = useFormState(createrOrderParams, initialState);
+  const [state, formAction] = useFormState(createOrderParams, initialState);
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof orderDetailsSchmea>>({
-    resolver: zodResolver(orderDetailsSchmea),
+  const form = useForm<z.infer<typeof orderDetailsSchema>>({
+    resolver: zodResolver(orderDetailsSchema),
     defaultValues: {
       name: "",
       address: "",
@@ -74,13 +95,6 @@ function CheckoutForm() {
       notes: "",
     },
   });
-
-  const grandTotal = useMemo(() => {
-    return products.reduce(
-      (prev, curr) => prev + curr.price * curr.quantity,
-      0,
-    );
-  }, [products]);
 
   useEffect(() => {
     if (state.message) {
@@ -209,7 +223,7 @@ function CheckoutForm() {
                             <MapPin className="mx-2" />
                             <Input
                               id="postalCode"
-                              type="string"
+                              type="text"
                               placeholder="Your Area Postal Code"
                               autoComplete="off"
                               className="rounded-l-none border-2 bg-input"
@@ -271,23 +285,21 @@ function CheckoutForm() {
                 <div className="space-y-1">
                   <div className="flex items-center justify-between text-sm">
                     <p>Sub-Total</p>
-                    <p className="font-semibold">{convertRupiah(grandTotal)}</p>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <p>Insurance</p>
-                    <p className="font-semibold">{convertRupiah(0)}</p>
+                    <p className="font-semibold">{convertRupiah(totalPrice)}</p>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <p>Shipping</p>
-                    <p className="font-semibold">{convertRupiah(0)}</p>
+                    <p className="font-semibold">
+                      {convertRupiah(SHIPPING_COST)}
+                    </p>
                   </div>
                   <div className="flex items-center justify-between text-sm">
                     <p>Original Warranty</p>
-                    <p className="font-semibold">{convertRupiah(0)}</p>
+                    <p className="font-semibold">{convertRupiah(warranty)}</p>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <p>VAT</p>
-                    <p className="font-semibold">{convertRupiah(0)}</p>
+                    <p>VAT (10%)</p>
+                    <p className="font-semibold">{convertRupiah(tax)}</p>
                   </div>
                 </div>
                 <div className="mt-4">
