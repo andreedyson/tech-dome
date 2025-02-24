@@ -93,32 +93,69 @@ async function CategoriesPage() {
       </div>
 
       {/* Products by Categories */}
-      <div className="mt-12 w-full space-y-8">
+      <div className="mt-12 w-full space-y-12">
         {categoryWithProducts.length > 0 ? (
           categoryWithProducts.map((category) => (
             <div
-              className="grid gap-2 lg:grid-cols-5"
+              className="grid gap-4 lg:grid-cols-5"
               key={category.id + category.name}
             >
               <div className="col-span-1">
                 <h3 className="text-lg font-bold md:text-xl">
                   {category.name}
                 </h3>
+                <p>{category.products.length} Products</p>
               </div>
               {/* Products Cards */}
-              <div className="col-span-4 grid grid-cols-2 md:grid-cols-3">
+              <div className="col-span-4 grid grid-cols-2 md:grid-cols-4">
                 {category.products.length > 0 ? (
                   category.products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))
                 ) : (
-                  <div>No product from this category yet</div>
+                  <div className="col-span-full flex flex-col items-center gap-2 text-center">
+                    <Image
+                      src={"/assets/empty-vault.svg"}
+                      width={500}
+                      height={300}
+                      alt="Products Not Found"
+                      className="aspect-video w-[180px] lg:w-[280px]"
+                      priority
+                    />
+                    <div className="space-y-0.5">
+                      <h4 className="text-sm font-semibold md:text-base">
+                        No Products Available in {category.name}.
+                      </h4>
+                      <p className="max-w-md text-xs md:text-sm">
+                        Showing products with the categories of
+                        {category.name}.
+                      </p>
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
           ))
         ) : (
-          <div></div>
+          <div className="col-span-full flex flex-col items-center gap-2 text-center">
+            <Image
+              src={"/assets/empty-products.svg"}
+              width={500}
+              height={300}
+              alt="Products Not Found"
+              className="aspect-video size-[180px] lg:size-[280px]"
+              priority
+            />
+            <div className="space-y-0.5">
+              <h4 className="text-sm font-semibold md:text-base">
+                No Categories found.
+              </h4>
+              <p className="max-w-[350px] text-xs md:text-sm">
+                Showing list of categories with products that are available on
+                DealDome.
+              </p>
+            </div>
+          </div>
         )}
       </div>
     </section>
