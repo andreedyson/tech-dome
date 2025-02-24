@@ -11,10 +11,10 @@ export type ProductDetailProps = {
   description: string;
   images: string[];
   price: number;
-  categoryName: string;
-  brandName: string;
-  locationName: string;
-  total_sales: number;
+  categoryName?: string;
+  brandName?: string;
+  locationName?: string;
+  total_sales?: number;
   createdAt: Date;
 };
 

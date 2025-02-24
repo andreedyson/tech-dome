@@ -1,3 +1,4 @@
+import ProductCard from "@/components/card/ProductCard";
 import { Button } from "@/components/ui/button";
 import {
   getCategoryWithProducts,
@@ -12,11 +13,14 @@ async function CategoriesPage() {
   const categoryWithProducts = await getCategoryWithProducts();
 
   return (
-    <div>
+    <section>
+      {/* Categories Header Section */}
       <h1 className="max-w-[350px] text-2xl font-extrabold leading-none md:text-3xl lg:max-w-[500px] lg:text-4xl">
         Shop by
         <span className="text-main-violet-500"> Category</span>
       </h1>
+
+      {/* Categories Section */}
       <div className="mt-6 w-full">
         {categoriesProducts.length ? (
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
@@ -64,7 +68,7 @@ async function CategoriesPage() {
           className="h-full w-full rounded-xl object-cover"
         />
         <div className="absolute inset-0 rounded-xl bg-black opacity-50" />
-        <div className="absolute top-0 flex w-full flex-col px-12 py-16 max-lg:order-last">
+        <div className="sm: absolute top-4 flex w-full flex-col px-12 py-16 md:top-0">
           <div className="flex w-fit -skew-x-12 transform items-center gap-2 border-2 bg-white px-3 py-0.5 text-xs font-semibold text-black shadow-md md:text-sm">
             Gear Up for New Semester
           </div>
@@ -80,14 +84,44 @@ async function CategoriesPage() {
             </p>
           </div>
           <Link href={"/catalogs"}>
-            <Button className="mt-3 flex w-fit md:mt-5">
+            <Button className="mt-3 hidden w-fit sm:flex md:mt-5">
               <University />
               Shop the Student Deals
             </Button>
           </Link>
         </div>
       </div>
-    </div>
+
+      {/* Products by Categories */}
+      <div className="mt-12 w-full space-y-8">
+        {categoryWithProducts.length > 0 ? (
+          categoryWithProducts.map((category) => (
+            <div
+              className="grid gap-2 lg:grid-cols-5"
+              key={category.id + category.name}
+            >
+              <div className="col-span-1">
+                <h3 className="text-lg font-bold md:text-xl">
+                  {category.name}
+                </h3>
+              </div>
+              {/* Products Cards */}
+              <div className="col-span-4 grid grid-cols-2 md:grid-cols-3">
+                {category.products.length > 0 ? (
+                  category.products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))
+                ) : (
+                  <div>No product from this category yet</div>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div></div>
+        )}
+      </div>
+    </section>
   );
 }
 
