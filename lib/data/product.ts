@@ -60,6 +60,7 @@ export async function getProductById(
       name: product.name,
       description: product.description,
       price: product.price,
+      stock: product.stock,
       images: product.images,
       category: product.category,
       brand: product.brand,

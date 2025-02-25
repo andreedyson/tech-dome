@@ -4,8 +4,9 @@ import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
 import { deleteFiles, uploadFile } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
+import { ProductDetailProps } from "@/types/product";
 import { editProductSchema, productSchema } from "@/types/validations";
-import { Product, ProductStatus } from "@prisma/client";
+import { ProductStatus } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function createProduct(
@@ -50,8 +51,8 @@ export async function createProduct(
 
     await prisma.product.create({
       data: {
-        name: validatedFields.data.name,
-        description: validatedFields.data.description,
+        name: validatedFields.data.name.trim(),
+        description: validatedFields.data.description.trim(),
         price: Number(validatedFields.data.price),
         categoryId: Number(validatedFields.data.categoryId),
         brandId: Number(validatedFields.data.brandId),
@@ -76,7 +77,7 @@ export async function createProduct(
 }
 
 export async function editProduct(
-  productData: Product,
+  productData: ProductDetailProps,
   formData: FormData,
 ): Promise<ActionResult> {
   try {
@@ -91,6 +92,7 @@ export async function editProduct(
     const formDatas = {
       name: formData.get("name"),
       price: formData.get("price"),
+      stock: formData.get("stock"),
       description: formData.get("description"),
       categoryId: formData.get("categoryId"),
       locationId: formData.get("locationId"),
@@ -165,9 +167,10 @@ export async function editProduct(
         id: productData.id,
       },
       data: {
-        name: validatedFields.data.name,
-        description: validatedFields.data.description,
+        name: validatedFields.data.name.trim(),
+        description: validatedFields.data.description.trim(),
         price: Number(validatedFields.data.price),
+        stock: Number(validatedFields.data.stock),
         categoryId: Number(validatedFields.data.categoryId),
         brandId: Number(validatedFields.data.brandId),
         locationId: Number(validatedFields.data.locationId),

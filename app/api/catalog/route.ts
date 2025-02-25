@@ -83,6 +83,8 @@ export async function POST(req: NextRequest) {
         name: true,
         description: true,
         price: true,
+        stock: true,
+        status: true,
         createdAt: true,
         category: {
           select: {
@@ -116,7 +118,9 @@ export async function POST(req: NextRequest) {
       brandName: product.brand.name,
       locationName: product.location.name,
       price: product.price,
+      stock: product.stock,
       createdAt: product.createdAt,
+      status: product.status,
       total_sales: product.orders.length,
     }));
 

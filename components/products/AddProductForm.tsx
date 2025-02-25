@@ -72,6 +72,7 @@ function AddProductForm() {
       brandId: "",
       locationId: "",
       price: 0,
+      stock: 1,
       status: "PRE_ORDER",
       images: "",
     },
@@ -108,7 +109,7 @@ function AddProductForm() {
             </div>
 
             <div className="space-y-3 md:col-span-5">
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-3">
                 <FormField
                   control={form.control}
                   name="name"
@@ -138,6 +139,24 @@ function AddProductForm() {
                         <Input
                           id="price"
                           placeholder="Rp ---,---"
+                          autoComplete="off"
+                          className="bg-input"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="stock"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="stock">Stock</FormLabel>
+                      <FormControl>
+                        <Input
+                          id="stock"
                           autoComplete="off"
                           className="bg-input"
                           {...field}

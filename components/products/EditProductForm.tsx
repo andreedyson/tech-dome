@@ -26,19 +26,19 @@ import { Input } from "@/components/ui/input";
 import { useBrands } from "@/hooks/use-brand";
 import { useCategories } from "@/hooks/use-category";
 import { useLocations } from "@/hooks/use-location";
-import { createProduct, editProduct } from "@/lib/actions/product/actions";
+import { editProduct } from "@/lib/actions/product/actions";
+import { getImageUrl } from "@/lib/supabase";
 import { ActionResult } from "@/types/auth";
+import { ProductDetailProps } from "@/types/product";
 import { productSchema } from "@/types/validations";
-import { Product } from "@prisma/client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
 import { SubmitButton } from "../SubmitButton";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import ProductImageUpload from "./ProductImageUpload";
-import { getImageUrl } from "@/lib/supabase";
-import { useRouter } from "next/navigation";
 
 const initialState: ActionResult = {
   error: "",
@@ -58,7 +58,7 @@ function Submit() {
 }
 
 type EditProductProps = {
-  productData: Product;
+  productData: ProductDetailProps;
 };
 
 function EditProductForm({ productData }: EditProductProps) {
@@ -83,10 +83,11 @@ function EditProductForm({ productData }: EditProductProps) {
     defaultValues: {
       name: productData.name,
       description: productData.description,
-      categoryId: productData.categoryId.toString(),
-      brandId: productData.categoryId.toString(),
-      locationId: productData.brandId.toString(),
+      categoryId: productData.category?.id.toString(),
+      brandId: productData.brand?.id.toString(),
+      locationId: productData.location?.id.toString(),
       price: productData.price,
+      stock: productData.stock,
       status: productData.status,
       images: "",
     },
@@ -123,7 +124,7 @@ function EditProductForm({ productData }: EditProductProps) {
             </div>
 
             <div className="space-y-3 md:col-span-5">
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-3">
                 <FormField
                   control={form.control}
                   name="name"
@@ -162,6 +163,24 @@ function EditProductForm({ productData }: EditProductProps) {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="stock"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="stock">Stock</FormLabel>
+                      <FormControl>
+                        <Input
+                          id="stock"
+                          autoComplete="off"
+                          className="bg-input"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <FormField
@@ -188,7 +207,7 @@ function EditProductForm({ productData }: EditProductProps) {
                   <Label htmlFor="categoryId">Category</Label>
                   <Select
                     name="categoryId"
-                    defaultValue={productData.categoryId.toString()}
+                    defaultValue={productData.category?.id.toString()}
                   >
                     <SelectTrigger
                       id="categoryId"
@@ -214,7 +233,7 @@ function EditProductForm({ productData }: EditProductProps) {
                   <Label htmlFor="brandId">Brand</Label>
                   <Select
                     name="brandId"
-                    defaultValue={productData.brandId.toString()}
+                    defaultValue={productData.brand?.id.toString()}
                   >
                     <SelectTrigger
                       id="brandId"
@@ -237,7 +256,7 @@ function EditProductForm({ productData }: EditProductProps) {
                   <Label htmlFor="locationId">Location</Label>
                   <Select
                     name="locationId"
-                    defaultValue={productData.locationId.toString()}
+                    defaultValue={productData.location?.id.toString()}
                   >
                     <SelectTrigger
                       id="locationId"
