@@ -38,11 +38,12 @@ const initialState: ActionResult = {
   error: "",
 };
 
-function Submit() {
+function Submit({ isDisabled }: { isDisabled: boolean }) {
   const { pending } = useFormStatus();
 
   return (
     <SubmitButton
+      disabled={isDisabled}
       isSubmitting={pending}
       className="mt-5 w-full rounded-full bg-main-violet-700 hover:bg-main-violet-500"
     >
@@ -308,7 +309,7 @@ function CheckoutForm() {
                     {convertRupiah(grandTotal)}
                   </p>
                 </div>
-                <Submit />
+                <Submit isDisabled={products.length > 0 ? false : true} />
               </div>
             </div>
           </div>
