@@ -47,6 +47,21 @@ export async function createOrderDetails(
       };
     }
 
+    // Check product stock before creating the order
+    for (const product of products) {
+      const productInStock = await prisma.product.findUnique({
+        where: { id: product.id },
+        select: { stock: true },
+      });
+
+      if (!productInStock || productInStock.stock < product.quantity) {
+        return {
+          error: `You can only buy a maximum of ${productInStock?.stock} items for this product.`,
+        };
+      }
+    }
+
+    // Order Data
     const order = await prisma.order.create({
       data: {
         userId: user.id,
@@ -56,6 +71,7 @@ export async function createOrderDetails(
       },
     });
 
+    // Xendit Payment Data
     const data: PaymentRequestParameters = {
       currency: "IDR",
       amount: total,
@@ -88,6 +104,17 @@ export async function createOrderDetails(
         productId: product.id,
         subTotal: product.price,
         quantity: product.quantity,
+      });
+
+      await prisma.product.update({
+        where: {
+          id: product.id,
+        },
+        data: {
+          stock: {
+            decrement: product.quantity,
+          },
+        },
       });
     }
 

@@ -43,7 +43,7 @@ function Submit({ isDisabled }: { isDisabled: boolean }) {
 
   return (
     <SubmitButton
-      disabled={isDisabled}
+      disabled={isDisabled || pending}
       isSubmitting={pending}
       className="mt-5 w-full rounded-full bg-main-violet-700 hover:bg-main-violet-500"
     >
