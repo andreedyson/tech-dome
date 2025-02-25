@@ -9,6 +9,7 @@ export type UserOrderHistoryProps = {
     name: string;
     image: string;
     quantity: number;
+    price: number;
     category: string;
   }[];
 };

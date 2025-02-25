@@ -75,6 +75,7 @@ export async function getUserOrderHistory(
         name: item.product.name,
         image: item.product.images[0],
         quantity: item.quantity,
+        price: item.subTotal,
         category: item.product.category.name,
       })),
     }));

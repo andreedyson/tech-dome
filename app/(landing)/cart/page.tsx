@@ -1,6 +1,5 @@
 import CartProducts from "@/components/cart/CartProducts";
 import CheckoutForm from "@/components/cart/CheckoutForm";
-import React from "react";
 
 function CartPage() {
   return (
