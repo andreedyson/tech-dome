@@ -1,6 +1,7 @@
 import { OrderColumn } from "@/components/orders/columns";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
+import { UserOrderHistoryProps } from "@/types/order";
 
 export async function getAllOrders(): Promise<OrderColumn[]> {
   try {
@@ -33,6 +34,52 @@ export async function getAllOrders(): Promise<OrderColumn[]> {
     }));
 
     return mappedOrders;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getUserOrderHistory(
+  userId: string,
+): Promise<UserOrderHistoryProps[]> {
+  try {
+    const userOrders = await prisma.order.findMany({
+      where: {
+        userId: userId,
+      },
+      include: {
+        products: {
+          include: {
+            product: {
+              select: {
+                name: true,
+                images: true,
+                category: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const mappedUserOrders = userOrders.map((order) => ({
+      id: order.code,
+      status: order.status,
+      total: order.total,
+      updatedAt: order.updatedAt,
+      products: order.products.map((item) => ({
+        name: item.product.name,
+        image: item.product.images[0],
+        quantity: item.quantity,
+        category: item.product.category.name,
+      })),
+    }));
+
+    return mappedUserOrders;
   } catch (error) {
     return [];
   }

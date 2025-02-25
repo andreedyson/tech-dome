@@ -20,7 +20,7 @@ type UserAvatarProps = {
   fullname: string;
 };
 function UserAvatar({ fullname }: UserAvatarProps) {
-  const memberIntial =
+  const userInitial =
     fullname.split(" ").length > 1
       ? fullname.split(" ")[0].charAt(0) + fullname.split(" ")[1].charAt(0)
       : fullname.charAt(0);
@@ -33,7 +33,7 @@ function UserAvatar({ fullname }: UserAvatarProps) {
           className="relative size-8 rounded-full md:size-10"
         >
           <Avatar className="flex items-center justify-center bg-main-violet-300 font-semibold">
-            {memberIntial}
+            {userInitial}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

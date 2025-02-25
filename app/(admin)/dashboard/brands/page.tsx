@@ -1,4 +1,3 @@
-// import AddBrandDialog from "@/components/brands/AddBrandDialog";
 import AddBrandDialog from "@/components/brands/AddBrandDialog";
 import { columns as BrandColumns } from "@/components/brands/columns";
 import { DataTable } from "@/components/ui/data-table";
