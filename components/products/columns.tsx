@@ -68,6 +68,11 @@ export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "total_sales",
     header: "Sales",
+    cell: ({ row }) => {
+      const product = row.original;
+
+      return <div>{product.total_sales}</div>;
+    },
   },
   {
     accessorKey: "createdAt",
