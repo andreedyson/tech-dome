@@ -25,7 +25,7 @@ export async function getAllOrders(): Promise<OrderColumn[]> {
       id: order.id,
       products: order.products.map((item) => ({
         name: item.product.name,
-        image: getImageUrl(item.product.images[0]),
+        image: getImageUrl(item.product.images[0], "products"),
       })),
       createdAt: order.createdAt,
       customerName: order.user.name,

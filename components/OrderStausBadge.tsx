@@ -13,13 +13,7 @@ function OrderStatusBadge({ status }: OrderStatusProps) {
     case "PENDING":
       badgeColor = "bg-orange-500";
       break;
-    case "PROCESSING":
-      badgeColor = "bg-sky-500";
-      break;
-    case "SHIPPED":
-      badgeColor = "bg-yellow-600";
-      break;
-    case "DELIVERED":
+    case "SUCCESS":
       badgeColor = "bg-green-500";
       break;
     default:
