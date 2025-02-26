@@ -21,7 +21,7 @@ async function DashboardPage() {
               </h4>
             </div>
             <div>
-              <Package className="opacity-60 md:size-20" />
+              <Package className="opacity-80 md:size-20" />
             </div>
           </div>
         ))}

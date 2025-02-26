@@ -3,6 +3,7 @@
 import {
   ColumnDef,
   flexRender,
+  getPaginationRowModel,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -15,6 +16,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Button } from "./button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -29,6 +32,7 @@ export function DataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
@@ -75,6 +79,25 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      {/* Pagination Button */}
+      <div className="mx-3 flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <ChevronLeft />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          <ChevronRight />
+        </Button>
+      </div>
     </div>
   );
 }
