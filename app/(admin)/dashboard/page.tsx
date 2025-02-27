@@ -1,13 +1,16 @@
 import StatsCard from "@/components/card/StatsCard";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getStatsCardData } from "@/lib/data/dashboard";
+import { getSalesByCountry } from "@/lib/data/location";
 import { getTopProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -16,6 +19,7 @@ export const metadata: Metadata = {
 async function DashboardPage() {
   const statsCard = await getStatsCardData();
   const topProducts = await getTopProducts();
+  const salesByCountry = await getSalesByCountry();
 
   return (
     <section className="w-full space-y-6">
@@ -31,12 +35,19 @@ async function DashboardPage() {
         ))}
       </div>
 
-      {/* Top Selling Products & Latest Orders */}
-      <div className="grid gap-4 lg:grid-cols-12">
-        <div className="col-span-6">
-          <Card className="border-2">
+      <div className="grid h-full w-full gap-4 lg:grid-cols-12 lg:grid-rows-2">
+        {/* Top Selling Products Card */}
+        <div className="lg:col-span-8 lg:row-span-2">
+          <Card className="h-full border-2">
             <CardHeader>
-              <CardTitle>Top Selling Products</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Top Selling Products</CardTitle>
+                <Link href={"/dashboard/products"}>
+                  <Button variant={"outline"} size={"sm"}>
+                    View All
+                  </Button>
+                </Link>
+              </div>
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent>
@@ -67,7 +78,7 @@ async function DashboardPage() {
                       <p className="font-semibold">
                         {convertRupiah(product.price)}
                       </p>
-                      <Badge className="rounded-full bg-slate-400 font-bold">
+                      <Badge className="rounded-full bg-muted-foreground font-bold">
                         {product.totalOrders} Sold
                       </Badge>
                     </div>
@@ -79,8 +90,10 @@ async function DashboardPage() {
             </CardContent>
           </Card>
         </div>
-        <div className="col-span-3">
-          <Card className="border-2">
+
+        {/* Total Customers Card */}
+        <div className="lg:col-span-4 lg:col-start-9">
+          <Card className="h-full border-2">
             <CardHeader>
               <CardTitle>Total Customers</CardTitle>
               <Separator className="h-[2px]" />
@@ -90,14 +103,49 @@ async function DashboardPage() {
             </CardContent>
           </Card>
         </div>
-        <div className="col-span-3">
-          <Card className="border-2">
+
+        {/* Sales by Country Card */}
+        <div className="lg:col-span-4 lg:col-start-9">
+          <Card className="h-full border-2">
             <CardHeader>
-              <CardTitle>Sales by Country</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Sales by Country</CardTitle>
+                <Link href={"/dashboard/locations"}>
+                  <Button variant={"outline"} size={"sm"}>
+                    View All
+                  </Button>
+                </Link>
+              </div>
               <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent>
-              <div></div>
+            <CardContent className="grid grid-cols-2">
+              {salesByCountry.length > 0 ? (
+                salesByCountry.map((country, index) => (
+                  <div
+                    key={country.id + country.name}
+                    className="flex items-center justify-between py-3"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-4xl font-bold text-muted-foreground">
+                        {index + 1}.
+                      </span>
+                      <div>
+                        <p className="font-semibold">{country.name}</p>
+                        <div className="flex items-center gap-1">
+                          <p className="text-xl font-bold text-main-violet-500">
+                            {country.totalSales}
+                          </p>
+                          <span className="font-light text-muted-foreground">
+                            Sales
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div></div>
+              )}
             </CardContent>
           </Card>
         </div>
