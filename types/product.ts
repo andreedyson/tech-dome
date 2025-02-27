@@ -9,6 +9,7 @@ import {
 export type TopProductProps = Product & {
   category: Category;
   location: Location;
+  totalOrders: number;
 };
 
 export type ProductDetailProps = {

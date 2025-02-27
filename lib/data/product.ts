@@ -90,7 +90,14 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
       (product) => product.orders.length >= 5,
     );
 
-    return topProducts.slice(0, 4);
+    const data = topProducts.map(({ orders, ...product }) => ({
+      ...product,
+      totalOrders: orders.length,
+    }));
+
+    console.log(data);
+
+    return data.slice(0, 4);
   } catch (error) {
     return [];
   }
@@ -111,12 +118,18 @@ export async function getNewReleaseProducts(): Promise<TopProductProps[]> {
         },
       },
       include: {
+        orders: true,
         category: true,
         location: true,
       },
     });
 
-    return newReleases.slice(0, 8);
+    const data = newReleases.map(({ orders, ...product }) => ({
+      ...product,
+      totalOrders: orders.length,
+    }));
+
+    return data.slice(0, 8);
   } catch (error) {
     return [];
   }

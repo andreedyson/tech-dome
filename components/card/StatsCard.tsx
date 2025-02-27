@@ -22,13 +22,15 @@ const StatsCard = ({ name, total, icon: Icon }: StatsCardProps) => {
       )}
     >
       <div className="space-y-2">
-        <p className="text-xs font-semibold uppercase">Total {name}</p>
-        <h4 className="text-5xl font-bold">
+        <p className="line-clamp-1 text-xs font-semibold uppercase">
+          Total {name}
+        </p>
+        <h4 className="line-clamp-1 text-4xl font-bold lg:text-5xl">
           {total} <span className="text-xs font-medium">{name}</span>
         </h4>
       </div>
       <div>
-        <Icon className="opacity-80 md:size-20" />
+        <Icon className="opacity-80 lg:size-16 xl:size-20" />
       </div>
     </div>
   );
