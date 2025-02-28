@@ -9,7 +9,6 @@ import { getTopProducts } from "@/lib/data/product";
 import { getTopCustomers } from "@/lib/data/user";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
-import { UserCircle } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -77,7 +76,7 @@ async function DashboardPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center text-sm sm:flex-row md:gap-6">
+                    <div className="flex flex-col items-center gap-2 text-sm sm:flex-row md:gap-6">
                       <p className="font-semibold">
                         {convertRupiah(product.price)}
                       </p>
@@ -110,17 +109,31 @@ async function DashboardPage() {
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-3">
               {topCustomers.length > 0 ? (
-                topCustomers.map((customer) => (
+                topCustomers.map((customer, index) => (
                   <div
                     key={customer.id + customer.name}
-                    className="flex items-center gap-2 py-3"
+                    className="flex items-center justify-between py-3"
                   >
-                    <UserCircle className="size-8" />
-                    <div>
-                      <p className="font-bold">{customer.name}</p>
-                      <p className="text-sm">
-                        {customer.totalOrders} Success Orders
-                      </p>
+                    <div className="flex items-center gap-4">
+                      <span className="text-4xl font-bold text-muted-foreground">
+                        {index + 1}.
+                      </span>
+                      <div>
+                        <p
+                          className="line-clamp-1 text-sm font-semibold lg:text-base"
+                          title={customer.name}
+                        >
+                          {customer.name}
+                        </p>
+                        <div className="flex items-center gap-1">
+                          <p className="text-xl font-bold text-main-violet-500">
+                            {customer.totalOrders}
+                          </p>
+                          <span className="font-light text-muted-foreground">
+                            Orders
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))
