@@ -1,4 +1,5 @@
 import StatsCard from "@/components/card/StatsCard";
+import { BrandPerformanceCharts } from "@/components/charts/BrandPerformanceCharts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -196,8 +197,8 @@ async function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-12">
-        <div className="lg:col-span-8">
+      <div className="grid w-full gap-4 lg:grid-cols-12">
+        <div className="w-full lg:col-span-8">
           <Card className="border-2">
             <CardHeader>
               <CardTitle>Latest Orders</CardTitle>
@@ -209,15 +210,15 @@ async function DashboardPage() {
             </CardContent>
           </Card>
         </div>
-        <div className="lg:col-span-4">
+        {/* Brand Performance Sales */}
+        <div className="w-full lg:col-span-4">
           <Card className="border-2">
             <CardHeader>
               <CardTitle>Brand Performance</CardTitle>
               <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent>
-              <div></div>
-              <div></div>
+            <CardContent className="h-full w-full">
+              <BrandPerformanceCharts />
             </CardContent>
           </Card>
         </div>
