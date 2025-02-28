@@ -6,8 +6,10 @@ import { Separator } from "@/components/ui/separator";
 import { getStatsCardData } from "@/lib/data/dashboard";
 import { getSalesByCountry } from "@/lib/data/location";
 import { getTopProducts } from "@/lib/data/product";
+import { getTopCustomers } from "@/lib/data/user";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
+import { UserCircle } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,6 +22,7 @@ async function DashboardPage() {
   const statsCard = await getStatsCardData();
   const topProducts = await getTopProducts();
   const salesByCountry = await getSalesByCountry();
+  const topCustomers = await getTopCustomers();
 
   return (
     <section className="w-full space-y-6">
@@ -74,11 +77,11 @@ async function DashboardPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-6 text-sm">
+                    <div className="flex flex-col items-center text-sm sm:flex-row md:gap-6">
                       <p className="font-semibold">
                         {convertRupiah(product.price)}
                       </p>
-                      <Badge className="rounded-full bg-muted-foreground font-bold">
+                      <Badge className="rounded-full font-bold">
                         {product.totalOrders} Sold
                       </Badge>
                     </div>
@@ -95,11 +98,35 @@ async function DashboardPage() {
         <div className="md:col-span-2 lg:col-span-4 lg:col-start-9">
           <Card className="h-full border-2">
             <CardHeader>
-              <CardTitle>Total Customers</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Top Customers</CardTitle>
+                <Link href={"/dashboard/customers"}>
+                  <Button variant={"outline"} size={"sm"}>
+                    View All
+                  </Button>
+                </Link>
+              </div>
               <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent>
-              <div></div>
+            <CardContent className="grid grid-cols-2 gap-3">
+              {topCustomers.length > 0 ? (
+                topCustomers.map((customer) => (
+                  <div
+                    key={customer.id + customer.name}
+                    className="flex items-center gap-2 py-3"
+                  >
+                    <UserCircle className="size-8" />
+                    <div>
+                      <p className="font-bold">{customer.name}</p>
+                      <p className="text-sm">
+                        {customer.totalOrders} Success Orders
+                      </p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div></div>
+              )}
             </CardContent>
           </Card>
         </div>

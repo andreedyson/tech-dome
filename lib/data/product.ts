@@ -95,8 +95,6 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
       totalOrders: orders.length,
     }));
 
-    console.log(data);
-
     return data.slice(0, 4);
   } catch (error) {
     return [];
