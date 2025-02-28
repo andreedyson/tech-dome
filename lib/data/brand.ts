@@ -3,6 +3,7 @@
 import { Brand } from "@prisma/client";
 import { prisma } from "../prisma";
 import {
+  BrandSalesProps,
   BrandWithProductsProps,
   BrandWithTotalProductsProps,
 } from "@/types/brand";
@@ -98,6 +99,35 @@ export async function getBrandsWithProducts(): Promise<
     }));
 
     return brandWithProducts;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getBrandSales(): Promise<BrandSalesProps[]> {
+  try {
+    const brands = await prisma.brand.findMany({
+      include: {
+        Product: {
+          include: {
+            orders: true,
+          },
+        },
+      },
+    });
+
+    const data = brands.map((brand) => {
+      const totalOrders = brand.Product.reduce((acc, product) => {
+        return acc + product.orders.length;
+      }, 0);
+
+      return {
+        brand: brand.name,
+        sales: totalOrders,
+      };
+    });
+
+    return data;
   } catch (error) {
     return [];
   }

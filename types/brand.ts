@@ -13,3 +13,8 @@ export type BrandWithProductsProps = {
   logo: string;
   products: TopProductProps[];
 };
+
+export type BrandSalesProps = {
+  brand: string;
+  sales: number;
+};

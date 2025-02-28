@@ -10,40 +10,64 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { ShoppingCart } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { getBrandSales } from "@/lib/data/brand";
 
-const chartData = [
-  { brand: "Logitech", sales: 186 },
-  { brand: "Asus", sales: 305 },
-  { brand: "Razer", sales: 237 },
-  { brand: "Fantech", sales: 73 },
-];
+type BrandPerformanceChartsProps = {
+  totalBrand?: number;
+};
 
-const chartConfig = {
-  sales: {
-    label: "Sales",
-    color: "#2563eb",
-  },
-} satisfies ChartConfig;
+export function BrandPerformanceCharts({
+  totalBrand = 4,
+}: BrandPerformanceChartsProps) {
+  const { data } = useQuery({
+    queryKey: ["brand-performance"],
+    queryFn: async () => getBrandSales(),
+  });
 
-export function BrandPerformanceCharts() {
+  const chartData = data?.slice(0, totalBrand);
+
+  const chartConfig = {
+    sales: {
+      label: "Sales",
+      color: "#9661f1",
+    },
+  } satisfies ChartConfig;
+
+  const totalSales = chartData?.reduce((acc, curr) => {
+    return acc + curr.sales;
+  }, 0);
+
   return (
-    <ChartContainer
-      config={chartConfig}
-      className="max-h-[300px] min-h-[200px] max-[430px]:max-w-[240px] min-[350px]:w-full"
-    >
-      <BarChart accessibilityLayer data={chartData}>
-        <CartesianGrid vertical={false} />
-        <XAxis
-          dataKey="brand"
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
-        />
-        <ChartTooltip content={<ChartTooltipContent />} />
-        <ChartLegend content={<ChartLegendContent />} />
-        <Bar dataKey="sales" fill="var(--color-sales)" radius={4} />
-      </BarChart>
-    </ChartContainer>
+    <div className="space-y-4">
+      <ChartContainer
+        config={chartConfig}
+        className="max-h-[300px] min-h-[200px] max-[430px]:max-w-[240px] min-[350px]:w-full"
+      >
+        <BarChart accessibilityLayer data={chartData}>
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey="brand"
+            tickLine={false}
+            tickMargin={10}
+            axisLine={false}
+            tickFormatter={(value) => value.slice(0, 3)}
+          />
+          <ChartTooltip content={<ChartTooltipContent />} />
+          <ChartLegend content={<ChartLegendContent />} />
+          <Bar dataKey="sales" fill="var(--color-sales)" radius={4} />
+        </BarChart>
+      </ChartContainer>
+      <div className="flex-col items-start gap-2 text-sm">
+        <div className="flex gap-2 font-medium">
+          <ShoppingCart strokeWidth={3} className="size-4" />
+          {totalSales} products sold total from all brands
+        </div>
+        <div className="text-muted-foreground">
+          Showing total sales for each brands
+        </div>
+      </div>
+    </div>
   );
 }
