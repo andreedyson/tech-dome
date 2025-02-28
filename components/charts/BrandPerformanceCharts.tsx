@@ -59,7 +59,7 @@ export function BrandPerformanceCharts({
           <Bar dataKey="sales" fill="var(--color-sales)" radius={4} />
         </BarChart>
       </ChartContainer>
-      <div className="flex-col items-start gap-2 text-sm">
+      <div className="flex w-full flex-col items-center justify-center text-center text-sm">
         <div className="flex gap-2 font-medium">
           <ShoppingCart strokeWidth={3} className="size-4" />
           {totalSales} products sold total from all brands

@@ -201,7 +201,14 @@ async function DashboardPage() {
         <div className="w-full lg:col-span-8">
           <Card className="border-2">
             <CardHeader>
-              <CardTitle>Latest Orders</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Latest Orders</CardTitle>
+                <Link href={"/dashboard/orders"}>
+                  <Button variant={"outline"} size={"sm"}>
+                    View All
+                  </Button>
+                </Link>
+              </div>
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent>
@@ -214,7 +221,14 @@ async function DashboardPage() {
         <div className="w-full lg:col-span-4">
           <Card className="border-2">
             <CardHeader>
-              <CardTitle>Brand Performance</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>Brands Perfomance</CardTitle>
+                <Link href={"/dashboard/brands"}>
+                  <Button variant={"outline"} size={"sm"}>
+                    View All
+                  </Button>
+                </Link>
+              </div>
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent className="h-full w-full">
