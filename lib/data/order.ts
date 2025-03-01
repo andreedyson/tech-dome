@@ -2,6 +2,7 @@ import { OrderColumn } from "@/components/orders/columns";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
 import { UserOrderHistoryProps } from "@/types/order";
+import { LatestOrderColumn } from "@/components/orders/latest-order-columns";
 
 export async function getAllOrders(): Promise<OrderColumn[]> {
   try {
@@ -81,6 +82,56 @@ export async function getUserOrderHistory(
     }));
 
     return mappedUserOrders;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
+  try {
+    const currentDate = new Date();
+
+    // Calculate the date for the past week
+    const pastWeek = new Date(currentDate);
+    pastWeek.setDate(currentDate.getDate() - 7);
+
+    const orders = await prisma.order.findMany({
+      where: {
+        createdAt: {
+          gte: pastWeek,
+        },
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        products: {
+          include: {
+            product: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    const mappedOrders = orders.map((order) => ({
+      id: order.id,
+      products: order.products.map((item) => ({
+        name: item.product.name,
+        image: getImageUrl(item.product.images[0], "products"),
+      })),
+      customerName: order.user.name,
+      total: Number(order.total),
+      status: order.status,
+      createdAt: order.createdAt,
+    }));
+
+    return mappedOrders.slice(0, 10);
   } catch (error) {
     return [];
   }

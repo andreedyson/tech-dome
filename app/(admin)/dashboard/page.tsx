@@ -8,6 +8,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { Separator } from "@/components/ui/separator";
 import { getStatsCardData } from "@/lib/data/dashboard";
 import { getSalesByCountry } from "@/lib/data/location";
+import { getLatestOrders } from "@/lib/data/order";
 import { getTopProducts } from "@/lib/data/product";
 import { getTopCustomers } from "@/lib/data/user";
 import { getImageUrl } from "@/lib/supabase";
@@ -25,6 +26,7 @@ async function DashboardPage() {
   const topProducts = await getTopProducts();
   const salesByCountry = await getSalesByCountry();
   const topCustomers = await getTopCustomers();
+  const latestOrders = await getLatestOrders();
 
   return (
     <section className="w-full space-y-6">
@@ -214,13 +216,13 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent>
-              <DataTable columns={columns} data={[]} />
+              <DataTable columns={columns} data={latestOrders} pageSize={5} />
             </CardContent>
           </Card>
         </div>
         {/* Brand Performance Sales */}
         <div className="w-full lg:col-span-4">
-          <Card className="border-2">
+          <Card className="h-full border-2">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Brands Perfomance</CardTitle>
@@ -232,7 +234,7 @@ async function DashboardPage() {
               </div>
               <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent className="h-full w-full">
+            <CardContent className="h-[70%] w-full">
               <BrandPerformanceCharts />
             </CardContent>
           </Card>
