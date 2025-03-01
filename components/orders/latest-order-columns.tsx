@@ -49,7 +49,9 @@ export const columns: ColumnDef<LatestOrderColumn>[] = [
       return (
         <div className="inline-flex flex-col gap-1">
           {order.products.map((product, i) => (
-            <p key={product.name + i}>{product.name}</p>
+            <p key={product.name + i} className="line-clamp-1">
+              {product.name}
+            </p>
           ))}
         </div>
       );

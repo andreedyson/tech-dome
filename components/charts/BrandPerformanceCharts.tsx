@@ -43,7 +43,7 @@ export function BrandPerformanceCharts({
     <div className="space-y-4">
       <ChartContainer
         config={chartConfig}
-        className="max-h-[300px] min-h-[200px] max-[430px]:max-w-[240px] min-[350px]:w-full"
+        className="max-h-[350px] min-h-[300px] max-[430px]:max-w-[240px] min-[350px]:w-full"
       >
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
