@@ -1,8 +1,10 @@
 import StatsCard from "@/components/card/StatsCard";
 import { BrandPerformanceCharts } from "@/components/charts/BrandPerformanceCharts";
+import { columns } from "@/components/orders/latest-order-columns";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DataTable } from "@/components/ui/data-table";
 import { Separator } from "@/components/ui/separator";
 import { getStatsCardData } from "@/lib/data/dashboard";
 import { getSalesByCountry } from "@/lib/data/location";
@@ -212,8 +214,7 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent>
-              <div></div>
-              <div></div>
+              <DataTable columns={columns} data={[]} />
             </CardContent>
           </Card>
         </div>

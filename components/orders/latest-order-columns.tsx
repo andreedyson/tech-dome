@@ -1,13 +1,11 @@
 "use client";
 
-import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah, formatDate } from "@/lib/utils";
 import { OrderStatus } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
 import OrderStatusBadge from "../OrderStausBadge";
 
-export type OrderColumn = {
+export type LatestOrderColumn = {
   id: number;
   products: {
     name: string;
@@ -19,32 +17,7 @@ export type OrderColumn = {
   createdAt: Date;
 };
 
-export const columns: ColumnDef<OrderColumn>[] = [
-  {
-    accessorKey: "name",
-    header: "Product",
-    cell: ({ row }) => {
-      const order = row.original;
-
-      return (
-        <div className="inline-flex flex-col items-center gap-5 md:flex-row">
-          {order.products.map((product, i) => (
-            <div key={product.name + i}>
-              <div className="size-20 rounded-lg object-contain">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={80}
-                  height={80}
-                />
-              </div>
-              <p>{product.name}</p>
-            </div>
-          ))}
-        </div>
-      );
-    },
-  },
+export const columns: ColumnDef<LatestOrderColumn>[] = [
   {
     accessorKey: "createdAt",
     header: "Date",
@@ -55,8 +28,32 @@ export const columns: ColumnDef<OrderColumn>[] = [
     },
   },
   {
+    accessorKey: "id",
+    header: "Order ID",
+    cell: ({ row }) => {
+      const order = row.original;
+
+      return <div>{order.id}</div>;
+    },
+  },
+  {
     accessorKey: "customerName",
     header: "Customer",
+  },
+  {
+    accessorKey: "product",
+    header: "Product",
+    cell: ({ row }) => {
+      const order = row.original;
+
+      return (
+        <div className="inline-flex flex-col items-center gap-5 md:flex-row">
+          {order.products.map((product, i) => (
+            <p key={product.name + i}>{product.name}</p>
+          ))}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "total",

@@ -80,7 +80,7 @@ async function ProfilePage() {
               <Separator className="my-3 h-[2px]" />
 
               {/* Order Products */}
-              <div className="flex w-full flex-col">
+              <div className="flex w-full flex-col gap-4">
                 {order.products.map((product, i) => (
                   <OrderHistoryProduct
                     key={product.name + i}

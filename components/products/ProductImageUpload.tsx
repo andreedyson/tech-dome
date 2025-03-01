@@ -24,10 +24,14 @@ function ProductImageUpload({ defaultImages = [] }: ProductImageUploadProps) {
   };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length >= 3) {
-      const newImages = Array.from(e.target.files).map((file) =>
-        URL.createObjectURL(file),
-      );
+    if (e.target.files) {
+      const newImages: string[] = [];
+      // Iterate through the FileList to maintain the order
+      for (let i = 0; i < e.target.files.length; i++) {
+        const file = e.target.files[i];
+        newImages.push(URL.createObjectURL(file));
+      }
+      // Limit Images to 3
       setImages(newImages.slice(0, 3));
     }
   };
