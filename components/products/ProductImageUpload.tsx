@@ -75,7 +75,7 @@ function ProductImageUpload({ defaultImages = [] }: ProductImageUploadProps) {
         onChange={handleImageChange}
         autoComplete="off"
         className="hidden"
-        accept=".jpg, .png, .jpeg, images/**"
+        accept=".jpg, .png, .jpeg, .webp, images/**"
         multiple
       />
     </div>

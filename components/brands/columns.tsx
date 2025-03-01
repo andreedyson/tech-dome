@@ -16,12 +16,13 @@ export const columns: ColumnDef<Brand>[] = [
 
       return (
         <div className="inline-flex items-center gap-4">
-          <div className="size-20 rounded-lg object-contain">
+          <div className="size-20 rounded-lg">
             <Image
               src={getImageUrl(brand.logo, "brands")}
               alt={brand.name}
               width={80}
               height={80}
+              className="size-20 object-contain"
             />
           </div>
           <p>{brand.name}</p>

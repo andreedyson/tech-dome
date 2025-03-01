@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-const ALLOWED_FILE_TYPE = ["image/jpg", "image/jpeg", "image/png"];
+const ALLOWED_FILE_TYPE = [
+  "image/jpg",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+];
 
 export const loginSchema = z.object({
   email: z
@@ -75,7 +80,7 @@ export const productSchema = z.object({
     .string({ required_error: "Description is required" })
     .min(10, { message: "Description should be at least 10 characters " }),
   price: z.coerce.number({ required_error: "Price is required" }),
-  stock: z.coerce.number().min(1, { message: "Stock should be at least 1" }),
+  stock: z.coerce.number(),
   status: z.enum(["PRE_ORDER", "READY"]),
   categoryId: z.string({ required_error: "Category is required" }),
   brandId: z.string({ required_error: "Brand is required" }),
