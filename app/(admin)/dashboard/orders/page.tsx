@@ -28,7 +28,11 @@ async function OrdersPage() {
         </div>
         {/* Data Table */}
         <div>
-          <DataTable columns={OrderColumn} data={ordersData} />
+          <DataTable
+            columns={OrderColumn}
+            data={ordersData}
+            columnFilter="id"
+          />
         </div>
       </div>
     </section>

@@ -29,7 +29,11 @@ async function CustomersPage() {
         </div>
         {/* Data Table */}
         <div>
-          <DataTable columns={CustomerColumn} data={customersData} />
+          <DataTable
+            columns={CustomerColumn}
+            data={customersData}
+            columnFilter="name"
+          />
         </div>
       </div>
     </section>

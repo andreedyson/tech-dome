@@ -8,7 +8,7 @@ import Image from "next/image";
 import OrderStatusBadge from "../OrderStausBadge";
 
 export type OrderColumn = {
-  id: number;
+  id: string;
   products: {
     name: string;
     image: string;
@@ -20,6 +20,10 @@ export type OrderColumn = {
 };
 
 export const columns: ColumnDef<OrderColumn>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
   {
     accessorKey: "name",
     header: "Product",

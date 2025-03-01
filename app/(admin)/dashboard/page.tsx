@@ -216,7 +216,12 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent>
-              <DataTable columns={columns} data={latestOrders} pageSize={5} />
+              <DataTable
+                columns={columns}
+                data={latestOrders}
+                pageSize={5}
+                columnFilter="id"
+              />
             </CardContent>
           </Card>
         </div>

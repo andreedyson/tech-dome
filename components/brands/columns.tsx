@@ -9,8 +9,8 @@ import DeleteBrandDialog from "./DeleteBrandDialog";
 
 export const columns: ColumnDef<Brand>[] = [
   {
-    accessorKey: "logo",
-    header: "Logo",
+    accessorKey: "name",
+    header: "Name",
     cell: ({ row }) => {
       const brand = row.original;
 

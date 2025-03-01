@@ -21,25 +21,29 @@ import {
 } from "@/components/ui/table";
 import { Button } from "./button";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "./dropdown-menu";
+import { Input } from "./input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pageSize?: number;
+  columnFilter?: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   pageSize,
+  columnFilter,
 }: DataTableProps<TData, TValue>) {
+  const columFiltered = columnFilter || "name";
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
@@ -67,31 +71,47 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-2">
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild className="flex justify-end">
-          <Button variant="outline" size={"sm"} className="ml-auto">
-            <Eye />
-            Toggle
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          {table
-            .getAllColumns()
-            .filter((column) => column.getCanHide())
-            .map((column) => {
-              return (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  className="capitalize"
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                >
-                  {column.id}
-                </DropdownMenuCheckboxItem>
-              );
-            })}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center py-4">
+          <Input
+            placeholder={`Search by ${columFiltered}`}
+            value={
+              (table.getColumn(columFiltered)?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn(columFiltered)?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm placeholder:capitalize"
+          />
+        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size={"sm"} className="ml-auto">
+              <Eye />
+              Toggle
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter((column) => column.getCanHide())
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

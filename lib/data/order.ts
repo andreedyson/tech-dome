@@ -23,7 +23,7 @@ export async function getAllOrders(): Promise<OrderColumn[]> {
     });
 
     const mappedOrders = orders.map((order) => ({
-      id: order.id,
+      id: order.id.toString(),
       products: order.products.map((item) => ({
         name: item.product.name,
         image: getImageUrl(item.product.images[0], "products"),
@@ -120,7 +120,7 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
     });
 
     const mappedOrders = orders.map((order) => ({
-      id: order.id,
+      id: order.id.toString(),
       products: order.products.map((item) => ({
         name: item.product.name,
         image: getImageUrl(item.product.images[0], "products"),

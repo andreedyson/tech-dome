@@ -6,7 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import OrderStatusBadge from "../OrderStausBadge";
 
 export type LatestOrderColumn = {
-  id: number;
+  id: string;
   products: {
     name: string;
     image: string;
