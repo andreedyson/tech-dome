@@ -179,6 +179,7 @@ function AddProductForm() {
                         id="description"
                         autoComplete="off"
                         className="bg-input"
+                        rows={4}
                         {...field}
                       />
                     </FormControl>

@@ -21,7 +21,7 @@ function ProductCard({ product }: ProductProps) {
           width={150}
           height={150}
           alt={product.name}
-          className="w-full rounded-xl object-contain"
+          className="aspect-square size-full rounded-t-xl border-b-2 object-cover"
         />
         {/* Product Details */}
         <div className="p-4">
@@ -29,7 +29,7 @@ function ProductCard({ product }: ProductProps) {
             {product.name}
           </h4>
           <p className="text-sm font-medium text-muted-foreground">
-            {product.categoryName}
+            {product.category?.name}
           </p>
           <p className="mt-2.5 line-clamp-3 text-sm leading-5 tracking-tight">
             {product.description}
