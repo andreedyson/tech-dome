@@ -17,7 +17,7 @@ async function LocationsPage() {
 
   return (
     <section className="space-y-4">
-      <div className="space-y-3 rounded-lg bg-muted p-4">
+      <div className="space-y-3 rounded-lg border-2 bg-background p-4">
         {/* Locations Page Header */}
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full space-y-2">

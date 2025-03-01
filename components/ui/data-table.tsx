@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "./button";
-import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye, Search } from "lucide-react";
 import React, { useState } from "react";
 import {
   DropdownMenu,
@@ -29,6 +29,7 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { Input } from "./input";
+import { Label } from "./label";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -72,8 +73,12 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <div className="flex items-center py-4">
+        <div className="relative flex items-center py-4">
+          <Label htmlFor="search" className="absolute left-2">
+            <Search strokeWidth={3} />
+          </Label>
           <Input
+            id="search"
             placeholder={`Search by ${columFiltered}`}
             value={
               (table.getColumn(columFiltered)?.getFilterValue() as string) ?? ""
@@ -81,7 +86,7 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
               table.getColumn(columFiltered)?.setFilterValue(event.target.value)
             }
-            className="max-w-sm placeholder:capitalize"
+            className="max-w-sm border-2 bg-input pl-10 placeholder:capitalize"
           />
         </div>
         <DropdownMenu>
