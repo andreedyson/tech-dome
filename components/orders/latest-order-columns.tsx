@@ -3,7 +3,7 @@
 import { convertRupiah, formatDate } from "@/lib/utils";
 import { OrderStatus } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import OrderStatusBadge from "../OrderStausBadge";
+import OrderStatusBadge from "../OrderStatusBadge";
 
 export type LatestOrderColumn = {
   id: string;

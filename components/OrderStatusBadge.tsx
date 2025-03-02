@@ -21,7 +21,11 @@ function OrderStatusBadge({ status }: OrderStatusProps) {
       break;
   }
 
-  return <Badge className={`${badgeColor} rounded-full`}>{status}</Badge>;
+  return (
+    <Badge className={`${badgeColor} rounded-full`}>
+      {status === "PENDING" ? "Pending" : "Success"}
+    </Badge>
+  );
 }
 
 export default OrderStatusBadge;

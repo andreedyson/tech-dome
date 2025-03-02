@@ -5,7 +5,8 @@ import { convertRupiah, formatDate } from "@/lib/utils";
 import { OrderStatus } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-import OrderStatusBadge from "../OrderStausBadge";
+import OrderStatusBadge from "../OrderStatusBadge";
+import { Loader } from "lucide-react";
 
 export type OrderColumn = {
   id: string;
@@ -73,7 +74,12 @@ export const columns: ColumnDef<OrderColumn>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Loader size={14} />
+        Status
+      </div>
+    ),
     cell: ({ row }) => {
       const order = row.original;
 
