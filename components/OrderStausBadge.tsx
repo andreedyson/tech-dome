@@ -11,10 +11,10 @@ function OrderStatusBadge({ status }: OrderStatusProps) {
 
   switch (status) {
     case "PENDING":
-      badgeColor = "bg-orange-500";
+      badgeColor = "border-2 bg-orange-200 text-orange-600 border-orange-500";
       break;
     case "SUCCESS":
-      badgeColor = "bg-green-500";
+      badgeColor = "border-2 bg-green-200 text-green-600 border-green-500";
       break;
     default:
       badgeColor = "bg-gray-500";

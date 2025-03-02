@@ -16,6 +16,8 @@ import { convertRupiah } from "@/lib/utils";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getBrandHighestSellingProducts } from "@/lib/data/brand";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -27,6 +29,7 @@ async function DashboardPage() {
   const salesByCountry = await getSalesByCountry();
   const topCustomers = await getTopCustomers();
   const latestOrders = await getLatestOrders();
+  const brandHighestSelling = await getBrandHighestSellingProducts();
 
   return (
     <section className="w-full space-y-6">
@@ -225,6 +228,7 @@ async function DashboardPage() {
             </CardContent>
           </Card>
         </div>
+
         {/* Brand Performance Sales */}
         <div className="w-full lg:col-span-4">
           <Card className="h-full border-2">
@@ -240,7 +244,28 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent className="h-[70%] w-full">
-              <BrandPerformanceCharts />
+              <Tabs defaultValue="performance" className="w-full">
+                <TabsList className="w-full">
+                  <TabsTrigger
+                    value="performance"
+                    className="max-w-[200px] md:w-full"
+                  >
+                    Performance
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="highest"
+                    className="max-w-[200px] md:w-full"
+                  >
+                    Highest Selling
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="performance">
+                  <BrandPerformanceCharts />
+                </TabsContent>
+                <TabsContent value="highest">
+                  {/* {brandHighestSelling.map((brand) => )} */}
+                </TabsContent>
+              </Tabs>
             </CardContent>
           </Card>
         </div>
