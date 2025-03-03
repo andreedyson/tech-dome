@@ -22,4 +22,5 @@ export type BrandSalesProps = {
 
 export type BrandHighestSellingProductsProps = Brand & {
   product: Product | undefined;
+  totalOrder: number;
 };

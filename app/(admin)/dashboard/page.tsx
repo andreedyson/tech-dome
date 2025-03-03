@@ -244,7 +244,7 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent className="h-[70%] w-full">
-              <Tabs defaultValue="performance" className="w-full">
+              <Tabs defaultValue="performance" className="h-full w-full">
                 <TabsList className="w-full">
                   <TabsTrigger
                     value="performance"
@@ -262,29 +262,44 @@ async function DashboardPage() {
                 <TabsContent value="performance">
                   <BrandPerformanceCharts />
                 </TabsContent>
-                <TabsContent value="highest">
-                  {brandHighestSelling.map((brand, index) => (
-                    <div
-                      key={brand.id}
-                      className="flex items-center gap-4 py-3"
-                    >
-                      <Image
-                        src={getImageUrl(brand.logo, "brands")}
-                        width={80}
-                        height={80}
-                        alt={brand.name}
-                        className="aspect-square size-20 rounded-lg border-2 object-contain"
-                      />
-                      <div>
-                        <p className="text-base font-bold">{brand.name}</p>
+                <TabsContent
+                  value="highest"
+                  className="flex h-full flex-col justify-between"
+                >
+                  <div className="space-y-2">
+                    {brandHighestSelling.map((brand) => (
+                      <div key={brand.id} className="flex items-center gap-4">
+                        <Image
+                          src={getImageUrl(brand.logo, "brands")}
+                          width={80}
+                          height={80}
+                          alt={brand.name}
+                          className="aspect-square size-20 rounded-lg border-2 object-contain"
+                        />
                         <div>
-                          <p className="font-medium text-main-violet-600">
-                            {brand.product?.name}
-                          </p>
+                          <p className="text-base font-bold">{brand.name}</p>
+                          <div className="text-sm leading-5 text-muted-foreground">
+                            <p className="font-medium">
+                              {brand.product && brand.product?.name}
+                            </p>
+                            <p>
+                              {brand.product
+                                ? `(${brand.totalOrder} Sold)`
+                                : ""}
+                            </p>
+                          </div>
                         </div>
                       </div>
+                    ))}
+                  </div>
+                  <div className="flex w-full flex-col items-center justify-center text-center text-sm">
+                    <div className="flex gap-2 font-medium">
+                      Brand Highest Selling
                     </div>
-                  ))}
+                    <div className="text-muted-foreground">
+                      Showing the top product from each brand.
+                    </div>
+                  </div>
                 </TabsContent>
               </Tabs>
             </CardContent>

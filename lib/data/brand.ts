@@ -166,6 +166,10 @@ export async function getBrandHighestSellingProducts(): Promise<
       product: Product.find((product) => {
         return product.orders.length >= 5;
       }),
+      totalOrder:
+        Product.find((product) => {
+          return product.orders.length >= 5;
+        })?.orders.length || 0,
     }));
 
     return data;
