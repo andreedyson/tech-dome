@@ -4,18 +4,12 @@ import { Building, Package, ReceiptText, TicketCheck } from "lucide-react";
 
 export async function getStatsCardData(): Promise<StatsCardProps[]> {
   try {
-    const products = await prisma.product.findMany({});
-    const brands = await prisma.brand.findMany({});
-    const pendingOrders = await prisma.order.findMany({
-      where: {
-        status: "PENDING",
-      },
-    });
-    const sucessOrders = await prisma.order.findMany({
-      where: {
-        status: "SUCCESS",
-      },
-    });
+    const [products, brands, pendingOrders, successOrders] = await Promise.all([
+      prisma.product.findMany({}),
+      prisma.brand.findMany({}),
+      prisma.order.findMany({ where: { status: "PENDING" } }),
+      prisma.order.findMany({ where: { status: "SUCCESS" } }),
+    ]);
 
     const data = [
       { name: "Products", total: products.length, icon: Package },
@@ -25,7 +19,11 @@ export async function getStatsCardData(): Promise<StatsCardProps[]> {
         total: pendingOrders.length,
         icon: ReceiptText,
       },
-      { name: "Success Orders", total: sucessOrders.length, icon: TicketCheck },
+      {
+        name: "Success Orders",
+        total: successOrders.length,
+        icon: TicketCheck,
+      },
     ];
 
     return data;
