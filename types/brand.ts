@@ -1,4 +1,4 @@
-import { Brand, Product } from "@prisma/client";
+import { Brand, Order, Product } from "@prisma/client";
 import { TopProductProps } from "./product";
 
 export type BrandWithTotalProductsProps = {
@@ -21,5 +21,5 @@ export type BrandSalesProps = {
 };
 
 export type BrandHighestSellingProductsProps = Brand & {
-  products: Product[];
+  product: Product | undefined;
 };

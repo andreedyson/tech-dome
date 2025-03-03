@@ -153,13 +153,19 @@ export async function getBrandHighestSellingProducts(): Promise<
         },
       },
       include: {
-        Product: true,
+        Product: {
+          include: {
+            orders: true,
+          },
+        },
       },
     });
 
-    const data = brands.map(({ Product, ...brands }) => ({
-      ...brands,
-      products: Product,
+    const data = brands.map(({ Product, ...brand }) => ({
+      ...brand,
+      product: Product.find((product) => {
+        return product.orders.length >= 5;
+      }),
     }));
 
     return data;

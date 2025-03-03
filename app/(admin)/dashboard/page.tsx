@@ -263,7 +263,28 @@ async function DashboardPage() {
                   <BrandPerformanceCharts />
                 </TabsContent>
                 <TabsContent value="highest">
-                  {/* {brandHighestSelling.map((brand) => )} */}
+                  {brandHighestSelling.map((brand, index) => (
+                    <div
+                      key={brand.id}
+                      className="flex items-center gap-4 py-3"
+                    >
+                      <Image
+                        src={getImageUrl(brand.logo, "brands")}
+                        width={80}
+                        height={80}
+                        alt={brand.name}
+                        className="aspect-square size-20 rounded-lg border-2 object-contain"
+                      />
+                      <div>
+                        <p className="text-base font-bold">{brand.name}</p>
+                        <div>
+                          <p className="font-medium text-main-violet-600">
+                            {brand.product?.name}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </TabsContent>
               </Tabs>
             </CardContent>
