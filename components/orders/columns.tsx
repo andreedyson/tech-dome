@@ -6,7 +6,14 @@ import { OrderStatus } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import OrderStatusBadge from "../OrderStatusBadge";
-import { Loader } from "lucide-react";
+import {
+  Calendar,
+  Coins,
+  Captions,
+  Loader,
+  PackageOpen,
+  User,
+} from "lucide-react";
 
 export type OrderColumn = {
   id: string;
@@ -23,11 +30,21 @@ export type OrderColumn = {
 export const columns: ColumnDef<OrderColumn>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Captions size={14} />
+        ID
+      </div>
+    ),
   },
   {
     accessorKey: "name",
-    header: "Product",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <PackageOpen size={14} />
+        Products
+      </div>
+    ),
     cell: ({ row }) => {
       const order = row.original;
 
@@ -52,7 +69,12 @@ export const columns: ColumnDef<OrderColumn>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Date",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Calendar size={14} />
+        Date
+      </div>
+    ),
     cell: ({ row }) => {
       const order = row.original;
 
@@ -61,11 +83,21 @@ export const columns: ColumnDef<OrderColumn>[] = [
   },
   {
     accessorKey: "customerName",
-    header: "Customer",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <User size={14} />
+        Customer
+      </div>
+    ),
   },
   {
     accessorKey: "total",
-    header: "Total",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Coins size={14} />
+        Price
+      </div>
+    ),
     cell: ({ row }) => {
       const order = row.original;
 

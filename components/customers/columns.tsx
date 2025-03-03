@@ -2,6 +2,7 @@
 
 import { formatDate } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
+import { AtSign, Calendar, LetterText } from "lucide-react";
 
 export type CustomerColumn = {
   id: string;
@@ -13,15 +14,30 @@ export type CustomerColumn = {
 export const columns: ColumnDef<CustomerColumn>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <LetterText size={14} />
+        Name
+      </div>
+    ),
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <AtSign size={14} />
+        Email
+      </div>
+    ),
   },
   {
     accessorKey: "createdAt",
-    header: "Joined",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Calendar size={14} />
+        Joined
+      </div>
+    ),
     cell: ({ row }) => {
       const customer = row.original;
 

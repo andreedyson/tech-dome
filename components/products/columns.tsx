@@ -7,7 +7,14 @@ import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah, formatDate } from "@/lib/utils";
 import ProductStatusBadge from "../ProductStatusBadge";
 import { Button } from "../ui/button";
-import { Pencil } from "lucide-react";
+import {
+  Calendar,
+  Coins,
+  Loader,
+  PackageOpen,
+  Pencil,
+  ShoppingBag,
+} from "lucide-react";
 import Link from "next/link";
 import DeleteProductDialog from "./DeleteProductDialog";
 
@@ -28,7 +35,14 @@ export type ProductColumn = {
 export const columns: ColumnDef<ProductColumn>[] = [
   {
     accessorKey: "name",
-    header: "Product",
+    header: () => {
+      return (
+        <div className="flex items-center gap-1">
+          <PackageOpen size={14} />
+          Product
+        </div>
+      );
+    },
     cell: ({ row }) => {
       const product = row.original;
 
@@ -49,7 +63,12 @@ export const columns: ColumnDef<ProductColumn>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Loader size={14} />
+        Status
+      </div>
+    ),
     cell: ({ row }) => {
       const product = row.original;
 
@@ -58,7 +77,12 @@ export const columns: ColumnDef<ProductColumn>[] = [
   },
   {
     accessorKey: "price",
-    header: "Price",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Coins size={14} />
+        Price
+      </div>
+    ),
     cell: ({ row }) => {
       const product = row.original;
 
@@ -67,7 +91,12 @@ export const columns: ColumnDef<ProductColumn>[] = [
   },
   {
     accessorKey: "total_sales",
-    header: "Sales",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <ShoppingBag size={14} />
+        Sales
+      </div>
+    ),
     cell: ({ row }) => {
       const product = row.original;
 
@@ -76,7 +105,12 @@ export const columns: ColumnDef<ProductColumn>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Added",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Calendar size={14} />
+        Added
+      </div>
+    ),
     cell: ({ row }) => {
       const product = row.original;
 

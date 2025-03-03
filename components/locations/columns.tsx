@@ -4,15 +4,30 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Location } from "@prisma/client";
 import EditlocationDialog from "./EditLocationDialog";
 import DeletelocationDialog from "./DeleteLocationDialog";
+import { Captions, LetterText } from "lucide-react";
 
 export const columns: ColumnDef<Location>[] = [
   {
     accessorKey: "id",
-    header: "ID",
+    header: () => {
+      return (
+        <div className="flex items-center gap-1">
+          <Captions size={14} />
+          ID
+        </div>
+      );
+    },
   },
   {
     accessorKey: "name",
-    header: "Name",
+    header: () => {
+      return (
+        <div className="flex items-center gap-1">
+          <LetterText size={14} />
+          Name
+        </div>
+      );
+    },
   },
   {
     accessorKey: "actions",

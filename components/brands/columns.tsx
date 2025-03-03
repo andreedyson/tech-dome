@@ -6,11 +6,19 @@ import Image from "next/image";
 import { getImageUrl } from "@/lib/supabase";
 import EditBrandDialog from "./EditBrandDialog";
 import DeleteBrandDialog from "./DeleteBrandDialog";
+import { LetterText } from "lucide-react";
 
 export const columns: ColumnDef<Brand>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: () => {
+      return (
+        <div className="flex items-center gap-1">
+          <LetterText size={14} />
+          Name
+        </div>
+      );
+    },
     cell: ({ row }) => {
       const brand = row.original;
 
