@@ -21,9 +21,9 @@ type BrandPerformanceChartsProps = {
 export function BrandPerformanceCharts({
   totalBrand = 4,
 }: BrandPerformanceChartsProps) {
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["brand-performance"],
-    queryFn: async () => getBrandSales(),
+    queryFn: async () => await getBrandSales(),
   });
 
   const chartData = data?.slice(0, totalBrand);
@@ -38,6 +38,8 @@ export function BrandPerformanceCharts({
   const totalSales = chartData?.reduce((acc, curr) => {
     return acc + curr.sales;
   }, 0);
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="space-y-4">

@@ -1,3 +1,5 @@
+"use server";
+
 import { OrderColumn } from "@/components/orders/columns";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
@@ -115,11 +117,11 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
         },
       },
       orderBy: {
-        createdAt: "desc",
+        createdAt: "asc",
       },
     });
 
-    const mappedOrders = orders.map((order) => ({
+    const data = orders.map((order) => ({
       id: order.id.toString(),
       products: order.products.map((item) => ({
         name: item.product.name,
@@ -131,8 +133,9 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
       createdAt: order.createdAt,
     }));
 
-    return mappedOrders.slice(0, 10);
+    return data.slice(0, 10);
   } catch (error) {
+    console.log(error);
     return [];
   }
 }

@@ -18,6 +18,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getBrandHighestSellingProducts } from "@/lib/data/brand";
+import { ChartNoAxesCombined, Table } from "lucide-react";
+import { LatestOrderCharts } from "@/components/charts/LatestOrderCharts";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -140,7 +142,7 @@ async function DashboardPage() {
                     className="flex items-center justify-between py-3"
                   >
                     <div className="flex items-center gap-4">
-                      <span className="text-4xl font-bold text-muted-foreground">
+                      <span className="text-2xl font-bold text-muted-foreground md:text-3xl">
                         {index + 1}.
                       </span>
                       <div>
@@ -151,10 +153,10 @@ async function DashboardPage() {
                           {customer.name}
                         </p>
                         <div className="flex items-center gap-1">
-                          <p className="text-xl font-bold text-main-violet-500">
+                          <p className="text-base font-bold text-main-violet-500 md:text-lg">
                             {customer.totalOrders}
                           </p>
-                          <span className="font-light text-muted-foreground">
+                          <span className="text-sm font-light text-muted-foreground md:text-base">
                             Orders
                           </span>
                         </div>
@@ -208,7 +210,7 @@ async function DashboardPage() {
                     className="flex items-center justify-between py-3"
                   >
                     <div className="flex items-center gap-4">
-                      <span className="text-4xl font-bold text-muted-foreground">
+                      <span className="text-2xl font-bold text-muted-foreground md:text-3xl">
                         {index + 1}.
                       </span>
                       <div>
@@ -219,10 +221,10 @@ async function DashboardPage() {
                           {country.name}
                         </p>
                         <div className="flex items-center gap-1">
-                          <p className="text-xl font-bold text-main-violet-500">
+                          <p className="text-base font-bold text-main-violet-500 md:text-lg">
                             {country.totalSales}
                           </p>
-                          <span className="font-light text-muted-foreground">
+                          <span className="text-sm font-light text-muted-foreground md:text-base">
                             Sales
                           </span>
                         </div>
@@ -271,33 +273,50 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent>
-              {latestOrders.length > 0 ? (
-                <DataTable
-                  columns={columns}
-                  data={latestOrders}
-                  pageSize={5}
-                  columnFilter="id"
-                />
-              ) : (
-                <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
-                  <Image
-                    src={"/assets/empty-orders.svg"}
-                    width={500}
-                    height={300}
-                    alt="Orders Not Found"
-                    className="aspect-video w-[180px] lg:w-[380px]"
-                    priority
-                  />
-                  <div className="space-y-0.5">
-                    <h4 className="text-sm font-semibold md:text-base">
-                      No Orders Found
-                    </h4>
-                    <p className="max-w-md text-xs md:text-sm">
-                      Showing the list of orders from the past two weeks.
-                    </p>
-                  </div>
+              <Tabs defaultValue="order-table" className="h-full w-full">
+                <div className="flex w-full justify-end">
+                  <TabsList className="w-[160px]">
+                    <TabsTrigger value="order-table" className="w-full">
+                      <Table size={20} />
+                    </TabsTrigger>
+                    <TabsTrigger value="order-chart" className="w-full">
+                      <ChartNoAxesCombined size={20} />
+                    </TabsTrigger>
+                  </TabsList>
                 </div>
-              )}
+                <TabsContent value="order-table">
+                  {latestOrders.length > 0 ? (
+                    <DataTable
+                      columns={columns}
+                      data={latestOrders}
+                      pageSize={5}
+                      columnFilter="id"
+                    />
+                  ) : (
+                    <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                      <Image
+                        src={"/assets/empty-orders.svg"}
+                        width={500}
+                        height={300}
+                        alt="Orders Not Found"
+                        className="aspect-video w-[180px] lg:w-[380px]"
+                        priority
+                      />
+                      <div className="space-y-0.5">
+                        <h4 className="text-sm font-semibold md:text-base">
+                          No Orders Found
+                        </h4>
+                        <p className="max-w-md text-xs md:text-sm">
+                          Showing the list of orders from the past two weeks.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </TabsContent>
+                <TabsContent value="order-chart" className="h-full">
+                  <LatestOrderCharts />
+                </TabsContent>
+              </Tabs>
             </CardContent>
           </Card>
         </div>
