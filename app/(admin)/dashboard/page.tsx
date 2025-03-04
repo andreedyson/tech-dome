@@ -168,7 +168,7 @@ async function DashboardPage() {
                     src={"/assets/empty-vault.svg"}
                     width={500}
                     height={300}
-                    alt="Products Not Found"
+                    alt="Customers Not Found"
                     className="aspect-video w-[180px] lg:w-[280px]"
                     priority
                   />
@@ -236,7 +236,7 @@ async function DashboardPage() {
                     src={"/assets/empty-cart.svg"}
                     width={500}
                     height={300}
-                    alt="Products Not Found"
+                    alt="Countries Not Found"
                     className="aspect-video w-[180px] lg:w-[280px]"
                     priority
                   />
@@ -256,8 +256,9 @@ async function DashboardPage() {
       </div>
 
       <div className="grid w-full gap-4 lg:grid-cols-12">
+        {/* Latest Orders Table */}
         <div className="w-full lg:col-span-8">
-          <Card className="border-2">
+          <Card className="h-full border-2">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Latest Orders</CardTitle>
@@ -270,12 +271,33 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent>
-              <DataTable
-                columns={columns}
-                data={latestOrders}
-                pageSize={5}
-                columnFilter="id"
-              />
+              {latestOrders.length > 0 ? (
+                <DataTable
+                  columns={columns}
+                  data={latestOrders}
+                  pageSize={5}
+                  columnFilter="id"
+                />
+              ) : (
+                <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                  <Image
+                    src={"/assets/empty-orders.svg"}
+                    width={500}
+                    height={300}
+                    alt="Orders Not Found"
+                    className="aspect-video w-[180px] lg:w-[380px]"
+                    priority
+                  />
+                  <div className="space-y-0.5">
+                    <h4 className="text-sm font-semibold md:text-base">
+                      No Orders Found
+                    </h4>
+                    <p className="max-w-md text-xs md:text-sm">
+                      Showing the list of orders from the past two weeks.
+                    </p>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -313,44 +335,70 @@ async function DashboardPage() {
                 <TabsContent value="performance">
                   <BrandPerformanceCharts />
                 </TabsContent>
-                <TabsContent
-                  value="highest"
-                  className="flex h-full flex-col justify-between"
-                >
-                  <div className="space-y-2">
-                    {brandHighestSelling.map((brand) => (
-                      <div key={brand.id} className="flex items-center gap-4">
-                        <Image
-                          src={getImageUrl(brand.logo, "brands")}
-                          width={80}
-                          height={80}
-                          alt={brand.name}
-                          className="aspect-square size-20 rounded-lg border-2 object-contain"
-                        />
-                        <div>
-                          <p className="text-base font-bold">{brand.name}</p>
-                          <div className="text-sm leading-5 text-muted-foreground">
-                            <p className="font-medium">
-                              {brand.product && brand.product?.name}
-                            </p>
-                            <p>
-                              {brand.product
-                                ? `(${brand.totalOrder} Sold)`
-                                : ""}
-                            </p>
+                <TabsContent value="highest" className="h-full">
+                  {brandHighestSelling.length > 0 ? (
+                    <div className="flex h-full flex-col justify-between">
+                      <div className="space-y-2">
+                        {brandHighestSelling.map((brand) => (
+                          <div
+                            key={brand.id}
+                            className="flex items-center gap-4"
+                          >
+                            <Image
+                              src={getImageUrl(brand.logo, "brands")}
+                              width={80}
+                              height={80}
+                              alt={brand.name}
+                              className="aspect-square size-20 rounded-lg border-2 object-contain"
+                            />
+                            <div>
+                              <p className="text-base font-bold">
+                                {brand.name}
+                              </p>
+                              <div className="text-sm leading-5 text-muted-foreground">
+                                <p className="font-medium">
+                                  {brand.product && brand.product?.name}
+                                </p>
+                                <p>
+                                  {brand.product
+                                    ? `(${brand.totalOrder} Sold)`
+                                    : ""}
+                                </p>
+                              </div>
+                            </div>
                           </div>
+                        ))}
+                      </div>
+                      <div className="flex w-full flex-col items-center justify-center text-center text-sm">
+                        <div className="flex gap-2 font-medium">
+                          Brand Highest Selling
+                        </div>
+                        <div className="text-muted-foreground">
+                          Showing the top product from each brand.
                         </div>
                       </div>
-                    ))}
-                  </div>
-                  <div className="flex w-full flex-col items-center justify-center text-center text-sm">
-                    <div className="flex gap-2 font-medium">
-                      Brand Highest Selling
                     </div>
-                    <div className="text-muted-foreground">
-                      Showing the top product from each brand.
+                  ) : (
+                    <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
+                      <Image
+                        src={"/assets/empty-cart.svg"}
+                        width={500}
+                        height={300}
+                        alt="Sales Not Found"
+                        className="aspect-video w-[180px] lg:w-[380px]"
+                        priority
+                      />
+                      <div className="space-y-0.5">
+                        <h4 className="text-sm font-semibold md:text-base">
+                          No Brand or Sales Found
+                        </h4>
+                        <p className="max-w-md text-xs md:text-sm">
+                          Showing the list of highest selling product from each
+                          brand.
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </TabsContent>
               </Tabs>
             </CardContent>
