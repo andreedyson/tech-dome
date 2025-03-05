@@ -51,12 +51,12 @@ export async function createOrderDetails(
     for (const product of products) {
       const productInStock = await prisma.product.findUnique({
         where: { id: product.id },
-        select: { stock: true },
+        select: { name: true, stock: true },
       });
 
       if (!productInStock || productInStock.stock < product.quantity) {
         return {
-          error: `You can only buy a maximum of ${productInStock?.stock} items for this product.`,
+          error: `You can only buy a maximum of ${productInStock?.stock} items for ${productInStock?.name}.`,
         };
       }
     }
