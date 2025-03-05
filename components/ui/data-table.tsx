@@ -102,17 +102,24 @@ export function DataTable<TData, TValue>({
               .getAllColumns()
               .filter((column) => column.getCanHide())
               .map((column) => {
+                const columnName =
+                  column.id.split("_").length > 1
+                    ? column.id.split("_")[0] + " " + column.id.split("_")[1]
+                    : column.id;
+
                 return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
+                  column.id !== "actions" && (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {columnName}
+                    </DropdownMenuCheckboxItem>
+                  )
                 );
               })}
           </DropdownMenuContent>
