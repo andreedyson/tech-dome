@@ -10,7 +10,7 @@ async function Brands() {
     <section className="w-full space-y-4">
       {/* Brands Section Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold md:text-3xl">Brands</h2>
+        <h2 className="text-2xl font-bold md:text-3xl">Popular Brands</h2>
         <Link href={"/brands"}>
           <Button variant={"ghost"} className="border-2 font-semibold">
             Explore All

@@ -17,7 +17,7 @@ export function SubmitButton({
       <span>{children}</span>
 
       {isSubmitting && (
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div>
           <Loader2 className="size-4 animate-spin" />
         </div>
       )}
