@@ -1,11 +1,14 @@
 import StatsCard from "@/components/card/StatsCard";
 import { BrandPerformanceCharts } from "@/components/charts/BrandPerformanceCharts";
+import { LatestOrderCharts } from "@/components/charts/LatestOrderCharts";
 import { columns } from "@/components/orders/latest-order-columns";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getBrandHighestSellingProducts } from "@/lib/data/brand";
 import { getStatsCardData } from "@/lib/data/dashboard";
 import { getSalesByCountry } from "@/lib/data/location";
 import { getLatestOrders } from "@/lib/data/order";
@@ -13,13 +16,10 @@ import { getTopProducts } from "@/lib/data/product";
 import { getTopCustomers } from "@/lib/data/user";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
+import { ChartNoAxesCombined, Table } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getBrandHighestSellingProducts } from "@/lib/data/brand";
-import { ChartNoAxesCombined, Table } from "lucide-react";
-import { LatestOrderCharts } from "@/components/charts/LatestOrderCharts";
 
 export const metadata: Metadata = {
   title: "Dashboard",
