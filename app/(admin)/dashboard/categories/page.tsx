@@ -1,11 +1,9 @@
 import AddCategoryDialog from "@/components/categories/AddCategoryDialog";
 import { columns as CategoryColumns } from "@/components/categories/columns";
 import { DataTable } from "@/components/ui/data-table";
-import { validateProtected } from "@/lib/check-session";
 import { getAllCategories } from "@/lib/data/category";
 import { ChartBarStacked } from "lucide-react";
 import { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Categories",
@@ -13,7 +11,6 @@ export const metadata: Metadata = {
 
 async function CategoriesPage() {
   const categoriesData = await getAllCategories();
-  const { session } = await validateProtected();
 
   return (
     <section className="space-y-4">
