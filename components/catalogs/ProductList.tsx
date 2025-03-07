@@ -6,6 +6,7 @@ import { ProductDetailProps } from "@/types/product";
 import { useQuery } from "@tanstack/react-query";
 import ProductCard from "../card/ProductCard";
 import Image from "next/image";
+import ProductCardSkeletons from "../skeletons/ProductCardSkeletons";
 
 const fetchProducts = async (body?: Filter): Promise<ProductDetailProps[]> => {
   try {
@@ -30,29 +31,37 @@ function ProductList() {
   });
 
   if (isLoading)
-    return <div className="mt-6 w-full text-center">Loading...</div>;
+    return (
+      <div className="mt-6 grid h-full w-full grid-cols-2 gap-4 text-center md:grid-cols-3">
+        {Array.from({ length: 9 }, (_, index) => (
+          <div key={index}>
+            <ProductCardSkeletons />
+          </div>
+        ))}
+      </div>
+    );
 
   return (
-    <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3">
+    <div className="grid h-full w-full grid-cols-2 gap-4 md:grid-cols-3">
       {products && products.length > 0 ? (
         products?.map((product) => (
           <ProductCard key={product.id + product.name} product={product} />
         ))
       ) : (
-        <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+        <div className="col-span-full flex h-[90%] flex-col items-center justify-center gap-2 text-center">
           <Image
             src={"/assets/empty-products.svg"}
             width={500}
             height={300}
             alt="Products Not Found"
-            className="aspect-video size-[180px] lg:size-[280px]"
+            className="aspect-video size-[180px] lg:size-[400px]"
             priority
           />
           <div className="space-y-0.5">
-            <h4 className="text-sm font-semibold md:text-base">
+            <h4 className="text-base font-semibold md:text-lg">
               No Products Found
             </h4>
-            <p className="max-w-md text-xs md:text-sm">
+            <p className="max-w-md text-sm md:text-base">
               Showing the list of Products available on DealDome.
             </p>
           </div>
