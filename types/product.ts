@@ -36,4 +36,5 @@ export type CartProps = {
   brandName: string;
   locationName: string;
   quantity: number;
+  createdAt: Date;
 };

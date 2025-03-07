@@ -1,7 +1,7 @@
-import ProductDetailsSkeletons from "@/components/skeletons/ProductDetailsSkeletons";
+import ProductDetailsSkeletons from "@/components/skeletons/ProductInputSkeletons";
 import React from "react";
 
-function ProductInputSkeleton() {
+function ProductInputLoading() {
   return (
     <>
       <ProductDetailsSkeletons />
@@ -9,4 +9,4 @@ function ProductInputSkeleton() {
   );
 }
 
-export default ProductInputSkeleton;
+export default ProductInputLoading;
