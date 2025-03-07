@@ -45,6 +45,9 @@ async function Products() {
                   <p className="text-sm font-medium text-muted-foreground">
                     {product.category.name}
                   </p>
+                  <p className="my-3 line-clamp-3 text-sm">
+                    {product.description}
+                  </p>
                   <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
                     {convertRupiah(product.price)}
                   </p>
