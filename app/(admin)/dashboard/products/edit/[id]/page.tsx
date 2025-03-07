@@ -4,7 +4,6 @@ import { Boxes, ChevronLeft } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Edit Products",
