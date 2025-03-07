@@ -2,7 +2,6 @@ import { ProductColumn } from "@/components/products/columns";
 import { ProductDetailProps, TopProductProps } from "@/types/product";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
-import { Product } from "@prisma/client";
 
 export async function getAllProducts(): Promise<ProductColumn[]> {
   try {
@@ -62,9 +61,9 @@ export async function getProductById(
       price: product.price,
       stock: product.stock,
       images: product.images,
-      categoryName: product.category.name,
-      brandName: product.brand.name,
-      locationName: product.location.name,
+      category: product.category,
+      brand: product.brand,
+      location: product.location,
       total_sales: product.orders.length,
       status: product.status,
       createdAt: product.createdAt,
