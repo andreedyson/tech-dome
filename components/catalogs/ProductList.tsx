@@ -42,7 +42,7 @@ function ProductList() {
     );
 
   return (
-    <div className="grid h-full w-full grid-cols-2 gap-4 md:grid-cols-3">
+    <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3">
       {products && products.length > 0 ? (
         products?.map((product) => (
           <ProductCard key={product.id + product.name} product={product} />

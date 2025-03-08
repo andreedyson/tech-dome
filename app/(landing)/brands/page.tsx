@@ -29,10 +29,10 @@ async function BrandsPage() {
               alt={brands[0] ? brands[0].name : "-"}
               className="aspect-video w-[100px] rounded-xl object-contain lg:h-[100px] lg:w-[250px]"
             />
-            <div className="absolute inset-0 rounded-lg bg-black opacity-40" />
+            <div className="absolute inset-0 rounded-lg bg-black opacity-70" />
             <div className="absolute text-center text-white">
               <p className="font-bold uppercase">{brands[0].name}</p>
-              <p className="font-semibold text-main-violet-300">
+              <p className="font-semibold text-main-violet-400">
                 {brands[0] ? brands[0].totalProducts : 0} Products
               </p>
             </div>
@@ -46,12 +46,12 @@ async function BrandsPage() {
               alt={brands[1] ? brands[1].name : "-"}
               className="aspect-video w-[100px] rounded-xl object-contain lg:h-[100px] lg:w-[250px]"
             />
-            <div className="absolute inset-0 rounded-lg bg-black opacity-40" />
+            <div className="absolute inset-0 rounded-lg bg-black opacity-70" />
             <div className="absolute text-center text-white">
               <p className="font-bold uppercase">
                 {brands[1] ? brands[1].name : "-"}
               </p>
-              <p className="font-semibold text-main-violet-300">
+              <p className="font-semibold text-main-violet-400">
                 {brands[1] ? brands[1].totalProducts : 0} Products
               </p>
             </div>
@@ -65,12 +65,12 @@ async function BrandsPage() {
               alt={brands[2] ? brands[2].name : "-"}
               className="aspect-video w-[100px] rounded-xl object-contain lg:h-[100px] lg:w-[200px]"
             />
-            <div className="absolute inset-0 rounded-lg bg-black opacity-40" />
+            <div className="absolute inset-0 rounded-lg bg-black opacity-70" />
             <div className="absolute text-center text-white">
               <p className="font-bold uppercase">
                 {brands[2] ? brands[2].name : "-"}
               </p>
-              <p className="font-semibold text-main-violet-300">
+              <p className="font-semibold text-main-violet-400">
                 {brands[2] ? brands[2].totalProducts : 0} Products
               </p>
             </div>
@@ -84,12 +84,12 @@ async function BrandsPage() {
               alt={brands[3] ? brands[3].name : "-"}
               className="aspect-video w-[100px] rounded-xl object-contain lg:h-[100px] lg:w-[200px]"
             />
-            <div className="absolute inset-0 rounded-lg bg-black opacity-40" />
+            <div className="absolute inset-0 rounded-lg bg-black opacity-70" />
             <div className="absolute text-center text-white">
               <p className="font-bold uppercase">
                 {brands[3] ? brands[3].name : "-"}
               </p>
-              <p className="font-semibold text-main-violet-300">
+              <p className="font-semibold text-main-violet-400">
                 {brands[3] ? brands[3].totalProducts : 0} Products
               </p>
             </div>
@@ -99,53 +99,38 @@ async function BrandsPage() {
 
       {/* Products by Brand Section */}
       <div>
-        {brandWithProducts.length > 0 ? (
+        {brandWithProducts.filter((brand) => brand.products.length > 0).length >
+        0 ? (
           <div className="space-y-6">
-            {brandWithProducts.map((brand) => (
-              <div key={brand.id + brand.name} className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <div className="aspect-video h-8 w-16 object-contain">
-                    <Image
-                      src={brand.logo}
-                      width={80}
-                      height={40}
-                      alt={brand.name}
-                      className="size-full object-contain"
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold leading-none md:text-2xl">
-                    {brand.name}
-                  </h3>
-                </div>
-
-                <div className="flex w-full md:overflow-x-auto">
-                  {brand.products.length > 0 ? (
-                    brand.products.map((product) => (
-                      <HorizontalProductCard product={product} />
-                    ))
-                  ) : (
-                    <div className="flex h-full w-full flex-col items-center gap-2 text-center">
+            {brandWithProducts
+              .filter((brand) => brand.products.length > 0)
+              .map((brand) => (
+                <div key={brand.id + brand.name} className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="aspect-video h-8 w-16 object-contain">
                       <Image
-                        src={"/assets/empty-vault.svg"}
-                        width={500}
-                        height={300}
-                        alt="Products Not Found"
-                        className="aspect-video w-[180px] lg:w-[280px]"
-                        priority
+                        src={brand.logo}
+                        width={80}
+                        height={40}
+                        alt={brand.name}
+                        className="size-full object-contain"
                       />
-                      <div className="space-y-0.5">
-                        <h4 className="text-sm font-semibold md:text-base">
-                          No Products from {brand.name} yet.
-                        </h4>
-                        <p className="max-w-md text-xs md:text-sm">
-                          Showing list of product from {brand.name}.
-                        </p>
-                      </div>
                     </div>
-                  )}
+                    <h3 className="text-xl font-bold leading-none md:text-2xl">
+                      {brand.name}
+                    </h3>
+                  </div>
+
+                  <div className="flex w-full md:overflow-x-auto">
+                    {brand.products.map((product) => (
+                      <HorizontalProductCard
+                        key={product.id + product.name}
+                        product={product}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         ) : (
           <div className="flex h-full w-full flex-col items-center gap-2 text-center">
@@ -159,10 +144,10 @@ async function BrandsPage() {
             />
             <div className="space-y-0.5">
               <h4 className="text-sm font-semibold md:text-base">
-                No Brands data yet.
+                No Brands with Products Available.
               </h4>
               <p className="max-w-md text-xs md:text-sm">
-                Showing list of product from each Brands.
+                Currently, no brands have available products.
               </p>
             </div>
           </div>

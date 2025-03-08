@@ -99,7 +99,7 @@ export async function getBrandsWithProducts(): Promise<
       products: brand.Product,
     }));
 
-    return brandWithProducts;
+    return brandWithProducts.slice(0, 5);
   } catch (error) {
     return [];
   }
