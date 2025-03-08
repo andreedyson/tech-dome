@@ -76,7 +76,7 @@ async function CategoriesPage() {
                   <p>{category.products.length} Products</p>
                 </div>
                 {/* Products Cards */}
-                <div className="col-span-4 grid grid-cols-2 md:grid-cols-4">
+                <div className="col-span-4 grid grid-cols-2 gap-4 md:grid-cols-4">
                   {category.products.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
