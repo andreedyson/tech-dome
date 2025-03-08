@@ -5,8 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "@/ReactQueryProvider";
 
 export const metadata: Metadata = {
-  title: "DealDome",
-  description: "Shop with Deal Dome",
+  title: "TechDome",
+  description: "Shop with Tech Dome",
 };
 
 export default function AootLayout({

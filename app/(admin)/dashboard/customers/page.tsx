@@ -22,7 +22,7 @@ async function CustomersPage() {
               Customers
             </h2>
             <p className="text-sm leading-none text-muted-foreground md:text-base">
-              manage all the customers that are registered to DealDome
+              manage all the customers that are registered to TechDome
               E-Commerce.
             </p>
           </div>

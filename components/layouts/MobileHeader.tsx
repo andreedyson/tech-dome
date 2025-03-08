@@ -47,7 +47,7 @@ function MobileHeader({ session, user }: MobileHeaderProps) {
               {openNav ? <X size={28} /> : <AlignJustify size={28} />}
             </div>
             <div className="text-xl font-bold text-main-violet-500">
-              Deal Dome
+              Tech Dome
             </div>
           </div>
           {session && user?.role && (

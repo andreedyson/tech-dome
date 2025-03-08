@@ -77,10 +77,10 @@ export function AppSidebar() {
             <SidebarMenuButton size="lg" asChild>
               <Link href="/dashboard">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary font-bold text-sidebar-primary-foreground">
-                  DD
+                  TD
                 </div>
                 <div className="leading-none">
-                  <span className="font-semibold italic">Deal Dome</span>
+                  <span className="font-semibold italic">Tech Dome</span>
                 </div>
               </Link>
             </SidebarMenuButton>

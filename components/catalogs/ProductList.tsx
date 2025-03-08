@@ -62,7 +62,7 @@ function ProductList() {
               No Products Found
             </h4>
             <p className="max-w-md text-sm md:text-base">
-              Showing the list of Products available on DealDome.
+              Showing the list of Products available on TechDome.
             </p>
           </div>
         </div>

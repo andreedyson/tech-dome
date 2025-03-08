@@ -9,10 +9,10 @@ import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | DealDome",
-    default: "DealDome",
+    template: "%s | TechDome",
+    default: "TechDome",
   },
-  description: "Shop with Deal Dome",
+  description: "Shop with Tech Dome",
 };
 
 export default async function AdminLayout({

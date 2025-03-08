@@ -18,12 +18,12 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
   const pathname = usePathname();
   return (
     <header className="sticky top-4 z-[99] my-4 hidden items-center justify-between rounded-2xl border bg-background p-6 shadow-md md:flex">
-      {/* Deal Dome Logo */}
+      {/* Tech Dome Logo */}
       <Link href="/" className="flex items-center gap-2 font-semibold italic">
         <div className="flex size-8 items-center justify-center rounded-md bg-primary font-bold text-primary-foreground">
-          DD
+          TD
         </div>
-        <span>Deal Dome</span>
+        <span>Tech Dome</span>
       </Link>
 
       {/* Landing Page Links */}

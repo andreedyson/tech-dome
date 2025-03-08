@@ -51,7 +51,7 @@ async function CategoriesPage() {
                 No Categories Found
               </h4>
               <p className="max-w-md text-xs md:text-sm">
-                Showing product categories that are available on DealDome.
+                Showing product categories that are available on TechDome.
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ async function CategoriesPage() {
               </h4>
               <p className="max-w-[350px] text-xs md:text-sm">
                 Showing list of categories with products that are available on
-                DealDome.
+                TechDome.
               </p>
             </div>
           </div>

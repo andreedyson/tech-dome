@@ -9,8 +9,8 @@ import { redirect } from "next/navigation";
 import { validateProtected } from "@/lib/check-session";
 
 export const metadata: Metadata = {
-  title: "DealDome",
-  description: "Shop with Deal Dome",
+  title: "TechDome",
+  description: "Shop with Tech Dome",
 };
 
 export default async function LandingLayout({

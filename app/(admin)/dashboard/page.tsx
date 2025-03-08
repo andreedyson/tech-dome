@@ -111,7 +111,7 @@ async function DashboardPage() {
                       No Products Found
                     </h4>
                     <p className="max-w-md text-xs md:text-sm">
-                      Showing the list of Top Selling Products on DealDome.
+                      Showing the list of Top Selling Products on TechDome.
                     </p>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import { getUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
-  title: "DealDome",
+  title: "TechDome",
 };
 
 export default async function AuthLayout({

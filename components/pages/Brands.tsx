@@ -52,7 +52,7 @@ async function Brands() {
                 No Brands Found
               </h4>
               <p className="max-w-md text-xs md:text-sm">
-                Showing the popular brands that are available on DealDome.
+                Showing the popular brands that are available on TechDome.
               </p>
             </div>
           </div>

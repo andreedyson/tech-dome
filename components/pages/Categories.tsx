@@ -45,7 +45,7 @@ async function Categories() {
                 No Categories Found
               </h4>
               <p className="max-w-md text-xs md:text-sm">
-                Showing product categories that are available on DealDome.
+                Showing product categories that are available on TechDome.
               </p>
             </div>
           </div>

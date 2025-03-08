@@ -70,7 +70,7 @@ async function Products() {
                 No Top Products Found
               </h4>
               <p className="max-w-md text-xs md:text-sm">
-                Showing the top selling Products on DealDome.
+                Showing the top selling Products on TechDome.
               </p>
             </div>
           </div>

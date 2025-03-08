@@ -13,9 +13,9 @@ function SignInPage() {
             className="flex items-center gap-2 font-semibold italic"
           >
             <div className="flex size-8 items-center justify-center rounded-md bg-primary font-bold text-primary-foreground">
-              DD
+              TD
             </div>
-            Deal Dome
+            Tech Dome
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">

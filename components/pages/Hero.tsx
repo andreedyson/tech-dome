@@ -11,7 +11,7 @@ function Hero() {
         <div className="flex w-full flex-col max-lg:order-last max-lg:items-center max-lg:justify-center">
           <div className="flex w-fit items-center gap-2 rounded-full border-2 bg-white px-3 py-2 text-sm font-semibold text-black shadow-md">
             <Crown size={20} />
-            Most Popular Product in DealDome
+            Most Popular Product in TechDome
           </div>
           <div className="mt-3 flex w-full flex-col max-lg:items-center max-lg:justify-center">
             <h1 className="max-w-[400px] text-balance text-2xl font-extrabold leading-none text-gray-900 md:text-3xl lg:max-w-[500px] lg:text-4xl">
