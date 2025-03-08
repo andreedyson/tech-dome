@@ -12,14 +12,16 @@ async function CategoriesPage() {
 
   return (
     <section>
+      <CategoriesBanner />
+
       {/* Categories Header Section */}
-      <h1 className="max-w-[350px] text-2xl font-extrabold leading-none md:text-3xl lg:max-w-[500px] lg:text-4xl">
+      <h1 className="mt-6 max-w-[350px] text-2xl font-extrabold leading-none md:text-3xl lg:max-w-[500px] lg:text-4xl">
         Shop by
         <span className="text-main-violet-500"> Category</span>
       </h1>
 
       {/* Categories Section */}
-      <div className="mt-6 w-full">
+      <div className="mt-4 w-full">
         {categoriesProducts.length ? (
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
             {categoriesProducts.map((category) => (
@@ -56,59 +58,38 @@ async function CategoriesPage() {
         )}
       </div>
 
-      <CategoriesBanner />
-
       {/* Products by Categories */}
       <div className="mt-12 w-full space-y-12">
-        {categoryWithProducts.length > 0 ? (
-          categoryWithProducts.map((category) => (
-            <div
-              className="grid gap-4 lg:grid-cols-5"
-              key={category.id + category.name}
-            >
-              <div className="col-span-1">
-                <h3 className="text-lg font-bold md:text-xl">
-                  {category.name}
-                </h3>
-                <p>{category.products.length} Products</p>
-              </div>
-              {/* Products Cards */}
-              <div className="col-span-4 grid grid-cols-2 md:grid-cols-4">
-                {category.products.length > 0 ? (
-                  category.products.map((product) => (
+        {categoryWithProducts.filter((category) => category.products.length > 0)
+          .length > 0 ? (
+          categoryWithProducts
+            .filter((category) => category.products.length > 0)
+            .map((category) => (
+              <div
+                className="grid gap-4 lg:grid-cols-5"
+                key={category.id + category.name}
+              >
+                <div className="col-span-1">
+                  <h3 className="text-lg font-bold md:text-xl">
+                    {category.name}
+                  </h3>
+                  <p>{category.products.length} Products</p>
+                </div>
+                {/* Products Cards */}
+                <div className="col-span-4 grid grid-cols-2 md:grid-cols-4">
+                  {category.products.map((product) => (
                     <ProductCard key={product.id} product={product} />
-                  ))
-                ) : (
-                  <div className="col-span-full flex flex-col items-center gap-2 text-center">
-                    <Image
-                      src={"/assets/empty-vault.svg"}
-                      width={500}
-                      height={300}
-                      alt="Products Not Found"
-                      className="aspect-video w-[180px] lg:w-[280px]"
-                      priority
-                    />
-                    <div className="space-y-0.5">
-                      <h4 className="text-sm font-semibold md:text-base">
-                        No Products Available in {category.name}.
-                      </h4>
-                      <p className="max-w-md text-xs md:text-sm">
-                        Showing products with the categories of
-                        {category.name}.
-                      </p>
-                    </div>
-                  </div>
-                )}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))
+            ))
         ) : (
           <div className="col-span-full flex flex-col items-center gap-2 text-center">
             <Image
               src={"/assets/empty-products.svg"}
               width={500}
               height={300}
-              alt="Products Not Found"
+              alt="Categories Not Found"
               className="aspect-video size-[180px] lg:size-[280px]"
               priority
             />
