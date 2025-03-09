@@ -19,7 +19,7 @@ export async function createOrderDetails(
   products: CartProps[],
   total: number,
 ) {
-  let redirectPaymentUrl = "/";
+  let redirectPaymentUrl = "/payment-success";
 
   try {
     const { user } = await validateProtected();

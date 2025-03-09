@@ -73,28 +73,26 @@ function CartProducts() {
           </article>
         ))
       ) : (
-        <div>
-          <div className="flex h-full w-full flex-col items-center gap-2 text-center">
-            <Image
-              src={"/assets/empty-cart.svg"}
-              width={500}
-              height={300}
-              alt="Products Not Found"
-              className="aspect-video size-[180px] lg:size-[280px]"
-              priority
-            />
-            <div className="space-y-0.5">
-              <h4 className="text-sm font-semibold md:text-base">
-                No Products in Cart Yet
-              </h4>
-              <Link
-                href={"/catalogs"}
-                className="flex max-w-md items-center text-xs hover:underline md:text-sm"
-              >
-                <ChevronLeft size={16} />
-                Checkout some products
-              </Link>
-            </div>
+        <div className="flex h-full w-full flex-col items-center gap-2 text-center">
+          <Image
+            src={"/assets/empty-cart.svg"}
+            width={500}
+            height={300}
+            alt="Products Not Found"
+            className="aspect-video size-[180px] lg:size-[280px]"
+            priority
+          />
+          <div className="space-y-0.5">
+            <h4 className="text-sm font-semibold md:text-base">
+              No Products in Cart Yet
+            </h4>
+            <Link
+              href={"/catalogs"}
+              className="flex max-w-md items-center text-xs hover:underline md:text-sm"
+            >
+              <ChevronLeft size={16} />
+              Checkout some products
+            </Link>
           </div>
         </div>
       )}
