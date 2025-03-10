@@ -11,8 +11,12 @@ import { redirect } from "next/navigation";
 async function ProfilePage() {
   const { session, user } = await getUser();
 
-  if (!session || !user) {
+  if (!session) {
     redirect("/");
+  }
+
+  if (user.role === "ADMIN") {
+    redirect("/dashboard");
   }
 
   const userInitial =

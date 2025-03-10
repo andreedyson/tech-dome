@@ -135,7 +135,6 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
 
     return data.slice(0, 10);
   } catch (error) {
-    console.log(error);
     return [];
   }
 }
