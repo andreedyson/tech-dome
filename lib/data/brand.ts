@@ -4,7 +4,7 @@ import { Brand } from "@prisma/client";
 import { prisma } from "../prisma";
 import {
   AllBrandProps,
-  BrandHighestSellingProductsProps,
+  BrandTotalProductsProps,
   BrandSalesProps,
   BrandWithProductsProps,
   BrandWithTotalProductsProps,
@@ -152,43 +152,22 @@ export async function getBrandSales(): Promise<BrandSalesProps[]> {
   }
 }
 
-export async function getBrandHighestSellingProducts(): Promise<
-  BrandHighestSellingProductsProps[]
+export async function getBrandTotalProducts(): Promise<
+  BrandTotalProductsProps[]
 > {
   try {
     const brands = await prisma.brand.findMany({
-      where: {
-        Product: {
-          some: {
-            orders: {
-              some: {
-                order: {
-                  status: "SUCCESS",
-                },
-              },
-            },
-          },
-        },
-      },
       include: {
-        Product: {
-          include: {
-            orders: true,
-          },
-        },
+        Product: true,
       },
     });
 
-    const data = brands.map(({ Product, ...brand }) => ({
-      ...brand,
-      product: Product.find((product) => {
-        return product.orders.length >= 5;
-      }),
-      totalOrders:
-        Product.find((product) => {
-          return product.orders.length >= 5;
-        })?.orders.length || 0,
-    }));
+    const data = brands
+      .map(({ Product, ...brand }) => ({
+        ...brand,
+        totalProducts: Product.length,
+      }))
+      .sort((a, b) => b.totalProducts - a.totalProducts);
 
     return data;
   } catch (error) {

@@ -24,7 +24,6 @@ export type BrandSalesProps = {
   sales: number;
 };
 
-export type BrandHighestSellingProductsProps = Brand & {
-  product: Product | undefined;
-  totalOrders: number;
+export type BrandTotalProductsProps = Brand & {
+  totalProducts: number;
 };

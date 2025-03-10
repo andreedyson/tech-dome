@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataTable } from "@/components/ui/data-table";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getBrandHighestSellingProducts } from "@/lib/data/brand";
+import { getBrandTotalProducts } from "@/lib/data/brand";
 import { getStatsCardData } from "@/lib/data/dashboard";
 import { getSalesByLocation } from "@/lib/data/location";
 import { getLatestOrders } from "@/lib/data/order";
@@ -31,7 +31,7 @@ async function DashboardPage() {
   const salesByLocation = await getSalesByLocation();
   const topCustomers = await getTopCustomers();
   const latestOrders = await getLatestOrders();
-  const brandHighestSelling = await getBrandHighestSellingProducts();
+  const brandHighestSelling = await getBrandTotalProducts();
 
   return (
     <section className="w-full space-y-6">
@@ -342,7 +342,7 @@ async function DashboardPage() {
                     Performance
                   </TabsTrigger>
                   <TabsTrigger value="highest" className="w-full">
-                    Highest Selling
+                    Brand Products
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="performance">
@@ -350,46 +350,26 @@ async function DashboardPage() {
                 </TabsContent>
                 <TabsContent value="highest" className="h-full">
                   {brandHighestSelling.length > 0 ? (
-                    <div className="flex h-full flex-col justify-between">
-                      <div className="space-y-2">
-                        {brandHighestSelling.map((brand) => (
-                          <div
-                            key={brand.id}
-                            className="flex items-center gap-4"
-                          >
-                            <Image
-                              src={getImageUrl(brand.logo, "brands")}
-                              width={80}
-                              height={80}
-                              alt={brand.name}
-                              className="aspect-square size-20 rounded-lg border-2 object-contain"
-                            />
-                            <div>
-                              <p className="text-base font-bold">
-                                {brand.name}
-                              </p>
-                              <div className="text-sm leading-5 text-muted-foreground">
-                                <p className="font-medium">
-                                  {brand.product && brand.product?.name}
-                                </p>
-                                <p>
-                                  {brand.product
-                                    ? `(${brand.totalOrders} Sold)`
-                                    : ""}
-                                </p>
-                              </div>
-                            </div>
+                    <div className="grid grid-cols-2 gap-8">
+                      {brandHighestSelling.slice(0, 8).map((brand) => (
+                        <div key={brand.id} className="flex items-center gap-2">
+                          <Image
+                            src={getImageUrl(brand.logo, "brands")}
+                            width={80}
+                            height={80}
+                            alt={brand.name}
+                            className="aspect-video w-12 rounded-lg border-2 object-contain md:w-16"
+                          />
+                          <div>
+                            <p className="line-clamp-1 font-bold md:text-sm">
+                              {brand.name}
+                            </p>
+                            <p className="text-xs md:text-[14px]">
+                              {brand.totalProducts} Products
+                            </p>
                           </div>
-                        ))}
-                      </div>
-                      <div className="flex w-full flex-col items-center justify-center text-center text-sm">
-                        <div className="flex gap-2 font-medium">
-                          Brand Highest Selling
                         </div>
-                        <div className="text-muted-foreground">
-                          Showing the top product from each brand.
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   ) : (
                     <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
