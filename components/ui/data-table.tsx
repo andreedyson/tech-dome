@@ -80,7 +80,7 @@ export function DataTable<TData, TValue>({
           <Input
             id="search"
             autoComplete="off"
-            placeholder={`Search by ${columFiltered}`}
+            placeholder={`Search by ${columFiltered == "id" ? "ID" : columFiltered}`}
             value={
               (table.getColumn(columFiltered)?.getFilterValue() as string) ?? ""
             }
