@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge } from "./ui/badge";
 import { OrderStatus } from "@prisma/client";
+import { Check, Loader } from "lucide-react";
 
 type OrderStatusProps = {
   status: OrderStatus;
@@ -23,6 +24,11 @@ function OrderStatusBadge({ status }: OrderStatusProps) {
 
   return (
     <Badge className={`${badgeColor} rounded-full`}>
+      {status === "PENDING" ? (
+        <Loader size={14} strokeWidth={3} className="mr-1" />
+      ) : (
+        <Check size={14} strokeWidth={3} className="mr-1" />
+      )}
       {status === "PENDING" ? "Pending" : "Success"}
     </Badge>
   );
