@@ -9,6 +9,7 @@ import ProductStatusBadge from "../ProductStatusBadge";
 import { Button } from "../ui/button";
 import {
   Calendar,
+  ChartBarStacked,
   Coins,
   Loader,
   PackageOpen,
@@ -63,6 +64,20 @@ export const columns: ColumnDef<ProductColumn>[] = [
     },
   },
   {
+    accessorKey: "categoryName",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <ChartBarStacked size={14} />
+        Category
+      </div>
+    ),
+    cell: ({ row }) => {
+      const product = row.original;
+
+      return <div>{product.categoryName}</div>;
+    },
+  },
+  {
     accessorKey: "status",
     header: () => (
       <div className="flex items-center gap-1">
@@ -102,20 +117,6 @@ export const columns: ColumnDef<ProductColumn>[] = [
       const product = row.original;
 
       return <div>{product.total_sales}</div>;
-    },
-  },
-  {
-    accessorKey: "createdAt",
-    header: () => (
-      <div className="flex items-center gap-1">
-        <Calendar size={14} />
-        Added
-      </div>
-    ),
-    cell: ({ row }) => {
-      const product = row.original;
-
-      return <div>{formatDate(product.createdAt)}</div>;
     },
   },
   {
