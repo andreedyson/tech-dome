@@ -37,7 +37,11 @@ async function ProductsPage() {
         </div>
         {/* Data Table */}
         <div>
-          <DataTable columns={ProductColumns} data={productsData} />
+          <DataTable
+            columns={ProductColumns}
+            data={productsData}
+            filterType="product"
+          />
         </div>
       </div>
     </section>

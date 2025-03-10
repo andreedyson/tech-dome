@@ -2,11 +2,11 @@
 
 import {
   ColumnDef,
-  flexRender,
   ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  getCoreRowModel,
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
@@ -19,9 +19,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "./button";
 import { ChevronLeft, ChevronRight, Eye, Search } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
+import { DataTableFilter } from "../tables/DataTableFilter";
+import { Button } from "./button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -30,12 +31,17 @@ import {
 } from "./dropdown-menu";
 import { Input } from "./input";
 import { Label } from "./label";
+import {
+  orderStatusFilterOptions,
+  productStatusFilterOptions,
+} from "@/constants";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pageSize?: number;
   columnFilter?: string;
+  filterType?: "product" | "order";
 }
 
 export function DataTable<TData, TValue>({
@@ -43,6 +49,7 @@ export function DataTable<TData, TValue>({
   data,
   pageSize,
   columnFilter,
+  filterType,
 }: DataTableProps<TData, TValue>) {
   const columFiltered = columnFilter || "name";
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -90,40 +97,57 @@ export function DataTable<TData, TValue>({
             className="max-w-sm border-2 bg-input pl-10 placeholder:capitalize"
           />
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" size={"sm"} className="ml-auto">
-              <Eye />
-              Toggle
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                const columnName =
-                  column.id.split("_").length > 1
-                    ? column.id.split("_")[0] + " " + column.id.split("_")[1]
-                    : column.id;
-
-                return (
-                  column.id !== "actions" && (
-                    <DropdownMenuCheckboxItem
-                      key={column.id}
-                      className="capitalize"
-                      checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
-                    >
-                      {columnName}
-                    </DropdownMenuCheckboxItem>
-                  )
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-3">
+          {filterType == "product" && (
+            <DataTableFilter
+              column={table.getColumn("status")}
+              title="Status"
+              type="product"
+              options={productStatusFilterOptions}
+            />
+          )}
+          {filterType == "order" && (
+            <DataTableFilter
+              column={table.getColumn("status")}
+              title="Status"
+              type="product"
+              options={orderStatusFilterOptions}
+            />
+          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size={"sm"}>
+                <Eye />
+                Toggle
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  const columnName =
+                    column.id.split("_").length > 1
+                      ? column.id.split("_")[0] + " " + column.id.split("_")[1]
+                      : column.id;
+                  return (
+                    column.id !== "actions" && (
+                      <DropdownMenuCheckboxItem
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {columnName}
+                      </DropdownMenuCheckboxItem>
+                    )
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>

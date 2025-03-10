@@ -1,6 +1,6 @@
-import * as React from "react";
 import { Column } from "@tanstack/react-table";
-import { Check, PlusCircle } from "lucide-react";
+import { Check, Filter } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { Badge } from "../ui/badge";
@@ -17,9 +17,10 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Separator } from "../ui/separator";
 
-interface DataTableFacetedFilterProps<TData, TValue> {
+interface DataTableFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
   title?: string;
+  type?: "product" | "order";
   options: {
     label: string;
     value: string;
@@ -27,11 +28,12 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   }[];
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
+export function DataTableFilter<TData, TValue>({
   column,
   title,
+  type,
   options,
-}: DataTableFacetedFilterProps<TData, TValue>) {
+}: DataTableFilterProps<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set(column?.getFilterValue() as string[]);
 
@@ -39,7 +41,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
-          <PlusCircle />
+          <Filter />
           {title}
           {selectedValues?.size > 0 && (
             <>

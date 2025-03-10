@@ -29,3 +29,25 @@ export const LANDING_TESTIMONIALS = [
     image: "/assets/landing-customer-4.png",
   },
 ];
+
+export const productStatusFilterOptions = [
+  {
+    value: "PRE_ORDER",
+    label: "Pre-Order",
+  },
+  {
+    value: "READY",
+    label: "Ready",
+  },
+];
+
+export const orderStatusFilterOptions = [
+  {
+    value: "PENDING",
+    label: "Pending",
+  },
+  {
+    value: "SUCCESS",
+    label: "Success",
+  },
+];

@@ -32,6 +32,7 @@ async function OrdersPage() {
             columns={OrderColumn}
             data={ordersData}
             columnFilter="id"
+            filterType="order"
           />
         </div>
       </div>
