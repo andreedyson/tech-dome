@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getBrandHighestSellingProducts } from "@/lib/data/brand";
 import { getStatsCardData } from "@/lib/data/dashboard";
-import { getSalesByCountry } from "@/lib/data/location";
+import { getSalesByLocation } from "@/lib/data/location";
 import { getLatestOrders } from "@/lib/data/order";
 import { getTopProducts } from "@/lib/data/product";
 import { getTopCustomers } from "@/lib/data/user";
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 async function DashboardPage() {
   const statsCard = await getStatsCardData();
   const topProducts = await getTopProducts();
-  const salesByCountry = await getSalesByCountry();
+  const salesByLocation = await getSalesByLocation();
   const topCustomers = await getTopCustomers();
   const latestOrders = await getLatestOrders();
   const brandHighestSelling = await getBrandHighestSellingProducts();
@@ -188,12 +188,12 @@ async function DashboardPage() {
           </Card>
         </div>
 
-        {/* Sales by Country Card */}
+        {/* Sales by Location Card */}
         <div className="md:col-span-2 lg:col-span-4 lg:col-start-9">
           <Card className="h-full border-2">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle>Sales by Country</CardTitle>
+                <CardTitle>Sales by Location</CardTitle>
                 <Link href={"/dashboard/locations"}>
                   <Button variant={"outline"} size={"sm"}>
                     View All
@@ -203,10 +203,10 @@ async function DashboardPage() {
               <Separator className="h-[2px]" />
             </CardHeader>
             <CardContent className="grid grid-cols-2">
-              {salesByCountry.length > 0 ? (
-                salesByCountry.map((country, index) => (
+              {salesByLocation.length > 0 ? (
+                salesByLocation.map((Location, index) => (
                   <div
-                    key={country.id + country.name}
+                    key={Location.id + Location.name}
                     className="flex items-center justify-between py-3"
                   >
                     <div className="flex items-center gap-4">
@@ -216,13 +216,13 @@ async function DashboardPage() {
                       <div>
                         <p
                           className="line-clamp-1 text-sm font-semibold lg:text-base"
-                          title={country.name}
+                          title={Location.name}
                         >
-                          {country.name}
+                          {Location.name}
                         </p>
                         <div className="flex items-center gap-1">
                           <p className="text-base font-bold text-main-violet-500 md:text-lg">
-                            {country.totalSales}
+                            {Location.totalSales}
                           </p>
                           <span className="text-sm font-light text-muted-foreground md:text-base">
                             Sales
@@ -244,10 +244,10 @@ async function DashboardPage() {
                   />
                   <div className="space-y-0.5">
                     <h4 className="text-sm font-semibold md:text-base">
-                      No Country Found
+                      No Location Found
                     </h4>
                     <p className="max-w-md text-xs md:text-sm">
-                      Showing the list of Top Country by total sales.
+                      Showing the list of Top Location by total sales.
                     </p>
                   </div>
                 </div>
@@ -257,10 +257,10 @@ async function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid w-full gap-4 lg:grid-cols-12">
+      <div className="grid h-full w-full grid-cols-1 gap-4 lg:grid-cols-12">
         {/* Latest Orders Table */}
-        <div className="w-full lg:col-span-8">
-          <Card className="h-full border-2">
+        <div className="col-span-full w-full lg:col-span-8">
+          <Card className="h-full w-full border-2">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Latest Orders</CardTitle>
@@ -272,7 +272,7 @@ async function DashboardPage() {
               </div>
               <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent>
+            <CardContent className="w-full">
               <Tabs defaultValue="order-table" className="h-full w-full">
                 <div className="flex w-full justify-end">
                   <TabsList className="w-[160px]">
@@ -322,7 +322,7 @@ async function DashboardPage() {
         </div>
 
         {/* Brand Performance Sales */}
-        <div className="w-full lg:col-span-4">
+        <div className="col-span-full w-full lg:col-span-4">
           <Card className="h-full border-2">
             <CardHeader>
               <div className="flex items-center justify-between">
@@ -338,16 +338,10 @@ async function DashboardPage() {
             <CardContent className="h-[70%] w-full">
               <Tabs defaultValue="performance" className="h-full w-full">
                 <TabsList className="w-full">
-                  <TabsTrigger
-                    value="performance"
-                    className="max-w-[200px] md:w-full"
-                  >
+                  <TabsTrigger value="performance" className="w-full">
                     Performance
                   </TabsTrigger>
-                  <TabsTrigger
-                    value="highest"
-                    className="max-w-[200px] md:w-full"
-                  >
+                  <TabsTrigger value="highest" className="w-full">
                     Highest Selling
                   </TabsTrigger>
                 </TabsList>
