@@ -11,7 +11,9 @@ function ProductStatusBadge({ status }: ProductStatusProps) {
   const statusText =
     status.split("_").length > 1 ? status.split("_").join("-") : status;
 
-  return <Badge className={`${badgeColor} rounded-full`}>{statusText}</Badge>;
+  return (
+    <Badge className={`${badgeColor} rounded-full text-xs`}>{statusText}</Badge>
+  );
 }
 
 export default ProductStatusBadge;

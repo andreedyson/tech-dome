@@ -94,7 +94,7 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
               table.getColumn(columFiltered)?.setFilterValue(event.target.value)
             }
-            className="max-w-sm border-2 bg-input pl-10 placeholder:capitalize"
+            className="max-w-[250px] border-2 bg-input pl-10 placeholder:capitalize max-md:placeholder:text-sm md:max-w-sm"
           />
         </div>
         <div className="flex items-center gap-3">

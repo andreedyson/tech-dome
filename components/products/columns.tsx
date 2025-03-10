@@ -47,13 +47,14 @@ export const columns: ColumnDef<ProductColumn>[] = [
       const product = row.original;
 
       return (
-        <div className="inline-flex items-center gap-5">
-          <div className="size-20 rounded-lg object-contain">
+        <div className="flex items-center gap-5">
+          <div className="hidden size-20 rounded-lg md:block">
             <Image
               src={product.imageUrl}
               alt={product.name}
               width={80}
               height={80}
+              className="size-full object-contain"
             />
           </div>
           <p>{product.name}</p>

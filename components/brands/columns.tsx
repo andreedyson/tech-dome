@@ -23,13 +23,13 @@ export const columns: ColumnDef<AllBrandProps>[] = [
       const brand = row.original;
 
       return (
-        <div className="size-20 rounded-lg">
+        <div className="size-16 rounded-lg md:size-20">
           <Image
             src={getImageUrl(brand.logo, "brands")}
             alt={brand.name}
             width={80}
             height={80}
-            className="size-20 object-contain"
+            className="size-16 object-contain md:size-20"
           />
         </div>
       );
