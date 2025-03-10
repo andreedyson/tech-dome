@@ -380,7 +380,7 @@ async function DashboardPage() {
                                 </p>
                                 <p>
                                   {brand.product
-                                    ? `(${brand.totalOrder} Sold)`
+                                    ? `(${brand.totalOrders} Sold)`
                                     : ""}
                                 </p>
                               </div>

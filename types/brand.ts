@@ -1,5 +1,9 @@
-import { Brand, Order, Product } from "@prisma/client";
+import { Brand, Product } from "@prisma/client";
 import { TopProductProps } from "./product";
+
+export type AllBrandProps = Brand & {
+  totalOrders: number;
+};
 
 export type BrandWithTotalProductsProps = {
   id: number;
@@ -22,5 +26,5 @@ export type BrandSalesProps = {
 
 export type BrandHighestSellingProductsProps = Brand & {
   product: Product | undefined;
-  totalOrder: number;
+  totalOrders: number;
 };

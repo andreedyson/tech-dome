@@ -3,6 +3,7 @@
 import { Brand } from "@prisma/client";
 import { prisma } from "../prisma";
 import {
+  AllBrandProps,
   BrandHighestSellingProductsProps,
   BrandSalesProps,
   BrandWithProductsProps,
@@ -10,15 +11,34 @@ import {
 } from "@/types/brand";
 import { getImageUrl } from "../supabase";
 
-export async function getAllBrands(): Promise<Brand[]> {
+export async function getAllBrands(): Promise<AllBrandProps[]> {
   try {
     const brands = await prisma.brand.findMany({
       orderBy: {
         id: "asc",
       },
+
+      include: {
+        Product: {
+          include: {
+            orders: true,
+          },
+        },
+      },
     });
 
-    return brands;
+    const data = brands.map(({ Product, ...brand }) => ({
+      ...brand,
+      product: Product.find((product) => {
+        return product.orders.length >= 5;
+      }),
+      totalOrders:
+        Product.find((product) => {
+          return product.orders.length >= 5;
+        })?.orders.length || 0,
+    }));
+
+    return data;
   } catch (error) {
     return [];
   }
@@ -166,7 +186,7 @@ export async function getBrandHighestSellingProducts(): Promise<
       product: Product.find((product) => {
         return product.orders.length >= 5;
       }),
-      totalOrder:
+      totalOrders:
         Product.find((product) => {
           return product.orders.length >= 5;
         })?.orders.length || 0,

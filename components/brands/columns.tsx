@@ -1,14 +1,14 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import { Brand } from "@prisma/client";
-import Image from "next/image";
 import { getImageUrl } from "@/lib/supabase";
-import EditBrandDialog from "./EditBrandDialog";
+import { AllBrandProps } from "@/types/brand";
+import { ColumnDef } from "@tanstack/react-table";
+import { Building, LetterText, ReceiptText } from "lucide-react";
+import Image from "next/image";
 import DeleteBrandDialog from "./DeleteBrandDialog";
-import { Building, LetterText } from "lucide-react";
+import EditBrandDialog from "./EditBrandDialog";
 
-export const columns: ColumnDef<Brand>[] = [
+export const columns: ColumnDef<AllBrandProps>[] = [
   {
     accessorKey: "logo",
     header: () => {
@@ -44,6 +44,22 @@ export const columns: ColumnDef<Brand>[] = [
           Name
         </div>
       );
+    },
+  },
+  {
+    accessorKey: "totalOrders",
+    header: () => {
+      return (
+        <div className="flex items-center gap-1">
+          <ReceiptText size={14} />
+          Total Orders
+        </div>
+      );
+    },
+    cell: ({ row }) => {
+      const brand = row.original;
+
+      return <div>{brand.totalOrders} Orders</div>;
     },
   },
   {
