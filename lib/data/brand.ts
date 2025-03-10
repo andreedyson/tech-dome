@@ -29,12 +29,10 @@ export async function getAllBrands(): Promise<AllBrandProps[]> {
 
     const data = brands.map(({ Product, ...brand }) => ({
       ...brand,
-      product: Product.find((product) => {
-        return product.orders.length >= 5;
-      }),
+
       totalOrders:
         Product.find((product) => {
-          return product.orders.length >= 5;
+          return product.orders;
         })?.orders.length || 0,
     }));
 
