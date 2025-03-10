@@ -12,14 +12,22 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
 import React from "react";
+import UserAvatar from "../UserAvatar";
+import { Session } from "lucia";
+import { User } from "lucia";
 
-function AdminHeader() {
+type AdminHeaderProps = {
+  session: Session | null;
+  user: User | null;
+};
+
+function AdminHeader({ session, user }: AdminHeaderProps) {
   const pathname = usePathname();
   const pathnames = pathname.split("/").filter((x) => x);
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-      <div className="flex items-center gap-2 px-3">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
+      <div className="flex items-center gap-2">
         <SidebarTrigger />
         <Separator orientation="vertical" className="mr-2 h-4" />
         <Breadcrumb>
@@ -58,6 +66,7 @@ function AdminHeader() {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
+      <UserAvatar fullname={user?.name as string} role={user?.role as string} />
     </header>
   );
 }

@@ -20,16 +20,17 @@ export default async function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { session } = await getUser();
+  const { session, user } = await getUser();
 
   if (!session) {
     redirect("/sign-in");
   }
+
   return (
     <SidebarProvider>
       <AppSidebar />
       <main className={`${GeistSans.className} w-full antialiased`}>
-        <AdminHeader />
+        <AdminHeader user={user} session={session} />
         <div className="m-4">{children}</div>
         <Toaster />
       </main>

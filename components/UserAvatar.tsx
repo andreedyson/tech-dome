@@ -18,8 +18,9 @@ import Link from "next/link";
 
 type UserAvatarProps = {
   fullname: string;
+  role: string;
 };
-function UserAvatar({ fullname }: UserAvatarProps) {
+function UserAvatar({ fullname, role }: UserAvatarProps) {
   const userInitial =
     fullname.split(" ").length > 1
       ? fullname.split(" ")[0].charAt(0) + fullname.split(" ")[1].charAt(0)
@@ -41,8 +42,10 @@ function UserAvatar({ fullname }: UserAvatarProps) {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1 text-right">
             <p className="text-sm font-semibold leading-none">{fullname}</p>
-            <p className="text-sm font-medium leading-none text-muted-foreground">
-              Customer
+            <p
+              className={`"text-sm text-muted-foreground" font-medium leading-none ${role == "ADMIN" ? "text-red-500" : "text-slate-400"}`}
+            >
+              {role == "ADMIN" ? "Admin" : "Customer"}
             </p>
           </div>
         </DropdownMenuLabel>

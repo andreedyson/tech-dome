@@ -49,7 +49,7 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
               className="text-main-violet-600"
             />
           </Link>
-          <UserAvatar fullname={user.name} />
+          <UserAvatar fullname={user.name} role={user.role} />
         </div>
       ) : (
         <div className="flex items-center gap-4 font-medium md:text-base">
