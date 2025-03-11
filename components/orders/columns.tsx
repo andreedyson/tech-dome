@@ -52,7 +52,7 @@ export const columns: ColumnDef<OrderColumn>[] = [
         <div className="inline-flex flex-col items-center gap-5 md:flex-row">
           {order.products.map((product, i) => (
             <div key={product.name + i}>
-              <div className="size-20 rounded-lg object-contain">
+              <div className="hidden size-20 rounded-lg object-contain md:block">
                 <Image
                   src={product.image}
                   alt={product.name}

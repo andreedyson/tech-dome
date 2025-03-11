@@ -94,10 +94,10 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
               table.getColumn(columFiltered)?.setFilterValue(event.target.value)
             }
-            className="max-w-[250px] border-2 bg-input pl-10 placeholder:capitalize max-md:placeholder:text-sm md:max-w-sm"
+            className="max-w-[200px] border-2 bg-input pl-10 placeholder:capitalize max-md:placeholder:text-sm md:max-w-sm"
           />
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row md:items-center">
           {filterType == "product" && (
             <DataTableFilter
               column={table.getColumn("status")}

@@ -12,7 +12,11 @@ function ProductStatusBadge({ status }: ProductStatusProps) {
     status.split("_").length > 1 ? status.split("_").join("-") : status;
 
   return (
-    <Badge className={`${badgeColor} rounded-full text-xs`}>{statusText}</Badge>
+    <Badge
+      className={`${badgeColor} rounded-full text-center text-[10px] leading-none`}
+    >
+      {statusText}
+    </Badge>
   );
 }
 

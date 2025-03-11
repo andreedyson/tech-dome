@@ -31,7 +31,7 @@ async function DashboardPage() {
   const salesByLocation = await getSalesByLocation();
   const topCustomers = await getTopCustomers();
   const latestOrders = await getLatestOrders();
-  const brandHighestSelling = await getBrandTotalProducts();
+  const brandProducts = await getBrandTotalProducts();
 
   return (
     <section className="w-full space-y-6">
@@ -349,22 +349,22 @@ async function DashboardPage() {
                   <BrandPerformanceCharts />
                 </TabsContent>
                 <TabsContent value="highest" className="h-full">
-                  {brandHighestSelling.length > 0 ? (
+                  {brandProducts.length > 0 ? (
                     <div className="grid grid-cols-2 gap-8">
-                      {brandHighestSelling.slice(0, 8).map((brand) => (
+                      {brandProducts.slice(0, 8).map((brand) => (
                         <div key={brand.id} className="flex items-center gap-2">
                           <Image
                             src={getImageUrl(brand.logo, "brands")}
                             width={80}
                             height={80}
                             alt={brand.name}
-                            className="aspect-video w-12 rounded-lg border-2 object-contain md:w-16"
+                            className="aspect-video w-12 rounded-lg border-2 object-contain 2xl:w-16"
                           />
                           <div>
                             <p className="line-clamp-1 font-bold md:text-sm">
                               {brand.name}
                             </p>
-                            <p className="text-xs md:text-[14px]">
+                            <p className="text-xs">
                               {brand.totalProducts} Products
                             </p>
                           </div>
