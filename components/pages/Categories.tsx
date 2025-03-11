@@ -23,7 +23,12 @@ async function Categories() {
                 key={category.name}
                 className="rounded-xl border-2 p-4 shadow-md duration-200 hover:border-yellow-500"
               >
-                <p className="text-lg font-bold">{category.name}</p>
+                <p
+                  className="line-clamp-1 text-base font-bold md:text-lg"
+                  title={category.name}
+                >
+                  {category.name}
+                </p>
                 <p className="text-muted-foreground">
                   {category.totalProducts} Products
                 </p>

@@ -22,12 +22,12 @@ async function Products() {
       {/* Top Products Section */}
       <div className="w-full">
         {topProducts.length ? (
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
             {topProducts.map((product) => (
               <Link
                 key={product.id}
                 href={`/product-details/${product.id}`}
-                className="rounded-xl border-2 shadow-md duration-200 hover:ring-2 hover:ring-main-violet-500"
+                className="size-full rounded-xl border-2 shadow-md duration-200 hover:ring-2 hover:ring-main-violet-500"
               >
                 {/* Product Image */}
                 <Image
@@ -35,7 +35,7 @@ async function Products() {
                   width={150}
                   height={150}
                   alt={product.name}
-                  className="w-full rounded-t-xl object-contain"
+                  className="aspect-square size-[200px] w-full rounded-t-xl border-b-2 object-contain"
                 />
                 {/* Product Details */}
                 <div className="p-4">
