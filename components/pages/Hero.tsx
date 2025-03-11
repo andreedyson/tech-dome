@@ -2,6 +2,7 @@ import { LANDING_TESTIMONIALS } from "@/constants";
 import { Crown, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -28,13 +29,15 @@ function Hero() {
             </p>
           </div>
           <div className="mt-6 flex items-center gap-4">
-            <Button className="rounded-full py-5 font-bold">
-              <ShoppingCart strokeWidth={3} />
-              Shop Now
-            </Button>
-            <Button variant={"link"} className="text-slate-500">
-              Discover More
-            </Button>
+            <Link href={"/catalogs"}>
+              <Button className="rounded-full py-5 font-bold">
+                <ShoppingCart strokeWidth={3} />
+                Shop Now
+              </Button>
+              <Button variant={"link"} className="text-slate-500">
+                Discover More
+              </Button>
+            </Link>
           </div>
         </div>
         {/* Hero Image */}

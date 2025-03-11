@@ -45,7 +45,7 @@ function ProductDetailsImages({ product }: ProductDetailsImagesProps) {
           width={800}
           height={800}
           alt={product.name}
-          className="size-full"
+          className="size-full object-contain"
         />
       </div>
     </div>
