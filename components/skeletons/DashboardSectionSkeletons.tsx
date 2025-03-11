@@ -6,7 +6,7 @@ function DashboardSectionSkeletons() {
     <div className="space-y-4 rounded-lg border-2 p-4">
       {/* Dashboard Section Header Skeletons */}
       <div>
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Skeleton className="size-10" />
@@ -14,7 +14,9 @@ function DashboardSectionSkeletons() {
             </div>
             <Skeleton className="h-[10px] w-full max-w-[450px]" />
           </div>
-          <Skeleton className="h-10 w-[140px] rounded-lg" />
+          <div className="flex w-full justify-end">
+            <Skeleton className="h-10 w-[140px] rounded-lg" />
+          </div>
         </div>
       </div>
 
