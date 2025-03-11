@@ -50,7 +50,7 @@ function Submit() {
   return (
     <SubmitButton
       isSubmitting={pending}
-      className="w-[150px] bg-main-violet-700 hover:bg-main-violet-500 md:w-full"
+      className="w-full bg-main-violet-700 hover:bg-main-violet-500"
     >
       {pending ? "Editing..." : "Edit"}
     </SubmitButton>
