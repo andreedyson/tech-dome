@@ -82,12 +82,14 @@ export async function getBrandsWithTotalProducts(): Promise<
       },
     });
 
-    const mappedBrands = brands.map((brand) => ({
-      id: brand.id,
-      name: brand.name,
-      logo: getImageUrl(brand.logo, "brands"),
-      totalProducts: brand.Product.length,
-    }));
+    const mappedBrands = brands
+      .map((brand) => ({
+        id: brand.id,
+        name: brand.name,
+        logo: getImageUrl(brand.logo, "brands"),
+        totalProducts: brand.Product.length,
+      }))
+      .sort((a, b) => b.totalProducts - a.totalProducts);
 
     return mappedBrands.slice(0, 4);
   } catch (error) {

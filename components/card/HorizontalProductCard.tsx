@@ -37,7 +37,7 @@ function HorizontalProductCard({ product }: HorizontalProductCardProps) {
         <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] md:w-[240px]">
           {product.description}
         </p>
-        <p className="mt-4 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted-foreground">
           Delivered from {product.location.name}
         </p>
       </div>

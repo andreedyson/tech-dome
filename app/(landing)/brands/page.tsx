@@ -121,7 +121,7 @@ async function BrandsPage() {
                     </h3>
                   </div>
 
-                  <div className="flex w-full md:overflow-x-auto">
+                  <div className="w-full max-md:space-y-2 md:flex md:md:space-x-2 md:overflow-x-auto">
                     {brand.products.map((product) => (
                       <HorizontalProductCard
                         key={product.id + product.name}
