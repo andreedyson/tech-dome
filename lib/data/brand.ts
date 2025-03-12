@@ -135,16 +135,18 @@ export async function getBrandSales(): Promise<BrandSalesProps[]> {
       },
     });
 
-    const data = brands.map((brand) => {
-      const totalOrders = brand.Product.reduce((acc, product) => {
-        return acc + product.orders.length;
-      }, 0);
+    const data = brands
+      .map((brand) => {
+        const totalOrders = brand.Product.reduce((acc, product) => {
+          return acc + product.orders.length;
+        }, 0);
 
-      return {
-        brand: brand.name,
-        sales: totalOrders,
-      };
-    });
+        return {
+          brand: brand.name,
+          sales: totalOrders,
+        };
+      })
+      .sort((a, b) => b.sales - a.sales);
 
     return data;
   } catch (error) {
