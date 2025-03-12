@@ -97,7 +97,7 @@ async function DashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
                   <Image
                     src={"/assets/empty-products.svg"}
                     width={500}

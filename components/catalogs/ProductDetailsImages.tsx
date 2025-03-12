@@ -33,7 +33,7 @@ function ProductDetailsImages({ product }: ProductDetailsImagesProps) {
               width={500}
               height={500}
               alt={product.name}
-              className="size-full rounded-xl ring-2 ring-slate-300"
+              className="size-full rounded-xl object-contain ring-2 ring-slate-300"
             />
           </div>
         ))}
