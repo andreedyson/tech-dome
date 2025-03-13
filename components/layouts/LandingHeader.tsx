@@ -27,7 +27,7 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
       </Link>
 
       {/* Landing Page Links */}
-      <div className="flex items-center gap-6 text-sm md:text-base">
+      <div className="flex items-center gap-6 text-sm lg:text-base">
         {LANDING_PAGE_LINKS.map((link) => (
           <Link
             key={link.title}
@@ -40,7 +40,7 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
       </div>
 
       {/* Authentication Buttons */}
-      {session && user?.role === "CUSTOMER" ? (
+      {session && user ? (
         <div className="flex items-center gap-3">
           <Link href={"/cart"} className="rounded-full bg-input p-2.5">
             <ShoppingCart
@@ -52,10 +52,10 @@ function LandingHeader({ session, user }: LandingHeaderProps) {
           <UserAvatar fullname={user.name} role={user.role} />
         </div>
       ) : (
-        <div className="flex items-center gap-4 font-medium md:text-base">
+        <div className="flex flex-col items-center gap-4 text-sm font-medium lg:flex-row lg:text-base">
           <Link
             href={"/sign-in"}
-            className="duration-200 hover:text-slate-800 hover:underline md:text-base"
+            className="duration-200 hover:text-slate-800 hover:underline"
           >
             Sign In
           </Link>

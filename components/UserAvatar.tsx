@@ -51,13 +51,14 @@ function UserAvatar({ fullname, role }: UserAvatarProps) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {role !== "ADMIN" && (
-            <DropdownMenuItem>
-              <Link href={"/profile"} className="w-full">
-                Profile
-              </Link>
-            </DropdownMenuItem>
-          )}
+          <DropdownMenuItem>
+            <Link
+              href={role === "ADMIN" ? "/dashboard" : "/profile"}
+              className="w-full"
+            >
+              {role === "ADMIN" ? "Dashboard" : "Profile"}
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => SignOut()}
             className="cursor-pointer font-semibold text-red-500"
