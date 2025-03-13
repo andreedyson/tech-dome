@@ -15,12 +15,14 @@ import {
 import { SignOut } from "@/lib/actions/auth/admin/actions";
 import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type UserAvatarProps = {
   fullname: string;
   role: string;
 };
 function UserAvatar({ fullname, role }: UserAvatarProps) {
+  const pathname = usePathname();
   const userInitial =
     fullname.split(" ").length > 1
       ? fullname.split(" ")[0].charAt(0) + fullname.split(" ")[1].charAt(0)

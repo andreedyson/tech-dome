@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Session, User } from "lucia";
+import UserAvatar from "../UserAvatar";
 
 type MobileHeaderProps = {
   session: Session | null;
@@ -52,9 +53,6 @@ function MobileHeader({ session, user }: MobileHeaderProps) {
           </div>
           {session && user?.role && (
             <div className="flex items-center gap-3">
-              <p className="text-sm font-semibold underline">
-                Hi, {user.name.split(" ")[0]}
-              </p>
               <Link href={"/cart"} className="rounded-full bg-input p-2.5">
                 <ShoppingCart
                   size={20}
@@ -62,6 +60,7 @@ function MobileHeader({ session, user }: MobileHeaderProps) {
                   className="text-main-violet-600"
                 />
               </Link>
+              <UserAvatar fullname={user.name} role={user.role} />
             </div>
           )}
         </div>
