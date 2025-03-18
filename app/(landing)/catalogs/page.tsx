@@ -17,10 +17,11 @@ async function CatalogsPage() {
       </div>
 
       {/* Product List Catalog */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-        <div className="rounded-xl border-2 bg-background p-4 shadow md:col-span-1">
-          <h3 className="text-xl font-bold md:text-2xl">Filters</h3>
-          <Separator className="my-2" />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+        {/* Products Filter */}
+        <div className="hidden rounded-xl border-2 bg-background p-4 shadow lg:col-span-1 lg:block">
+          <h3 className="text-xl font-bold lg:text-2xl">Filters</h3>
+          <Separator className="my-4" />
           <FilterPrice />
           <Separator className="my-4" />
           <FilterStatus />
@@ -32,7 +33,7 @@ async function CatalogsPage() {
           <FilterCategories />
         </div>
 
-        <div className="rounded-xl border-2 bg-background p-4 shadow md:col-span-3">
+        <div className="rounded-xl border-2 bg-background p-4 shadow lg:col-span-3">
           <h3 className="text-xl font-bold md:text-2xl">Products</h3>
           <Separator className="my-2" />
           <ProductList />

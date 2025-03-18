@@ -1,9 +1,9 @@
 "use client";
 
+import { useFilterCatalog } from "@/hooks/use-filter-catalog";
+import { DollarSign } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
-import { DollarSign } from "lucide-react";
-import { useFilterCatalog } from "@/hooks/use-filter-catalog";
 
 function FilterPrice() {
   const { setFilter } = useFilterCatalog();
@@ -47,10 +47,8 @@ function FilterPrice() {
   };
 
   return (
-    <div className="space-y-3">
-      {/* Filter Price Header */}
-      <h4 className="text-base font-semibold md:text-lg">Price Range</h4>
-
+    <div>
+      <div className="text-base font-semibold md:text-lg">Price Range</div>
       {/* Filter Price Inputs */}
       <div className="space-y-2">
         <div className="animate-pulse text-balance text-sm text-red-500">

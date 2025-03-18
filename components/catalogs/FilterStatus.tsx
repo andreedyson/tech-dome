@@ -1,12 +1,15 @@
-import React from "react";
-import { Input } from "../ui/input";
+"use client";
+
+import { useState } from "react";
 import FilterCheckboxItem from "./FilterCheckboxItem";
 
 function FilterStatus() {
   return (
     <div className="space-y-3">
       {/* Filter Status Header */}
-      <h4 className="text-base font-semibold md:text-lg">Status</h4>
+      <div className="flex w-full items-center justify-between text-base font-semibold md:text-lg">
+        Status
+      </div>
 
       {/* Filter Status Checkboxes */}
       <div className="space-y-2">
