@@ -295,7 +295,7 @@ async function DashboardPage() {
                   ) : (
                     <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
                       <Image
-                        src={"/assets/empty-orders.svg"}
+                        src={"/assets/empty-vault.svg"}
                         width={500}
                         height={300}
                         alt="Orders Not Found"
@@ -314,7 +314,28 @@ async function DashboardPage() {
                   )}
                 </TabsContent>
                 <TabsContent value="order-chart" className="h-full">
-                  <LatestOrderCharts />
+                  {latestOrders.length > 0 ? (
+                    <LatestOrderCharts />
+                  ) : (
+                    <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                      <Image
+                        src={"/assets/empty-orders.svg"}
+                        width={500}
+                        height={300}
+                        alt="Orders Not Found"
+                        className="aspect-video w-[180px] lg:w-[380px]"
+                        priority
+                      />
+                      <div className="space-y-0.5">
+                        <h4 className="text-sm font-semibold md:text-base">
+                          No Orders Found
+                        </h4>
+                        <p className="max-w-md text-xs md:text-sm">
+                          Showing the list of orders from the past two weeks.
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </TabsContent>
               </Tabs>
             </CardContent>
@@ -358,7 +379,7 @@ async function DashboardPage() {
                             width={80}
                             height={80}
                             alt={brand.name}
-                            className="aspect-video w-12 rounded-lg border-2 object-contain 2xl:w-16"
+                            className="aspect-video w-12 rounded-lg border-2 object-contain lg:w-16 2xl:w-20"
                           />
                           <div>
                             <p className="line-clamp-1 font-bold md:text-sm">
