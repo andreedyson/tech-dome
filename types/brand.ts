@@ -2,6 +2,7 @@ import { Brand, Product } from "@prisma/client";
 import { TopProductProps } from "./product";
 
 export type AllBrandProps = Brand & {
+  totalProducts: number;
   totalOrders: number;
 };
 

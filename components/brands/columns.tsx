@@ -3,7 +3,7 @@
 import { getImageUrl } from "@/lib/supabase";
 import { AllBrandProps } from "@/types/brand";
 import { ColumnDef } from "@tanstack/react-table";
-import { Building, LetterText, ReceiptText } from "lucide-react";
+import { Boxes, Building, LetterText, ReceiptText } from "lucide-react";
 import Image from "next/image";
 import DeleteBrandDialog from "./DeleteBrandDialog";
 import EditBrandDialog from "./EditBrandDialog";
@@ -44,6 +44,22 @@ export const columns: ColumnDef<AllBrandProps>[] = [
           Name
         </div>
       );
+    },
+  },
+  {
+    accessorKey: "totalProducts",
+    header: () => {
+      return (
+        <div className="flex items-center gap-1">
+          <Boxes size={14} />
+          Total Products
+        </div>
+      );
+    },
+    cell: ({ row }) => {
+      const brand = row.original;
+
+      return <div>{brand.totalProducts} Products</div>;
     },
   },
   {

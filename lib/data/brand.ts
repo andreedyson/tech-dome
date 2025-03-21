@@ -29,7 +29,7 @@ export async function getAllBrands(): Promise<AllBrandProps[]> {
 
     const data = brands.map(({ Product, ...brand }) => ({
       ...brand,
-
+      totalProducts: Product.length,
       totalOrders:
         Product.find((product) => {
           return product.orders;
