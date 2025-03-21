@@ -6,6 +6,7 @@ import { getUser } from "@/lib/auth";
 import { getUserOrderHistory } from "@/lib/data/order";
 import { convertRupiah, formatDate } from "@/lib/utils";
 import { MailCheck, ReceiptText } from "lucide-react";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 
 async function ProfilePage() {
@@ -60,56 +61,77 @@ async function ProfilePage() {
 
         {/* Order History */}
         <div className="grid gap-4">
-          {userOrders.map((order) => (
-            <div key={order.id} className="rounded-lg border-2 p-4">
-              {/* Order Card Header */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3 text-sm">
-                  <div className="flex items-center gap-1">
-                    <ReceiptText size={16} />
-                    <p className="font-semibold">Order</p>
+          {userOrders.length > 0 ? (
+            userOrders.map((order) => (
+              <div key={order.id} className="rounded-lg border-2 p-4">
+                {/* Order Card Header */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-1">
+                      <ReceiptText size={16} />
+                      <p className="font-semibold">Order</p>
+                    </div>
+                    <p>{formatDate(order.updatedAt)}</p>
+                    <p className="font-medium text-muted-foreground underline">
+                      {order.id}
+                    </p>
                   </div>
-                  <p>{formatDate(order.updatedAt)}</p>
-                  <p className="font-medium text-muted-foreground underline">
-                    {order.id}
-                  </p>
-                </div>
-                <Badge
-                  className={`max-md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
-                >
-                  {order.status}
-                </Badge>
-              </div>
-
-              <Separator className="my-3 h-[2px]" />
-
-              {/* Order Products */}
-              <div className="flex w-full flex-col gap-4">
-                {order.products.map((product, i) => (
-                  <OrderHistoryProduct
-                    key={product.name + i}
-                    product={product}
-                  />
-                ))}
-
-                <Separator className="my-3 h-[2px]" />
-
-                <div className="flex justify-between max-md:flex-row md:justify-end">
                   <Badge
-                    className={`md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
+                    className={`max-md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
                   >
                     {order.status}
                   </Badge>
-                  <div className="leading-5">
-                    <p className="text-sm">Grand Total</p>
-                    <p className="font-bold text-main-violet-500">
-                      {convertRupiah(order.total)}
-                    </p>
+                </div>
+
+                <Separator className="my-3 h-[2px]" />
+
+                {/* Order Products */}
+                <div className="flex w-full flex-col gap-4">
+                  {order.products.map((product, i) => (
+                    <OrderHistoryProduct
+                      key={product.name + i}
+                      product={product}
+                    />
+                  ))}
+
+                  <Separator className="my-3 h-[2px]" />
+
+                  <div className="flex justify-between max-md:flex-row md:justify-end">
+                    <Badge
+                      className={`md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
+                    >
+                      {order.status}
+                    </Badge>
+                    <div className="leading-5">
+                      <p className="text-sm">Grand Total</p>
+                      <p className="font-bold text-main-violet-500">
+                        {convertRupiah(order.total)}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-full flex h-full flex-col items-center gap-10 text-center">
+              <Image
+                src={"/assets/empty-table.svg"}
+                width={500}
+                height={300}
+                alt="Orders Not Found"
+                className="aspect-video w-[180px] lg:w-[380px]"
+                priority
+              />
+              <div className="space-y-0.5">
+                <h4 className="text-sm font-semibold md:text-base">
+                  No Orders Found
+                </h4>
+                <p className="max-w-md text-xs md:text-sm">
+                  Showing your list of orders.
+                </p>
+              </div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
