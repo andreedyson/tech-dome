@@ -159,9 +159,9 @@ async function ProductDetailsPage({
           <h2 className="text-2xl font-bold md:text-3xl">Similar Products</h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {filteredSimilarProducts.length > 0 ? (
-            filteredSimilarProducts.map((product) => (
+            filteredSimilarProducts.slice(0, 4).map((product) => (
               <div key={product.id} className="rounded-xl border-2 shadow-md">
                 <Image
                   src={getImageUrl(product.images[0], "products")}

@@ -19,7 +19,7 @@ async function CatalogsPage() {
       {/* Product List Catalog */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
         {/* Products Filter */}
-        <div className="hidden rounded-xl border-2 bg-background p-4 shadow lg:col-span-1 lg:block">
+        <div className="hidden h-fit rounded-xl border-2 bg-background p-4 shadow lg:col-span-1 lg:block">
           <h3 className="text-xl font-bold lg:text-2xl">Filters</h3>
           <Separator className="my-4" />
           <FilterPrice />
