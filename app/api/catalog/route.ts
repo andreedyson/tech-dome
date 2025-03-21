@@ -6,7 +6,14 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const res = (await req.json()) as Filter;
+    const res = (await req.json()) as Filter & {
+      page?: number;
+      limit?: number;
+    };
+
+    const page = res.page ?? 1; // Default to page 1
+    const limit = res.limit ?? 12; // Default to 12 items per page
+    const skip = (page - 1) * limit;
 
     const ORQuery: Prisma.ProductWhereInput[] = [];
 
@@ -95,22 +102,34 @@ export async function POST(req: NextRequest) {
           },
         },
       },
+      skip,
+      take: limit,
     });
 
-    const response: ProductDetailProps[] = products.map((product) => ({
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      images: product.images,
-      category: product.category,
-      brand: product.brand,
-      location: product.location,
-      price: product.price,
-      stock: product.stock,
-      createdAt: product.createdAt,
-      status: product.status,
-      total_sales: product.orders.length,
-    }));
+    const totalProducts = await prisma.product.count({
+      where: {
+        OR: ORQuery.length > 0 ? ORQuery : undefined,
+      },
+    });
+
+    const response = {
+      products: products.map((product) => ({
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        images: product.images,
+        category: product.category,
+        brand: product.brand,
+        location: product.location,
+        price: product.price,
+        stock: product.stock,
+        createdAt: product.createdAt,
+        status: product.status,
+        total_sales: product.orders.length,
+      })),
+      totalPages: Math.ceil(totalProducts / limit),
+      currentPage: page,
+    };
 
     return NextResponse.json(response);
   } catch (error) {
