@@ -36,14 +36,21 @@ function ProductList() {
   const products = data?.products ?? [];
   const totalPages = data?.totalPages ?? 1;
 
+  if (isLoading)
+    return (
+      <div className="mt-6 grid h-full w-full grid-cols-2 gap-4 text-center md:grid-cols-3">
+        {Array.from({ length: 9 }, (_, index) => (
+          <div key={index}>
+            <ProductCardSkeletons />
+          </div>
+        ))}
+      </div>
+    );
+
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3">
-        {isLoading ? (
-          Array.from({ length: 9 }, (_, index) => (
-            <ProductCardSkeletons key={index} />
-          ))
-        ) : products.length > 0 ? (
+      <div className="grid h-full w-full grid-cols-2 gap-4 md:grid-cols-3">
+        {products.length > 0 ? (
           products.map((product: ProductDetailProps) => (
             <ProductCard key={product.id + product.name} product={product} />
           ))
