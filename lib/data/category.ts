@@ -56,6 +56,7 @@ export async function getCategoryWithProducts(): Promise<
           include: {
             category: true,
             location: true,
+            brand: true,
           },
         },
       },
