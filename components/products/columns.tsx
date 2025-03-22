@@ -1,14 +1,9 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { convertRupiah } from "@/lib/utils";
 import { ProductStatus } from "@prisma/client";
-import Image from "next/image";
-import { getImageUrl } from "@/lib/supabase";
-import { convertRupiah, formatDate } from "@/lib/utils";
-import ProductStatusBadge from "../ProductStatusBadge";
-import { Button } from "../ui/button";
+import { ColumnDef } from "@tanstack/react-table";
 import {
-  Calendar,
   ChartBarStacked,
   Coins,
   Loader,
@@ -16,7 +11,10 @@ import {
   Pencil,
   ShoppingBag,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import ProductStatusBadge from "../ProductStatusBadge";
+import { Button } from "../ui/button";
 import DeleteProductDialog from "./DeleteProductDialog";
 
 export type ProductColumn = {

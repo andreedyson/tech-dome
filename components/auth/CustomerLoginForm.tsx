@@ -1,12 +1,22 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { SignIn } from "@/lib/actions/auth/customer/actions";
+import { cn } from "@/lib/utils";
+import { LoginActionResult } from "@/types/auth";
+import { loginSchema } from "@/types/validations";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -15,18 +25,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { useFormState, useFormStatus } from "react-dom";
-import { useForm } from "react-hook-form";
-import { LoginActionResult } from "@/types/auth";
-import { useEffect, useState } from "react";
-import { z } from "zod";
-import { loginSchema } from "@/types/validations";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Checkbox } from "../ui/checkbox";
-import { SignIn } from "@/lib/actions/auth/customer/actions";
-import { Badge } from "../ui/badge";
-
 const initialState: LoginActionResult = {
   errors: {
     email: undefined,

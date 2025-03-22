@@ -3,7 +3,7 @@
 import { getImageUrl } from "@/lib/supabase";
 import { ProductDetailProps } from "@/types/product";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useState } from "react";
 
 type ProductDetailsImagesProps = {
   product: ProductDetailProps;

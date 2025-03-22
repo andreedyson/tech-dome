@@ -1,16 +1,15 @@
 "use client";
 
-import React from "react";
+import { SignOut } from "@/lib/actions/auth/admin/actions";
+import { ActionResult } from "@/types/auth";
+import { LogOut } from "lucide-react";
+import { useFormState } from "react-dom";
 import {
   SidebarFooter,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "../ui/sidebar";
-import { LogOut } from "lucide-react";
-import { useFormState } from "react-dom";
-import { ActionResult } from "@/types/auth";
-import { SignOut } from "@/lib/actions/auth/admin/actions";
 
 const initialState: ActionResult = {
   error: "",

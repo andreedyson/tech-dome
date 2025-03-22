@@ -2,7 +2,7 @@ import AddLocationDialog from "@/components/locations/AddLocationDialog";
 import { columns as ColumnLocation } from "@/components/locations/columns";
 import { DataTable } from "@/components/ui/data-table";
 import { validateProtected } from "@/lib/check-session";
-import { getAllLocations } from "@/lib/data/locations";
+import { getAllLocations } from "@/lib/data/location";
 import { MapPin } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";

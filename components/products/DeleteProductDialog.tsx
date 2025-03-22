@@ -2,7 +2,6 @@
 
 import { useToast } from "@/hooks/use-toast";
 import { ActionResult } from "@/types/auth";
-import { Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";

@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  Line,
-  LineChart,
-  XAxis,
-} from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 
 import {
   ChartConfig,
@@ -15,9 +8,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { useQuery } from "@tanstack/react-query";
 import { getLatestOrders } from "@/lib/data/order";
 import { formatDate } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
 
 export function LatestOrderCharts() {
   const { data, isLoading } = useQuery({

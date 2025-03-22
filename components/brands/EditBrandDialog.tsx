@@ -25,16 +25,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SubmitButton } from "../SubmitButton";
-import { Building, Pencil } from "lucide-react";
-import { brandSchema } from "@/types/validations";
-import { createBrand, editBrand } from "@/lib/actions/brand/actions";
-import { ActionResult } from "@/types/auth";
-import { useFormState, useFormStatus } from "react-dom";
-import Image from "next/image";
-import { Brand } from "@prisma/client";
+import { editBrand } from "@/lib/actions/brand/actions";
 import { getImageUrl } from "@/lib/supabase";
+import { ActionResult } from "@/types/auth";
+import { brandSchema } from "@/types/validations";
+import { Brand } from "@prisma/client";
+import { Pencil } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useFormState, useFormStatus } from "react-dom";
+import { SubmitButton } from "../SubmitButton";
 
 const initialState: ActionResult = {
   error: "",

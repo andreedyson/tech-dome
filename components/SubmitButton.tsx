@@ -1,6 +1,5 @@
-import { Loader2 } from "lucide-react";
 import { Button, type ButtonProps } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 type SubmitButtonType = {
   children: React.ReactNode;

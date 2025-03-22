@@ -1,6 +1,6 @@
 import { StatsCardProps } from "@/types/dashboard";
-import { prisma } from "../prisma";
 import { Building, Package, ReceiptText, TicketCheck } from "lucide-react";
+import { prisma } from "../prisma";
 
 export async function getStatsCardData(): Promise<StatsCardProps[]> {
   try {

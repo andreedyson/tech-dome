@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import FilterCheckboxItem from "./FilterCheckboxItem";
 
 function FilterStatus() {

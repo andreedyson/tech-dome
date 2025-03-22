@@ -1,6 +1,6 @@
 import { CustomerColumn } from "@/components/customers/columns";
-import { prisma } from "../prisma";
 import { TopCustomersProps } from "@/types/user";
+import { prisma } from "../prisma";
 
 export async function getAllCustomers(): Promise<CustomerColumn[]> {
   try {

@@ -1,12 +1,11 @@
 "use client";
 
 import { LANDING_PAGE_LINKS } from "@/constants";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
-import { Button } from "../ui/button";
 import { Session, User } from "lucia";
 import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "../ui/button";
 import UserAvatar from "../UserAvatar";
 
 type LandingHeaderProps = {

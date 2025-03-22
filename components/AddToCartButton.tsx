@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
-import { Button } from "./ui/button";
-import { ShoppingCart } from "lucide-react";
-import { CartProps, ProductDetailProps } from "@/types/product";
-import { getImageUrl } from "@/lib/supabase";
 import { useCart } from "@/hooks/use-cart";
-import { redirect, useRouter } from "next/navigation";
+import { getImageUrl } from "@/lib/supabase";
+import { CartProps, ProductDetailProps } from "@/types/product";
+import { ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 type AddToCartButtonProps = {
   product: ProductDetailProps;

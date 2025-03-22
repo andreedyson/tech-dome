@@ -2,8 +2,8 @@ import { getTopProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
 import Image from "next/image";
-import { Button } from "../ui/button";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 async function Products() {
   const topProducts = await getTopProducts();

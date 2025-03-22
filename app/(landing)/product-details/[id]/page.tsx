@@ -17,8 +17,6 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }): Promise<Metadata> {
-  // Read Route Params
-
   // Fetch Product Data
   const product = await getProductById(id);
 

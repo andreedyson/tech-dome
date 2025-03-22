@@ -25,13 +25,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SubmitButton } from "../SubmitButton";
-import { Building } from "lucide-react";
-import { brandSchema } from "@/types/validations";
 import { createBrand } from "@/lib/actions/brand/actions";
 import { ActionResult } from "@/types/auth";
-import { useFormState, useFormStatus } from "react-dom";
+import { brandSchema } from "@/types/validations";
+import { Building } from "lucide-react";
 import Image from "next/image";
+import { useFormState, useFormStatus } from "react-dom";
+import { SubmitButton } from "../SubmitButton";
 
 const initialState: ActionResult = {
   error: "",

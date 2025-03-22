@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { BASE_URL } from "@/constants";
 import { Filter, useFilterCatalog } from "@/hooks/use-filter-catalog";
 import { ProductDetailProps } from "@/types/product";
 import { useQuery } from "@tanstack/react-query";
-import ProductCard from "../card/ProductCard";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
+import ProductCard from "../card/ProductCard";
 import ProductCardSkeletons from "../skeletons/ProductCardSkeletons";
 import { Button } from "../ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const fetchProducts = async (body?: Filter & { page?: number }) => {
   try {

@@ -12,14 +12,12 @@ import {
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ShoppingCart } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
 import { getBrandSales } from "@/lib/data/brand";
+import { useQuery } from "@tanstack/react-query";
+import { ShoppingCart } from "lucide-react";
 
 type BrandPerformanceChartsProps = {
   totalBrand?: number;

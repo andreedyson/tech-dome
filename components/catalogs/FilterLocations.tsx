@@ -1,6 +1,4 @@
-import React from "react";
-import { Input } from "../ui/input";
-import { getAllLocations } from "@/lib/data/locations";
+import { getAllLocations } from "@/lib/data/location";
 import FilterCheckboxItem from "./FilterCheckboxItem";
 
 async function FilterLocations() {

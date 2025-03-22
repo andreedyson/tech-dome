@@ -1,10 +1,10 @@
 "use server";
 
 import { OrderColumn } from "@/components/orders/columns";
+import { LatestOrderColumn } from "@/components/orders/latest-order-columns";
+import { UserOrderHistoryProps } from "@/types/order";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
-import { UserOrderHistoryProps } from "@/types/order";
-import { LatestOrderColumn } from "@/components/orders/latest-order-columns";
 
 export async function getAllOrders(): Promise<OrderColumn[]> {
   try {

@@ -1,8 +1,8 @@
 import { getPopularBrands } from "@/lib/data/brand";
 import { getImageUrl } from "@/lib/supabase";
 import Image from "next/image";
-import { Button } from "../ui/button";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 async function Brands() {
   const popularBrands = await getPopularBrands();

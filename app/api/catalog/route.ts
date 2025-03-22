@@ -1,6 +1,5 @@
 import { Filter } from "@/hooks/use-filter-catalog";
 import { prisma } from "@/lib/prisma";
-import { ProductDetailProps } from "@/types/product";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 

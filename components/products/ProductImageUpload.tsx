@@ -1,6 +1,6 @@
 import { Upload } from "lucide-react";
 import Image from "next/image";
-import { ChangeEvent, useRef, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 

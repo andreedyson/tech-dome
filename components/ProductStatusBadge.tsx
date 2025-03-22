@@ -1,5 +1,4 @@
 import { ProductStatus } from "@prisma/client";
-import React from "react";
 import { Badge } from "./ui/badge";
 
 type ProductStatusProps = {

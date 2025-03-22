@@ -1,11 +1,11 @@
 "use server";
 
-import { Category } from "@prisma/client";
-import { prisma } from "../prisma";
 import {
   CategoryWithProductsProps,
   TotalProductByCategoryProps,
 } from "@/types/category";
+import { Category } from "@prisma/client";
+import { prisma } from "../prisma";
 
 export async function getAllCategories(): Promise<Category[]> {
   try {

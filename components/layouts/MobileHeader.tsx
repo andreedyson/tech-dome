@@ -2,12 +2,12 @@
 
 import { LANDING_PAGE_LINKS } from "@/constants";
 import { cn } from "@/lib/utils";
+import { Session, User } from "lucia";
 import { AlignJustify, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { Session, User } from "lucia";
 import UserAvatar from "../UserAvatar";
 
 type MobileHeaderProps = {

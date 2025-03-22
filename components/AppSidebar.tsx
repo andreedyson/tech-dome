@@ -1,13 +1,12 @@
 "use client";
 
 import {
+  Boxes,
+  Building,
   ChartBarStacked,
   Home,
-  Boxes,
   MapPin,
-  Building,
   ShoppingCart,
-  LogOut,
   Users,
 } from "lucide-react";
 

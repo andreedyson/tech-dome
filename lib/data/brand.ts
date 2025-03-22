@@ -1,14 +1,14 @@
 "use server";
 
-import { Brand } from "@prisma/client";
-import { prisma } from "../prisma";
 import {
   AllBrandProps,
-  BrandTotalProductsProps,
   BrandSalesProps,
+  BrandTotalProductsProps,
   BrandWithProductsProps,
   BrandWithTotalProductsProps,
 } from "@/types/brand";
+import { Brand } from "@prisma/client";
+import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
 
 export async function getAllBrands(): Promise<AllBrandProps[]> {

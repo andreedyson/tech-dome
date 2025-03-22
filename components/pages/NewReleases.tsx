@@ -2,8 +2,8 @@ import { getNewReleaseProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah, formatDaysAgo } from "@/lib/utils";
 import Image from "next/image";
-import { Button } from "../ui/button";
 import Link from "next/link";
+import { Button } from "../ui/button";
 
 async function NewReleases() {
   const newReleases = await getNewReleaseProducts();

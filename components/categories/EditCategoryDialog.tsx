@@ -2,7 +2,7 @@
 
 import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,14 +25,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { SubmitButton } from "../SubmitButton";
-import { Pencil } from "lucide-react";
-import { categorySchema } from "@/types/validations";
 import { editCategory } from "@/lib/actions/category/actions";
 import { ActionResult } from "@/types/auth";
-import { useFormState, useFormStatus } from "react-dom";
+import { categorySchema } from "@/types/validations";
 import { Category } from "@prisma/client";
+import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useFormState, useFormStatus } from "react-dom";
+import { SubmitButton } from "../SubmitButton";
 
 const initialState: ActionResult = {
   error: "",

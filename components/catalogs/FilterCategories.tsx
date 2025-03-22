@@ -1,5 +1,3 @@
-import React from "react";
-import { Input } from "../ui/input";
 import { getAllCategories } from "@/lib/data/category";
 import FilterCheckboxItem from "./FilterCheckboxItem";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllLocations } from "@/lib/data/locations";
+import { getAllLocations } from "@/lib/data/location";
 import { Location } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 

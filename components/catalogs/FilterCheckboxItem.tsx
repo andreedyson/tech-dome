@@ -1,9 +1,9 @@
 "use client";
 
 import { useFilterCatalog } from "@/hooks/use-filter-catalog";
-import React, { ChangeEvent } from "react";
-import { Input } from "../ui/input";
 import { ProductStatus } from "@prisma/client";
+import { ChangeEvent } from "react";
+import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
 type FilterCheckboxItemProps = {

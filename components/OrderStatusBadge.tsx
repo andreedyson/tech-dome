@@ -1,7 +1,6 @@
-import React from "react";
-import { Badge } from "./ui/badge";
 import { OrderStatus } from "@prisma/client";
 import { Check, Loader } from "lucide-react";
+import { Badge } from "./ui/badge";
 
 type OrderStatusProps = {
   status: OrderStatus;
