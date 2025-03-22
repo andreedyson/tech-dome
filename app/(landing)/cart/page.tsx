@@ -8,7 +8,7 @@ async function CartPage() {
   const { session } = await getUser();
 
   return (
-    <section className="h-[80vh]">
+    <section className="mb-6">
       {session ? (
         <div className="w-full space-y-8">
           {/* Cart Products */}
