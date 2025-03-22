@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 
 type ShowMoreTextProps = {
@@ -14,24 +15,25 @@ const ShowMoreText = ({
 }: ShowMoreTextProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
-  const toggleText = () => {
-    setIsExpanded(!isExpanded);
-  };
+  const toggleText = () => setIsExpanded((prev) => !prev);
 
-  const displayText = isExpanded ? text : text.substring(0, maxLength ?? 200);
+  const displayText = isExpanded
+    ? text
+    : text.slice(0, maxLength) + (text.length > maxLength ? "..." : "");
 
   return (
     <div className={className}>
-      <p>{displayText}</p>
-      {text.length < maxLength ||
-        (isExpanded && (
-          <div
+      <p className="inline">
+        {displayText}{" "}
+        {text.length > maxLength && (
+          <span
             onClick={toggleText}
-            className="cursor-pointer font-semibold underline"
+            className="cursor-pointer font-semibold text-blue-500 hover:underline"
           >
             {isExpanded ? "Show Less" : "Show More"}
-          </div>
-        ))}
+          </span>
+        )}
+      </p>
     </div>
   );
 };
