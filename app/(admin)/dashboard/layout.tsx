@@ -26,6 +26,10 @@ export default async function AdminLayout({
     redirect("/sign-in");
   }
 
+  if (user.role !== "ADMIN") {
+    redirect("/");
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar />

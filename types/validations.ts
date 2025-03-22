@@ -78,6 +78,7 @@ export const productSchema = z.object({
     ),
   description: z
     .string({ required_error: "Description is required" })
+    .trim()
     .min(10, { message: "Description should be at least 10 characters " }),
   price: z.coerce.number({ required_error: "Price is required" }),
   stock: z.coerce.number(),

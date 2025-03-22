@@ -1,3 +1,5 @@
+"use server";
+
 import { SalesByLocationProps } from "@/types/location";
 import { prisma } from "../prisma";
 import { Location } from "@prisma/client";

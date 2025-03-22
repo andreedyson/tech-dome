@@ -56,17 +56,17 @@ function UserAvatar({ fullname, role }: UserAvatarProps) {
           <DropdownMenuItem>
             <Link
               href={
-                role === "ADMIN" && pathname !== "/dashboard"
+                role === "ADMIN" && !pathname.includes("/dashboard")
                   ? "/dashboard"
-                  : role === "ADMIN" && pathname === "/dashboard"
+                  : role === "ADMIN" && pathname.includes("/dashboard")
                     ? "/"
                     : "/profile"
               }
               className="w-full"
             >
-              {role === "ADMIN" && pathname !== "/dashboard"
+              {role === "ADMIN" && !pathname.includes("/dashboard")
                 ? "Dashboard"
-                : role === "ADMIN" && pathname === "/dashboard"
+                : role === "ADMIN" && pathname.includes("/dashboard")
                   ? "Main Page"
                   : "Profile"}
             </Link>

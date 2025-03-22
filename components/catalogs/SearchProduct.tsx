@@ -15,7 +15,7 @@ function SearchProduct() {
       setFilter({
         search: query,
       });
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(debounceInput);
   }, [query]);
