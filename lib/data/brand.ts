@@ -59,7 +59,7 @@ export async function getPopularBrands(): Promise<Brand[]> {
         return acc + product.orders.length;
       }, 0);
 
-      return totalOrders >= 5;
+      return totalOrders >= 1;
     });
 
     return filteredBrands.slice(0, 4);
