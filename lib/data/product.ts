@@ -86,7 +86,7 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
     });
 
     const topProducts = products.filter(
-      (product) => product.orders.length >= 5,
+      (product) => product.orders.length >= 1,
     );
 
     const data = topProducts.map(({ orders, ...product }) => ({

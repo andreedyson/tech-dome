@@ -64,36 +64,36 @@ async function DashboardPage() {
             </CardHeader>
             <CardContent className="h-[80%] w-full">
               {topProducts.length > 0 ? (
-                topProducts.map((product) => (
-                  <div
-                    key={product.id}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Image
-                        src={getImageUrl(product.images[0], "products")}
-                        width={64}
-                        height={64}
-                        alt={product.name}
-                        className="size-16 md:size-[64px]"
-                      />
-                      <div className="leading-none">
-                        <p className="line-clamp-1 text-base font-bold md:text-lg">
-                          {product.name}
+                topProducts.slice(0, 6).map((product, i) => (
+                  <div key={product.id}>
+                    <div className="my-2 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src={getImageUrl(product.images[0], "products")}
+                          width={64}
+                          height={64}
+                          alt={product.name}
+                          className="size-16 md:size-[64px]"
+                        />
+                        <div>
+                          <p className="line-clamp-1 text-base font-bold leading-none md:text-lg">
+                            {product.name}
+                          </p>
+                          <p className="text-sm font-medium leading-none text-muted-foreground">
+                            {product.category.name}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center gap-2 text-sm sm:flex-row md:gap-4">
+                        <p className="font-semibold">
+                          {convertRupiah(product.price)}
                         </p>
-                        <p className="text-sm font-medium text-muted-foreground md:text-base">
-                          {product.category.name}
-                        </p>
+                        <Badge className="rounded-full font-bold">
+                          {product.totalOrders} Sold
+                        </Badge>
                       </div>
                     </div>
-                    <div className="flex flex-col items-center gap-2 text-sm sm:flex-row md:gap-6">
-                      <p className="font-semibold">
-                        {convertRupiah(product.price)}
-                      </p>
-                      <Badge className="rounded-full font-bold">
-                        {product.totalOrders} Sold
-                      </Badge>
-                    </div>
+                    {i !== topProducts.length - 1 && <Separator />}
                   </div>
                 ))
               ) : (
