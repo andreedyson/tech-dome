@@ -1,13 +1,12 @@
 import { getImageUrl } from "@/lib/supabase";
-import { TopProductProps } from "@/types/product";
+import { convertRupiah } from "@/lib/utils";
+import { ProductDetailProps } from "@/types/product";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { Badge } from "../ui/badge";
-import { convertRupiah } from "@/lib/utils";
 
 type HorizontalProductCardProps = {
-  product: TopProductProps;
+  product: ProductDetailProps;
 };
 
 function HorizontalProductCard({ product }: HorizontalProductCardProps) {
@@ -26,7 +25,7 @@ function HorizontalProductCard({ product }: HorizontalProductCardProps) {
           className="size-full rounded-l-lg object-cover md:size-[180px]"
         />
         <Badge className="absolute left-2 top-2 rounded-full text-xs">
-          {product.category.name}
+          {product?.category?.name}
         </Badge>
       </div>
       <div className="p-4 leading-5">
@@ -38,7 +37,7 @@ function HorizontalProductCard({ product }: HorizontalProductCardProps) {
           {product.description}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">
-          Delivered from {product.location.name}
+          Delivered from {product?.location?.name}
         </p>
       </div>
     </Link>

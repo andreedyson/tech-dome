@@ -1,4 +1,5 @@
 import AddToCartButton from "@/components/AddToCartButton";
+import HorizontalProductCard from "@/components/card/HorizontalProductCard";
 import ProductDetailsBreadcrumb from "@/components/catalogs/ProductDetailsBreadcrumb";
 import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import ShowMoreText from "@/components/ShowMoreText";
@@ -38,7 +39,7 @@ async function ProductDetailsPage({
   const similarProducts = await getSimilarProducts(
     product?.category?.id as number,
   );
-  const filteredSimilarProducts = similarProducts.filter(
+  const filteredSimilarProducts = similarProducts?.filter(
     (similar) => similar.name !== product?.name,
   );
 
@@ -110,6 +111,7 @@ async function ProductDetailsPage({
         </div>
       </div>
 
+      {/* Testimonial Section */}
       <div>
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Testimonials</h3>
@@ -157,30 +159,11 @@ async function ProductDetailsPage({
           <h2 className="text-2xl font-bold md:text-3xl">Similar Products</h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {filteredSimilarProducts.length > 0 ? (
-            filteredSimilarProducts.slice(0, 4).map((product) => (
-              <div key={product.id} className="rounded-xl border-2 shadow-md">
-                <Image
-                  src={getImageUrl(product.images[0], "products")}
-                  width={150}
-                  height={150}
-                  alt={product.name}
-                  className="w-full object-contain"
-                />
-                <div className="p-4">
-                  <h4 className="line-clamp-1 text-lg font-bold md:text-xl">
-                    {product.name}
-                  </h4>
-                  <p className="text-sm font-medium text-muted-foreground">
-                    {product.category?.name}
-                  </p>
-                  <p className="mt-2 text-base font-bold text-main-violet-700 md:mt-3 md:text-lg">
-                    {convertRupiah(product.price)}
-                  </p>
-                </div>
-              </div>
-            ))
+            filteredSimilarProducts
+              .slice(0, 4)
+              .map((product) => <HorizontalProductCard product={product} />)
           ) : (
             <div className="col-span-full flex flex-col items-center gap-2 text-center">
               <Image

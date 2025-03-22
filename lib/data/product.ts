@@ -140,10 +140,34 @@ export async function getSimilarProducts(
       where: {
         categoryId: categoryId,
       },
-      include: { category: true },
+      include: {
+        category: true,
+        brand: true,
+        location: true,
+        orders: true,
+      },
     });
 
-    return similarProducts;
+    if (!similarProducts) {
+      return [];
+    }
+
+    const data = similarProducts.map((product) => ({
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      stock: product.stock,
+      images: product.images,
+      category: product.category,
+      brand: product.brand,
+      location: product.location,
+      total_sales: product.orders.length,
+      status: product.status,
+      createdAt: product.createdAt,
+    }));
+
+    return data;
   } catch (error) {
     return [];
   }
