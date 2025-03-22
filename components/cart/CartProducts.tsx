@@ -11,7 +11,7 @@ function CartProducts() {
     useCart();
 
   return (
-    <div className="w-full">
+    <div className="w-full space-y-4">
       {products.length > 0 ? (
         products.map((product) => (
           <article

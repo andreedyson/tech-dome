@@ -1,6 +1,13 @@
 "use client";
 
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  Line,
+  LineChart,
+  XAxis,
+} from "recharts";
 
 import {
   ChartConfig,
@@ -53,7 +60,7 @@ export function LatestOrderCharts() {
       config={chartConfig}
       className="max-h-[300px] min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full"
     >
-      <LineChart
+      <AreaChart
         accessibilityLayer
         data={result}
         margin={{
@@ -73,9 +80,25 @@ export function LatestOrderCharts() {
           cursor={false}
           content={<ChartTooltipContent hideLabel />}
         />
-        <Line
+        <defs>
+          <linearGradient id="fillTotal" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="var(--color-total)"
+              stopOpacity={0.8}
+            />
+            <stop
+              offset="95%"
+              stopColor="var(--color-total)"
+              stopOpacity={0.1}
+            />
+          </linearGradient>
+        </defs>
+        <Area
           dataKey="total"
           type="natural"
+          fill="url(#fillTotal)"
+          fillOpacity={0.4}
           stroke="var(--color-total)"
           strokeWidth={2}
           dot={{
@@ -84,8 +107,9 @@ export function LatestOrderCharts() {
           activeDot={{
             r: 6,
           }}
+          stackId="a"
         />
-      </LineChart>
+      </AreaChart>
     </ChartContainer>
   );
 }
