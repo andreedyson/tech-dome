@@ -356,7 +356,7 @@ async function DashboardPage() {
               </div>
               <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent className="h-[70%] w-full">
+            <CardContent className="h-[85%] w-full">
               <Tabs defaultValue="performance" className="h-full w-full">
                 <TabsList className="w-full">
                   <TabsTrigger value="performance" className="w-full">
@@ -366,13 +366,13 @@ async function DashboardPage() {
                     Brand Products
                   </TabsTrigger>
                 </TabsList>
-                <TabsContent value="performance">
-                  <BrandPerformanceCharts />
+                <TabsContent value="performance" className="h-[90%]">
+                  <BrandPerformanceCharts totalBrand={6} />
                 </TabsContent>
                 <TabsContent value="highest" className="h-full">
                   {brandProducts.length > 0 ? (
                     <div className="grid grid-cols-2 gap-8">
-                      {brandProducts.slice(0, 8).map((brand) => (
+                      {brandProducts.slice(0, 14).map((brand) => (
                         <div key={brand.id} className="flex items-center gap-2">
                           <Image
                             src={getImageUrl(brand.logo, "brands")}

@@ -58,7 +58,7 @@ export function LatestOrderCharts() {
   return (
     <ChartContainer
       config={chartConfig}
-      className="max-h-[300px] min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full"
+      className="h-full min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full"
     >
       <AreaChart
         accessibilityLayer
