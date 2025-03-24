@@ -203,7 +203,9 @@ async function ProductDetailsPage({
           {filteredSimilarProducts.length > 0 ? (
             filteredSimilarProducts
               .slice(0, 4)
-              .map((product) => <HorizontalProductCard product={product} />)
+              .map((product) => (
+                <HorizontalProductCard key={product.id} product={product} />
+              ))
           ) : (
             <div className="col-span-full flex flex-col items-center gap-2 text-center">
               <Image
