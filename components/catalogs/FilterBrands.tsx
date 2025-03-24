@@ -2,7 +2,7 @@ import { getAllBrands } from "@/lib/data/brand";
 import FilterCheckboxItem from "./FilterCheckboxItem";
 
 async function FilterBrands() {
-  const brands = await getAllBrands();
+  const brands = await getAllBrands("name");
   return (
     <div className="space-y-3">
       {/* Filter Brands Header */}

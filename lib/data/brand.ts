@@ -11,13 +11,14 @@ import { Brand } from "@prisma/client";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
 
-export async function getAllBrands(): Promise<AllBrandProps[]> {
+export async function getAllBrands(
+  sortBy: "id" | "name" = "id",
+): Promise<AllBrandProps[]> {
   try {
     const brands = await prisma.brand.findMany({
       orderBy: {
-        id: "asc",
+        [sortBy]: "asc",
       },
-
       include: {
         Product: {
           include: {
@@ -30,10 +31,10 @@ export async function getAllBrands(): Promise<AllBrandProps[]> {
     const data = brands.map(({ Product, ...brand }) => ({
       ...brand,
       totalProducts: Product.length,
-      totalOrders:
-        Product.find((product) => {
-          return product.orders;
-        })?.orders.length || 0,
+      totalOrders: Product.reduce(
+        (acc, product) => acc + (product.orders?.length || 0),
+        0,
+      ),
     }));
 
     return data;

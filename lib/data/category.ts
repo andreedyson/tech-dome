@@ -7,11 +7,13 @@ import {
 import { Category } from "@prisma/client";
 import { prisma } from "../prisma";
 
-export async function getAllCategories(): Promise<Category[]> {
+export async function getAllCategories(
+  sortBy: "id" | "name" = "id",
+): Promise<Category[]> {
   try {
     const categories = await prisma.category.findMany({
       orderBy: {
-        id: "asc",
+        [sortBy]: "asc",
       },
     });
 

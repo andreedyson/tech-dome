@@ -2,7 +2,7 @@ import { getAllCategories } from "@/lib/data/category";
 import FilterCheckboxItem from "./FilterCheckboxItem";
 
 async function FilterCategories() {
-  const categories = await getAllCategories();
+  const categories = await getAllCategories("name");
   return (
     <div className="space-y-3">
       {/* Filter Categories Header */}

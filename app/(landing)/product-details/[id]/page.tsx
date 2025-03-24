@@ -7,13 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getUser } from "@/lib/auth";
 import { getProductById, getSimilarProducts } from "@/lib/data/product";
-import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
-import { ChevronLeft, Home, MapPin, ShoppingCart, Star } from "lucide-react";
+import { ChevronLeft, Home, MapPin, Star } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export async function generateMetadata({
   params: { id },

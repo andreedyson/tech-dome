@@ -48,7 +48,7 @@ function ProductCard({ product }: ProductProps) {
             />
             <p>{product.brand?.name}</p>
           </div>
-          <p className="mt-2 line-clamp-2 text-sm leading-5 tracking-tight">
+          <p className="mt-2 line-clamp-3 h-max text-sm leading-5 tracking-tight">
             {product.description}
           </p>
 

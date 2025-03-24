@@ -4,11 +4,13 @@ import { SalesByLocationProps } from "@/types/location";
 import { prisma } from "../prisma";
 import { Location } from "@prisma/client";
 
-export async function getAllLocations(): Promise<Location[]> {
+export async function getAllLocations(
+  sortBy: "id" | "name" = "id",
+): Promise<Location[]> {
   try {
     const locations = await prisma.location.findMany({
       orderBy: {
-        id: "asc",
+        [sortBy]: "asc",
       },
     });
 
