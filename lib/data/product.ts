@@ -125,6 +125,9 @@ export async function getNewReleaseProducts(): Promise<TopProductProps[]> {
         category: true,
         location: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     const data = newReleases.map(({ orders, ...product }) => ({

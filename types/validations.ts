@@ -5,6 +5,7 @@ const ALLOWED_FILE_TYPE = [
   "image/jpeg",
   "image/png",
   "image/webp",
+  "image/svg",
 ];
 
 export const loginSchema = z.object({
