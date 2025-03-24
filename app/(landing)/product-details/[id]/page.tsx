@@ -3,14 +3,16 @@ import HorizontalProductCard from "@/components/card/HorizontalProductCard";
 import ProductDetailsBreadcrumb from "@/components/catalogs/ProductDetailsBreadcrumb";
 import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import ShowMoreText from "@/components/ShowMoreText";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { getUser } from "@/lib/auth";
 import { getProductById, getSimilarProducts } from "@/lib/data/product";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
-import { MapPin, Star } from "lucide-react";
+import { ChevronLeft, Home, MapPin, ShoppingCart, Star } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata({
@@ -22,8 +24,10 @@ export async function generateMetadata({
   const product = await getProductById(id);
 
   return {
-    title: `${product?.name} - ${product?.category?.name}`,
-    description: product?.description,
+    title: product
+      ? `${product?.name} - ${product?.category?.name}`
+      : "Product Not Found",
+    description: product?.description || "",
   };
 }
 
@@ -36,16 +40,54 @@ async function ProductDetailsPage({
 }) {
   const { session } = await getUser();
   const product = await getProductById(id);
-  const similarProducts = await getSimilarProducts(
-    product?.category?.id as number,
-  );
-  const filteredSimilarProducts = similarProducts?.filter(
-    (similar) => similar.name !== product?.name,
-  );
 
   if (!product) {
-    redirect("/catalogs");
+    return (
+      <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-2 text-center">
+        <Image
+          src={"/assets/empty-details.svg"}
+          width={500}
+          height={300}
+          alt="Products Not Found"
+          className="aspect-video size-full lg:size-[380px]"
+          priority
+        />
+        <div className="space-y-0.5">
+          <h4 className="text-sm font-semibold md:text-base">
+            Oops! Product Not Found.
+          </h4>
+          <p className="max-w-md text-sm md:text-base">
+            The item you're looking for might be out of stock or no longer
+            available.
+          </p>
+        </div>
+        <div className="mt-6 flex flex-col items-center gap-4 md:flex-row">
+          <Link href={"/catalogs"}>
+            <Button className="flex w-[180px] items-center gap-2">
+              <ChevronLeft />
+              Continue Shopping
+            </Button>
+          </Link>
+          <Link href={"/"}>
+            <Button
+              variant={"outline"}
+              className="flex w-[180px] items-center gap-2"
+            >
+              <Home />
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
   }
+
+  const similarProducts = await getSimilarProducts(
+    product.category?.id as number,
+  );
+  const filteredSimilarProducts = similarProducts.filter(
+    (similar) => similar.name !== product?.name,
+  );
 
   return (
     <section className="mt-8 w-full space-y-8">
