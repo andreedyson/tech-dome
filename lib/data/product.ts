@@ -3,7 +3,9 @@ import { ProductDetailProps, TopProductProps } from "@/types/product";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
 
-export async function getAllProducts(): Promise<ProductColumn[]> {
+export async function getAllProducts(
+  sortBy: "id" | "name" = "id",
+): Promise<ProductColumn[]> {
   try {
     const products = await prisma.product.findMany({
       include: {
@@ -11,6 +13,9 @@ export async function getAllProducts(): Promise<ProductColumn[]> {
         brand: true,
         location: true,
         orders: true,
+      },
+      orderBy: {
+        [sortBy]: "asc",
       },
     });
 

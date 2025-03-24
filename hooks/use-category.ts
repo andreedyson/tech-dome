@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 export function useCategories() {
   const { data, isLoading, isError, error } = useQuery<Category[]>({
     queryKey: ["categories"],
-    queryFn: () => getAllCategories(),
+    queryFn: () => getAllCategories("name"),
   });
 
   return { data, isLoading, isError, error };

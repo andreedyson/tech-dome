@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 async function ProductsPage() {
-  const productsData = await getAllProducts();
+  const productsData = await getAllProducts("name");
   return (
     <section className="space-y-4">
       <div className="space-y-3 rounded-lg border-2 bg-background p-4">

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 async function BrandsPage() {
-  const brandsData = await getAllBrands();
+  const brandsData = await getAllBrands("name");
 
   return (
     <section className="space-y-4">
