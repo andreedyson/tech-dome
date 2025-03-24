@@ -215,7 +215,7 @@ async function DashboardPage() {
                       </span>
                       <div>
                         <p
-                          className="line-clamp-1 text-sm font-semibold lg:text-base"
+                          className="line-clamp-1 max-w-[130px] text-sm font-semibold lg:text-base"
                           title={Location.name}
                         >
                           {Location.name}

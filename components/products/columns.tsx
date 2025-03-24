@@ -4,6 +4,7 @@ import { convertRupiah } from "@/lib/utils";
 import { ProductStatus } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import {
+  Box,
   ChartBarStacked,
   Coins,
   Loader,
@@ -28,6 +29,7 @@ export type ProductColumn = {
   locationName: string;
   total_sales: number;
   status: ProductStatus;
+  stock: number;
   createdAt: Date;
 };
 
@@ -76,20 +78,6 @@ export const columns: ColumnDef<ProductColumn>[] = [
     },
   },
   {
-    accessorKey: "status",
-    header: () => (
-      <div className="flex items-center gap-1">
-        <Loader size={14} />
-        Status
-      </div>
-    ),
-    cell: ({ row }) => {
-      const product = row.original;
-
-      return <ProductStatusBadge status={product.status} />;
-    },
-  },
-  {
     accessorKey: "price",
     header: () => (
       <div className="flex items-center gap-1">
@@ -115,6 +103,34 @@ export const columns: ColumnDef<ProductColumn>[] = [
       const product = row.original;
 
       return <div>{product.total_sales}</div>;
+    },
+  },
+  {
+    accessorKey: "stock",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Box size={14} />
+        Stock
+      </div>
+    ),
+    cell: ({ row }) => {
+      const product = row.original;
+
+      return <div>{product.stock}</div>;
+    },
+  },
+  {
+    accessorKey: "status",
+    header: () => (
+      <div className="flex items-center gap-1">
+        <Loader size={14} />
+        Status
+      </div>
+    ),
+    cell: ({ row }) => {
+      const product = row.original;
+
+      return <ProductStatusBadge status={product.status} />;
     },
   },
   {

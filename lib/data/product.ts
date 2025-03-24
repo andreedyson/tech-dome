@@ -26,6 +26,7 @@ export async function getAllProducts(): Promise<ProductColumn[]> {
       total_sales: product.orders.length,
       status: product.status,
       createdAt: product.createdAt,
+      stock: product.stock,
     }));
 
     return mappedProducts;
