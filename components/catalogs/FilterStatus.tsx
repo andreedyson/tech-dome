@@ -12,8 +12,8 @@ function FilterStatus() {
 
       {/* Filter Status Checkboxes */}
       <div className="space-y-2">
-        <FilterCheckboxItem id={"READY"} value="PRE-ORDER" type="status" />
-        <FilterCheckboxItem id={"PRE_ORDER"} value="READY" type="status" />
+        <FilterCheckboxItem id={"PRE_ORDER"} value="PRE_ORDER" type="status" />
+        <FilterCheckboxItem id={"READY"} value="READY" type="status" />
       </div>
     </div>
   );

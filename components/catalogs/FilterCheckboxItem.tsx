@@ -95,6 +95,9 @@ function FilterCheckboxItem({ id, value, type }: FilterCheckboxItemProps) {
     }
   };
 
+  const textValue =
+    value.split("_").length > 1 ? value.split("_").join(" ") : value;
+
   return (
     <div className="flex items-center gap-2">
       <Input
@@ -105,7 +108,7 @@ function FilterCheckboxItem({ id, value, type }: FilterCheckboxItemProps) {
         className="size-4"
       />
       <Label htmlFor={id + value}>
-        <p className="font-medium">{value}</p>
+        <p className="font-medium">{textValue}</p>
       </Label>
     </div>
   );
