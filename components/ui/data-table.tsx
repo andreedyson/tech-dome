@@ -129,7 +129,9 @@ export function DataTable<TData, TValue>({
                   const columnName =
                     column.id.split("_").length > 1
                       ? column.id.split("_")[0] + " " + column.id.split("_")[1]
-                      : column.id;
+                      : column.id
+                          .replace(/([a-z])([A-Z])/g, "$1 $2")
+                          .replace(/^./, (str) => str.toUpperCase());
                   return (
                     column.id !== "actions" && (
                       <DropdownMenuCheckboxItem
