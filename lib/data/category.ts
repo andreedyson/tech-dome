@@ -1,23 +1,31 @@
 "use server";
 
 import {
+  AllCategoryProps,
   CategoryWithProductsProps,
   TotalProductByCategoryProps,
 } from "@/types/category";
-import { Category } from "@prisma/client";
 import { prisma } from "../prisma";
 
 export async function getAllCategories(
   sortBy: "id" | "name" = "id",
-): Promise<Category[]> {
+): Promise<AllCategoryProps[]> {
   try {
     const categories = await prisma.category.findMany({
       orderBy: {
         [sortBy]: "asc",
       },
+      include: {
+        Product: true,
+      },
     });
 
-    return categories;
+    const data = categories.map(({ Product, ...category }) => ({
+      ...category,
+      totalProducts: Product.length,
+    }));
+
+    return data;
   } catch (error) {
     return [];
   }

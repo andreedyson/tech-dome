@@ -1,12 +1,12 @@
 "use client";
 
+import { AllBrandProps } from "@/types/brand";
 import { ColumnDef } from "@tanstack/react-table";
-import EditCategoryDialog from "./EditCategoryDialog";
-import { Category } from "@prisma/client";
+import { Boxes, Captions, LetterText } from "lucide-react";
 import DeleteCategoryDialog from "./DeleteCategoryDialog";
-import { LetterText, Captions } from "lucide-react";
+import EditCategoryDialog from "./EditCategoryDialog";
 
-export const columns: ColumnDef<Category>[] = [
+export const columns: ColumnDef<AllBrandProps>[] = [
   {
     accessorKey: "id",
     header: () => {
@@ -27,6 +27,22 @@ export const columns: ColumnDef<Category>[] = [
           Name
         </div>
       );
+    },
+  },
+  {
+    accessorKey: "totalProducts",
+    header: () => {
+      return (
+        <div className="flex items-center gap-1">
+          <Boxes size={14} />
+          Total Products
+        </div>
+      );
+    },
+    cell: ({ row }) => {
+      const category = row.original;
+
+      return <div>{category.totalProducts} Products</div>;
     },
   },
   {
