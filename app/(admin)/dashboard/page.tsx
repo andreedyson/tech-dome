@@ -2,6 +2,7 @@ import StatsCard from "@/components/card/StatsCard";
 import { BrandPerformanceCharts } from "@/components/charts/BrandPerformanceCharts";
 import { LatestOrderCharts } from "@/components/charts/LatestOrderCharts";
 import { LowStockProductCharts } from "@/components/charts/LowStockProductCharts";
+import { TopCustomerCharts } from "@/components/charts/TopCustomerCharts";
 import { columns } from "@/components/orders/latest-order-columns";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ import { getTopProducts } from "@/lib/data/product";
 import { getTopCustomers } from "@/lib/data/user";
 import { getImageUrl } from "@/lib/supabase";
 import { convertRupiah } from "@/lib/utils";
-import { ChartNoAxesCombined, Sparkle, Table } from "lucide-react";
+import { ChartBarBig, ChartNoAxesCombined, Sparkle, Table } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -71,7 +72,7 @@ async function DashboardPage() {
                       <Sparkle size={20} />
                     </TabsTrigger>
                     <TabsTrigger value="low-stocks" className="w-full">
-                      <ChartNoAxesCombined size={20} />
+                      <ChartBarBig size={20} />
                     </TabsTrigger>
                   </TabsList>
                 </div>
@@ -156,7 +157,7 @@ async function DashboardPage() {
           </Card>
         </div>
 
-        {/* Total Customers Card */}
+        {/* Top Customers Card */}
         <div className="md:col-span-2 lg:col-span-4 lg:col-start-9">
           <Card className="h-full border-2">
             <CardHeader>
@@ -168,38 +169,10 @@ async function DashboardPage() {
                   </Button>
                 </Link>
               </div>
-              <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent className="grid grid-cols-2 gap-3">
+            <CardContent className="h-full">
               {topCustomers.length > 0 ? (
-                topCustomers.map((customer, index) => (
-                  <div
-                    key={customer.id + customer.name}
-                    className="flex items-center justify-between py-3"
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="text-2xl font-bold text-muted-foreground md:text-3xl">
-                        {index + 1}.
-                      </span>
-                      <div>
-                        <p
-                          className="line-clamp-1 text-sm font-semibold lg:text-base"
-                          title={customer.name}
-                        >
-                          {customer.name}
-                        </p>
-                        <div className="flex items-center gap-1">
-                          <p className="text-base font-bold text-main-violet-500 md:text-lg">
-                            {customer.totalOrders}
-                          </p>
-                          <span className="text-sm font-light text-muted-foreground md:text-base">
-                            Orders
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
+                <TopCustomerCharts />
               ) : (
                 <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
                   <Image

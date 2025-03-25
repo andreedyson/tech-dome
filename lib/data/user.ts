@@ -1,3 +1,5 @@
+"use server";
+
 import { CustomerColumn } from "@/components/customers/columns";
 import { TopCustomersProps } from "@/types/user";
 import { prisma } from "../prisma";

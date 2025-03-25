@@ -201,7 +201,7 @@ export async function getLowStocksProducts(): Promise<LowStockProductProps[]> {
         stock: product.stock,
       }));
 
-    return data;
+    return data.sort((a, b) => a.stock - b.stock);
   } catch (error) {
     return [];
   }
