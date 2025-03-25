@@ -38,3 +38,9 @@ export type CartProps = {
   quantity: number;
   createdAt: Date;
 };
+
+export type LowStockProductProps = {
+  product: string;
+  stock: number;
+  color?: string;
+};

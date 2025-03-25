@@ -1,5 +1,11 @@
+"use server";
+
 import { ProductColumn } from "@/components/products/columns";
-import { ProductDetailProps, TopProductProps } from "@/types/product";
+import {
+  LowStockProductProps,
+  ProductDetailProps,
+  TopProductProps,
+} from "@/types/product";
 import { prisma } from "../prisma";
 import { getImageUrl } from "../supabase";
 
@@ -175,6 +181,25 @@ export async function getSimilarProducts(
       status: product.status,
       createdAt: product.createdAt,
     }));
+
+    return data;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getLowStocksProducts(): Promise<LowStockProductProps[]> {
+  try {
+    const products = await prisma.product.findMany({});
+
+    const data = products
+      .filter((product) => {
+        return product.stock <= 5;
+      })
+      .map((product) => ({
+        product: product.name,
+        stock: product.stock,
+      }));
 
     return data;
   } catch (error) {
