@@ -8,13 +8,13 @@ export async function getAllLocations(
   sortBy: "id" | "name" = "id",
 ): Promise<Location[]> {
   try {
-    const locations = await prisma.location.findMany({
+    const data = await prisma.location.findMany({
       orderBy: {
         [sortBy]: "asc",
       },
     });
 
-    return locations;
+    return data;
   } catch (error) {
     return [];
   }
@@ -43,7 +43,7 @@ export async function getSalesByLocation(): Promise<SalesByLocationProps[]> {
       }))
       .sort((a, b) => b.totalSales - a.totalSales);
 
-    return data.slice(0, 4);
+    return data;
   } catch (error) {
     return [];
   }

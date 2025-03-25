@@ -4,7 +4,7 @@ import { prisma } from "../prisma";
 
 export async function getAllCustomers(): Promise<CustomerColumn[]> {
   try {
-    const customers = await prisma.user.findMany({
+    const data = await prisma.user.findMany({
       where: {
         role: "CUSTOMER",
       },
@@ -16,7 +16,7 @@ export async function getAllCustomers(): Promise<CustomerColumn[]> {
       },
     });
 
-    return customers;
+    return data;
   } catch (error) {
     return [];
   }

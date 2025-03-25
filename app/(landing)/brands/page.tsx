@@ -1,10 +1,12 @@
 import HorizontalProductCard from "@/components/card/HorizontalProductCard";
 import BrandsBanner from "@/components/pages/BrandsBanner";
+import { Button } from "@/components/ui/button";
 import {
   getBrandsWithProducts,
   getBrandsWithTotalProducts,
 } from "@/lib/data/brand";
 import Image from "next/image";
+import Link from "next/link";
 
 async function BrandsPage() {
   const brands = await getBrandsWithTotalProducts();
@@ -104,6 +106,7 @@ async function BrandsPage() {
           <div className="space-y-6">
             {brandWithProducts
               .filter((brand) => brand.products.length > 0)
+              .slice(0, 6)
               .map((brand) => (
                 <div key={brand.id + brand.name} className="space-y-3">
                   <div className="flex items-center gap-2">
@@ -122,7 +125,7 @@ async function BrandsPage() {
                   </div>
 
                   <div className="custom-scrollbar w-full max-md:space-y-2 md:flex md:md:space-x-4 md:overflow-x-auto">
-                    {brand.products.map((product) => (
+                    {brand.products.slice(0, 4).map((product) => (
                       <HorizontalProductCard
                         key={product.id + product.name}
                         product={product}
@@ -131,6 +134,11 @@ async function BrandsPage() {
                   </div>
                 </div>
               ))}
+            <div className="flex items-center justify-center">
+              <Link href={"/catalogs"}>
+                <Button variant={"link"}>Explore More in Catalogs</Button>
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="flex h-full w-full flex-col items-center gap-2 text-center">

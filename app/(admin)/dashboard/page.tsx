@@ -64,7 +64,7 @@ async function DashboardPage() {
             </CardHeader>
             <CardContent className="h-[80%] w-full">
               {topProducts.length > 0 ? (
-                topProducts.slice(0, 6).map((product, i) => (
+                topProducts.slice(0, 4).map((product, i) => (
                   <div key={product.id}>
                     <div className="my-2 flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -204,7 +204,7 @@ async function DashboardPage() {
             </CardHeader>
             <CardContent className="grid grid-cols-2">
               {salesByLocation.length > 0 ? (
-                salesByLocation.map((Location, index) => (
+                salesByLocation.slice(0, 4).map((Location, index) => (
                   <div
                     key={Location.id + Location.name}
                     className="flex items-center justify-between py-3"
@@ -288,7 +288,7 @@ async function DashboardPage() {
                   {latestOrders.length > 0 ? (
                     <DataTable
                       columns={columns}
-                      data={latestOrders}
+                      data={latestOrders.slice(0, 10)}
                       pageSize={5}
                       columnFilter="id"
                     />

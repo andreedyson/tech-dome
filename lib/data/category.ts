@@ -50,7 +50,7 @@ export async function getTotalProductsByCategory(): Promise<
       totalProducts: _count.Product,
     }));
 
-    return data.slice(0, 8);
+    return data;
   } catch (error) {
     return [];
   }
@@ -72,13 +72,13 @@ export async function getCategoryWithProducts(): Promise<
       },
     });
 
-    const categoryWithProducts = categories.map((category) => ({
+    const data = categories.map((category) => ({
       id: category.id,
       name: category.name,
       products: category.Product,
     }));
 
-    return categoryWithProducts;
+    return data;
   } catch (error) {
     return [];
   }

@@ -23,7 +23,7 @@ async function Products() {
       <div className="w-full">
         {topProducts.length ? (
           <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
-            {topProducts.map((product) => (
+            {topProducts.slice(0, 8).map((product) => (
               <Link
                 key={product.id}
                 href={`/product-details/${product.id}`}

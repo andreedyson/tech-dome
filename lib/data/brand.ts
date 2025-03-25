@@ -55,7 +55,7 @@ export async function getPopularBrands(): Promise<Brand[]> {
       },
     });
 
-    const filteredBrands = brands.filter((brand) => {
+    const data = brands.filter((brand) => {
       const totalOrders = brand.Product.reduce((acc, product) => {
         return acc + product.orders.length;
       }, 0);
@@ -63,7 +63,7 @@ export async function getPopularBrands(): Promise<Brand[]> {
       return totalOrders >= 1;
     });
 
-    return filteredBrands.slice(0, 4);
+    return data;
   } catch (error) {
     return [];
   }
@@ -83,7 +83,7 @@ export async function getBrandsWithTotalProducts(): Promise<
       },
     });
 
-    const mappedBrands = brands
+    const data = brands
       .map((brand) => ({
         id: brand.id,
         name: brand.name,
@@ -92,7 +92,7 @@ export async function getBrandsWithTotalProducts(): Promise<
       }))
       .sort((a, b) => b.totalProducts - a.totalProducts);
 
-    return mappedBrands.slice(0, 4);
+    return data;
   } catch (error) {
     return [];
   }
@@ -113,14 +113,14 @@ export async function getBrandsWithProducts(): Promise<
       },
     });
 
-    const brandWithProducts = brands.map((brand) => ({
+    const data = brands.map((brand) => ({
       id: brand.id,
       name: brand.name,
       logo: getImageUrl(brand.logo),
       products: brand.Product,
     }));
 
-    return brandWithProducts.slice(0, 5);
+    return data;
   } catch (error) {
     return [];
   }

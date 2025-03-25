@@ -24,7 +24,7 @@ export async function getAllOrders(): Promise<OrderColumn[]> {
       },
     });
 
-    const mappedOrders = orders.map((order) => ({
+    const data = orders.map((order) => ({
       id: order.id.toString(),
       products: order.products.map((item) => ({
         name: item.product.name,
@@ -36,7 +36,7 @@ export async function getAllOrders(): Promise<OrderColumn[]> {
       status: order.status,
     }));
 
-    return mappedOrders;
+    return data;
   } catch (error) {
     return [];
   }
@@ -69,7 +69,7 @@ export async function getUserOrderHistory(
       },
     });
 
-    const mappedUserOrders = userOrders.map((order) => ({
+    const data = userOrders.map((order) => ({
       id: order.code,
       status: order.status,
       total: order.total,
@@ -83,7 +83,7 @@ export async function getUserOrderHistory(
       })),
     }));
 
-    return mappedUserOrders;
+    return data;
   } catch (error) {
     return [];
   }
@@ -133,7 +133,7 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
       createdAt: order.createdAt,
     }));
 
-    return data.slice(0, 10);
+    return data;
   } catch (error) {
     return [];
   }

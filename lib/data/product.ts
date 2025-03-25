@@ -19,7 +19,7 @@ export async function getAllProducts(
       },
     });
 
-    const mappedProducts = products.map((product) => ({
+    const data = products.map((product) => ({
       id: product.id,
       name: product.name,
       description: product.description,
@@ -34,7 +34,7 @@ export async function getAllProducts(
       stock: product.stock,
     }));
 
-    return mappedProducts;
+    return data;
   } catch (error) {
     return [];
   }
@@ -100,7 +100,7 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
       totalOrders: orders.length,
     }));
 
-    return data.slice(0, 4);
+    return data;
   } catch (error) {
     return [];
   }
@@ -135,7 +135,7 @@ export async function getNewReleaseProducts(): Promise<TopProductProps[]> {
       totalOrders: orders.length,
     }));
 
-    return data.slice(0, 8);
+    return data;
   } catch (error) {
     return [];
   }

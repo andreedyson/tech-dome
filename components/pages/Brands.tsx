@@ -22,7 +22,7 @@ async function Brands() {
       <div className="w-full">
         {popularBrands.length ? (
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {popularBrands.map((brand) => (
+            {popularBrands.slice(0, 4).map((brand) => (
               <div
                 key={brand.name}
                 className="w-full rounded-xl border-2 p-4 shadow-md"

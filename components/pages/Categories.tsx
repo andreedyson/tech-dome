@@ -18,7 +18,7 @@ async function Categories() {
       <div className="w-full">
         {categoriesProducts.length ? (
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {categoriesProducts.map((category) => (
+            {categoriesProducts.slice(0, 8).map((category) => (
               <div
                 key={category.name}
                 className="rounded-xl border-2 p-4 shadow-md duration-200 hover:border-yellow-500"
