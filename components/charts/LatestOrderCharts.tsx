@@ -62,7 +62,7 @@ export function LatestOrderCharts() {
       </div>
       <ChartContainer
         config={chartConfig}
-        className="h-full min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full"
+        className="h-full min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full md:h-[300px]"
       >
         <AreaChart
           accessibilityLayer
@@ -79,11 +79,9 @@ export function LatestOrderCharts() {
             axisLine={false}
             tickMargin={8}
             interval={0}
+            tickFormatter={(value) => value.slice(0, 6)}
           />
-          <ChartTooltip
-            cursor={false}
-            content={<ChartTooltipContent hideLabel />}
-          />
+          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <defs>
             <linearGradient id="fillTotal" x1="0" y1="0" x2="0" y2="1">
               <stop

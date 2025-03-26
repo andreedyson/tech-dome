@@ -75,7 +75,7 @@ export function SalesByLocationCharts() {
       <div className="flex w-full flex-col items-center justify-center gap-y-1.5 text-center text-sm">
         <p className="flex items-center gap-1 font-medium leading-none">
           <MapPin className="h-4 w-4" />
-          Total of {chartData?.length} Locations with {totalSales} Total Sales
+          {chartData?.length} Locations with {totalSales} Total Sales
         </p>
         <div className="leading-none text-muted-foreground">
           Showing the top selling locations with the amount of sales

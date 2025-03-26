@@ -50,93 +50,93 @@ async function DashboardPage() {
         ))}
       </div>
 
-      <div className="grid h-full w-full gap-4 md:grid-cols-4 lg:grid-cols-12 lg:grid-rows-2">
+      <div className="h-full w-full">
         {/* Latest Orders Card */}
-        <div className="md:col-span-4 lg:col-span-8 lg:row-span-2">
-          <Card className="h-full w-full border-2">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle>Orders Overview</CardTitle>
-                <Link href={"/dashboard/orders"}>
-                  <Button variant={"outline"} size={"sm"}>
-                    View All
-                  </Button>
-                </Link>
+        <Card className="h-full w-full border-2">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle>Orders Overview</CardTitle>
+              <Link href={"/dashboard/orders"}>
+                <Button variant={"outline"} size={"sm"}>
+                  View All
+                </Button>
+              </Link>
+            </div>
+            <Separator className="h-[2px]" />
+          </CardHeader>
+          <CardContent className="w-full">
+            <Tabs defaultValue="order-table" className="h-full w-full">
+              <div className="flex w-full justify-end">
+                <TabsList className="w-[160px]">
+                  <TabsTrigger value="order-table" className="w-full">
+                    <Table size={20} />
+                  </TabsTrigger>
+                  <TabsTrigger value="order-chart" className="w-full">
+                    <ChartNoAxesCombined size={20} />
+                  </TabsTrigger>
+                </TabsList>
               </div>
-              <Separator className="h-[2px]" />
-            </CardHeader>
-            <CardContent className="w-full">
-              <Tabs defaultValue="order-table" className="h-full w-full">
-                <div className="flex w-full justify-end">
-                  <TabsList className="w-[160px]">
-                    <TabsTrigger value="order-table" className="w-full">
-                      <Table size={20} />
-                    </TabsTrigger>
-                    <TabsTrigger value="order-chart" className="w-full">
-                      <ChartNoAxesCombined size={20} />
-                    </TabsTrigger>
-                  </TabsList>
-                </div>
-                <TabsContent value="order-table">
-                  {latestOrders.length > 0 ? (
-                    <DataTable
-                      columns={columns}
-                      data={latestOrders.slice(0, 10)}
-                      pageSize={5}
-                      columnFilter="id"
+              <TabsContent value="order-table">
+                {latestOrders.length > 0 ? (
+                  <DataTable
+                    columns={columns}
+                    data={latestOrders.slice(0, 10)}
+                    pageSize={5}
+                    columnFilter="id"
+                  />
+                ) : (
+                  <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                    <Image
+                      src={"/assets/empty-vault.svg"}
+                      width={500}
+                      height={300}
+                      alt="Orders Not Found"
+                      className="aspect-video w-[180px] lg:w-[380px]"
+                      priority
                     />
-                  ) : (
-                    <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
-                      <Image
-                        src={"/assets/empty-vault.svg"}
-                        width={500}
-                        height={300}
-                        alt="Orders Not Found"
-                        className="aspect-video w-[180px] lg:w-[380px]"
-                        priority
-                      />
-                      <div className="space-y-0.5">
-                        <h4 className="text-sm font-semibold md:text-base">
-                          No Orders Found
-                        </h4>
-                        <p className="max-w-md text-xs md:text-sm">
-                          Showing the list of orders from the past two weeks.
-                        </p>
-                      </div>
+                    <div className="space-y-0.5">
+                      <h4 className="text-sm font-semibold md:text-base">
+                        No Orders Found
+                      </h4>
+                      <p className="max-w-md text-xs md:text-sm">
+                        Showing the list of orders from the past two weeks.
+                      </p>
                     </div>
-                  )}
-                </TabsContent>
-                <TabsContent value="order-chart" className="h-full">
-                  {latestOrders.length > 0 ? (
-                    <LatestOrderCharts />
-                  ) : (
-                    <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
-                      <Image
-                        src={"/assets/empty-orders.svg"}
-                        width={500}
-                        height={300}
-                        alt="Orders Not Found"
-                        className="aspect-video w-[180px] lg:w-[380px]"
-                        priority
-                      />
-                      <div className="space-y-0.5">
-                        <h4 className="text-sm font-semibold md:text-base">
-                          No Orders Found
-                        </h4>
-                        <p className="max-w-md text-xs md:text-sm">
-                          Showing the list of orders from the past two weeks.
-                        </p>
-                      </div>
+                  </div>
+                )}
+              </TabsContent>
+              <TabsContent value="order-chart" className="h-full">
+                {latestOrders.length > 0 ? (
+                  <LatestOrderCharts />
+                ) : (
+                  <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                    <Image
+                      src={"/assets/empty-orders.svg"}
+                      width={500}
+                      height={300}
+                      alt="Orders Not Found"
+                      className="aspect-video w-[180px] lg:w-[380px]"
+                      priority
+                    />
+                    <div className="space-y-0.5">
+                      <h4 className="text-sm font-semibold md:text-base">
+                        No Orders Found
+                      </h4>
+                      <p className="max-w-md text-xs md:text-sm">
+                        Showing the list of orders from the past two weeks.
+                      </p>
                     </div>
-                  )}
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
-        </div>
+                  </div>
+                )}
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </Card>
+      </div>
 
+      <div className="grid h-full w-full grid-cols-1 gap-4 md:grid-cols-8">
         {/* Top Customers Card */}
-        <div className="md:col-span-2 lg:col-span-4 lg:col-start-9">
+        <div className="col-span-full w-full md:col-span-4">
           <Card className="h-full border-2">
             <CardHeader>
               <div className="flex items-center justify-between">
@@ -148,7 +148,7 @@ async function DashboardPage() {
                 </Link>
               </div>
             </CardHeader>
-            <CardContent className="h-full">
+            <CardContent className="h-[75%] w-full md:h-[80%]">
               {topCustomers.length > 0 ? (
                 <TopCustomerCharts />
               ) : (
@@ -176,8 +176,8 @@ async function DashboardPage() {
         </div>
 
         {/* Sales by Location Card */}
-        <div className="md:col-span-2 lg:col-span-4 lg:col-start-9">
-          <Card className="h-full border-2">
+        <div className="col-span-full w-full md:col-span-4">
+          <Card className="h-full w-full border-2">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle>Sales by Location</CardTitle>
@@ -188,11 +188,11 @@ async function DashboardPage() {
                 </Link>
               </div>
             </CardHeader>
-            <CardContent className="h-full">
+            <CardContent className="h-[75%] md:h-[80%]">
               {salesByLocation.length > 0 ? (
                 <SalesByLocationCharts />
               ) : (
-                <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                <div className="flex h-full flex-col items-center gap-2 text-center">
                   <Image
                     src={"/assets/empty-cart.svg"}
                     width={500}
@@ -244,8 +244,8 @@ async function DashboardPage() {
                   </TabsList>
                 </div>
                 <TabsContent value="top-selling" className="space-y-4">
-                  <div className="space-y-1.5">
-                    <p className="text-base font-semibold leading-none md:text-lg">
+                  <div className="space-y-1.5 text-sm md:text-base">
+                    <p className="font-semibold leading-none">
                       Top Selling Products
                     </p>
                     <p className="leading-none text-muted-foreground">
@@ -264,8 +264,8 @@ async function DashboardPage() {
                               alt={product.name}
                               className="size-16 md:size-[64px]"
                             />
-                            <div>
-                              <p className="line-clamp-1 text-base font-bold leading-none md:text-lg">
+                            <div className="space-y-1">
+                              <p className="line-clamp-1 text-sm font-bold leading-none md:text-base">
                                 {product.name}
                               </p>
                               <p className="text-sm font-medium leading-none text-muted-foreground">
@@ -273,7 +273,7 @@ async function DashboardPage() {
                               </p>
                             </div>
                           </div>
-                          <div className="flex flex-col items-center gap-2 text-sm sm:flex-row md:gap-4">
+                          <div className="flex flex-col items-center gap-1 text-sm sm:flex-row md:gap-4">
                             <p className="font-semibold">
                               {convertRupiah(product.price)}
                             </p>
@@ -308,8 +308,8 @@ async function DashboardPage() {
                 </TabsContent>
                 <TabsContent value="low-stocks" className="h-full">
                   <div className="space-y-4">
-                    <div className="space-y-1.5">
-                      <p className="text-base font-semibold leading-none md:text-lg">
+                    <div className="space-y-1.5 text-sm md:text-base">
+                      <p className="font-semibold leading-none">
                         Low Stocks Products
                       </p>
                       <p className="leading-none text-muted-foreground">
@@ -348,7 +348,7 @@ async function DashboardPage() {
                     Brand Products
                   </TabsTrigger>
                 </TabsList>
-                <TabsContent value="performance" className="h-[90%]">
+                <TabsContent value="performance" className="h-full">
                   <BrandPerformanceCharts totalBrand={6} />
                 </TabsContent>
                 <TabsContent value="highest" className="h-full">
