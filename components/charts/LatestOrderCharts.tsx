@@ -11,6 +11,7 @@ import {
 import { getLatestOrders } from "@/lib/data/order";
 import { formatDate } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
+import { ChartSpline } from "lucide-react";
 
 export function LatestOrderCharts() {
   const { data, isLoading } = useQuery({
@@ -49,60 +50,71 @@ export function LatestOrderCharts() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <ChartContainer
-      config={chartConfig}
-      className="h-full min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full"
-    >
-      <AreaChart
-        accessibilityLayer
-        data={result}
-        margin={{
-          left: 40,
-          right: 40,
-        }}
+    <div className="space-y-3.5">
+      <div className="space-y-1.5">
+        <p className="flex items-center gap-1 text-base font-semibold leading-none md:text-lg">
+          <ChartSpline className="size-4" />
+          Latest Orders
+        </p>
+        <p className="leading-none text-muted-foreground">
+          Showing the list of orders that are made from the past two weeks.
+        </p>
+      </div>
+      <ChartContainer
+        config={chartConfig}
+        className="h-full min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full"
       >
-        <CartesianGrid vertical={false} />
-        <XAxis
-          dataKey="date"
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          interval={0}
-        />
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent hideLabel />}
-        />
-        <defs>
-          <linearGradient id="fillTotal" x1="0" y1="0" x2="0" y2="1">
-            <stop
-              offset="5%"
-              stopColor="var(--color-total)"
-              stopOpacity={0.8}
-            />
-            <stop
-              offset="95%"
-              stopColor="var(--color-total)"
-              stopOpacity={0.1}
-            />
-          </linearGradient>
-        </defs>
-        <Area
-          dataKey="total"
-          type="natural"
-          fill="url(#fillTotal)"
-          fillOpacity={0.4}
-          stroke="var(--color-total)"
-          strokeWidth={2}
-          dot={{
-            fill: "var(--color-total)",
+        <AreaChart
+          accessibilityLayer
+          data={result}
+          margin={{
+            left: 40,
+            right: 40,
           }}
-          activeDot={{
-            r: 6,
-          }}
-          stackId="a"
-        />
-      </AreaChart>
-    </ChartContainer>
+        >
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey="date"
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            interval={0}
+          />
+          <ChartTooltip
+            cursor={false}
+            content={<ChartTooltipContent hideLabel />}
+          />
+          <defs>
+            <linearGradient id="fillTotal" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="5%"
+                stopColor="var(--color-total)"
+                stopOpacity={0.8}
+              />
+              <stop
+                offset="95%"
+                stopColor="var(--color-total)"
+                stopOpacity={0.1}
+              />
+            </linearGradient>
+          </defs>
+          <Area
+            dataKey="total"
+            type="natural"
+            fill="url(#fillTotal)"
+            fillOpacity={0.4}
+            stroke="var(--color-total)"
+            strokeWidth={2}
+            dot={{
+              fill: "var(--color-total)",
+            }}
+            activeDot={{
+              r: 6,
+            }}
+            stackId="a"
+          />
+        </AreaChart>
+      </ChartContainer>
+    </div>
   );
 }
