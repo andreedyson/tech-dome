@@ -81,7 +81,10 @@ export function LatestOrderCharts() {
             interval={0}
             tickFormatter={(value) => value.slice(0, 6)}
           />
-          <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+          <ChartTooltip
+            cursor={false}
+            content={<ChartTooltipContent indicator="line" />}
+          />
           <defs>
             <linearGradient id="fillTotal" x1="0" y1="0" x2="0" y2="1">
               <stop

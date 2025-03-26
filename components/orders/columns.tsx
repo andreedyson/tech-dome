@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import OrderStatusBadge from "../OrderStatusBadge";
+import { Separator } from "../ui/separator";
 
 export type OrderColumn = {
   id: string;
@@ -48,17 +49,9 @@ export const columns: ColumnDef<OrderColumn>[] = [
       const order = row.original;
 
       return (
-        <div className="inline-flex flex-col items-center gap-5 md:flex-row">
+        <div className="flex flex-col gap-2 font-semibold">
           {order.products.map((product, i) => (
             <div key={product.name + i}>
-              <div className="hidden size-20 rounded-lg object-contain md:block">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={80}
-                  height={80}
-                />
-              </div>
               <p>{product.name}</p>
             </div>
           ))}
