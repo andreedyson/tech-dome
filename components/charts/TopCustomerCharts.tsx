@@ -61,7 +61,7 @@ export function TopCustomerCharts() {
 
   if (isLoading)
     return (
-      <div className="relative flex h-full items-center justify-center">
+      <div className="relative flex h-[70%] items-center justify-center">
         <Skeleton className="size-[160px] rounded-full" />
         <div className="absolute size-[130px] rounded-full bg-white" />
       </div>
@@ -117,10 +117,10 @@ export function TopCustomerCharts() {
           </Pie>
         </PieChart>
       </ChartContainer>
-      <div className="flex flex-col items-center justify-center gap-y-1.5 text-center">
-        <p className="flex items-center gap-2 font-medium leading-none">
-          {chartData?.length} Top Customers with {totalTopOrders} Total Orders{" "}
+      <div className="flex flex-col items-center justify-center gap-y-1.5 text-center text-sm">
+        <p className="flex items-center gap-1 font-medium leading-none">
           <TrendingUp className="h-4 w-4" />
+          {chartData?.length} Top Customers with {totalTopOrders} Total Orders{" "}
         </p>
         <div className="leading-none text-muted-foreground">
           Showing top customer with the amount of orders they made

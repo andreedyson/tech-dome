@@ -43,12 +43,16 @@ export async function getTopCustomers(): Promise<TopCustomersProps[]> {
       },
     });
 
-    const data = topCustomers.map((customer) => ({
-      id: customer.id,
-      name: customer.name,
-      email: customer.email,
-      totalOrders: customer.Order.length,
-    }));
+    const data = topCustomers
+      .map((customer) => ({
+        id: customer.id,
+        name: customer.name,
+        email: customer.email,
+        totalOrders: customer.Order.length,
+      }))
+      .filter((customer) => {
+        return customer.totalOrders >= 1;
+      });
 
     return data;
   } catch (error) {

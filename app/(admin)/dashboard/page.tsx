@@ -2,6 +2,7 @@ import StatsCard from "@/components/card/StatsCard";
 import { BrandPerformanceCharts } from "@/components/charts/BrandPerformanceCharts";
 import { LatestOrderCharts } from "@/components/charts/LatestOrderCharts";
 import { LowStockProductCharts } from "@/components/charts/LowStockProductCharts";
+import { SalesByLocationCharts } from "@/components/charts/SalesByLocationCharts";
 import { TopCustomerCharts } from "@/components/charts/TopCustomerCharts";
 import { columns } from "@/components/orders/latest-order-columns";
 import { Badge } from "@/components/ui/badge";
@@ -209,38 +210,10 @@ async function DashboardPage() {
                   </Button>
                 </Link>
               </div>
-              <Separator className="h-[2px]" />
             </CardHeader>
-            <CardContent className="grid grid-cols-2">
+            <CardContent className="h-full">
               {salesByLocation.length > 0 ? (
-                salesByLocation.slice(0, 4).map((Location, index) => (
-                  <div
-                    key={Location.id + Location.name}
-                    className="flex items-center justify-between py-3"
-                  >
-                    <div className="flex items-center gap-4">
-                      <span className="text-2xl font-bold text-muted-foreground md:text-3xl">
-                        {index + 1}.
-                      </span>
-                      <div>
-                        <p
-                          className="line-clamp-1 max-w-[130px] text-sm font-semibold lg:text-base"
-                          title={Location.name}
-                        >
-                          {Location.name}
-                        </p>
-                        <div className="flex items-center gap-1">
-                          <p className="text-base font-bold text-main-violet-500 md:text-lg">
-                            {Location.totalSales}
-                          </p>
-                          <span className="text-sm font-light text-muted-foreground md:text-base">
-                            Sales
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
+                <SalesByLocationCharts />
               ) : (
                 <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
                   <Image

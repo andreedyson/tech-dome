@@ -102,7 +102,7 @@ export function BrandPerformanceCharts({
       <div className="flex w-full flex-col items-center justify-center text-center text-sm">
         <div className="flex gap-2 font-medium">
           <ShoppingCart strokeWidth={3} className="size-4" />
-          {totalSales} products sold total from all brands
+          {totalSales} Products sold total from all Brands
         </div>
         <div className="text-muted-foreground">
           Showing total sales for each brands
