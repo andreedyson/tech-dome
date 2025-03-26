@@ -13,19 +13,19 @@ function DashboardSkeletons() {
 
       {/* Orders Overview Skeletons */}
       <div className="h-full w-full">
-        <Skeleton className="h-[400px] md:col-span-4 md:h-[600px]" />
+        <Skeleton className="h-[400px] md:col-span-4 md:h-[500px]" />
       </div>
 
       {/*  Customers & Countries Overview */}
       <div className="grid h-full w-full gap-4 md:grid-cols-4 lg:grid-cols-8">
-        <Skeleton className="md:col-span-2 lg:col-span-4" />
-        <Skeleton className="md:col-span-2 lg:col-span-4" />
+        <Skeleton className="h-[350px] md:col-span-2 lg:col-span-4" />
+        <Skeleton className="h-[350px] md:col-span-2 lg:col-span-4" />
       </div>
 
       {/* Products Overview and Brand Performances Skeletons */}
       <div className="grid w-full gap-4 lg:grid-cols-12">
-        <Skeleton className="h-[250px] w-full lg:col-span-8" />
-        <Skeleton className="h-[250px] w-full lg:col-span-4" />
+        <Skeleton className="h-[450px] w-full lg:col-span-8" />
+        <Skeleton className="h-[450px] w-full lg:col-span-4" />
       </div>
     </div>
   );

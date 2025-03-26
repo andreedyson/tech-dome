@@ -12,7 +12,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { getTopCustomers } from "@/lib/data/user";
 import { Skeleton } from "../ui/skeleton";
-import { TrendingUp } from "lucide-react";
+import { LoaderCircle, TrendingUp } from "lucide-react";
 
 // Predefined chart colors
 const predefinedColors = [
@@ -61,9 +61,8 @@ export function TopCustomerCharts() {
 
   if (isLoading)
     return (
-      <div className="relative flex h-[70%] items-center justify-center">
-        <Skeleton className="size-[160px] rounded-full" />
-        <div className="absolute size-[130px] rounded-full bg-white" />
+      <div className="flex h-[200px] w-full flex-col items-center justify-center md:h-[350px]">
+        <LoaderCircle className="size-10 animate-spin text-main-violet-700" />
       </div>
     );
 

@@ -11,7 +11,7 @@ import {
 import { getLatestOrders } from "@/lib/data/order";
 import { formatDate } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
-import { ChartSpline } from "lucide-react";
+import { ChartSpline, LoaderCircle } from "lucide-react";
 
 export function LatestOrderCharts() {
   const { data, isLoading } = useQuery({
@@ -47,10 +47,15 @@ export function LatestOrderCharts() {
     },
   } satisfies ChartConfig;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex h-[200px] w-full flex-col items-center justify-center lg:h-[350px]">
+        <LoaderCircle className="size-10 animate-spin text-main-violet-700" />
+      </div>
+    );
 
   return (
-    <div className="space-y-3.5">
+    <div className="w-full space-y-3.5">
       <div className="space-y-1.5">
         <p className="flex items-center gap-1 text-base font-semibold leading-none md:text-lg">
           <ChartSpline className="size-4" />
@@ -62,7 +67,7 @@ export function LatestOrderCharts() {
       </div>
       <ChartContainer
         config={chartConfig}
-        className="h-full min-h-[280px] max-[430px]:max-w-[240px] min-[350px]:w-full md:h-[300px]"
+        className="h-full min-h-[280px] w-full md:h-[300px]"
       >
         <AreaChart
           accessibilityLayer

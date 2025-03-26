@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/chart";
 import { getBrandSales } from "@/lib/data/brand";
 import { useQuery } from "@tanstack/react-query";
-import { ShoppingCart } from "lucide-react";
+import { LoaderCircle, ShoppingCart } from "lucide-react";
 
 type BrandPerformanceChartsProps = {
   totalBrand?: number;
@@ -44,7 +44,12 @@ export function BrandPerformanceCharts({
     return acc + curr.sales;
   }, 0);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex h-[200px] w-full flex-col items-center justify-center lg:h-[450px]">
+        <LoaderCircle className="size-10 animate-spin text-main-violet-700" />
+      </div>
+    );
 
   return (
     <div className="h-full space-y-4">

@@ -10,16 +10,8 @@ import {
 } from "@/components/ui/chart";
 import { getSalesByLocation } from "@/lib/data/location";
 import { useQuery } from "@tanstack/react-query";
-import { MapPin } from "lucide-react";
+import { LoaderCircle, MapPin } from "lucide-react";
 import { useMemo } from "react";
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-];
 
 export function SalesByLocationCharts() {
   const { data: chartData, isLoading } = useQuery({
@@ -38,7 +30,13 @@ export function SalesByLocationCharts() {
     return chartData?.reduce((acc, curr) => acc + curr.totalSales, 0) || 0;
   }, [chartData]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex h-[200px] w-full flex-col items-center justify-center md:h-[350px]">
+        <LoaderCircle className="size-10 animate-spin text-main-violet-700" />
+      </div>
+    );
+
   return (
     <div className="space-y-3.5">
       <ChartContainer
