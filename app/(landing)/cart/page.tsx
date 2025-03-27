@@ -3,9 +3,18 @@ import CheckoutForm from "@/components/cart/CheckoutForm";
 import { getUser } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 async function CartPage() {
-  const { session } = await getUser();
+  const { session, user } = await getUser();
+
+  if (!session) {
+    redirect("/");
+  }
+
+  if (user.role === "ADMIN") {
+    redirect("/dashboard");
+  }
 
   return (
     <section className="mb-6">
