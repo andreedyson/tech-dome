@@ -12,7 +12,7 @@ export function SubmitButton({
   ...props
 }: SubmitButtonType) {
   return (
-    <Button disabled={isSubmitting} {...props}>
+    <Button disabled={isSubmitting} {...props} type="submit">
       <span>{children}</span>
 
       {isSubmitting && (

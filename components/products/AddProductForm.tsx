@@ -189,71 +189,101 @@ function AddProductForm() {
               />
 
               <div className="grid gap-4 md:grid-cols-3">
-                <div className="space-y-2">
-                  <Label htmlFor="categoryId">Category</Label>
-                  <Select name="categoryId">
-                    <SelectTrigger
-                      id="categoryId"
-                      className="bg-input"
-                      aria-label="Select Category"
-                    >
-                      <SelectValue placeholder="Select Category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {categories?.map((category) => (
-                        <SelectItem
-                          key={category.id}
-                          value={String(category.id)}
-                        >
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <FormField
+                  control={form.control}
+                  name="categoryId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="categoryId">Category</FormLabel>
+                      <FormControl>
+                        <Select name="categoryId">
+                          <SelectTrigger
+                            id="categoryId"
+                            className="bg-input"
+                            aria-label="Select Category"
+                          >
+                            <SelectValue placeholder="Select Category" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {categories?.map((category) => (
+                              <SelectItem
+                                key={category.id}
+                                value={String(category.id)}
+                              >
+                                {category.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div className="space-y-2">
-                  <Label htmlFor="brandId">Brand</Label>
-                  <Select name="brandId">
-                    <SelectTrigger
-                      id="brandId"
-                      className="bg-input"
-                      aria-label="Select Brand"
-                    >
-                      <SelectValue placeholder="Select Brand" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {brands?.map((brand) => (
-                        <SelectItem key={brand.id} value={String(brand.id)}>
-                          {brand.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <FormField
+                  control={form.control}
+                  name="brandId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="brandId">Brand</FormLabel>
+                      <FormControl>
+                        <Select name="brandId">
+                          <SelectTrigger
+                            id="brandId"
+                            className="bg-input"
+                            aria-label="Select Brand"
+                          >
+                            <SelectValue placeholder="Select Brand" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {brands?.map((brand) => (
+                              <SelectItem
+                                key={brand.id}
+                                value={String(brand.id)}
+                              >
+                                {brand.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div className="space-y-2">
-                  <Label htmlFor="locationId">Location</Label>
-                  <Select name="locationId">
-                    <SelectTrigger
-                      id="locationId"
-                      className="bg-input"
-                      aria-label="Select Location"
-                    >
-                      <SelectValue placeholder="Select Location" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {locations?.map((location) => (
-                        <SelectItem
-                          key={location.id}
-                          value={String(location.id)}
-                        >
-                          {location.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                <FormField
+                  control={form.control}
+                  name="locationId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel htmlFor="locationId">Location</FormLabel>
+                      <FormControl>
+                        <Select name="locationId">
+                          <SelectTrigger
+                            id="brandId"
+                            className="bg-input"
+                            aria-label="Select Location"
+                          >
+                            <SelectValue placeholder="Select Location" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {locations?.map((location) => (
+                              <SelectItem
+                                key={location.id}
+                                value={String(location.id)}
+                              >
+                                {location.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               <div className="space-y-2">
