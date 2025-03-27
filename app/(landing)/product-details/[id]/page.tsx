@@ -5,6 +5,7 @@ import ProductDetailsImages from "@/components/catalogs/ProductDetailsImages";
 import ShowMoreText from "@/components/ShowMoreText";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { DUMMY_TESTIMONIALS } from "@/constants";
 import { getUser } from "@/lib/auth";
 import { getProductById, getSimilarProducts } from "@/lib/data/product";
 import { convertRupiah } from "@/lib/utils";
@@ -156,7 +157,7 @@ async function ProductDetailsPage({
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Testimonials</h3>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 4 }, (_, index) => (
+            {DUMMY_TESTIMONIALS.map((testi, index) => (
               <article
                 key={index}
                 className="flex flex-col gap-4 rounded-lg border-2 p-6"
@@ -172,17 +173,15 @@ async function ProductDetailsPage({
                     />
                   </div>
                   <div className="space-y-1">
-                    <p className="text-base font-bold">Caio Henrique</p>
-                    <p className="text-sm">Jan 12, 2025</p>
+                    <p className="text-base font-bold">{testi.name}</p>
+                    <p className="text-sm">{testi.date}</p>
                   </div>
                 </div>
 
                 <div className="mt-2 space-y-3">
-                  <p className="text-justify leading-none">
-                    I do really love the quality of this product
-                  </p>
-                  <div className="flex items-center">
-                    {Array.from({ length: 5 }, (_, i) => (
+                  <p className="leading-none">{testi.review}</p>
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: testi.star }, (_, i) => (
                       <Star key={i} fill="orange" stroke="orange" size={16} />
                     ))}
                   </div>
