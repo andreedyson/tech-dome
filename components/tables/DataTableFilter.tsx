@@ -1,5 +1,5 @@
 import { Column } from "@tanstack/react-table";
-import { Check, Filter } from "lucide-react";
+import { Check, SlidersHorizontal } from "lucide-react";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -20,7 +20,6 @@ import { Separator } from "../ui/separator";
 interface DataTableFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;
   title?: string;
-  type?: "product" | "order";
   options: {
     label: string;
     value: string;
@@ -31,7 +30,6 @@ interface DataTableFilterProps<TData, TValue> {
 export function DataTableFilter<TData, TValue>({
   column,
   title,
-  type,
   options,
 }: DataTableFilterProps<TData, TValue>) {
   const facets = column?.getFacetedUniqueValues();
@@ -41,7 +39,7 @@ export function DataTableFilter<TData, TValue>({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
-          <Filter />
+          <SlidersHorizontal />
           {title}
           {selectedValues?.size > 0 && (
             <>

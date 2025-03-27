@@ -76,6 +76,10 @@ export const columns: ColumnDef<ProductColumn>[] = [
 
       return <div>{product.categoryName}</div>;
     },
+    filterFn: (row, columnId, filterValues) => {
+      if (!filterValues || filterValues.length === 0) return true;
+      return filterValues.includes(row.getValue(columnId));
+    },
   },
   {
     accessorKey: "price",

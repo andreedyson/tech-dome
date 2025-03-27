@@ -39,11 +39,11 @@ export function LatestOrderCharts() {
   const chartConfig = {
     date: {
       label: "Date",
-      color: "#9661f1",
+      color: "hsl(var(--chart-2))",
     },
     total: {
       label: "Total",
-      color: "#9661f1",
+      color: "hsl(var(--chart-2))",
     },
   } satisfies ChartConfig;
 

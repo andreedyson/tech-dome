@@ -19,6 +19,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { orderStatusFilterOptions } from "@/constants";
+import { getAllCategories } from "@/lib/data/category";
+import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight, Eye, Search } from "lucide-react";
 import React from "react";
 import { DataTableFilter } from "../tables/DataTableFilter";
@@ -31,10 +34,7 @@ import {
 } from "./dropdown-menu";
 import { Input } from "./input";
 import { Label } from "./label";
-import {
-  orderStatusFilterOptions,
-  productStatusFilterOptions,
-} from "@/constants";
+import { Skeleton } from "./skeleton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -77,6 +77,30 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const { data: categoryFilter, isLoading } = useQuery({
+    queryKey: ["category-filter"],
+    queryFn: () => getAllCategories(),
+    enabled: filterType === "product",
+  });
+
+  const categoryFilterOptions = categoryFilter?.map((category) => ({
+    value: category.name,
+    label: category.name,
+  }));
+
+  if (isLoading)
+    return (
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-10 w-[250px]" />
+          <Skeleton className="h-10 w-[100px]" />
+        </div>
+        <div>
+          <Skeleton className="h-[600px] w-full" />
+        </div>
+      </div>
+    );
+
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
@@ -100,17 +124,15 @@ export function DataTable<TData, TValue>({
         <div className="flex flex-col gap-3 sm:flex-row md:items-center">
           {filterType == "product" && (
             <DataTableFilter
-              column={table.getColumn("status")}
-              title="Status"
-              type="product"
-              options={productStatusFilterOptions}
+              column={table.getColumn("categoryName")}
+              title="Category"
+              options={categoryFilterOptions || []}
             />
           )}
           {filterType == "order" && (
             <DataTableFilter
               column={table.getColumn("status")}
               title="Status"
-              type="product"
               options={orderStatusFilterOptions}
             />
           )}
