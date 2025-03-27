@@ -21,6 +21,7 @@ export const loginSchema = z.object({
 export const registerSchema = loginSchema.extend({
   name: z
     .string({ required_error: "Name is required" })
+    .trim()
     .min(2, { message: "Name must be minimum of 2 characters" })
     .max(80, { message: "Name must be less than 80 characters" }),
 });
@@ -100,13 +101,14 @@ export const orderDetailsSchema = z.object({
   address: z
     .string({ required_error: "Address is required" })
     .trim()
-    .trim()
     .min(5, { message: "Address must be minimum of 5 characters" }),
   city: z
     .string({ required_error: "City is required" })
-    .min(5, { message: "City must be minimum of 5 characters" }),
+    .trim()
+    .min(3, { message: "City must be minimum of 3 characters" }),
   postalCode: z
     .string({ required_error: "Postal Code is required" })
+    .trim()
     .min(5, { message: "Postal Code must be minimum of 5 characters" }),
   notes: z.string().optional(),
 });
