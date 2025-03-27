@@ -104,7 +104,12 @@ async function ProductDetailsPage({
         <div className="w-full">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold md:text-5xl">{product.name}</h1>
+              <h1
+                title={product.name}
+                className="line-clamp-2 max-w-sm text-3xl font-bold md:text-5xl"
+              >
+                {product.name}
+              </h1>
               <div>
                 <p className="mt-1 text-sm font-semibold text-muted-foreground md:mt-2 md:text-base">
                   {product.category?.name} • {product.brand?.name}
@@ -118,13 +123,18 @@ async function ProductDetailsPage({
               </p>
             </div>
           </div>
-          <div className="mt-2 flex items-center gap-2">
-            <div className="flex items-center">
-              {Array.from({ length: 5 }, (_, i) => (
-                <Star key={i} fill="orange" stroke="orange" size={22} />
-              ))}
+          <div className="mt-2 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <Star key={i} fill="orange" stroke="orange" size={22} />
+                ))}
+              </div>
+              <span className="font-semibold">({product.total_sales})</span>
             </div>
-            <span className="font-semibold">({product.total_sales})</span>
+            <p className="text-sm font-medium text-muted-foreground md:text-base">
+              {product.stock} Items Left
+            </p>
           </div>
 
           <Separator className="my-4 h-[2px]" />

@@ -36,7 +36,7 @@ function ProductCard({ product }: ProductProps) {
             {product.name}
           </h4>
           <p className="text-sm font-medium text-muted-foreground">
-            {product.total_sales} Sold • {product.stock} Stocks Left
+            {product.total_sales} Sold • {product.stock} Items
           </p>
           <div className="mt-1.5 flex items-center gap-2 text-sm">
             <Image
