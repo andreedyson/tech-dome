@@ -66,7 +66,7 @@ async function DashboardPage() {
           </CardHeader>
           <CardContent className="w-full">
             <Tabs defaultValue="order-table" className="h-full w-full">
-              <div className="flex w-full justify-end">
+              <div className="w-full">
                 <TabsList className="w-[160px]">
                   <TabsTrigger value="order-table" className="w-full">
                     <Table size={20} />

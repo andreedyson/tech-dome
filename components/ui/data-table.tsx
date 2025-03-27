@@ -103,8 +103,8 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="relative flex items-center py-4">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <div className="relative flex items-center pt-4">
           <Label htmlFor="search" className="absolute left-2">
             <Search strokeWidth={3} />
           </Label>
@@ -118,24 +118,10 @@ export function DataTable<TData, TValue>({
             onChange={(event) =>
               table.getColumn(columFiltered)?.setFilterValue(event.target.value)
             }
-            className="max-w-[200px] border-2 bg-input pl-10 placeholder:capitalize max-md:placeholder:text-sm md:max-w-sm"
+            className="w-full border-2 bg-input pl-10 placeholder:capitalize max-md:placeholder:text-sm md:max-w-sm"
           />
         </div>
         <div className="flex flex-col gap-3 sm:flex-row md:items-center">
-          {filterType == "product" && (
-            <DataTableFilter
-              column={table.getColumn("categoryName")}
-              title="Category"
-              options={categoryFilterOptions || []}
-            />
-          )}
-          {filterType == "order" && (
-            <DataTableFilter
-              column={table.getColumn("status")}
-              title="Status"
-              options={orderStatusFilterOptions}
-            />
-          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size={"sm"}>
@@ -171,6 +157,20 @@ export function DataTable<TData, TValue>({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
+          {filterType == "product" && (
+            <DataTableFilter
+              column={table.getColumn("categoryName")}
+              title="Category"
+              options={categoryFilterOptions || []}
+            />
+          )}
+          {filterType == "order" && (
+            <DataTableFilter
+              column={table.getColumn("status")}
+              title="Status"
+              options={orderStatusFilterOptions}
+            />
+          )}
         </div>
       </div>
       <div className="rounded-md border">
