@@ -1,6 +1,13 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 import {
   ChartConfig,
@@ -59,6 +66,7 @@ export function SalesByLocationCharts() {
             axisLine={false}
             tickFormatter={(value) => value.slice(0, 3)}
           />
+          <YAxis tickLine={false} tickMargin={10} axisLine={false} />
           <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
           <Bar dataKey="totalSales" fill="var(--color-totalSales)" radius={4}>
             <LabelList

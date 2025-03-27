@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/chart";
 import { useQuery } from "@tanstack/react-query";
 import { getLowStocksProducts } from "@/lib/data/product";
+import { LoaderCircle } from "lucide-react";
 
 // Function to determine color based on stock level
 const getStockColor = (stock: number): string => {
@@ -43,7 +44,12 @@ export function LowStockProductCharts() {
     queryFn: async () => getLowStocksProducts(),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex h-[200px] w-full flex-col items-center justify-center md:h-[350px]">
+        <LoaderCircle className="size-10 animate-spin text-main-violet-700" />
+      </div>
+    );
 
   return (
     <ChartContainer
