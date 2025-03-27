@@ -10,9 +10,10 @@ import { Button } from "./ui/button";
 type AddToCartButtonProps = {
   product: ProductDetailProps;
   isLoggedIn: boolean;
+  stock: number;
 };
 
-function AddToCartButton({ product, isLoggedIn }: AddToCartButtonProps) {
+function AddToCartButton({ product, isLoggedIn, stock }: AddToCartButtonProps) {
   const { addProduct } = useCart();
   const router = useRouter();
 
@@ -33,7 +34,7 @@ function AddToCartButton({ product, isLoggedIn }: AddToCartButtonProps) {
   };
 
   return (
-    <Button onClick={handleAddToCart}>
+    <Button onClick={handleAddToCart} disabled={stock <= 0 ? true : false}>
       <ShoppingCart strokeWidth={3} />
       Add to Cart
     </Button>

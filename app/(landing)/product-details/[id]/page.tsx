@@ -157,6 +157,7 @@ async function ProductDetailsPage({
             <AddToCartButton
               product={product}
               isLoggedIn={session ? true : false}
+              stock={product.stock}
             />
           </div>
         </div>
