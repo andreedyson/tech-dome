@@ -38,8 +38,8 @@ function ProductList() {
 
   if (isLoading)
     return (
-      <div className="grid h-full w-full grid-cols-2 gap-4 md:grid-cols-3">
-        {Array.from({ length: 9 }, (_, index) => (
+      <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-3">
+        {Array.from({ length: 12 }, (_, index) => (
           <div key={index}>
             <ProductCardSkeletons />
           </div>
