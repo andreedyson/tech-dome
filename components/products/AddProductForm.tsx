@@ -103,12 +103,12 @@ function AddProductForm() {
     <div>
       <Form {...form}>
         <form action={formAction} className="space-y-6">
-          <div className="grid gap-5 md:grid-cols-7">
-            <div className="space-y-2 md:col-span-2">
+          <div className="grid gap-5 lg:grid-cols-7">
+            <div className="space-y-2 lg:col-span-2">
               <ProductImageUpload />
             </div>
 
-            <div className="space-y-3 md:col-span-5">
+            <div className="space-y-3 lg:col-span-5">
               <div className="grid gap-4 md:grid-cols-3">
                 <FormField
                   control={form.control}

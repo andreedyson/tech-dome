@@ -353,7 +353,7 @@ async function DashboardPage() {
                 </TabsContent>
                 <TabsContent value="highest" className="h-full">
                   {brandProducts.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid grid-cols-2 gap-8 sm:max-lg:grid-cols-3">
                       {brandProducts.slice(0, 14).map((brand) => (
                         <div key={brand.id} className="flex items-center gap-2">
                           <Image
@@ -361,14 +361,14 @@ async function DashboardPage() {
                             width={80}
                             height={80}
                             alt={brand.name}
-                            className="aspect-video w-12 rounded-lg border-2 object-contain lg:w-16 2xl:w-20"
+                            className="aspect-video w-12 rounded-lg border-2 object-contain xl:w-16 2xl:w-20"
                           />
                           <div>
                             <p className="line-clamp-1 font-bold md:text-sm">
                               {brand.name}
                             </p>
                             <p className="text-xs">
-                              {brand.totalProducts} Products
+                              {brand.totalProducts} Items
                             </p>
                           </div>
                         </div>

@@ -37,17 +37,17 @@ function ProductImageUpload({ defaultImages = [] }: ProductImageUploadProps) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4 max-md:items-center">
       {/* Thumbnail Image */}
       <Image
         src={images[0] || "/assets/image-placeholder.svg"}
         width={200}
         height={200}
         alt="Product Image"
-        className="aspect-square h-full w-full rounded-md object-cover"
+        className="aspect-square size-full rounded-md object-cover"
       />
 
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex justify-between gap-2 lg:flex-row">
         {/* Additional Images */}
         {[1, 2].map((index) => (
           <Image
@@ -56,7 +56,7 @@ function ProductImageUpload({ defaultImages = [] }: ProductImageUploadProps) {
             width={200}
             height={200}
             alt="Product Image"
-            className="aspect-square size-12 rounded-md object-cover md:size-20"
+            className="aspect-square size-24 rounded-md border object-cover md:size-20"
           />
         ))}
 
@@ -64,7 +64,7 @@ function ProductImageUpload({ defaultImages = [] }: ProductImageUploadProps) {
         <Button
           onClick={handleOpenFolder}
           variant="outline"
-          className="size-12 cursor-pointer bg-input md:size-20"
+          className="size-24 cursor-pointer bg-input md:size-20"
           asChild
         >
           <Upload color="#955cf6" />

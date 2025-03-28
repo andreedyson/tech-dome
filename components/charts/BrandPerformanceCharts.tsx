@@ -55,7 +55,7 @@ export function BrandPerformanceCharts({
     <div className="h-full space-y-4">
       <ChartContainer
         config={chartConfig}
-        className="h-[80%] min-h-[280px] w-full md:h-[85%]"
+        className="h-[70%] min-h-[280px] w-full md:h-[75%] lg:h-[85%]"
       >
         <BarChart
           accessibilityLayer
