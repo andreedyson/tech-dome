@@ -7,6 +7,7 @@ import MobileHeader from "@/components/layouts/MobileHeader";
 import { getUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { validateProtected } from "@/lib/check-session";
+import Footer from "@/components/pages/Footer";
 
 export const metadata: Metadata = {
   title: "TechDome",
@@ -32,6 +33,7 @@ export default async function LandingLayout({
           <Toaster />
         </ReactQueryProvider>
       </div>
+      <Footer />
     </main>
   );
 }
