@@ -29,7 +29,9 @@ async function CategoriesPage() {
                 key={category.name}
                 className="rounded-xl border-2 p-4 shadow-md duration-200 hover:border-yellow-500"
               >
-                <p className="text-lg font-bold">{category.name}</p>
+                <p className="line-clamp-1 text-base font-bold md:text-lg">
+                  {category.name}
+                </p>
                 <p className="text-muted-foreground">
                   {category.totalProducts} Products
                 </p>
@@ -66,10 +68,10 @@ async function CategoriesPage() {
             .filter((category) => category.products.length > 0)
             .map((category) => (
               <div
-                className="grid gap-4 lg:grid-cols-5"
+                className="grid grid-cols-1 gap-4 lg:grid-cols-5"
                 key={category.id + category.name}
               >
-                <div className="col-span-1">
+                <div className="col-span-full lg:col-span-1">
                   <h3 className="text-lg font-bold md:text-xl">
                     {category.name}
                   </h3>
