@@ -22,9 +22,9 @@ function HorizontalProductCard({ product }: HorizontalProductCardProps) {
           width={180}
           height={180}
           alt={product.name}
-          className="size-full rounded-l-lg object-cover md:size-[180px]"
+          className="aspect-square size-full rounded-l-lg object-contain md:size-[180px] md:object-cover"
         />
-        <Badge className="absolute left-2 top-2 rounded-full text-xs">
+        <Badge className="absolute left-2 top-2 line-clamp-1 w-fit rounded-full text-xs max-md:max-w-[100px]">
           {product?.category?.name}
         </Badge>
       </div>
@@ -33,7 +33,7 @@ function HorizontalProductCard({ product }: HorizontalProductCardProps) {
         <p className="text-sm font-semibold text-main-violet-500">
           {convertRupiah(product.price)}
         </p>
-        <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] md:w-[240px]">
+        <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] lg:w-[240px]">
           {product.description}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">

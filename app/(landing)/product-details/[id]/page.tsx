@@ -209,7 +209,7 @@ async function ProductDetailsPage({
           <h2 className="text-2xl font-bold md:text-3xl">Similar Products</h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {filteredSimilarProducts.length > 0 ? (
             filteredSimilarProducts
               .slice(0, 4)

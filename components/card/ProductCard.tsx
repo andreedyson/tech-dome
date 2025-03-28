@@ -25,7 +25,7 @@ function ProductCard({ product }: ProductProps) {
             alt={product.name}
             className="aspect-square size-full rounded-t-xl border-b-2 object-cover"
           />
-          <Badge className="absolute left-2 top-2 rounded-full text-xs">
+          <Badge className="absolute left-2 top-2 line-clamp-1 w-fit rounded-full text-xs max-md:max-w-[120px]">
             {product.category?.name}
           </Badge>
         </div>

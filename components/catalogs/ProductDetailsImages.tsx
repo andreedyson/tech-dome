@@ -15,9 +15,9 @@ function ProductDetailsImages({ product }: ProductDetailsImagesProps) {
     setSelectedImage(product.images[index]);
   };
   return (
-    <div className="flex flex-col gap-6 max-xl:items-center md:flex-row">
+    <div className="flex flex-col gap-6 max-xl:items-center lg:flex-row">
       {/* Product Images */}
-      <div className="flex h-full flex-row justify-between gap-12 max-xl:order-1 md:flex-col lg:gap-6 xl:w-full">
+      <div className="flex h-full flex-row justify-between gap-12 max-xl:order-1 lg:flex-col lg:gap-6 xl:w-full">
         {product.images.map((img, index) => (
           <div
             key={index}
