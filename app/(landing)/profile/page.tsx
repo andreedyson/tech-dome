@@ -31,12 +31,12 @@ async function ProfilePage() {
       {/* User Profile */}
       <div className="relative">
         <div className="h-[250px] w-full rounded-xl bg-gradient-to-r from-blue-800 to-indigo-900" />
-        <div className="absolute -bottom-20 flex w-full flex-col items-center justify-center space-y-4">
-          <Avatar className="flex size-24 items-center justify-center border-8 border-zinc-300 bg-main-violet-300 text-2xl font-semibold">
+        <div className="absolute -bottom-20 flex w-full flex-col items-center justify-center space-y-2 md:space-y-4">
+          <Avatar className="flex size-20 items-center justify-center border-8 border-zinc-300 bg-main-violet-300 text-2xl font-semibold md:size-24">
             {userInitial}
           </Avatar>
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-xl font-semibold">{user.name}</p>
+          <div className="flex flex-col items-center justify-center leading-none">
+            <p className="text-lg font-semibold md:text-xl">{user.name}</p>
             <div className="flex items-center gap-2 font-medium text-muted-foreground">
               <MailCheck size={16} />
               <p>{user.email}</p>
@@ -65,22 +65,26 @@ async function ProfilePage() {
             userOrders.map((order) => (
               <article key={order.id} className="rounded-lg border-2 p-4">
                 {/* Order Card Header */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 text-sm">
-                    <div className="flex items-center gap-1">
-                      <ReceiptText size={16} />
-                      <p className="font-semibold">Order</p>
+                <div className="w-full">
+                  <div className="flex w-full items-center justify-between text-sm">
+                    <div className="">
+                      <div className="flex items-center gap-1">
+                        <ReceiptText size={16} />
+                        <p className="font-semibold">Order</p>
+                      </div>
+                      <p>{formatDate(order.updatedAt)}</p>
                     </div>
-                    <p>{formatDate(order.updatedAt)}</p>
-                    <p className="font-medium text-muted-foreground underline">
-                      {order.id}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="font-medium text-muted-foreground underline">
+                        {order.id}
+                      </p>
+                      <Badge
+                        className={`max-md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
+                      >
+                        {order.status}
+                      </Badge>
+                    </div>
                   </div>
-                  <Badge
-                    className={`max-md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
-                  >
-                    {order.status}
-                  </Badge>
                 </div>
 
                 <Separator className="my-3 h-[2px]" />
@@ -96,9 +100,9 @@ async function ProfilePage() {
 
                   <Separator className="my-3 h-[2px]" />
 
-                  <div className="flex justify-between max-md:flex-row md:justify-end">
+                  <div className="flex items-center justify-between max-md:flex-row md:justify-end">
                     <Badge
-                      className={`md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
+                      className={`h-fit md:hidden ${order.status === "SUCCESS" ? "bg-lime-500" : "bg-slate-500"}`}
                     >
                       {order.status}
                     </Badge>
