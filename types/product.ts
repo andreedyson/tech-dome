@@ -32,9 +32,9 @@ export type CartProps = {
   name: string;
   imageUrl: string;
   price: number;
-  categoryName?: string;
-  brandName?: string;
-  locationName?: string;
+  category?: Category;
+  brand?: Brand;
+  location?: Location;
   quantity: number;
   createdAt: Date;
 };

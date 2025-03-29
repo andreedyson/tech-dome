@@ -63,7 +63,7 @@ async function ProfilePage() {
         <div className="grid gap-4">
           {userOrders.length > 0 ? (
             userOrders.map((order) => (
-              <div key={order.id} className="rounded-lg border-2 p-4">
+              <article key={order.id} className="rounded-lg border-2 p-4">
                 {/* Order Card Header */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3 text-sm">
@@ -110,7 +110,7 @@ async function ProfilePage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </article>
             ))
           ) : (
             <div className="col-span-full flex h-full flex-col items-center gap-10 text-center">

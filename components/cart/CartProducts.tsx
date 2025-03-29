@@ -2,10 +2,11 @@
 
 import { useCart } from "@/hooks/use-cart";
 import { convertRupiah } from "@/lib/utils";
-import { ChevronLeft, Minus, Plus, Trash, Trash2 } from "lucide-react";
+import { ChevronLeft, Minus, Plus, Trash, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
 
 function CartProducts() {
   const {
@@ -23,41 +24,26 @@ function CartProducts() {
           products.map((product) => (
             <article
               key={product.id}
-              className="flex items-center gap-6 rounded-lg border-2 p-4"
+              className="relative flex flex-col rounded-lg border-2 p-2.5 md:p-4"
             >
-              <Image
-                src={product.imageUrl}
-                alt={product.name}
-                width={100}
-                height={100}
-                className="size-[150px] rounded-xl object-cover md:size-[100px]"
-              />
-              {/* Cart Product Details */}
-              <div className="grid w-full grid-cols-2 lg:grid-cols-4">
-                <div className="max-md:col-span-2">
-                  <h4 className="line-clamp-2 text-xl font-bold">
-                    {product.name}
-                  </h4>
+              <div className="flex gap-3">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  width={100}
+                  height={100}
+                  className="aspect-square size-[80px] rounded-lg border object-cover md:size-[100px]"
+                />
+                {/* Cart Product Details */}
+                <div className="flex w-full flex-col text-sm md:flex-row md:items-center md:justify-between md:text-base">
+                  <h4 className="line-clamp-1 font-semibold">{product.name}</h4>
                   <p className="text-muted-foreground">
-                    {product.categoryName}
+                    {product.category?.name}
                   </p>
-                </div>
-                <div className="max-md:col-span-2">
-                  <p className="hidden font-semibold text-muted-foreground md:block">
-                    Price
-                  </p>
-                  <p className="font-bold text-main-violet-500 max-md:mt-3">
-                    {convertRupiah(product.price)}
-                  </p>
-                </div>
-                <div className="max-md:col-span-2 max-md:mt-6 max-sm:mt-3">
-                  <p className="font-semibold text-muted-foreground">
-                    Quantity
-                  </p>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 max-md:my-1.5">
                     <Minus
                       onClick={() => decreaseQuantity(product.id)}
-                      className="size-5 cursor-pointer rounded-full bg-black"
+                      className="size-4 cursor-pointer rounded-full bg-black md:size-5"
                       color="white"
                     />
                     <span className="text-lg font-bold text-main-violet-500">
@@ -65,23 +51,32 @@ function CartProducts() {
                     </span>
                     <Plus
                       onClick={() => increaseQuantity(product.id)}
-                      className="size-5 cursor-pointer rounded-full bg-black"
+                      className="size-4 cursor-pointer rounded-full bg-black md:size-5"
                       color="white"
                     />
                   </div>
+                  <p className="font-bold text-main-violet-500">
+                    {convertRupiah(product.price)}
+                  </p>
                 </div>
-                <div className="max-md:col-span-2 max-md:mt-6 max-sm:mt-3">
-                  <p className="font-semibold text-muted-foreground">Total</p>
+              </div>
+
+              <Separator className="my-3 h-[1px]" />
+
+              {/* Product Total Details */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3 text-sm md:text-base">
+                  <p className="font-medium text-muted-foreground">Total</p>
                   <p className="font-bold text-main-violet-500">
                     {convertRupiah(product.price * product.quantity)}
                   </p>
                 </div>
-              </div>
-              <div
-                onClick={() => removeProduct(product.id)}
-                className="flex size-10 cursor-pointer items-center justify-center"
-              >
-                <Trash2 color="red" />
+                <div
+                  className="absolute right-3 text-red-500"
+                  onClick={() => removeProduct(product.id)}
+                >
+                  <Trash2 className="size-4 md:size-6" />
+                </div>
               </div>
             </article>
           ))
