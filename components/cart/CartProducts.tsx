@@ -89,18 +89,20 @@ function CartProducts() {
               <Separator className="my-3 h-[1px]" />
 
               {/* Product Total Details */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-end gap-3">
+                <Button
+                  variant={"outline"}
+                  size={"icon"}
+                  className="bg-transparent text-xs text-red-500 hover:text-red-800"
+                  onClick={() => removeProduct(product.id)}
+                >
+                  <Trash2 className="size-4 md:size-6" />
+                </Button>
                 <div className="flex items-center gap-3 text-sm md:text-base">
                   <p className="font-medium text-muted-foreground">Total</p>
                   <p className="font-bold text-main-violet-500">
                     {convertRupiah(product.price * product.quantity)}
                   </p>
-                </div>
-                <div
-                  className="absolute right-3 text-red-500"
-                  onClick={() => removeProduct(product.id)}
-                >
-                  <Trash2 className="size-4 md:size-6" />
                 </div>
               </div>
             </article>
