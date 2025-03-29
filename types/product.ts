@@ -36,6 +36,7 @@ export type CartProps = {
   brand?: Brand;
   location?: Location;
   quantity: number;
+  stock: number;
   createdAt: Date;
 };
 

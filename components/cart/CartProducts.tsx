@@ -36,28 +36,42 @@ function CartProducts() {
                 />
                 {/* Cart Product Details */}
                 <div className="flex w-full flex-col text-sm md:flex-row md:items-center md:justify-between md:text-base">
-                  <h4 className="line-clamp-1 font-semibold">{product.name}</h4>
-                  <p className="text-muted-foreground">
-                    {product.category?.name}
-                  </p>
-                  <div className="flex items-center gap-3 max-md:my-1.5">
-                    <Minus
-                      onClick={() => decreaseQuantity(product.id)}
-                      className="size-4 cursor-pointer rounded-full bg-black md:size-5"
-                      color="white"
-                    />
-                    <span className="text-lg font-bold text-main-violet-500">
-                      {product.quantity}
-                    </span>
-                    <Plus
-                      onClick={() => increaseQuantity(product.id)}
-                      className="size-4 cursor-pointer rounded-full bg-black md:size-5"
-                      color="white"
-                    />
+                  <div>
+                    <h4 className="line-clamp-1 font-semibold">
+                      {product.name}
+                    </h4>
+                    <p className="text-muted-foreground">
+                      {product.category?.name}
+                    </p>
                   </div>
-                  <p className="font-bold text-main-violet-500">
-                    {convertRupiah(product.price)}
-                  </p>
+                  <div className="flex flex-col gap-1 text-sm leading-none max-md:mt-1 md:items-center md:text-base">
+                    <p className="font-semibold max-md:hidden">Stock</p>
+                    <p>{product.stock} Items</p>
+                  </div>
+                  <div className="flex flex-col gap-1 text-sm leading-none md:items-center md:text-base">
+                    <p className="font-semibold max-md:hidden">Quantity</p>
+                    <div className="flex items-center gap-3 max-md:my-1.5">
+                      <Minus
+                        onClick={() => decreaseQuantity(product.id)}
+                        className="size-4 cursor-pointer rounded-full bg-black md:size-5"
+                        color="white"
+                      />
+                      <span className="text-lg font-bold text-main-violet-500">
+                        {product.quantity}
+                      </span>
+                      <Plus
+                        onClick={() => increaseQuantity(product.id)}
+                        className="size-4 cursor-pointer rounded-full bg-black md:size-5"
+                        color="white"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1 text-sm leading-none md:items-center md:text-base">
+                    <p className="font-semibold max-md:hidden">Price</p>
+                    <p className="font-bold text-main-violet-500">
+                      {convertRupiah(product.price)}
+                    </p>
+                  </div>
                 </div>
               </div>
 
