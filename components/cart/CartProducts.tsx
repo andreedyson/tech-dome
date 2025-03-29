@@ -51,19 +51,30 @@ function CartProducts() {
                   <div className="flex flex-col gap-1 text-sm leading-none md:items-center md:text-base">
                     <p className="font-semibold max-md:hidden">Quantity</p>
                     <div className="flex items-center gap-3 max-md:my-1.5">
-                      <Minus
+                      <Button
                         onClick={() => decreaseQuantity(product.id)}
-                        className="size-4 cursor-pointer rounded-full bg-black md:size-5"
-                        color="white"
-                      />
+                        size={"icon"}
+                        className="bg-transparent hover:bg-muted-foreground/30"
+                      >
+                        <Minus
+                          className="size-4 cursor-pointer rounded-full bg-black md:size-5"
+                          color="white"
+                        />
+                      </Button>
                       <span className="text-lg font-bold text-main-violet-500">
                         {product.quantity}
                       </span>
-                      <Plus
+                      <Button
                         onClick={() => increaseQuantity(product.id)}
-                        className="size-4 cursor-pointer rounded-full bg-black md:size-5"
-                        color="white"
-                      />
+                        disabled={product.quantity >= product.stock}
+                        size={"icon"}
+                        className="bg-transparent hover:bg-muted-foreground/30"
+                      >
+                        <Plus
+                          className="size-4 cursor-pointer rounded-full bg-black md:size-5"
+                          color="white"
+                        />
+                      </Button>
                     </div>
                   </div>
                   <div className="flex flex-col gap-1 text-sm leading-none md:items-center md:text-base">
