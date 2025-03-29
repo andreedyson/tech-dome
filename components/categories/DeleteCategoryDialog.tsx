@@ -54,6 +54,9 @@ function DeleteCategoryDialog({ categoryData }: DeleteCategoryProps) {
 
   useEffect(() => {
     if (state.message) {
+      router.push("/dashboard/categories");
+      router.refresh();
+
       toast({
         title: "Success ✔️",
         description: state.message,
@@ -61,8 +64,6 @@ function DeleteCategoryDialog({ categoryData }: DeleteCategoryProps) {
       });
 
       setOpen(false);
-      router.push("/dashboard/categories");
-      router.refresh();
     }
 
     if (state.error) {

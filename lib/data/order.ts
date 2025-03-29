@@ -94,13 +94,13 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
     const currentDate = new Date();
 
     // Calculate the date for the past week
-    const pastWeek = new Date(currentDate);
-    pastWeek.setDate(currentDate.getDate() - 7);
+    const pastTwoWeeks = new Date(currentDate);
+    pastTwoWeeks.setDate(currentDate.getDate() - 14);
 
     const orders = await prisma.order.findMany({
       where: {
         createdAt: {
-          gte: pastWeek,
+          gte: pastTwoWeeks,
         },
       },
       include: {
