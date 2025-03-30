@@ -27,6 +27,7 @@ export const registerSchema = loginSchema.extend({
 });
 
 export const categorySchema = z.object({
+  categoryId: z.coerce.number().optional(),
   name: z
     .string({ required_error: "Name is required" })
     .trim()

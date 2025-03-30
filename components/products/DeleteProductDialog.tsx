@@ -60,7 +60,7 @@ function DeleteProductDialog({ productId }: DeleteBrandProps) {
       });
 
       setOpen(false);
-      router.push("/dashboard/brands");
+      router.push("/dashboard/products");
       router.refresh();
     }
 

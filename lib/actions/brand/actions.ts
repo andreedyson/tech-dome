@@ -195,8 +195,6 @@ export async function deleteBrand(brandId: number): Promise<ActionResult> {
       },
     });
 
-    revalidatePath("/dashboard/brands");
-
     return {
       error: undefined,
       message: "Brand successfully deleted",

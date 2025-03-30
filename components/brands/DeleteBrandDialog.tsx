@@ -73,7 +73,6 @@ function DeleteBrandDialog({ brandData }: DeleteBrandProps) {
       });
     }
   }, [state]);
-
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>

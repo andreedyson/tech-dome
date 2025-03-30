@@ -226,8 +226,6 @@ export async function deleteProduct(productId: string): Promise<ActionResult> {
       },
     });
 
-    revalidatePath("/dashboard/products");
-
     return {
       error: undefined,
       message: "Product successfully deleted",

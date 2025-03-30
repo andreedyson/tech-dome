@@ -38,7 +38,7 @@ function BrandsPerformanceCard({ brandProducts }: BrandsPerformanceCardProps) {
                 Brand Products
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="performance" className="h-full">
+            <TabsContent value="performance" className="h-[80%]">
               <BrandPerformanceCharts totalBrand={6} />
             </TabsContent>
             <TabsContent value="highest" className="h-full">
