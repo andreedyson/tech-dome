@@ -46,8 +46,8 @@ function OrdersOverview({ latestOrders }: OrdersOverviewProps) {
               {latestOrders.length > 0 ? (
                 <DataTable
                   columns={columns}
-                  data={latestOrders.slice(0, 10)}
-                  pageSize={5}
+                  data={latestOrders.slice(0, 16)}
+                  pageSize={8}
                   columnFilter="id"
                 />
               ) : (

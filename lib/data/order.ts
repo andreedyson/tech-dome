@@ -115,6 +115,11 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
             product: true,
           },
         },
+        detail: {
+          select: {
+            name: true,
+          },
+        },
       },
       orderBy: {
         createdAt: "asc",
@@ -127,7 +132,7 @@ export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
         name: item.product.name,
         image: getImageUrl(item.product.images[0], "products"),
       })),
-      customerName: order.user.name,
+      customerName: order.detail?.name || "",
       total: Number(order.total),
       status: order.status,
       createdAt: order.createdAt,
