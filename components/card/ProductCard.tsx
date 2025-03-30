@@ -32,10 +32,10 @@ function ProductCard({ product }: ProductProps) {
 
         {/* Product Details */}
         <div className="p-4">
-          <h4 className="line-clamp-1 text-base font-bold md:text-lg">
+          <h4 className="line-clamp-1 text-sm font-bold sm:text-base md:text-lg">
             {product.name}
           </h4>
-          <p className="text-sm font-medium text-muted-foreground">
+          <p className="text-xs font-medium text-muted-foreground sm:text-sm">
             {product.total_sales} Sold • {product.stock} Items
           </p>
           <div className="mt-1.5 flex items-center gap-2 text-sm">
@@ -44,11 +44,11 @@ function ProductCard({ product }: ProductProps) {
               width={100}
               height={80}
               alt={product.brand?.name || ""}
-              className="aspect-video w-12 rounded-lg border-2 object-contain 2xl:w-16"
+              className="aspect-video w-10 rounded-lg border-2 object-contain sm:w-12 2xl:w-16"
             />
-            <p>{product.brand?.name}</p>
+            <p className="max-md:hidden">{product.brand?.name}</p>
           </div>
-          <p className="mt-2 line-clamp-3 h-max text-sm leading-5 tracking-tight">
+          <p className="mt-2 line-clamp-3 h-max text-xs leading-5 tracking-tight md:text-sm">
             {product.description}
           </p>
 
