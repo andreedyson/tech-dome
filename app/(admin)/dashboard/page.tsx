@@ -38,7 +38,6 @@ async function DashboardPage() {
         ))}
       </div>
 
-      {/* Orders Overview Card */}
       <OrdersOverview latestOrders={latestOrders} />
 
       <div className="grid h-full w-full grid-cols-1 gap-4 md:grid-cols-8">

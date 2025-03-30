@@ -20,10 +20,14 @@ export function LatestOrderCharts() {
   });
 
   const chartData = data
-    ? data.map((order) => ({
-        date: new Date(order.createdAt),
-        total: order.total,
-      }))
+    ? data
+        .filter((order) => {
+          return order.status === "SUCCESS";
+        })
+        .map((order) => ({
+          date: new Date(order.createdAt),
+          total: order.total,
+        }))
     : [];
 
   const groupedData = chartData.reduce<Record<string, number>>((acc, entry) => {
