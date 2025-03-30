@@ -17,12 +17,21 @@ export const metadata: Metadata = {
 };
 
 async function DashboardPage() {
-  const statsCard = await getStatsCardData();
-  const topProducts = await getTopProducts();
-  const salesByLocation = await getSalesByLocation();
-  const topCustomers = await getTopCustomers();
-  const latestOrders = await getLatestOrders();
-  const brandProducts = await getBrandTotalProducts();
+  const [
+    statsCard,
+    topProducts,
+    salesByLocation,
+    topCustomers,
+    latestOrders,
+    brandProducts,
+  ] = await Promise.all([
+    getStatsCardData(),
+    getTopProducts(),
+    getSalesByLocation(),
+    getTopCustomers(),
+    getLatestOrders(),
+    getBrandTotalProducts(),
+  ]);
 
   return (
     <section className="w-full space-y-6">
