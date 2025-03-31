@@ -7,6 +7,7 @@ import {
   Box,
   ChartBarStacked,
   Coins,
+  Eye,
   Loader,
   PackageOpen,
   Pencil,
@@ -152,6 +153,14 @@ export const columns: ColumnDef<ProductColumn>[] = [
             </Button>
           </Link>
           <DeleteProductDialog productId={product.id} />
+          <Link href={`/product-details/${product.id}`} title="Preview">
+            <Button
+              variant={"ghost"}
+              className="flex items-center gap-2 bg-main-violet-500 text-sm text-white duration-200 hover:bg-main-violet-400"
+            >
+              <Eye size={16} />
+            </Button>
+          </Link>
         </div>
       );
     },
