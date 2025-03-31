@@ -8,13 +8,19 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
 type AddToCartButtonProps = {
+  userId: string;
   product: ProductDetailProps;
   isLoggedIn: boolean;
   stock: number;
 };
 
-function AddToCartButton({ product, isLoggedIn, stock }: AddToCartButtonProps) {
-  const { addProduct } = useCart();
+function AddToCartButton({
+  userId,
+  product,
+  isLoggedIn,
+  stock,
+}: AddToCartButtonProps) {
+  const { addProduct } = useCart(userId);
   const router = useRouter();
 
   const handleAddToCart = () => {

@@ -18,10 +18,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type UserAvatarProps = {
+  userId: string;
   fullname: string;
   role: string;
 };
-function UserAvatar({ fullname, role }: UserAvatarProps) {
+function UserAvatar({ userId, fullname, role }: UserAvatarProps) {
   const pathname = usePathname();
   const userInitial =
     fullname.split(" ").length > 1
@@ -72,7 +73,11 @@ function UserAvatar({ fullname, role }: UserAvatarProps) {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => SignOut()}
+            onClick={() => {
+              sessionStorage.removeItem(`cart-${userId}`);
+
+              SignOut();
+            }}
             className="cursor-pointer font-semibold text-red-500"
           >
             Log out

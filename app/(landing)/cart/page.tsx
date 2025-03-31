@@ -23,10 +23,10 @@ async function CartPage() {
           {/* Cart Products */}
           <div className="space-y-2 md:space-y-4">
             <h2 className="text-2xl font-bold md:text-3xl">Checkout Cart</h2>
-            <CartProducts />
+            <CartProducts userId={session.userId} />
           </div>
           {/* Checkout Form Details */}
-          <CheckoutForm />
+          <CheckoutForm userId={session.userId} />
         </div>
       ) : (
         <div className="flex h-full w-full flex-col items-center gap-2 text-center">

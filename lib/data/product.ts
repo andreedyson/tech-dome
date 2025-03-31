@@ -101,10 +101,12 @@ export async function getTopProducts(): Promise<TopProductProps[]> {
       (product) => product.orders.length >= 1,
     );
 
-    const data = topProducts.map(({ orders, ...product }) => ({
-      ...product,
-      totalOrders: orders.length,
-    }));
+    const data = topProducts
+      .map(({ orders, ...product }) => ({
+        ...product,
+        totalOrders: orders.length,
+      }))
+      .sort((a, b) => b.totalOrders - a.totalOrders);
 
     return data;
   } catch (error) {

@@ -15,7 +15,11 @@ const initialState: ActionResult = {
   error: "",
 };
 
-function LogoutButtonSidebar() {
+function LogoutButtonSidebar({ userId }: { userId: string }) {
+  const signOutClearStorage = () => {
+    sessionStorage.removeItem(`cart-${userId}`);
+    SignOut();
+  };
   const [state, formAction] = useFormState(SignOut, initialState);
   return (
     <form action={formAction}>
