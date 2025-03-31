@@ -64,7 +64,7 @@ export const useCart = create<CartState>()(
       clearCart: () => set({ products: [] }),
     }),
     {
-      name: "cart-product-deal-dome",
+      name: "cart-product-tech-dome",
       storage: createJSONStorage(() => sessionStorage),
     },
   ),
