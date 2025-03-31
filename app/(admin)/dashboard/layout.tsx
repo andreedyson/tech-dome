@@ -32,7 +32,7 @@ export default async function AdminLayout({
 
   return (
     <SidebarProvider>
-      <AppSidebar userId={user.id} />
+      <AppSidebar />
       <main className={`${GeistSans.className} w-full antialiased`}>
         <AdminHeader user={user} session={session} />
         <div className="m-4">{children}</div>

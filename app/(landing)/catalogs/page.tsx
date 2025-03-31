@@ -35,7 +35,7 @@ async function CatalogsPage() {
 
         <div className="rounded-xl border-2 bg-background p-4 shadow lg:col-span-3">
           <h3 className="text-xl font-bold md:text-2xl">Products</h3>
-          <Separator className="mb-4 mt-2" />
+          <Separator className="my-2" />
           <ProductList />
         </div>
       </div>

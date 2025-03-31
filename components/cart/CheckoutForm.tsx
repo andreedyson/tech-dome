@@ -38,10 +38,6 @@ const initialState: ActionResult = {
   error: "",
 };
 
-type CheckoutFormProps = {
-  userId: string;
-};
-
 function Submit({ isDisabled }: { isDisabled: boolean }) {
   const { pending } = useFormStatus();
 
@@ -59,8 +55,8 @@ function Submit({ isDisabled }: { isDisabled: boolean }) {
   );
 }
 
-function CheckoutForm({ userId }: CheckoutFormProps) {
-  const { products } = useCart(userId);
+function CheckoutForm() {
+  const { products } = useCart();
 
   const totalPrice = useMemo(() => {
     return products.reduce(

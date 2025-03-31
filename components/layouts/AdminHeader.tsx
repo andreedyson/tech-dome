@@ -65,11 +65,7 @@ function AdminHeader({ session, user }: AdminHeaderProps) {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <UserAvatar
-        userId={user?.id as string}
-        fullname={user?.name as string}
-        role={user?.role as string}
-      />
+      <UserAvatar fullname={user?.name as string} role={user?.role as string} />
     </header>
   );
 }

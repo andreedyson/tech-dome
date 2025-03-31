@@ -64,9 +64,7 @@ const items = [
   },
 ];
 
-type AppSidebarProps = { userId: string };
-
-export function AppSidebar({ userId }: AppSidebarProps) {
+export function AppSidebar() {
   const pathname = usePathname();
   const pathnameSplit = pathname.split("/").slice(0, 3).join("/");
 
@@ -110,7 +108,7 @@ export function AppSidebar({ userId }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <LogoutButtonSidebar userId={userId} />
+      <LogoutButtonSidebar />
     </Sidebar>
   );
 }

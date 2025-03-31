@@ -155,7 +155,6 @@ async function ProductDetailsPage({
               {convertRupiah(product.price)}
             </h2>
             <AddToCartButton
-              userId={session?.userId as string}
               product={product}
               isLoggedIn={session ? true : false}
               stock={product.stock}

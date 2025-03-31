@@ -8,18 +8,14 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 
-type CartProductsProps = {
-  userId: string;
-};
-
-function CartProducts({ userId }: CartProductsProps) {
+function CartProducts() {
   const {
     products,
     increaseQuantity,
     decreaseQuantity,
     removeProduct,
     clearCart,
-  } = useCart(userId);
+  } = useCart();
 
   return (
     <div>
