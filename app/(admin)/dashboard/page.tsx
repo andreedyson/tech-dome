@@ -29,7 +29,7 @@ async function DashboardPage() {
     getTopProducts(),
     getSalesByLocation(),
     getTopCustomers(),
-    getLatestOrders("createdAt", "desc"),
+    getLatestOrders(),
     getBrandTotalProducts(),
   ]);
 

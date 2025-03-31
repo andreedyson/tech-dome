@@ -89,10 +89,7 @@ export async function getUserOrderHistory(
   }
 }
 
-export async function getLatestOrders(
-  sortBy: "id" | "createdAt" = "createdAt",
-  order: "asc" | "desc" = "asc",
-): Promise<LatestOrderColumn[]> {
+export async function getLatestOrders(): Promise<LatestOrderColumn[]> {
   try {
     const currentDate = new Date();
 
@@ -125,7 +122,7 @@ export async function getLatestOrders(
         },
       },
       orderBy: {
-        [sortBy]: order,
+        createdAt: "asc",
       },
     });
 
