@@ -77,8 +77,8 @@ export function LatestOrderCharts() {
           accessibilityLayer
           data={result}
           margin={{
-            left: 40,
-            right: 40,
+            left: 20,
+            right: 20,
           }}
         >
           <CartesianGrid vertical={false} />

@@ -22,6 +22,9 @@ export async function getAllOrders(): Promise<OrderColumn[]> {
           },
         },
       },
+      orderBy: {
+        id: "asc",
+      },
     });
 
     const data = orders.map((order) => ({
