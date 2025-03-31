@@ -14,7 +14,7 @@ function HorizontalProductCard({ product }: HorizontalProductCardProps) {
     <Link
       key={product.id + product.name}
       href={`/product-details/${product.id}`}
-      className="flex rounded-lg border-2 duration-200 hover:border-main-violet-800 max-md:w-full md:flex-shrink-0"
+      className="flex w-full rounded-lg border-2 duration-200 hover:border-main-violet-800"
     >
       <div className="relative">
         <Image
@@ -33,7 +33,7 @@ function HorizontalProductCard({ product }: HorizontalProductCardProps) {
         <p className="text-sm font-semibold text-main-violet-500">
           {convertRupiah(product.price)}
         </p>
-        <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] lg:w-[240px]">
+        <p className="mt-3 line-clamp-3 max-w-[300px] text-balance text-sm sm:max-w-[400px] lg:w-full">
           {product.description}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">

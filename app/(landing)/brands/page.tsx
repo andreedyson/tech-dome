@@ -124,7 +124,7 @@ async function BrandsPage() {
                     </h3>
                   </div>
 
-                  <div className="custom-scrollbar w-full max-lg:space-y-2 lg:flex lg:space-x-4 lg:overflow-x-auto">
+                  <div className="custom-scrollbar grid w-full grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-4">
                     {brand.products.slice(0, 4).map((product) => (
                       <HorizontalProductCard
                         key={product.id + product.name}

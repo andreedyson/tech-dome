@@ -110,6 +110,6 @@ export const orderDetailsSchema = z.object({
   postalCode: z
     .string({ required_error: "Postal Code is required" })
     .trim()
-    .min(5, { message: "Postal Code must be minimum of 5 characters" }),
+    .min(2, { message: "Postal Code must be minimum of 2 characters" }),
   notes: z.string().optional(),
 });

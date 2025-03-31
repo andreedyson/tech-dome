@@ -113,12 +113,14 @@ export async function getBrandsWithProducts(): Promise<
       },
     });
 
-    const data = brands.map((brand) => ({
-      id: brand.id,
-      name: brand.name,
-      logo: getImageUrl(brand.logo),
-      products: brand.Product,
-    }));
+    const data = brands
+      .map((brand) => ({
+        id: brand.id,
+        name: brand.name,
+        logo: getImageUrl(brand.logo),
+        products: brand.Product,
+      }))
+      .sort((a, b) => b.products.length - a.products.length);
 
     return data;
   } catch (error) {
