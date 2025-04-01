@@ -51,6 +51,7 @@ function Submit() {
 }
 
 function AddBrandDialog() {
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [state, formAction] = useFormState(createBrand, initialState);
   const [open, setOpen] = useState<boolean>(false);
@@ -71,6 +72,13 @@ function AddBrandDialog() {
       setSelectedImage(previewUrl);
     } else {
       setSelectedImage(null);
+    }
+  };
+
+  const handleClearImage = () => {
+    setSelectedImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -147,8 +155,9 @@ function AddBrandDialog() {
                       type="file"
                       autoComplete="off"
                       className="w-full bg-input"
-                      accept=".jpg, .png, .jpeg"
+                      accept=".jpg, .png, .jpeg, .webp, .svg"
                       required
+                      ref={fileInputRef}
                     />
                   </FormControl>
                   <FormMessage />
@@ -167,7 +176,7 @@ function AddBrandDialog() {
                   className="max-h-[200px] object-contain"
                 />
                 <p
-                  onClick={() => setSelectedImage(null)}
+                  onClick={handleClearImage}
                   className="w-fit cursor-pointer border bg-muted px-2 py-1 text-end text-sm"
                 >
                   Clear

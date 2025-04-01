@@ -58,6 +58,7 @@ function Submit() {
 }
 
 function EditBrandDialog({ brandData }: EditBrandProps) {
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>();
   const editBrandWithId = async (_: ActionResult, formData: FormData) => {
     return await editBrand(brandData, formData);
@@ -82,6 +83,13 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
       setSelectedImage(previewUrl);
     } else {
       setSelectedImage(null);
+    }
+  };
+
+  const handleClearImage = () => {
+    setSelectedImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -166,7 +174,8 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
                       type="file"
                       autoComplete="off"
                       className="w-full bg-input"
-                      accept=".jpg, .png, .jpeg"
+                      accept=".jpg, .png, .jpeg, .webp, .svg"
+                      ref={fileInputRef}
                     />
                   </FormControl>
                   <FormMessage />
@@ -185,7 +194,7 @@ function EditBrandDialog({ brandData }: EditBrandProps) {
                   className="max-h-[200px] object-contain"
                 />
                 <p
-                  onClick={() => setSelectedImage(null)}
+                  onClick={handleClearImage}
                   className="w-fit cursor-pointer border bg-muted px-2 py-1 text-end text-sm"
                 >
                   Clear
