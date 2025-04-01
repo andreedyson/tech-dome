@@ -3,14 +3,9 @@
 import { validateProtected } from "@/lib/check-session";
 import { prisma } from "@/lib/prisma";
 import { generateRandomString } from "@/lib/utils";
-import xenditClient from "@/lib/xendit";
 import { CartProps } from "@/types/product";
 import { orderDetailsSchema } from "@/types/validations";
 import { Prisma } from "@prisma/client";
-import {
-  PaymentRequest,
-  PaymentRequestParameters,
-} from "xendit-node/payment_request/models";
 
 export async function createOrderDetails(
   _: unknown,
@@ -18,7 +13,7 @@ export async function createOrderDetails(
   products: CartProps[],
   total: number,
 ) {
-  let redirectPaymentUrl = "/payment-success";
+  let redirectPaymentUrl = "/";
 
   try {
     const { user } = await validateProtected();
@@ -70,30 +65,14 @@ export async function createOrderDetails(
       },
     });
 
-    // Xendit Payment Data
-    const data: PaymentRequestParameters = {
-      currency: "IDR",
-      amount: total,
-      referenceId: order.code,
-      paymentMethod: {
-        ewallet: {
-          channelProperties: {
-            successReturnUrl: process.env.NEXT_PUBLIC_REDIRECT_URL as string,
-          },
-          channelCode: "SHOPEEPAY",
-        },
-        reusability: "ONE_TIME_USE",
-        type: "EWALLET",
+    await prisma.order.update({
+      where: {
+        code: order.code,
       },
-    };
-
-    const response: PaymentRequest =
-      await xenditClient.PaymentRequest.createPaymentRequest({
-        data,
-      });
-
-    redirectPaymentUrl =
-      response.actions?.find((res) => res.urlType == "DEEPLINK")?.url ?? "";
+      data: {
+        status: "SUCCESS",
+      },
+    });
 
     const queryProductOrder: Prisma.OrderProductCreateManyInput[] = [];
 
