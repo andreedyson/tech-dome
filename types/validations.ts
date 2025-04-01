@@ -62,10 +62,37 @@ export const productSchema = z.object({
     .string({ required_error: "Product Name is required" })
     .trim()
     .min(4, { message: "Product name must be minimum of 4 characters" }),
+  price: z.coerce.number({ required_error: "Price is required" }),
+  stock: z.coerce.number(),
+  description: z
+    .string({ required_error: "Description is required" })
+    .trim()
+    .min(10, { message: "Description should be at least 10 characters" }),
+  categoryId: z
+    .string({ required_error: "Category is required" })
+    .trim()
+    .min(1, { message: "Category is required" }),
+  brandId: z
+    .string({ required_error: "Brand is required" })
+    .trim()
+    .min(1, { message: "Brand is required" }),
+  locationId: z
+    .string({ required_error: "Location is required" })
+    .trim()
+    .min(1, { message: "Location is required" }),
+  status: z
+    .string()
+    .trim()
+    .min(1, { message: "Status is required" })
+    .pipe(
+      z.enum(["PRE_ORDER", "READY"], {
+        required_error: "Status is required",
+      }),
+    ),
   images: z
     .any()
     .refine((files: File[]) => files.length <= 3, {
-      message: "Please upload 3 product images",
+      message: "Please upload maximum of 3 product images",
     })
     .refine(
       (files: File[]) => {
@@ -79,16 +106,6 @@ export const productSchema = z.object({
       },
       { message: "Uploaded files should be the type of images" },
     ),
-  description: z
-    .string({ required_error: "Description is required" })
-    .trim()
-    .min(10, { message: "Description should be at least 10 characters " }),
-  price: z.coerce.number({ required_error: "Price is required" }),
-  stock: z.coerce.number(),
-  status: z.enum(["PRE_ORDER", "READY"]),
-  categoryId: z.string({ required_error: "Category is required" }),
-  brandId: z.string({ required_error: "Brand is required" }),
-  locationId: z.string({ required_error: "Location is required" }),
 });
 
 export const editProductSchema = productSchema.omit({ images: true });
