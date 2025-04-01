@@ -134,7 +134,13 @@ function CartProducts() {
         )}
       </div>
       {products.length > 0 && (
-        <div className="mt-4 flex w-full justify-end font-semibold">
+        <div className="mt-4 flex w-full justify-end gap-2 font-semibold">
+          <Link href={"/catalogs"}>
+            <Button variant="outline" size={"sm"}>
+              <ChevronLeft />
+              Add More
+            </Button>
+          </Link>
           <Button variant="outline" size={"sm"} onClick={() => clearCart()}>
             <Trash />
             Clear Cart

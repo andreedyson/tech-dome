@@ -12,6 +12,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useCart } from "@/hooks/use-cart";
 import { SignOut } from "@/lib/actions/auth/admin/actions";
 import { LogOutIcon } from "lucide-react";
 import Link from "next/link";
@@ -23,6 +24,7 @@ type UserAvatarProps = {
 };
 function UserAvatar({ fullname, role }: UserAvatarProps) {
   const pathname = usePathname();
+  const { clearCart } = useCart();
   const userInitial =
     fullname.split(" ").length > 1
       ? fullname.split(" ")[0].charAt(0) + fullname.split(" ")[1].charAt(0)
@@ -72,7 +74,10 @@ function UserAvatar({ fullname, role }: UserAvatarProps) {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() => SignOut()}
+            onClick={() => {
+              clearCart();
+              SignOut();
+            }}
             className="cursor-pointer font-semibold text-red-500"
           >
             Log out

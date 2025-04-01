@@ -26,11 +26,11 @@ async function CatalogsPage() {
           <Separator className="my-4" />
           <FilterStatus />
           <Separator className="my-4" />
+          <FilterCategories />
+          <Separator className="my-4" />
           <FilterBrands />
           <Separator className="my-4" />
           <FilterLocations />
-          <Separator className="my-4" />
-          <FilterCategories />
         </div>
 
         <div className="rounded-xl border-2 bg-background p-4 shadow lg:col-span-3">
