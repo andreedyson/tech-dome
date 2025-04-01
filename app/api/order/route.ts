@@ -7,6 +7,7 @@ import { Prisma } from "@prisma/client";
 import { CartProps } from "@/types/product";
 
 export const runtime = "nodejs"; // Allow longer execution
+export const maxDuration = 20;
 
 export async function POST(req: NextRequest) {
   try {
