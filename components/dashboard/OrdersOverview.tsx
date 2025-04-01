@@ -51,7 +51,7 @@ function OrdersOverview({ latestOrders }: OrdersOverviewProps) {
                   columnFilter="id"
                 />
               ) : (
-                <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
                   <Image
                     src={"/assets/empty-vault.svg"}
                     width={500}
@@ -75,7 +75,7 @@ function OrdersOverview({ latestOrders }: OrdersOverviewProps) {
               {latestOrders.length > 0 ? (
                 <LatestOrderCharts />
               ) : (
-                <div className="col-span-full flex h-full flex-col items-center gap-2 text-center">
+                <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
                   <Image
                     src={"/assets/empty-orders.svg"}
                     width={500}

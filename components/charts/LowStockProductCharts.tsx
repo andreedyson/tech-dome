@@ -19,6 +19,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { getLowStocksProducts } from "@/lib/data/product";
 import { LoaderCircle } from "lucide-react";
+import Image from "next/image";
 
 // Function to determine color based on stock level
 const getStockColor = (stock: number): string => {
@@ -51,7 +52,7 @@ export function LowStockProductCharts() {
       </div>
     );
 
-  return (
+  return chartData && chartData?.length > 0 ? (
     <ChartContainer
       config={chartConfig}
       className="h-[80%] min-h-[280px] w-full md:h-full"
@@ -96,5 +97,24 @@ export function LowStockProductCharts() {
         </Bar>
       </BarChart>
     </ChartContainer>
+  ) : (
+    <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
+      <Image
+        src={"/assets/empty-products.svg"}
+        width={500}
+        height={300}
+        alt="Products Not Found"
+        className="aspect-video size-[180px] lg:size-[280px]"
+        priority
+      />
+      <div className="space-y-0.5">
+        <h4 className="text-sm font-semibold md:text-base">
+          No Low Stock Products
+        </h4>
+        <p className="max-w-md text-xs md:text-sm">
+          Showing the list of products that are low in stock.
+        </p>
+      </div>
+    </div>
   );
 }

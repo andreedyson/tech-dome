@@ -28,7 +28,7 @@ function SalesByLocationCard({ salesByLocation }: SalesByLocationCardProps) {
           {salesByLocation.length > 0 ? (
             <SalesByLocationCharts />
           ) : (
-            <div className="flex h-full flex-col items-center gap-2 text-center">
+            <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
               <Image
                 src={"/assets/empty-cart.svg"}
                 width={500}

@@ -63,7 +63,7 @@ function BrandsPerformanceCard({ brandProducts }: BrandsPerformanceCardProps) {
                   ))}
                 </div>
               ) : (
-                <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
+                <div className="col-span-full flex flex-col items-center justify-center gap-2 text-center md:h-[75%] lg:h-[85%]">
                   <Image
                     src={"/assets/empty-cart.svg"}
                     width={500}

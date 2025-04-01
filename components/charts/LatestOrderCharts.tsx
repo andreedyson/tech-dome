@@ -89,6 +89,7 @@ export function LatestOrderCharts() {
             tickMargin={8}
             interval={0}
             tickFormatter={(value) => value.slice(0, 6)}
+            className="max-sm:hidden"
           />
           <ChartTooltip
             cursor={false}

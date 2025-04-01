@@ -18,6 +18,7 @@ import {
 import { getBrandSales } from "@/lib/data/brand";
 import { useQuery } from "@tanstack/react-query";
 import { LoaderCircle, ShoppingCart } from "lucide-react";
+import Image from "next/image";
 
 type BrandPerformanceChartsProps = {
   totalBrand?: number;
@@ -51,7 +52,7 @@ export function BrandPerformanceCharts({
       </div>
     );
 
-  return (
+  return chartData && chartData.length > 0 ? (
     <div className="h-full space-y-4">
       <ChartContainer
         config={chartConfig}
@@ -112,6 +113,23 @@ export function BrandPerformanceCharts({
         <div className="text-muted-foreground">
           Showing total sales for each brands
         </div>
+      </div>
+    </div>
+  ) : (
+    <div className="col-span-full flex h-full flex-col items-center justify-center gap-2 text-center">
+      <Image
+        src={"/assets/empty-vault.svg"}
+        width={500}
+        height={300}
+        alt="Products Not Found"
+        className="aspect-video size-[180px] lg:size-[280px]"
+        priority
+      />
+      <div className="space-y-0.5">
+        <h4 className="text-sm font-semibold md:text-base">No Brands Found</h4>
+        <p className="max-w-md text-xs md:text-sm">
+          Showing the list of brands with the amount of products sold.
+        </p>
       </div>
     </div>
   );
