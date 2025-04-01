@@ -107,9 +107,7 @@ function CheckoutForm() {
 
       clearCart();
 
-      setTimeout(() => {
-        window.location.href = state.redirectUrl!;
-      }, 500); // Delay to make cart clears first
+      window.location.href = state.redirectUrl!;
     }
 
     if (state.error) {
