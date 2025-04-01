@@ -112,9 +112,13 @@ export function RegisterForm({ className }: React.ComponentProps<"div">) {
                           name="name"
                           placeholder="ex: John Doe"
                           autoComplete="off"
+                          onChange={(e) => {
+                            field.onChange(e);
+                            form.clearErrors("name");
+                          }}
                         />
                       </FormControl>
-                      <FormMessage>{state.errors.email}</FormMessage>
+                      <FormMessage>{state.errors.name}</FormMessage>
                     </FormItem>
                   )}
                 />
@@ -131,6 +135,10 @@ export function RegisterForm({ className }: React.ComponentProps<"div">) {
                           name="email"
                           type="email"
                           placeholder="ex: user@mail.com"
+                          onChange={(e) => {
+                            field.onChange(e);
+                            form.clearErrors("email");
+                          }}
                         />
                       </FormControl>
                       <FormMessage>{state?.errors.email}</FormMessage>
@@ -152,6 +160,10 @@ export function RegisterForm({ className }: React.ComponentProps<"div">) {
                           placeholder={
                             showPassword ? "Your Password" : "********"
                           }
+                          onChange={(e) => {
+                            field.onChange(e);
+                            form.clearErrors("password");
+                          }}
                         />
                       </FormControl>
                       <FormMessage>{state?.errors.password}</FormMessage>

@@ -116,6 +116,10 @@ export function CustomerLoginForm({
                             name="email"
                             type="email"
                             placeholder="ex: user@mail.com"
+                            onChange={(e) => {
+                              field.onChange(e);
+                              form.clearErrors("email");
+                            }}
                           />
                         </FormControl>
                         <FormMessage>{state?.errors.email}</FormMessage>
@@ -137,6 +141,10 @@ export function CustomerLoginForm({
                             placeholder={
                               showPassword ? "Your Password" : "********"
                             }
+                            onChange={(e) => {
+                              field.onChange(e);
+                              form.clearErrors("password");
+                            }}
                           />
                         </FormControl>
                         <FormMessage>{state?.errors.password}</FormMessage>
