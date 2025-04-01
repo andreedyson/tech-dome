@@ -7,7 +7,6 @@ import xenditClient from "@/lib/xendit";
 import { CartProps } from "@/types/product";
 import { orderDetailsSchema } from "@/types/validations";
 import { Prisma } from "@prisma/client";
-import { redirect } from "next/navigation";
 import {
   PaymentRequest,
   PaymentRequestParameters,
@@ -31,11 +30,11 @@ export async function createOrderDetails(
     }
 
     const formDataObject = {
-      name: formData.get("name"),
-      address: formData.get("address"),
-      phone: formData.get("phone"),
-      city: formData.get("city"),
-      postalCode: formData.get("postalCode"),
+      name: formData.get("name") || "",
+      address: formData.get("address") || "",
+      phone: formData.get("phone") || "",
+      city: formData.get("city") || "",
+      postalCode: formData.get("postalCode") || "",
       notes: formData.get("notes"),
     };
 

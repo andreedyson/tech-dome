@@ -98,7 +98,9 @@ export const orderDetailsSchema = z.object({
     .string({ required_error: " Name is required" })
     .trim()
     .min(3, { message: "Your Name must be minimum of 3 characters" }),
-  phone: z.string({ required_error: "Phone Number is required" }),
+  phone: z
+    .string({ required_error: "Phone Number is required" })
+    .min(1, { message: "Phone Number is required" }),
   address: z
     .string({ required_error: "Address is required" })
     .trim()
