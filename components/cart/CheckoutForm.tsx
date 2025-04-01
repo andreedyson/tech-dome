@@ -2,9 +2,7 @@
 
 import { useCart } from "@/hooks/use-cart";
 import { useToast } from "@/hooks/use-toast";
-import { createOrderDetails } from "@/lib/actions/cart/actions";
 import { calculateShippingFee, convertRupiah } from "@/lib/utils";
-import { ActionResult } from "@/types/auth";
 import { orderDetailsSchema } from "@/types/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -17,8 +15,7 @@ import {
   PhoneCall,
   UserCircle2Icon,
 } from "lucide-react";
-import { useEffect, useMemo } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SubmitButton } from "../SubmitButton";
@@ -33,22 +30,25 @@ import {
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Textarea } from "../ui/textarea";
+import { BASE_URL } from "@/constants";
+import { useRouter } from "next/navigation";
 
-const initialState: ActionResult = {
-  error: "",
-};
-
-function Submit({ isDisabled }: { isDisabled: boolean }) {
-  const { pending } = useFormStatus();
-
+function Submit({
+  isDisabled,
+  isSubmitting,
+}: {
+  isDisabled: boolean;
+  isSubmitting: boolean;
+}) {
   return (
     <SubmitButton
-      disabled={isDisabled || pending}
-      isSubmitting={pending}
+      type="submit"
+      disabled={isDisabled || isSubmitting}
+      isSubmitting={isSubmitting}
       className="mt-5 w-full rounded-full bg-main-violet-700 hover:bg-main-violet-500"
     >
       <div className="flex items-center gap-1">
-        {pending ? "Checking Out..." : "Check Out"}
+        {isSubmitting ? "Checking Out..." : "Check Out"}
         <ChevronRight size={18} strokeWidth={3} />
       </div>
     </SubmitButton>
@@ -56,34 +56,30 @@ function Submit({ isDisabled }: { isDisabled: boolean }) {
 }
 
 function CheckoutForm() {
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
   const { products, clearCart } = useCart();
+  const { toast } = useToast();
+  const router = useRouter();
 
-  const totalPrice = useMemo(() => {
-    return products.reduce(
-      (prev, curr) => prev + curr.price * curr.quantity,
-      0,
-    );
-  }, [products]);
+  const totalPrice = useMemo(
+    () => products.reduce((prev, curr) => prev + curr.price * curr.quantity, 0),
+    [products],
+  );
 
-  const TAX_RATE = 0.1; // 10% Tax
-  const WARRANTY_RATE = 0.05; // 5% Warranty
+  const TAX_RATE = 0.1;
+  const WARRANTY_RATE = 0.05;
   const SHIPPING_COST =
     products.length > 0 ? calculateShippingFee(totalPrice) : 0;
-
   const warranty = useMemo(() => totalPrice * WARRANTY_RATE, [totalPrice]);
   const tax = useMemo(
     () => (totalPrice + SHIPPING_COST + warranty) * TAX_RATE,
     [totalPrice],
   );
-  const grandTotal = useMemo(() => {
-    return totalPrice + tax + SHIPPING_COST + warranty;
-  }, [totalPrice, tax]);
-
-  const createOrderParams = async (_: unknown, formData: FormData) => {
-    return await createOrderDetails(_, formData, products, grandTotal);
-  };
-  const [state, formAction] = useFormState(createOrderParams, initialState);
-  const { toast } = useToast();
+  const grandTotal = useMemo(
+    () => totalPrice + tax + SHIPPING_COST + warranty,
+    [totalPrice, tax],
+  );
 
   const form = useForm<z.infer<typeof orderDetailsSchema>>({
     resolver: zodResolver(orderDetailsSchema),
@@ -97,52 +93,75 @@ function CheckoutForm() {
     },
   });
 
-  useEffect(() => {
-    if (state.message && state.redirectUrl) {
-      toast({
-        title: "Success ✔️",
-        description: state.message,
-        variant: "success",
+  const onSubmit = async (values: z.infer<typeof orderDetailsSchema>) => {
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`${BASE_URL}/api/order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          formDataObject: values,
+          products,
+          total: grandTotal,
+        }),
       });
 
-      clearCart();
+      const data = await res.json();
 
-      window.location.href = state.redirectUrl!;
-    }
-
-    if (state.error) {
+      if (!res.ok) {
+        toast({
+          title: "Uh oh! Something went wrong 😵",
+          description: data?.error || "Failed to place order",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Success 🎉",
+          description: data.message,
+          variant: "success",
+        });
+        form.reset();
+        clearCart();
+        if (data.redirectUrl) {
+          window.location.href = data.redirectUrl;
+        } else {
+          router.refresh();
+        }
+      }
+    } catch (error) {
       toast({
-        title: "There's a problem 😵",
-        description: state.error,
+        title: "Unexpected Error",
+        description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  }, [state]);
+  };
 
   return (
     <Form {...form}>
-      <form action={formAction}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid w-full gap-6 lg:grid-cols-6">
           {/* Shipping Details */}
           <div className="space-y-4 lg:col-span-4">
             <h3 className="text-lg font-bold md:text-xl">Shipping Details</h3>
             <div className="grid rounded-lg border-2 bg-background p-4">
               <div className="space-y-3">
+                {/* Name */}
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel htmlFor="name">Name</FormLabel>
+                      <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <div className="flex items-center justify-center rounded-md border border-input bg-muted">
+                        <div className="flex items-center rounded-md border bg-muted">
                           <UserCircle2Icon className="mx-2" />
                           <Input
-                            id="name"
-                            placeholder="Enter Your Full Name"
-                            autoComplete="off"
-                            className="rounded-l-none border-2 bg-input"
                             {...field}
+                            className="rounded-l-none border-2 bg-input"
+                            placeholder="Enter Your Full Name"
                           />
                         </div>
                       </FormControl>
@@ -150,21 +169,20 @@ function CheckoutForm() {
                     </FormItem>
                   )}
                 />
+                {/* Phone */}
                 <FormField
                   control={form.control}
                   name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel htmlFor="phone">Phone</FormLabel>
+                      <FormLabel>Phone</FormLabel>
                       <FormControl>
-                        <div className="flex items-center justify-center rounded-md border border-input bg-muted">
+                        <div className="flex items-center rounded-md border bg-muted">
                           <PhoneCall className="mx-2" />
                           <Input
-                            id="phone"
-                            placeholder="Enter Your Phone Number"
-                            autoComplete="off"
-                            className="rounded-l-none border-2 bg-input"
                             {...field}
+                            className="rounded-l-none border-2 bg-input"
+                            placeholder="Enter Your Phone Number"
                           />
                         </div>
                       </FormControl>
@@ -172,21 +190,20 @@ function CheckoutForm() {
                     </FormItem>
                   )}
                 />
+                {/* Address */}
                 <FormField
                   control={form.control}
                   name="address"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel htmlFor="address">Address</FormLabel>
+                      <FormLabel>Address</FormLabel>
                       <FormControl>
-                        <div className="flex items-center justify-center rounded-md border border-input bg-muted">
+                        <div className="flex items-center rounded-md border bg-muted">
                           <MapPinHouse className="mx-2" />
                           <Input
-                            id="address"
-                            placeholder="Enter Your House Address"
-                            autoComplete="off"
-                            className="rounded-l-none border-2 bg-input"
                             {...field}
+                            className="rounded-l-none border-2 bg-input"
+                            placeholder="Enter Your House Address"
                           />
                         </div>
                       </FormControl>
@@ -195,21 +212,20 @@ function CheckoutForm() {
                   )}
                 />
                 <div className="grid gap-6 md:grid-cols-2">
+                  {/* City */}
                   <FormField
                     control={form.control}
                     name="city"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="city">City</FormLabel>
+                        <FormLabel>City</FormLabel>
                         <FormControl>
-                          <div className="flex items-center justify-center rounded-md border border-input bg-muted">
+                          <div className="flex items-center rounded-md border bg-muted">
                             <Globe className="mx-2" />
                             <Input
-                              id="city"
-                              placeholder="The City You Lived In"
-                              autoComplete="off"
-                              className="rounded-l-none border-2 bg-input"
                               {...field}
+                              className="rounded-l-none border-2 bg-input"
+                              placeholder="The City You Lived In"
                             />
                           </div>
                         </FormControl>
@@ -217,22 +233,20 @@ function CheckoutForm() {
                       </FormItem>
                     )}
                   />
+                  {/* Postal Code */}
                   <FormField
                     control={form.control}
                     name="postalCode"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="postalCode">Postal Code</FormLabel>
+                        <FormLabel>Postal Code</FormLabel>
                         <FormControl>
-                          <div className="flex items-center justify-center rounded-md border border-input bg-muted">
+                          <div className="flex items-center rounded-md border bg-muted">
                             <MapPin className="mx-2" />
                             <Input
-                              id="postalCode"
-                              type="text"
-                              placeholder="Your Area Postal Code"
-                              autoComplete="off"
-                              className="rounded-l-none border-2 bg-input"
                               {...field}
+                              className="rounded-l-none border-2 bg-input"
+                              placeholder="Your Area Postal Code"
                             />
                           </div>
                         </FormControl>
@@ -241,22 +255,21 @@ function CheckoutForm() {
                     )}
                   />
                 </div>
+                {/* Notes */}
                 <FormField
                   control={form.control}
                   name="notes"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel htmlFor="notes">Additional Notes</FormLabel>
+                      <FormLabel>Additional Notes (optional)</FormLabel>
                       <FormControl>
-                        <div className="flex items-center justify-center rounded-md border border-input bg-muted">
+                        <div className="flex items-center rounded-md border bg-muted">
                           <Notebook className="mx-2" />
                           <Textarea
-                            id="notes"
-                            placeholder="Additional Notes For Courier"
-                            autoComplete="off"
-                            className="rounded-l-none border-2 bg-input"
-                            rows={5}
                             {...field}
+                            rows={5}
+                            className="rounded-l-none border-2 bg-input"
+                            placeholder="Additional Notes For Courier"
                           />
                         </div>
                       </FormControl>
@@ -267,6 +280,7 @@ function CheckoutForm() {
               </div>
             </div>
           </div>
+
           {/* Summary Detail */}
           <div className="space-y-4 lg:col-span-2">
             <h3 className="text-lg font-bold md:text-xl">Summary</h3>
@@ -286,23 +300,22 @@ function CheckoutForm() {
                   </div>
                 </div>
                 <Separator className="my-4 border-2" />
-                {/* Payment Details */}
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-sm">
+                <div className="space-y-1 text-sm">
+                  <div className="flex justify-between">
                     <p>Sub-Total</p>
                     <p className="font-semibold">{convertRupiah(totalPrice)}</p>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex justify-between">
                     <p>Shipping</p>
                     <p className="font-semibold">
                       {convertRupiah(SHIPPING_COST)}
                     </p>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex justify-between">
                     <p>Original Warranty</p>
                     <p className="font-semibold">{convertRupiah(warranty)}</p>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
+                  <div className="flex justify-between">
                     <p>VAT (10%)</p>
                     <p className="font-semibold">{convertRupiah(tax)}</p>
                   </div>
@@ -313,7 +326,10 @@ function CheckoutForm() {
                     {convertRupiah(grandTotal)}
                   </p>
                 </div>
-                <Submit isDisabled={products.length > 0 ? false : true} />
+                <Submit
+                  isDisabled={products.length === 0}
+                  isSubmitting={isSubmitting}
+                />
               </div>
             </div>
           </div>
