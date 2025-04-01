@@ -18,4 +18,5 @@ export type RegisterActionResult = {
 export type ActionResult = {
   error?: string;
   message?: string;
+  redirectUrl?: string;
 };
