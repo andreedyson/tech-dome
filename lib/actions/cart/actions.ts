@@ -135,10 +135,13 @@ export async function createOrderDetails(
     });
   } catch (error) {
     return {
-      error: "Something went wrong creating Order",
+      error: "Something went wrong creating Order. Try again!",
       message: undefined,
     };
   }
 
-  redirect(redirectPaymentUrl);
+  return {
+    message: "Order created successfully!",
+    redirectUrl: redirectPaymentUrl,
+  };
 }

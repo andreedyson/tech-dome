@@ -56,7 +56,7 @@ function Submit({ isDisabled }: { isDisabled: boolean }) {
 }
 
 function CheckoutForm() {
-  const { products } = useCart();
+  const { products, clearCart } = useCart();
 
   const totalPrice = useMemo(() => {
     return products.reduce(
@@ -98,12 +98,18 @@ function CheckoutForm() {
   });
 
   useEffect(() => {
-    if (state.message) {
+    if (state.message && state.redirectUrl) {
       toast({
         title: "Success ✔️",
         description: state.message,
         variant: "success",
       });
+
+      clearCart();
+
+      setTimeout(() => {
+        window.location.href = state.redirectUrl!;
+      }, 500); // Delay to make cart clears first
     }
 
     if (state.error) {

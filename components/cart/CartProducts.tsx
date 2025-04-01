@@ -26,7 +26,7 @@ function CartProducts() {
               key={product.id}
               className="relative flex flex-col rounded-lg border-2 p-2.5 md:p-4"
             >
-              <div className="flex gap-3">
+              <div className="flex items-center gap-2 md:gap-4">
                 <Image
                   src={product.imageUrl}
                   alt={product.name}
@@ -34,8 +34,9 @@ function CartProducts() {
                   height={100}
                   className="aspect-square size-[80px] rounded-lg border object-cover md:size-[100px]"
                 />
-                {/* Cart Product Details */}
-                <div className="flex w-full flex-col text-sm md:flex-row md:items-center md:justify-between md:text-base">
+
+                <div className="grid w-full grid-cols-1 gap-1.5 sm:grid-cols-4 sm:gap-3">
+                  {/* Cart Product Details */}
                   <div>
                     <h4 className="line-clamp-1 font-semibold">
                       {product.name}
@@ -44,13 +45,13 @@ function CartProducts() {
                       {product.category?.name}
                     </p>
                   </div>
-                  <div className="flex flex-col gap-1 text-sm leading-none max-md:mt-1 md:items-center md:text-base">
-                    <p className="font-semibold max-md:hidden">Stock</p>
-                    <p>{product.stock} Items</p>
+                  <div className="flex flex-col gap-1 text-sm leading-none max-sm:mt-1 sm:items-center md:text-base">
+                    <p className="font-semibold max-sm:hidden">Stock</p>
+                    <p>{product.stock} Left</p>
                   </div>
-                  <div className="flex flex-col gap-1 text-sm leading-none md:items-center md:text-base">
-                    <p className="font-semibold max-md:hidden">Quantity</p>
-                    <div className="flex items-center gap-3 max-md:my-1.5">
+                  <div className="flex flex-col gap-1 text-sm leading-none sm:items-center md:text-base">
+                    <p className="font-semibold max-sm:hidden">Quantity</p>
+                    <div className="flex items-center gap-3 max-sm:my-1.5">
                       <Button
                         onClick={() => decreaseQuantity(product.id)}
                         size={"icon"}
@@ -77,8 +78,8 @@ function CartProducts() {
                       </Button>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-1 text-sm leading-none md:items-center md:text-base">
-                    <p className="font-semibold max-md:hidden">Price</p>
+                  <div className="flex flex-col gap-1 text-sm leading-none sm:items-center md:text-base">
+                    <p className="font-semibold max-sm:hidden">Price</p>
                     <p className="font-bold text-main-violet-500">
                       {convertRupiah(product.price)}
                     </p>
