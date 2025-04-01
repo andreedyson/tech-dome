@@ -100,8 +100,8 @@ async function CategoriesPage() {
                 No Categories found.
               </h4>
               <p className="max-w-[350px] text-xs md:text-sm">
-                Showing list of categories with products that are available on
-                TechDome.
+                Showing list of categories with their products that are
+                available on TechDome.
               </p>
             </div>
           </div>

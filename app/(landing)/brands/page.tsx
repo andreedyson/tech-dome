@@ -18,10 +18,10 @@ async function BrandsPage() {
 
       {/* Brands Bento Grid */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold leading-none md:text-3xl">
+        <h2 className="text-2xl font-bold leading-none max-sm:text-center md:text-3xl">
           Top Brands by Product Count
         </h2>
-        <div className="grid h-full w-full grid-cols-2 gap-4 md:grid-cols-4 md:grid-rows-4">
+        <div className="grid h-full w-full grid-cols-2 gap-4 text-sm md:grid-cols-4 md:grid-rows-4 md:text-base">
           {/* Brand 1 */}
           <div className="relative flex flex-col items-center justify-center rounded-lg py-8 md:col-span-2 md:row-span-4">
             <Image

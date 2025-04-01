@@ -74,7 +74,7 @@ async function NewReleases() {
                 No New Releases Products Found
               </h4>
               <p className="max-w-md text-xs md:text-sm">
-                Showing the top selling Products on TechDome.
+                Showing the recently added Products on TechDome.
               </p>
             </div>
           </div>
