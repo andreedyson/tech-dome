@@ -1,12 +1,12 @@
 "use client";
 
-import { AllBrandProps } from "@/types/brand";
+import { AllCategoryProps } from "@/types/category";
 import { ColumnDef } from "@tanstack/react-table";
 import { Boxes, Captions, LetterText } from "lucide-react";
 import DeleteCategoryDialog from "./DeleteCategoryDialog";
 import EditCategoryDialog from "./EditCategoryDialog";
 
-export const columns: ColumnDef<AllBrandProps>[] = [
+export const columns: ColumnDef<AllCategoryProps>[] = [
   {
     accessorKey: "id",
     header: () => {
