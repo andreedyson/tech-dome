@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+export const maxDuration = 20;
+
 function SignInPage() {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
