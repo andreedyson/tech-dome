@@ -3,6 +3,7 @@ import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "@/ReactQueryProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "TechDome",
@@ -20,7 +21,10 @@ export default function AootLayout({
         className={`${GeistSans.className} mx-auto max-w-[1920px] antialiased`}
       >
         <div>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            {children}
+            <Analytics />
+          </ReactQueryProvider>
         </div>
         <Toaster />
       </body>
